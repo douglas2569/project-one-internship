@@ -4,7 +4,7 @@ Cada um de vocês vai desenvolver um pequeno sistema
 	1 - Oficina
 		-Deve possuir o cadastro de veiculo(placa, modelo)
 		-Deve possuir peças
--Deve registrar manutenções
+		-Deve registrar manutenções
 	2 - Pedido de compra
 		-Deve possuir fornecedor
 		-Deve possuir Itens
