@@ -1,0 +1,15 @@
+10:15 25/10/2023
+
+Cada um de vocês vai desenvolver um pequeno sistema
+	1 - Oficina
+		-Deve possuir o cadastro de veiculo(placa, modelo)
+		-Deve possuir peças
+-Deve registrar manutenções
+	2 - Pedido de compra
+		-Deve possuir fornecedor
+		-Deve possuir Itens
+		-Deve registrar pedido
+	3 - Vendas
+		-Deve Possuir Comprador
+		-Deve Possuir Itens
+		-Deve registrar vendas
