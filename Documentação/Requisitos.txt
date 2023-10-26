@@ -1,23 +1,52 @@
-10:15 25/10/2023
+08:55 26/10/2023
 
 Cada um de vocês vai desenvolver um pequeno sistema
-	1 - Oficina
-		-Deve possuir o cadastro de veiculo(placa, modelo)
-		-Deve possuir peças
-		-Deve registrar manutenções
-	2 - Pedido de compra
-		-Deve possuir fornecedor
-		-Deve possuir Itens
-		-Deve registrar pedido
-	3 - Vendas
-		-Deve Possuir Comprador
-		-Deve Possuir Itens
-		-Deve registrar vendas
+	1 - Oficina (Douglas)
+		-   Cadastro da oficina
+		-   Cadastro de Clientes
+		-   Formas de pagamento		
+		-   Cadastro de fornecedor
+		-   Cadastro de Pecas
+		-   Cadastro de Funcionarios
+	    -   Cadastro de Servicos
+		-   Gerenciamento de serviços prestados
+		-   Cadastro de Usuario
+		-   Cadastro de Veiculos
+		-   Autenticacao de entrada no sistema
+		-   Gerenciamento de estoque
 
-Os registros de pedidos, vendas e manutenções serão de fato movimentações, que envolvam os cadastros anteriores
+		- * Deve possuir o cadastro de veiculo(placa, modelo)
+		- * Deve possuir peças
+		- * Deve registrar manutenções
+
+* Os registros de pedidos, vendas e manutenções serão de fato movimentações, que envolvam os cadastros anteriores
 Cada um dos pontos deve possuir um CRUD
 Eu posso incluir, Editar e Inativar registros
-Sempre respeitando a integridade de dados
+* Sempre respeitando a integridade de dados
 vocês vão desenvolver isso com base em todo o conteudo que estudaram
-incluindo inclusive o CI 3 e Bootstrap
+* incluindo inclusive o CI 3 e Bootstrap
 Usar AWS não será obrigatorio, mas será diferencia
+
+* --> Representa os requisitos que DEVEM ser implementados, pois são os que serão avaliados, o restante não é obrigatorio. 
+
+
+Descrição do sistema: Posso cadastrar clientes, formas de pagamento, fornecedores, produtos (peças usadas na manutenção), funcionarios (mecanico, atendente ), usuarios, serviços, emitir ordem, controlar estoque. No cadastro de peças eu ja coloco para quais carros aquelas peças funcionam para a entrega das peças, mas não é obrigatorio. No momento de dar baixa nas peças e prestar um serviço eu coloco o nome do cliente para na hora de emitir a ordem ja da certo.
+
+- Gerente: gerencia funcionarios, fornecedores, pecas, usuarios, cad oficina
+- Atendente: da baixa nas peças e emite a ordem de serviço, cadastra serviços
+- Mecanico: exercuta o serviço
+
+Serviços prestados
+	- Conectar o serviço(s) ao cliente
+	
+Estoque:
+	- Mostra todas as peças
+	- Quantidade min e max
+	- Dou entrada nas peças
+	- Dou saida nas peças (para determinado cliente, por determinado mecanico)
+
+Ordem de serviço (gera por cliente)
+	- Serviços prestados
+	- Peças usadas
+	- Valor
+	- Forma de pagamento

@@ -1,0 +1,24 @@
+10:15 25/10/2023
+
+Cada um de vocês vai desenvolver um pequeno sistema
+	1 - Oficina (Douglas)
+		-Deve possuir o cadastro de veiculo(placa, modelo)
+		-Deve possuir peças
+		-Deve registrar manutenções
+		
+	2 - Pedido de compra
+		-Deve possuir fornecedor
+		-Deve possuir Itens
+		-Deve registrar pedido
+	3 - Vendas
+		-Deve Possuir Comprador
+		-Deve Possuir Itens
+		-Deve registrar vendas
+
+Os registros de pedidos, vendas e manutenções serão de fato movimentações, que envolvam os cadastros anteriores
+Cada um dos pontos deve possuir um CRUD
+Eu posso incluir, Editar e Inativar registros
+Sempre respeitando a integridade de dados
+vocês vão desenvolver isso com base em todo o conteudo que estudaram
+incluindo inclusive o CI 3 e Bootstrap
+Usar AWS não será obrigatorio, mas será diferencia
