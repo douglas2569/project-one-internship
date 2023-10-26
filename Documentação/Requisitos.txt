@@ -3,16 +3,17 @@
 Cada um de vocês vai desenvolver um pequeno sistema
 	1 - Oficina (Douglas)
 		-   Cadastro da oficina
-		-   Cadastro de Clientes
-		-   Formas de pagamento		
-		-   Cadastro de fornecedor
-		-   Cadastro de Pecas
 		-   Cadastro de Funcionarios
-	    -   Cadastro de Servicos
-		-   Gerenciamento de serviços prestados
-		-   Cadastro de Usuario
-		-   Cadastro de Veiculos
+		-   Cadastro de Usuario		
+		-   Cadastro de Clientes		
+		-   Cadastro de fornecedor
+		-   Cadastro de Veiculos		
+		-   Cadastro de Pecas
+	    -   Cadastro de Servicos		
+		-   Formas de pagamento		
+		-   Gerenciamento de serviços prestados				
 		-   Autenticacao de entrada no sistema
+		
 		-   Gerenciamento de estoque
 
 		- * Deve possuir o cadastro de veiculo(placa, modelo)
