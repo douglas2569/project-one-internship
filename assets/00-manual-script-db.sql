@@ -411,3 +411,6 @@ values(36,'46899032040',35);
 insert into services_provided(id_maintenance_fk, cpf_mechanics_fk, id_services_fk) 
 values(37,'31685403077',36);
 
+CREATE VIEW v_users 
+AS SELECT users.cpf, users.username, users.password, employees.name, employees.position FROM users 
+INNER JOIN employees on users.cpf = employees.cpf; 
