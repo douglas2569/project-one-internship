@@ -5,11 +5,12 @@ class Home_controller extends CI_Controller {
 
 	 public function __construct() {
 		parent::__construct();		
-		checkAuthentication();			
+		checkAuthentication();
+		$this->load->model('Maintenance_model');			
 	 }	
 
-	public function index(){	
-		$data = array();
+	public function index(){
+		$data['maintenanceList'] = $this->Maintenance_model->show();		
         
 		$this->load->view('templates/header', $data);
 		$this->load->view('home/home', $data);

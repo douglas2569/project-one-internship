@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="<?= site_url('assets/css/global_sytle.css') ?>">  
     
     <title><?= siteTitle() ?></title>
@@ -14,7 +16,32 @@
     <header>
         <div class="container">
             <?php if(isset($this->session->message)) echo renderMessage($this->session->message) ?>
-            <div class='header-top'>                                               
+            
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                        <a class="navbar-brand" href="#">
+                               <span><?=  ucfirst($this->session->position) ?></span>
+                        </a>
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Manutenções <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Estoque</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Veiculos</a>
+                            </li>
+                        </ul>
+                        
+                    </div>
+            </nav>
+            
+            
+            <!-- <div class='header-left'>                                               
                         <span>Olá, <strong> <?= $this->session->name ?>  </strong> </span> 
                                                
 
@@ -23,6 +50,7 @@
                 <?php endif ?>
                 
                     <a href="<?=site_url('index.php/auth/logout') ?>">Sair</a>
-            </div>
+            </div> -->
+
         </div>
     </header>

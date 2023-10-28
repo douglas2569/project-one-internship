@@ -1,3 +1,44 @@
+:root{
+    --sm-margin1: 3px;
+    --sm-margin2: 6px;
+    --sm-margin3: 9px;
+    --md-margin1: 12px;
+    --md-margin2: 18px;
+    --md-margin3: 21px;
+    --lg-margin1: 24px;
+    --lg-margin2: 27px;
+    --lg-margin3: 30px;
+
+    --sm-padding1: 3px;
+    --sm-padding2: 6px;
+    --sm-padding3: 9px;
+    --md-padding1: 12px;
+    --md-padding2: 18px;
+    --md-padding3: 21px;
+    --lg-padding1: 24px;
+    --lg-padding2: 27px;
+    --lg-padding3: 30px;
+
+    --button-size: 40px;
+    --input-size: 30px;
+
+    --sm-font-size: 0.5em;
+    --md-font-size: 1em;
+    --lg-font-size: 2em;
+    --xlg-font-size: 2.5em;
+
+    --border-color:  #cacaca;
+    --sm-border-radius2:  6px;
+
+    --black-color1: rgb(15, 15, 15);
+    --black-color3: rgb(53, 53, 53);
+    --white-color: rgb(231, 231, 231);
+}
+
+main{
+    min-height: 100vh;
+}
+
 /* messages */
 .toast{
     position:absolute;        
@@ -10,4 +51,22 @@
     color: rgb(240, 240, 240);
     font-weight: 600;
     font-size: 1.2em;
+}
+
+/* header */
+
+.maintance-header{
+    display: flex;
+    justify-content: space-between;
+}
+.table{
+    vertical-align: middle;
+    margin-top: var(--sm-margin2);
+}
+.table th{
+    text-align: center;
+}
+
+.table tr::content('-'){
+    text-align: center;
 }
