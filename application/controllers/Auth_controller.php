@@ -16,7 +16,7 @@ class Auth_controller extends CI_Controller {
 		
 		if (count($resultset) != 1) {	
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Usuário invalido.'));					
-			$this->load->view('login/login');
+			$this->load->view('login');
 			$this->load->view('templates/footer');
 			
 		}else{
@@ -36,7 +36,7 @@ class Auth_controller extends CI_Controller {
 				redirect('/');				
 			}else{								
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Senha invalida.'));
-				$this->load->view('login/login');
+				$this->load->view('login');
 				$this->load->view('templates/footer');				
 			}
 			
@@ -46,7 +46,7 @@ class Auth_controller extends CI_Controller {
 	}
 	public function login() {
 		if(isset($_SESSION['username'])) redirect('/'); 		
-		$this->load->view('login/login');
+		$this->load->view('login');
 		$this->load->view('templates/footer');
 	}	
 	

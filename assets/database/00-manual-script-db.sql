@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `vehicles_customer` (
 
 DROP TABLE IF EXISTS `automotive_parts`;
 CREATE TABLE IF NOT EXISTS `automotive_parts` (
+  `image_address` varchar(255),
   `reference_number` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text,    
@@ -415,3 +416,15 @@ values(37,'31685403077',36);
 CREATE VIEW v_users 
 AS SELECT users.cpf, users.username, users.password, employees.name, employees.position FROM users 
 INNER JOIN employees on users.cpf = employees.cpf; 
+
+CREATE VIEW v_inventory 
+AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand FROM automotive_parts 
+INNER JOIN inventory on automotive_parts.reference_number = automotive_parts.reference_number; 
+
+CREATE VIEW v_vehicles 
+AS
+SELECT customers.cpf, customers.name, customers.address, customers.phone_number, customers.email, vehicles_customer.model_vehicles_fk, vehicles_customer.license_plate, vehicles.brand FROM vehicles_customer
+INNER JOIN vehicles 
+on vehicles_customer.model_vehicles_fk = vehicles.model 
+INNER JOIN customers 
+on customers.cpf = vehicles_customer.cpf_customer_fk; 

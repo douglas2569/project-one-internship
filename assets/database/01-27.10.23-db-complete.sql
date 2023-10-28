@@ -79,6 +79,7 @@ DROP TABLE IF EXISTS `automotive_parts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `automotive_parts` (
+  `image_address` varchar(255),
   `reference_number` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text,

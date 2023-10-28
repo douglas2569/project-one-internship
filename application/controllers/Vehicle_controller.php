@@ -1,19 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home_controller extends CI_Controller {	
+class Vehicle_controller extends CI_Controller {	
 
 	 public function __construct() {
 		parent::__construct();		
 		checkAuthentication();
-		$this->load->model('Maintenance_model');			
+		$this->load->model('Vehicle_model');							
 	 }	
 
 	public function index(){
-		$data['maintenanceList'] = $this->Maintenance_model->show();		
+		$data['vehiclesList'] = $this->Vehicle_model->show();		
         
 		$this->load->view('templates/header', $data);
-		$this->load->view('home', $data);
+		$this->load->view('vehicle', $data);
 		$this->load->view('templates/footer');
 	}
 }

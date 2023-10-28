@@ -27,13 +27,13 @@
                         </a>
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Manutenções <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="<?= site_url() ?>">Manutenções</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Estoque</a>
+                                <a class="nav-link" href="<?= site_url('index.php/inventory') ?>">Estoque</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Veiculos</a>
+                                <a class="nav-link" href="<?= site_url('index.php/vehicle') ?>">Veiculos</a>
                             </li>
                         </ul>
                         

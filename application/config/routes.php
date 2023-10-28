@@ -54,18 +54,22 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['home'] = 'Home_controller';
-$route['home/(:any)'] = 'Home_controller/index/$1';
-
-$route['auth'] = 'Auth_controller';
-$route['auth/login'] = 'Auth_controller/login';
-$route['auth/logout'] = 'Auth_controller/logout';
-
-// $route['game/details/(:num)'] = 'Game_controller/details/$1';
-// $route['game/store'] = 'Game_controller/store';
-// $route['game/edit/(:num)'] = 'Game_controller/edit/$1';
-// $route['game/delete/(:num)'] = 'Game_controller/delete/$1';
 
 $route['user'] = 'User_controller/index';
 $route['user/store'] = 'User_controller/store';
 $route['user/edit/(:any)'] = 'User_controller/edit/$1';
 $route['user/delete/(:any)'] = 'User_controller/delete/$1';
+
+$route['auth'] = 'Auth_controller';
+$route['auth/login'] = 'Auth_controller/login';
+$route['auth/logout'] = 'Auth_controller/logout';
+
+$route['inventory'] = 'Inventory_controller';
+$route['vehicle'] = 'Vehicle_controller';
+
+
+// $route['game/store'] = 'Game_controller/store';
+// $route['game/edit/(:num)'] = 'Game_controller/edit/$1';
+// $route['game/delete/(:num)'] = 'Game_controller/delete/$1';
+
+

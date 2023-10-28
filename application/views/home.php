@@ -1,9 +1,12 @@
-  
+<link rel="stylesheet" href="style.css">  
     <main>
-        <div class="container">            
-            <h1>Manutenções</h1> 
+        <div class="container">  
+            <div class="title-box">
+                <h1 style="width:100%">Manutenções</h1> 
+            </div>   
+
             <div class="maintenance">
-                <div class="maintance-header">                                            
+                <div class="maintance-header toolbar">                                            
                     <button type="button" class="btn ">
                         <i class="bi bi-plus-circle"></i>
                         Nova
