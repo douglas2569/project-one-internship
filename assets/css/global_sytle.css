@@ -1,0 +1,13 @@
+/* messages */
+.toast{
+    position:absolute;        
+        left:50%;
+        transform:translate(-50%);
+}
+.toast > .toast-body{
+    display: flex;
+    justify-content: space-between;
+    color: rgb(240, 240, 240);
+    font-weight: 600;
+    font-size: 1.2em;
+}

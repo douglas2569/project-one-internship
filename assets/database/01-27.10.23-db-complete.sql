@@ -408,6 +408,7 @@ CREATE TABLE `users` (
   `cpf` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `status` tinyint(1) default 1, 
   PRIMARY KEY (`cpf`),
   UNIQUE KEY `username` (`username`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`cpf`) REFERENCES `employees` (`cpf`)

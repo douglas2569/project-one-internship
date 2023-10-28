@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `cpf` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL unique,   
   `password` varchar(255) NOT NULL, 
+  `status` tinyint(1) default 1, 
 	
   PRIMARY KEY (`cpf`),
   FOREIGN KEY (`cpf`) REFERENCES `employees`(`cpf`)
