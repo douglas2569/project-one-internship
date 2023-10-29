@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `automotive_parts` (
   `reference_number` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text,    
-  `unit_value` decimal NOT NULL,
+  `unit_value` FLOAT NOT NULL,
   `brand` varchar(50) NOT NULL, 
   `status` tinyint default 1, 
   
@@ -423,79 +423,6 @@ CREATE VIEW v_inventory
 AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand FROM automotive_parts 
 INNER JOIN inventory on automotive_parts.reference_number = automotive_parts.reference_number; 
 
-CREATE VIEW v_vehicles 
-AS
-SELECT customers.cpf, customers.name, customers.address, customers.phone_number, customers.email, vehicles_customer.model_vehicles_fk, vehicles_customer.license_plate, vehicles.brand FROM vehicles_customer
-INNER JOIN vehicles 
-on vehicles_customer.model_vehicles_fk = vehicles.model 
-INNER JOIN customers 
-on customers.cpf = vehicles_customer.cpf_customer_fk; 
-
-DROP PROCEDURE IF EXISTS sp_vehicle_costumer;
-DELIMITER $$
-
-CREATE PROCEDURE sp_vehicle_costumer(
-	 cpf_p VARCHAR(50),
-    name_p VARCHAR(50),
-    address_p VARCHAR(50),
-    phoneNumber_p VARCHAR(50),
-    email_p VARCHAR(50),
-    cnpjAutoVehicleWorkstops_p VARCHAR(255),
-    license_plate_p VARCHAR(50),
-    model_p VARCHAR(50),
-    brand_p VARCHAR(50)
-  )
-
-BEGIN    
-    
-	DECLARE num_model VARCHAR(100) DEFAULT '0';
-    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
-    
-    BEGIN    
-        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
-        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
-        SELECT track_no, @full_error, num_model;
-
-        ROLLBACK;    
-    END;
-
-    START TRANSACTION;
-        SET track_no = '1/3';        
-        INSERT INTO customers (cpf, name, address, phone_number, email, cnpj_auto_vehicle_workstops_fk) 
-        VALUES(cpf_p, name_p, address_p, phoneNumber_p, email_p, cnpjAutoVehicleWorkstops_p);
-              
-        SET track_no = '2/3';  
-        /* model_p COLLATE utf8mb4_0900_ai_ci --> aqui estou fazendo com que o valor da minha variavel tenha o msm  COLLATE da minha tabela, por consequencia dos meu campos, se eu nao forçar iss nao da certo */
-        SELECT COUNT(model) INTO num_model FROM vehicles WHERE model_p COLLATE utf8mb4_0900_ai_ci = vehicles.model; 
-        IF (num_model = '0') THEN
-        	INSERT INTO vehicles(model, brand ) 
-        	VALUES(model_p, brand_p);
-    	  END IF;
-        
-        SET track_no = '3/3';
-        INSERT INTO vehicles_customer (license_plate, cpf_customer_fk, model_vehicles_fk ) 
-        VALUES(license_plate_p, cpf_p, model_p);
-        
-        SET track_no = '0/3';
-        SELECT track_no, 'successfully executed.';
-    COMMIT;
-
-END; $$
-
-DELIMITER ;
-
-
-CALL sp_vehicle_costumer('85743380099','Julio Mautinho','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473217',
-'julio@outlook.com','01187817000183','NAY5700', 'Ranger XLS 3.0 PSE 163cv 4x2 CD TB Dies', 'Ford');
-
-CALL sp_vehicle_costumer('09048491045','Mario Coiso','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473211',
-'mariocoiso@outlook.com','01187817000183','LRR3766', 'Chairman 3.2 V6 220cv Aut.', 'SSANGYONG');
-
-CALL sp_vehicle_costumer('09048491555','Mariana Alta','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584773211',
-'mariana@outlook.com','01187817000183','JKB9916', 'Sorento 3.5 V6 24V 278cv 4x2 Aut.', 'Kia Motors');
-
-
 DROP PROCEDURE IF EXISTS sp_vehicle_costumer;
 DELIMITER $$
 
@@ -553,4 +480,62 @@ END; $$
 
 DELIMITER ;
 
+
+CALL sp_vehicle_costumer('85743380099','Julio Mautinho','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473217',
+'julio@outlook.com','01187817000183','NAY5700', 'Ranger XLS 3.0 PSE 163cv 4x2 CD TB Dies', 'Ford');
+
+CALL sp_vehicle_costumer('09048491045','Mario Coiso','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473211',
+'mariocoiso@outlook.com','01187817000183','LRR3766', 'Chairman 3.2 V6 220cv Aut.', 'SSANGYONG');
+
+CALL sp_vehicle_costumer('09048491555','Mariana Alta','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584773211',
+'mariana@outlook.com','01187817000183','JKB9916', 'Sorento 3.5 V6 24V 278cv 4x2 Aut.', 'Kia Motors');
+
+
+
+DROP PROCEDURE IF EXISTS sp_inventory;
+DELIMITER $$
+
+CREATE PROCEDURE sp_inventory(
+	  image_address_P VARCHAR(255),
+    reference_number_p VARCHAR(255),
+    name_p VARCHAR(50),
+    brand_p VARCHAR(50),
+    description_p TEXT,
+    unit_value_p DECIMAL,
+    quantity_p INT
+  )
+
+BEGIN    
+    
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN    
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
+
+        ROLLBACK;    
+    END;
+
+    START TRANSACTION;
+        SET track_no = '1/2'; 
+        INSERT INTO automotive_parts(image_address, reference_number, name, brand, description, unit_value) 
+        VALUES(image_address_p, reference_number_p, name_p, brand_p, description_p, unit_value_p);
+        
+        
+        SET track_no = '2/2';
+        INSERT INTO  inventory (reference_number, quantity) 
+        VALUES(reference_number_p, quantity_p);
+        
+        SET track_no = '0/2';
+        SELECT track_no, 'successfully executed.';
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
+
+CALL sp_inventory('caminho.jpg','23423423423','nome da peça','marca da peça',
+'descrição da pela........',11, 200);
 
