@@ -6,7 +6,8 @@ class Inventory_controller extends CI_Controller {
 	 public function __construct() {
 		parent::__construct();		
 		checkAuthentication();
-		$this->load->model('Inventory_model');							
+		$this->load->model('Inventory_model');	
+		$this->load->helper('encrypt_helper');
 	 }	
 
 	public function index(){
@@ -26,7 +27,7 @@ class Inventory_controller extends CI_Controller {
 		$this->form_validation->set_rules('unitValue', 'Valor da unidade', 'trim|numeric|min_length[1]|max_length[50]');
 		$this->form_validation->set_rules('quantity', 'Quantidade', 'trim|integer|min_length[1]|max_length[50]');
 
-				
+						
 		if(!$this->form_validation->run() == FALSE){								
 			$address = '';
 			if ( isset($_FILES['imageInventoryPart']) && $_FILES['imageInventoryPart']['size'] > 0 ){

@@ -8,7 +8,7 @@
             <div class="title-box">
                 <h1>Cadastrar de Peça</h1>
             </div>              
-            <?php echo form_open('index.php/inventory/store'); ?>
+            <?php echo form_open_multipart('index.php/inventory/store'); ?>
                     
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="image-inventory-part">Upload Imagem</label>
