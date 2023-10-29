@@ -28,7 +28,7 @@ class Vehicle_controller extends CI_Controller {
 		$this->form_validation->set_rules('licensePlate', 'Placa', 'trim|min_length[6]|max_length[50]|required');
 
 		$this->form_validation->set_rules('model', 'Modelo', 'trim|min_length[5]|max_length[50]');
-		$this->form_validation->set_rules('brand', 'Marca', 'trim|min_length[5]|max_length[50]');
+		$this->form_validation->set_rules('brand', 'Marca', 'trim|min_length[1]|max_length[50]');
 				
 		if(!$this->form_validation->run() == FALSE){								
 			$cpf = $this->input->post('cpf');
