@@ -95,3 +95,17 @@ main .container > .toast{
 .table tr::content('-'){
     text-align: center;
 }
+
+/* forms */
+
+/* fieldset */
+fieldset {
+    padding:var(--md-padding3);
+}
+
+legend{
+    float: none;
+    width: auto;
+    padding:var(--sm-padding3);
+    
+}

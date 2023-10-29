@@ -25,7 +25,7 @@ class Vehicle_controller extends CI_Controller {
 		$this->form_validation->set_rules('phoneNumber', 'Telefone', 'trim|required|min_length[5]|max_length[50]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|valid_email|min_length[5]|max_length[100]');
 
-		$this->form_validation->set_rules('licensePlate', 'Placa', 'trim|min_length[6]|max_length[50]');
+		$this->form_validation->set_rules('licensePlate', 'Placa', 'trim|min_length[6]|max_length[50]|required');
 
 		$this->form_validation->set_rules('model', 'Modelo', 'trim|min_length[5]|max_length[50]');
 		$this->form_validation->set_rules('brand', 'Marca', 'trim|min_length[5]|max_length[50]');
@@ -43,7 +43,7 @@ class Vehicle_controller extends CI_Controller {
 			try{
 				$this->Vehicle_model->insert($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand);				
 				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Cadastrado com sucesso'));
-				redirect('/');						
+				redirect('index.php/vehicle');						
 			}catch(Exception $e){	
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel cadastrar. Erro: '.$e->getMessage()));
 			}
@@ -51,7 +51,7 @@ class Vehicle_controller extends CI_Controller {
 		}
 				
 		$this->load->view('templates/header.php');
-		$this->load->view('maintenance_input_form.php',$data);
+		$this->load->view('vehicle_input_form.php');
 		$this->load->view('templates/footer.php');	
 
 		

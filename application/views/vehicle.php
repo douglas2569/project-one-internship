@@ -7,10 +7,10 @@
                                
             <div class="vehicles">
                 <div class="vehicles-header toolbar">                                            
-                    <button type="button" class="btn ">
+                    <a href='<?= site_url('index.php/vehicle/store') ?>' class="btn ">
                         <i class="bi bi-plus-circle"></i>
                         Nova
-                    </button> 
+                    </a> 
                     <form class="form-inline">
                         <input class="form-control mr-sm-2 d-none" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn my-sm-0" type="submit">
