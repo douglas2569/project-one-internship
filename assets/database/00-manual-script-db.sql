@@ -614,6 +614,8 @@ END; $$
 
 DELIMITER ;
 
+DELIMITER ;
+
 DROP PROCEDURE IF EXISTS sp_update_inventory;
 DELIMITER $$
 
@@ -629,7 +631,6 @@ CREATE PROCEDURE sp_update_inventory(
   )
 
 BEGIN    
-    DECLARE count_reference INT DEFAULT 0;
     DECLARE track_no VARCHAR(10) DEFAULT '0/0';
     DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
     
@@ -642,19 +643,18 @@ BEGIN
     END;
 
     START TRANSACTION;
-        SET track_no = '1/1'; 
-        SELECT COUNT(reference_number) INTO count_reference FROM automotive_parts WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = automotive_parts.reference_number; 
-        IF (count_reference > 0) THEN 
-          UPDATE automotive_parts SET image_address = image_address_p, name = name_p, brand = brand_p, description = description_p, unit_value = unit_value_p 
-          WHERE automotive_parts.reference_number = reference_number_old_p COLLATE utf8mb4_0900_ai_ci;
-        END IF;        
-        
-        SET track_no = '0/1';
+        SET track_no = '1/2';
+        UPDATE inventory SET quantity = quantity_p
+        WHERE inventory.reference_number = reference_number_old_p COLLATE utf8mb4_0900_ai_ci;
+
+        SET track_no = '2/2';
+        UPDATE automotive_parts SET image_address = image_address_p, name = name_p, brand = brand_p, description = description_p, unit_value = unit_value_p 
+        WHERE automotive_parts.reference_number = reference_number_old_p COLLATE utf8mb4_0900_ai_ci;
+
+        SET track_no = '0/2';
         SELECT track_no, 'successfully executed.';
     COMMIT;
 
 END; $$
 
 DELIMITER ;
-
-
