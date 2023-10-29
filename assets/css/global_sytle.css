@@ -60,18 +60,15 @@ main .container > .toast{
 }
 
 /* main */
-h1{
-    text-align: center;
-}
+
 .title-box{    
     margin-top: var(--md-margin2);
     margin-bottom: var(--md-margin3);
 }
 
 .title-box > h1{
-    margin: 0;    
-    display: inline-block;
-    width: 88%;
+    margin: 0;
+    text-align: center;    
 }
 
 .title-box > a{

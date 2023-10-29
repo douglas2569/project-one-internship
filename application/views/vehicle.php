@@ -1,8 +1,9 @@
   
     <main>
         <div class="container"> 
-            
-            <h1>Veiculos</h1>
+            <div class="title-box">
+                <h1>Veiculos</h1>
+            </div> 
                                
             <div class="vehicles">
                 <div class="vehicles-header toolbar">                                            

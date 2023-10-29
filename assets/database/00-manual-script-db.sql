@@ -430,3 +430,65 @@ INNER JOIN vehicles
 on vehicles_customer.model_vehicles_fk = vehicles.model 
 INNER JOIN customers 
 on customers.cpf = vehicles_customer.cpf_customer_fk; 
+
+
+DROP PROCEDURE IF EXISTS sp_vehicle_costumer;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_vehicle_costumer(
+	  cpf_p VARCHAR(50),
+    name_p VARCHAR(50),
+    address_p VARCHAR(50),
+    phoneNumber_p VARCHAR(50),
+    email_p VARCHAR(50),
+    cnpjAutoVehicleWorkstops_p VARCHAR(255),
+    license_plate_p VARCHAR(50),
+    model_p VARCHAR(50),
+    brand_p VARCHAR(50)
+  )
+
+BEGIN
+    
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN
+    
+        ROLLBACK;
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
+    
+    END;
+
+    START TRANSACTION;
+
+        SET track_no = '1/3';
+        INSERT INTO customers (cpf, name, address, phone_number, email, cnpj_auto_vehicle_workstops_fk) 
+        VALUES(cpf_p, name_p, address_p, phoneNumber_p, email_p, cnpjAutoVehicleWorkstops_p);
+        
+        SET track_no = '2/3';
+        INSERT INTO vehicles( model, brand ) 
+        VALUES(model_p, brand_p);
+        
+        SET track_no = '3/3';
+        INSERT INTO vehicles_customer (license_plate, cpf_customer_fk, model_vehicles_fk ) 
+        VALUES(license_plate_p, cpf_p, model_p);
+        
+        SET track_no = '0/3';
+        SELECT track_no, 'successfully executed.';
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
+
+CALL sp_vehicle_costumer('85743380099','Julio Mautinho','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473217',
+'julio@outlook.com','01187817000183','NAY5700', 'Ranger XLS 3.0 PSE 163cv 4x2 CD TB Dies', 'Ford');
+
+CALL sp_vehicle_costumer('09048491045','Mario Coiso','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473211',
+'mariocoiso@outlook.com','01187817000183','LRR3766', 'Chairman 3.2 V6 220cv Aut.', 'SSANGYONG');
+
+
+

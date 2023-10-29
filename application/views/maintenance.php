@@ -2,7 +2,7 @@
     <main>
         <div class="container">  
             <div class="title-box">
-                <h1 style="width:100%">Manutenções</h1> 
+                <h1>Manutenções</h1> 
             </div>   
 
             <div class="maintenance">

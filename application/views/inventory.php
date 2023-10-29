@@ -1,8 +1,9 @@
   
     <main>
-        <div class="container"> 
-                           
-            <h1>Estoque de peças</h1>
+        <div class="container">
+            <div class="title-box">
+                <h1>Estoque de peças</h1>
+            </div> 
                                           
             <div class="inventory">
                 <div class="inventory-header toolbar">                                            

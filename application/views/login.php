@@ -15,16 +15,21 @@
     </header>
     <main>
         <div class="container">
-            <form action="<?= site_url("index.php/auth") ?>" method="POST">
-                <h2>Login</h2>  
-                <label  for="username">Usuário*</label >
-                <input type="text" name='username' id='username' required/>
+             <?php if(validation_errors() !== ''):             
+                        echo renderMessage(array('type'=> 'error', 'content'=> validation_errors() ));
+                   endif
+            ?>
+            <div class="title-box">
+                <h1>Login</h1>  
+            </div>
+            <?php echo form_open("index.php/auth"); ?>                 
+                <label  for="username" class="form-label">Usuário*</label >
+                <input class="form-control" type="text" name='username' id='username' required/>
 
-                <label for="password">Senha*</label>
-                <input type="password" name='password'  required />  
-
-                <input type="submit" value='Entrar' />  
-                        
+                <label class="form-label" for="password">Senha*</label>
+                <input class="form-control" type="password" name='password'  required />  
+                  
+                <button class="btn  btn-primary" type='submit'>Entrar</button>        
             </form>
         </div>
 
