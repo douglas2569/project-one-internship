@@ -30,7 +30,9 @@
 
                     <div class="form-group">
                         <label class="form-label" for="description">Descrição</label>
-                        <input class="form-control" type="text" name="description"  required />
+                        <textarea class="form-control" name="description" id="description" cols="30" rows="10">
+                        </textarea>
+                        
                     </div>
                     
                     <div class="form-group">
@@ -39,7 +41,7 @@
                     <div>
                     <div class="form-group">
                         <label class="form-label" for="quantity">Quantidade*</label>
-                        <input class="form-control" type="number" name='quantity' id="quantity" required/> 
+                        <input class="form-control" inputmode="numeric" pattern="\d*"  type="number" name='quantity' id="quantity" value='0' min="0" /> 
                     </div>
 
                     <button class="btn  btn-primary" type='submit'>Cadastrar</button>              

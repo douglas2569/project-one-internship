@@ -15,7 +15,6 @@ class Inventory_model extends CI_Model {
     }  
     
     public function insert($address, $reference, $name, $brand, $description, $unitValue, $quantity){   
-        
         $data = array(
             'address' => $address,
             'reference' => $reference,
@@ -24,10 +23,11 @@ class Inventory_model extends CI_Model {
             'description' => $description,
             'unitValue' => $unitValue,            
             'quantity' => $quantity           
-                    
+            
         ); 
+        
         try{        
-            $this->db->query("CALL sp_invetory('$data[address]', '$data[reference]', '$data[name]', '$data[brand]',
+            $this->db->query("CALL sp_inventory('$data[address]', '$data[reference]', '$data[name]', '$data[brand]',
             '$data[description]', '$data[unitValue]', '$data[quantity]')"); 
         }catch(Exception $e){	
             throw new Exception($e);
