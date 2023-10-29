@@ -12,7 +12,24 @@ class Maintenance_model extends CI_Model {
         }        
         
         return $this->db->get("maintenance")->result_array();
-    }   
+    }
+    
+    public function insert($license_plate, $reason, $description){        
+        $data = array(
+            'license_plate_vehicles_customer_fk' => $license_plate,
+            'reason' => $reason,
+            'description' => $description
+        );        
+        
+        if(!$this->db->insert('maintenance', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);
+                return false; 
+            }
+        }
+
+    }
 
     
 

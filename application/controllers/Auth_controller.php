@@ -31,8 +31,7 @@ class Auth_controller extends CI_Controller {
 					'cpf' => $resultset[0]['cpf']
 									
 				);				
-				$this->session->set_userdata($array);
-				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Logado com sucesso.'));				
+				$this->session->set_userdata($array);								
 				redirect('/');				
 			}else{								
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Senha invalida.'));

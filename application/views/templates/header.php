@@ -15,7 +15,10 @@
 <body>
     <header>
         <div class="container">
-            <?php if(isset($this->session->message)) echo renderMessage($this->session->message) ?>
+            <?php if(isset($this->session->message)):
+                    echo renderMessage($this->session->message);
+                 endif
+            ?>
             
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +37,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= site_url('index.php/vehicle') ?>">Veiculos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= site_url('index.php/auth/logout') ?>">Sair</a>
                             </li>
                         </ul>
                         

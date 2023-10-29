@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `automotive_parts` (
   `description` text,    
   `unit_value` decimal NOT NULL,
   `brand` varchar(50) NOT NULL, 
+  `status` tinyint default 1, 
   
   PRIMARY KEY (`reference_number`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
@@ -173,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `services` (
   `description` text,
   `estimatedTime` varchar(50),
   `cost` decimal not null,
+  `status` tinyint default 1, 
   `cnpj_auto_vehicle_workstops_fk` varchar(50) NOT NULL, 
   
   PRIMARY KEY (`id`),   

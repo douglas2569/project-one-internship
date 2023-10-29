@@ -1,13 +1,9 @@
   
     <main>
         <div class="container"> 
-            <div class="title-box">
-                <a class="nav-link" href="<?= site_url() ?>">
-                     <i class="bi bi-arrow-left h2"></i>
-                     
-                </a>                
-                    <h1>Estoque de peças</h1>
-                </div>                           
+                           
+            <h1>Estoque de peças</h1>
+                                          
             <div class="inventory">
                 <div class="inventory-header toolbar">                                            
                     <button type="button" class="btn ">

@@ -85,6 +85,7 @@ CREATE TABLE `automotive_parts` (
   `description` text,
   `unit_value` decimal(10,0) NOT NULL,
   `brand` varchar(50) NOT NULL,
+  `status` tinyint default 1, 
   PRIMARY KEY (`reference_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -309,6 +310,7 @@ CREATE TABLE `services` (
   `description` text,
   `estimatedTime` varchar(50) DEFAULT NULL,
   `cost` decimal(10,0) NOT NULL,
+  `status` tinyint default 1,
   `cnpj_auto_vehicle_workstops_fk` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
