@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="style.css">  
     <main>
         <div class="container">  
             <div class="title-box">

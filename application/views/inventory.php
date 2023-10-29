@@ -34,14 +34,14 @@
                                 </div>
                             </div>
                             <div class="item-footer">
-                                <button type="button" class="btn edit-button" referenceNumber='<?= $part['reference_number'] ?>'>
+                                <a  href="<?= site_url('index.php/inventory/edit/'.$part['reference_number']) ?>" class="btn edit-button">
                                     <i class="bi bi-pencil-square"></i>
                                     Editar
-                                </button>
-                                <button type="button" class="btn delete-button" referenceNumber='<?= $part['reference_number'] ?>'>
+                                </a>
+                                <a  href="<?= site_url('index.php/inventory/delete/'.$part['reference_number']) ?>" class="btn delete-button">
                                     <i class="bi bi-trash3"></i>
                                     Excluir
-                                </button>
+                                </a>
                             </div>
                         </li>
                         <?php endforeach ?>

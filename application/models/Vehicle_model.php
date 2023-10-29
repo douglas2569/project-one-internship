@@ -45,6 +45,11 @@ class Vehicle_model extends CI_Model {
 
     }
 
+    public function delete($licensePlate){
+        $this->db->where('license_plate', $licensePlate);                     
+        return $this->db->delete('vehicles_customer');
+    }
+
     
 
 }

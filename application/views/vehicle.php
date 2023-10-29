@@ -29,14 +29,14 @@
                                 <span class="vehicle-brand"> <?= $vehicle['brand'] ?> </span>
                             </div>
                             <div class="item-footer">
-                                <button type="button" class="btn edit-button" referenceNumber='<?= $vehicle['cpf'] ?>'>
+                                <a  href="<?= site_url('index.php/vehicle/edit/'.$vehicle['license_plate']) ?>" class="btn edit-button">
                                     <i class="bi bi-pencil-square"></i>
                                     Editar
-                                </button>
-                                <button type="button" class="btn delete-button" referenceNumber='<?= $vehicle['cpf'] ?>'>
+                                </a>
+                                <a  href="<?= site_url('index.php/vehicle/delete/'.$vehicle['license_plate']) ?>" class="btn delete-button">
                                     <i class="bi bi-trash3"></i>
                                     Excluir
-                                </button>
+                                </a>
                             </div>
                         </li>
                         <?php endforeach ?>

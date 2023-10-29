@@ -30,6 +30,15 @@ class Maintenance_model extends CI_Model {
         }
 
     }
+    
+    public function delete($id){
+        try{    
+            $this->db->query("CALL sp_delete_maintance('$id')"); 
+           
+        }catch(Exception $e){	
+            throw new Exception($e);       
+        }        
+    }
 
     
 

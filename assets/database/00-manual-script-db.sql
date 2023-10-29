@@ -421,7 +421,7 @@ INNER JOIN employees on users.cpf = employees.cpf;
 
 CREATE VIEW v_inventory 
 AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand FROM automotive_parts 
-INNER JOIN inventory on automotive_parts.reference_number = automotive_parts.reference_number; 
+INNER JOIN inventory on automotive_parts.reference_number = inventory.reference_number; 
 
 DROP PROCEDURE IF EXISTS sp_vehicle_costumer;
 DELIMITER $$
@@ -538,4 +538,75 @@ DELIMITER ;
 
 CALL sp_inventory('caminho.jpg','23423423423','nome da peça','marca da peça',
 'descrição da pela........',11, 200);
+
+
+DROP PROCEDURE IF EXISTS sp_delete_part_inventory;
+DELIMITER $$
+
+CREATE PROCEDURE sp_delete_part_inventory(reference_number_p VARCHAR(255))
+BEGIN   
+    
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN    
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
+
+        ROLLBACK;    
+    END;
+
+    START TRANSACTION;
+        SET track_no = '1/2'; 
+        DELETE FROM inventory WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = inventory.reference_number;
+   
+        SET track_no = '2/2';
+        DELETE FROM automotive_parts WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = automotive_parts.reference_number;
+        
+        SET track_no = '0/2';
+        SELECT track_no, 'successfully executed.';
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS sp_delete_maintance;
+DELIMITER $$
+
+CREATE PROCEDURE sp_delete_maintance(id_p INT)
+BEGIN   
+    
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN    
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
+
+        ROLLBACK;    
+    END;
+
+    START TRANSACTION;
+        SET track_no = '1/3'; 
+        DELETE FROM services_provided WHERE id_p COLLATE utf8mb4_0900_ai_ci = services_provided.id_maintenance_fk;
+   
+        SET track_no = '2/3';
+        DELETE FROM maintenance_inventory WHERE id_p COLLATE utf8mb4_0900_ai_ci = maintenance_inventory.id_maintenance;
+
+        SET track_no = '3/3';
+        DELETE FROM maintenance WHERE id_p COLLATE utf8mb4_0900_ai_ci = maintenance.id;
+        
+        SET track_no = '0/3';
+        SELECT track_no, 'successfully executed.';
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
+
 

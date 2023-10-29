@@ -9,7 +9,7 @@ class Inventory_model extends CI_Model {
             $this->db->where( key($column),  $column[key($column)]);            
             
             return $this->db->get("v_inventory")->result_array();
-        }        
+        }    
         
         return $this->db->get("v_inventory")->result_array();
     }  
@@ -22,8 +22,7 @@ class Inventory_model extends CI_Model {
             'brand' => $brand,
             'description' => $description,
             'unitValue' => $unitValue,            
-            'quantity' => $quantity           
-            
+            'quantity' => $quantity 
         ); 
         
         try{        
@@ -33,6 +32,17 @@ class Inventory_model extends CI_Model {
             throw new Exception($e);
         }
 
+    }
+    
+    public function delete($reference){
+        try{    
+            $this->db->query("CALL sp_delete_part_inventory('$reference')"); 
+           
+        }catch(Exception $e){	
+            throw new Exception($e);       
+        }
+
+        
     }
 
     
