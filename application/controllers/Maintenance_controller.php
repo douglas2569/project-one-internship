@@ -40,7 +40,7 @@ class Maintenance_controller extends CI_Controller {
 		}
 				
 		$this->load->view('templates/header.php');
-		$this->load->view('maintenance_input_form.php',$data);
+		$this->load->view('maintenance_register_form.php',$data);
 		$this->load->view('templates/footer.php');	
 
 		
@@ -49,7 +49,7 @@ class Maintenance_controller extends CI_Controller {
 	public function delete($id) {
 		$resultset = $this->Maintenance_model->show(array('id'=>$id));		
 		if(count($resultset) == 1){			
-			$this->Maintenance_model->delete($id)
+			$this->Maintenance_model->delete($id);
 			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						
 		}else{
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro'));				

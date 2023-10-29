@@ -45,6 +45,26 @@ class Inventory_model extends CI_Model {
         
     }
 
+    public function update($referenceOld, $address, $referenceNew, $name, $brand, $description, $unitValue, $quantity){   
+        $data = array(
+            'address' => $address,
+            'reference' => $referenceNew,
+            'name' => $name,
+            'brand' => $brand,
+            'description' => $description,
+            'unitValue' => $unitValue,            
+            'quantity' => $quantity 
+        ); 
+        
+        try{        
+            $this->db->query("CALL sp_update_inventory('$referenceOld','$data[address]', '$data[reference]', '$data[name]', '$data[brand]',
+            '$data[description]', '$data[unitValue]', '$data[quantity]')"); 
+        }catch(Exception $e){	
+            throw new Exception($e);
+        }
+
+    }
+
     
 
 }

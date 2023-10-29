@@ -62,14 +62,14 @@ class Inventory_controller extends CI_Controller {
 					
 			}catch(Exception $e){
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel cadastrar. Erro: '.$e->getMessage()));
-				unlink('assets/images/'.$$address);
+				unlink('assets/images/'.$address);
 			}
 			
 
 		}
 				
 		$this->load->view('templates/header.php');
-		$this->load->view('inventory_input_form.php');
+		$this->load->view('inventory_register_form.php');
 		$this->load->view('templates/footer.php');	
 
 		
@@ -88,5 +88,74 @@ class Inventory_controller extends CI_Controller {
 		redirect('/');
 
 	}
+
+	public function edit($reference) {
+		$resulset = $this->Inventory_model->show(array('reference_number'=> $reference));		
+
+		if(count($resulset) != 1){			
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
+			
+		}else{			
+			
+			$this->form_validation->set_rules('reference', 'Numero de referência', 'trim|required|min_length[5]|max_length[255]');
+			$this->form_validation->set_rules('name', 'Nome', 'trim|required|min_length[5]|max_length[50]');
+			$this->form_validation->set_rules('brand', 'Marca', 'trim|required|min_length[2]|max_length[50]');
+			$this->form_validation->set_rules('description', 'Descrição', 'trim|min_length[5]');
+			$this->form_validation->set_rules('unitValue', 'Valor da unidade', 'trim|numeric|min_length[1]|max_length[50]');
+			$this->form_validation->set_rules('quantity', 'Quantidade', 'trim|integer|min_length[1]|max_length[50]');					
+			
+			$data['part'] = $resulset;
+			
+			if($this->form_validation->run() == FALSE){								
+				$this->load->view('templates/header.php');
+				$this->load->view('inventory_update_form.php',$data);
+				$this->load->view('templates/footer.php');
+
+			}else{
+				
+			if ( isset($_FILES['imageInventoryPart']) && $_FILES['imageInventoryPart']['size'] > 0 ){
+				$config['upload_path']          = './assets/images/';
+				$config['allowed_types']        = 'jpg|png';
+				$config['max_size']             = 200;
+				$config['max_width']            = 1024;
+				$config['max_height']           = 768;
+				$config['overwrite']            = TRUE;
+				$imageName = encryptHash(rand(99,9999).date("Y-m-d H:i:s"), 'md5');	
+				$config['file_name']            =   $imageName;					
+				
+				$this->load->library('upload', $config);
+				
+				if($this->upload->do_upload('imageInventoryPart')){
+					$imageType = $this->upload->data('file_ext');					
+					$address = $imageName.$imageType;
+				}
+				
+			}else{
+				$address = $this->input->post('imageInventoryPartOld');
+			}				
+			
+			$name = $this->input->post('name');
+			$brand = $this->input->post('brand');
+			$description = $this->input->post('description');						
+			$unitValue = $this->input->post('unitValue');			
+			$quantity = $this->input->post('quantity');			
+			$referenceNew = $this->input->post('reference');
+			$referenceOld = $reference;
+
+			try{
+				$this->Inventory_model->update($referenceOld, $address, $referenceNew, $name, $brand, $description, $unitValue, $quantity);
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));			
+				redirect('index.php/inventory');								
+					
+			}catch(Exception $e){
+				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel atualizar. Erro: '.$e->getMessage()));
+				unlink('assets/images/'.$address);
+			}
+				
+			}
+		}
+		
+	}
+
 }
 

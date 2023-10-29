@@ -189,6 +189,7 @@ CREATE TABLE IF NOT EXISTS `services_provided` (
   `id_maintenance_fk` int NOT NULL,  
   `cpf_mechanics_fk` varchar(50) NOT NULL,
   `id_services_fk` int NOT NULL, 
+  `quantity_service` int DEFAULT 1, 
   
   PRIMARY KEY (`id`),   
   FOREIGN KEY (`id_maintenance_fk`) REFERENCES `maintenance`(`id`),
@@ -420,7 +421,7 @@ AS SELECT users.cpf, users.username, users.password, employees.name, employees.p
 INNER JOIN employees on users.cpf = employees.cpf; 
 
 CREATE VIEW v_inventory 
-AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand FROM automotive_parts 
+AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand, automotive_parts.unit_value, automotive_parts.description FROM automotive_parts 
 INNER JOIN inventory on automotive_parts.reference_number = inventory.reference_number; 
 
 DROP PROCEDURE IF EXISTS sp_vehicle_costumer;
@@ -521,8 +522,7 @@ BEGIN
     START TRANSACTION;
         SET track_no = '1/2'; 
         INSERT INTO automotive_parts(image_address, reference_number, name, brand, description, unit_value) 
-        VALUES(image_address_p, reference_number_p, name_p, brand_p, description_p, unit_value_p);
-        
+        VALUES(image_address_p, reference_number_p, name_p, brand_p, description_p, unit_value_p);        
         
         SET track_no = '2/2';
         INSERT INTO  inventory (reference_number, quantity) 
@@ -558,10 +558,13 @@ BEGIN
     END;
 
     START TRANSACTION;
-        SET track_no = '1/2'; 
+        SET track_no = '1/3'; 
+        DELETE FROM vehicles_automotive_parts WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = vehicles_automotive_parts.reference_number_automotive_parts;
+
+        SET track_no = '2/3'; 
         DELETE FROM inventory WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = inventory.reference_number;
    
-        SET track_no = '2/2';
+        SET track_no = '3/3';
         DELETE FROM automotive_parts WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = automotive_parts.reference_number;
         
         SET track_no = '0/2';
@@ -602,6 +605,49 @@ BEGIN
         DELETE FROM maintenance WHERE id_p COLLATE utf8mb4_0900_ai_ci = maintenance.id;
         
         SET track_no = '0/3';
+        SELECT track_no, 'successfully executed.';
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS sp_update_inventory;
+DELIMITER $$
+
+CREATE PROCEDURE sp_update_inventory(
+    reference_number_old_p VARCHAR(255),
+	  image_address_P VARCHAR(255),
+    reference_number_p VARCHAR(255),
+    name_p VARCHAR(50),
+    brand_p VARCHAR(50),
+    description_p TEXT,
+    unit_value_p DECIMAL,
+    quantity_p INT
+  )
+
+BEGIN    
+    DECLARE count_reference INT DEFAULT 0;
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN    
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
+
+        ROLLBACK;    
+    END;
+
+    START TRANSACTION;
+        SET track_no = '1/1'; 
+        SELECT COUNT(reference_number) INTO count_reference FROM automotive_parts WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = automotive_parts.reference_number; 
+        IF (count_reference > 0) THEN 
+          UPDATE automotive_parts SET image_address = image_address_p, name = name_p, brand = brand_p, description = description_p, unit_value = unit_value_p 
+          WHERE automotive_parts.reference_number = reference_number_old_p COLLATE utf8mb4_0900_ai_ci;
+        END IF;        
+        
+        SET track_no = '0/1';
         SELECT track_no, 'successfully executed.';
     COMMIT;
 
