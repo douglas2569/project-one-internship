@@ -539,7 +539,6 @@ DELIMITER ;
 CALL sp_inventory('caminho.jpg','23423423423','nome da peça','marca da peça',
 'descrição da pela........',11, 200);
 
-
 DROP PROCEDURE IF EXISTS sp_delete_part_inventory;
 DELIMITER $$
 
@@ -558,13 +557,16 @@ BEGIN
     END;
 
     START TRANSACTION;
-        SET track_no = '1/3'; 
+        SET track_no = '1/4'; 
         DELETE FROM vehicles_automotive_parts WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = vehicles_automotive_parts.reference_number_automotive_parts;
 
-        SET track_no = '2/3'; 
+        SET track_no = '2/4'; 
+        DELETE FROM maintenance_inventory WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = maintenance_inventory .reference_number;
+
+        SET track_no = '3/4'; 
         DELETE FROM inventory WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = inventory.reference_number;
    
-        SET track_no = '3/3';
+        SET track_no = '4/4';
         DELETE FROM automotive_parts WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = automotive_parts.reference_number;
         
         SET track_no = '0/2';
