@@ -76,16 +76,17 @@ class Inventory_controller extends CI_Controller {
 	}
 
 	public function delete($reference) {
-		$resultset = $this->Inventory_model->show(array('reference_number'=>$reference));		
+		$resultset = $this->Inventory_model->show(array('reference_number'=>$reference));
+				
 		if(count($resultset) == 1){
-			$this->Inventory_model->delete($reference);
-			unlink('assets/images/'.$resultset[0]['cover']);
-			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						
+			$this->Inventory_model->delete($reference);			
+			unlink('assets/images/'.$resultset[0]['image_address']);
+			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));									
 		}else{
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro'));				
 		}
 
-		redirect('/');
+		redirect('index.php/inventory');
 
 	}
 
