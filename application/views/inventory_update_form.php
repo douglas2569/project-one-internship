@@ -21,7 +21,7 @@
                 
                     <div class="form-group">
                         <label for="reference" class="form-label">Referência*</label>
-                        <input class="form-control" type="text" name='reference' id="reference" value="<?= $part[0]['reference_number'] ?>"disabled required/>
+                        <input class="form-control" type="text" name='reference' id="reference" value="<?= $part[0]['reference_number'] ?>" required/>
                     <div>
                     <div class="form-group">
                         <label class="form-label" for="name">Nome*</label>

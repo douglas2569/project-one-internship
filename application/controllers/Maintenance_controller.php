@@ -59,6 +59,39 @@ class Maintenance_controller extends CI_Controller {
 
 	}
 
-	
+	public function edit($id) {
+		$resulset = $this->Maintenance_model->show(array('id'=> $id));		
+
+		if(count($resulset) != 1){			
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
+			
+		}else{			
+			
+			$this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|max_length[50]');
+			$this->form_validation->set_rules('name', 'Nome', 'trim|required|min_length[5]|max_length[50]');
+			$this->form_validation->set_rules('address', 'Endereço', 'trim|min_length[5]|max_length[255]');
+			$this->form_validation->set_rules('phoneNumber', 'Telefone', 'trim|required|min_length[5]|max_length[50]');
+			$this->form_validation->set_rules('email', 'Email', 'trim|valid_email|min_length[5]|max_length[100]');
+
+			$this->form_validation->set_rules('licensePlate', 'Placa', 'trim|min_length[6]|max_length[50]|required');
+
+			$this->form_validation->set_rules('model', 'Modelo', 'trim|min_length[5]|max_length[50]');
+			$this->form_validation->set_rules('brand', 'Marca', 'trim|min_length[1]|max_length[50]');	
+
+			$data['maintenance'] = $resulset;
+
+			if($this->form_validation->run() == FALSE){								
+				$this->load->view('templates/header.php');
+				$this->load->view('maintenance_update_form.php',$data);
+				$this->load->view('templates/footer.php');
+
+			}else{		
+			
+				
+				
+			}
+		}
+		
+	}
 
 }
