@@ -97,14 +97,25 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
   PRIMARY KEY (`model`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
+
+DROP TABLE IF EXISTS `vehicles_automotive_parts`;
+CREATE TABLE IF NOT EXISTS `vehicles_automotive_parts` (
+  `reference_number_automotive_parts` varchar(50) NOT NULL,
+  `model_vehicles` varchar(50) NOT NULL,  
+  
+  PRIMARY KEY (`reference_number_automotive_parts`, `model_vehicles`),   
+  FOREIGN KEY (`reference_number_automotive_parts`) REFERENCES `automotive_parts`(`reference_number`),
+  FOREIGN KEY (`model_vehicles`) REFERENCES `vehicles`(`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+
 DROP TABLE IF EXISTS `vehicles_customer`;
 CREATE TABLE IF NOT EXISTS `vehicles_customer` (
   `license_plate` varchar(50) NOT NULL,
   `cpf_customer_fk` varchar(50) NOT NULL,  
   `model_vehicles_fk` varchar(50) NOT NULL,
   
-  PRIMARY KEY (`license_plate`).
-  FOREIGN KEY (`cpf_customer_fk`) REFERENCES `customer`(`cpf`) ,
+  PRIMARY KEY (`license_plate`),
+  FOREIGN KEY (`cpf_customer_fk`) REFERENCES `customers`(`cpf`) ,
   FOREIGN KEY (`model_vehicles_fk`) REFERENCES `vehicles`(`model`) 
 
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
@@ -123,15 +134,6 @@ CREATE TABLE IF NOT EXISTS `automotive_parts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `vehicles_automotive_parts`;
-CREATE TABLE IF NOT EXISTS `vehicles_automotive_parts` (
-  `reference_number_automotive_parts` varchar(50) NOT NULL,
-  `model_vehicles` varchar(50) NOT NULL,  
-  
-  PRIMARY KEY (`reference_number_automotive_parts`, `model_vehicles`),   
-  FOREIGN KEY (`reference_number_automotive_parts`) REFERENCES `automotive_parts`(`reference_number`),
-  FOREIGN KEY (`model_vehicles`) REFERENCES `vehicles`(`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `maintenance`;
 CREATE TABLE IF NOT EXISTS `maintenance` (
@@ -141,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `maintenance` (
   `status` tinyint default 0,  
   `initialDate` datetime,
   `finalDate` datetime,
-  `license_plate_vehicles_customer_fk` varchar(50) NOT NULL
+  `license_plate_vehicles_customer_fk` varchar(50) NOT NULL,
   
   PRIMARY KEY (`id`),   
   FOREIGN KEY (`license_plate_vehicles_customer_fk`) REFERENCES `vehicles_customer`(`license_plate`)  
@@ -425,6 +427,17 @@ AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  au
 INNER JOIN inventory on automotive_parts.reference_number = inventory.reference_number
 WHERE automotive_parts.status = '1'; 
 
+CREATE VIEW v_inventory   
+AS 
+SELECT `customers`.`cpf` AS `cpf`, `customers`.`name` AS `name`, `customers`.`address` AS `address`, `customers`.`phone_number` AS `phone_number`, `customers`.`email` AS `email`, `vehicles_customer`.`model_vehicles_fk` AS `model_vehicles_fk`, `vehicles_customer`.`license_plate` AS `license_plate`, `vehicles`.`brand` AS `brand` FROM ((`vehicles_customer` join `vehicles` on((`vehicles_customer`.`model_vehicles_fk` = `vehicles`.`model`))) join `customers` on((`customers`.`cpf` = `vehicles_customer`.`cpf_customer_fk`)));
+
+
+CREATE VIEW v_vehicles_customers
+AS  
+select `workshopprime`.`customers`.`cpf` AS `cpf`,`workshopprime`.`customers`.`name` AS `name`,`workshopprime`.`customers`.`address` AS `address`,`workshopprime`.`customers`.`phone_number` AS `phone_number`,`workshopprime`.`customers`.`email` AS `email`,`workshopprime`.`vehicles_customer`.`model_vehicles_fk` AS `model_vehicles_fk`,`workshopprime`.`vehicles_customer`.`license_plate` AS `license_plate`,`workshopprime`.`vehicles`.`brand` AS `brand` from ((`workshopprime`.`vehicles_customer` join `workshopprime`.`vehicles` on(`workshopprime`.`vehicles_customer`.`model_vehicles_fk` = `workshopprime`.`vehicles`.`model`)) join `workshopprime`.`customers` on(`workshopprime`.`customers`.`cpf` = `workshopprime`.`vehicles_customer`.`cpf_customer_fk`));
+
+
+
 DROP PROCEDURE IF EXISTS sp_vehicle_costumer;
 DELIMITER $$
 
@@ -456,15 +469,15 @@ BEGIN
 
     START TRANSACTION;
         SET track_no = '1/3'; 
-        SELECT COUNT(cpf) INTO count_cpf FROM customers WHERE cpf_p COLLATE utf8mb4_0900_ai_ci = customers.cpf; 
+        SELECT COUNT(cpf) INTO count_cpf FROM customers WHERE cpf_p COLLATE utf8mb4_general_ci  = customers.cpf; 
         IF (count_cpf <= 0) THEN      
           INSERT INTO customers (cpf, name, address, phone_number, email, cnpj_auto_vehicle_workstops_fk) 
           VALUES(cpf_p, name_p, address_p, phoneNumber_p, email_p, cnpjAutoVehicleWorkstops_p);
         END IF;
               
-        /* model_p COLLATE utf8mb4_0900_ai_ci --> aqui estou fazendo com que o valor da minha variavel tenha o msm  COLLATE da minha tabela, por consequencia dos meu campos, se eu nao forçar iss nao da certo */
+        /* model_p COLLATE utf8mb4_general_ci  --> aqui estou fazendo com que o valor da minha variavel tenha o msm  COLLATE da minha tabela, por consequencia dos meu campos, se eu nao forçar iss nao da certo */
         SET track_no = '2/3';  
-        SELECT COUNT(model) INTO count_model FROM vehicles WHERE model_p COLLATE utf8mb4_0900_ai_ci = vehicles.model; 
+        SELECT COUNT(model) INTO count_model FROM vehicles WHERE model_p COLLATE utf8mb4_general_ci  = vehicles.model; 
         IF (count_model <= 0) THEN
         	INSERT INTO vehicles(model, brand ) 
         	VALUES(model_p, brand_p);
@@ -559,16 +572,16 @@ BEGIN
 
     START TRANSACTION;
         SET track_no = '1/4'; 
-        DELETE FROM vehicles_automotive_parts WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = vehicles_automotive_parts.reference_number_automotive_parts;
+        DELETE FROM vehicles_automotive_parts WHERE reference_number_p COLLATE utf8mb4_general_ci  = vehicles_automotive_parts.reference_number_automotive_parts;
 
         SET track_no = '2/4'; 
-        DELETE FROM maintenance_inventory WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = maintenance_inventory .reference_number;
+        DELETE FROM maintenance_inventory WHERE reference_number_p COLLATE utf8mb4_general_ci  = maintenance_inventory .reference_number;
 
         SET track_no = '3/4'; 
-        DELETE FROM inventory WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = inventory.reference_number;
+        DELETE FROM inventory WHERE reference_number_p COLLATE utf8mb4_general_ci  = inventory.reference_number;
    
         SET track_no = '4/4';
-        DELETE FROM automotive_parts WHERE reference_number_p COLLATE utf8mb4_0900_ai_ci = automotive_parts.reference_number;
+        DELETE FROM automotive_parts WHERE reference_number_p COLLATE utf8mb4_general_ci  = automotive_parts.reference_number;
         
         SET track_no = '0/2';
         SELECT track_no, 'successfully executed.';
@@ -599,13 +612,13 @@ BEGIN
 
     START TRANSACTION;
         SET track_no = '1/3'; 
-        DELETE FROM services_provided WHERE id_p COLLATE utf8mb4_0900_ai_ci = services_provided.id_maintenance_fk;
+        DELETE FROM services_provided WHERE id_p COLLATE utf8mb4_general_ci  = services_provided.id_maintenance_fk;
    
         SET track_no = '2/3';
-        DELETE FROM maintenance_inventory WHERE id_p COLLATE utf8mb4_0900_ai_ci = maintenance_inventory.id_maintenance;
+        DELETE FROM maintenance_inventory WHERE id_p COLLATE utf8mb4_general_ci  = maintenance_inventory.id_maintenance;
 
         SET track_no = '3/3';
-        DELETE FROM maintenance WHERE id_p COLLATE utf8mb4_0900_ai_ci = maintenance.id;
+        DELETE FROM maintenance WHERE id_p COLLATE utf8mb4_general_ci  = maintenance.id;
         
         SET track_no = '0/3';
         SELECT track_no, 'successfully executed.';
@@ -647,11 +660,69 @@ BEGIN
     START TRANSACTION;
         SET track_no = '1/2';
         UPDATE inventory SET quantity = quantity_p
-        WHERE inventory.reference_number = reference_number_old_p COLLATE utf8mb4_0900_ai_ci;
+        WHERE inventory.reference_number = reference_number_old_p COLLATE utf8mb4_general_ci ;
 
         SET track_no = '2/2';
         UPDATE automotive_parts SET image_address = image_address_p, name = name_p, brand = brand_p, description = description_p, unit_value = unit_value_p, status = status_p 
-        WHERE automotive_parts.reference_number = reference_number_old_p COLLATE utf8mb4_0900_ai_ci;
+        WHERE automotive_parts.reference_number = reference_number_old_p COLLATE utf8mb4_general_ci ;
+
+        SET track_no = '0/2';
+        SELECT track_no, 'successfully executed.';
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS sp_update_vehicle_customer;
+DELIMITER $$
+
+CREATE PROCEDURE sp_update_vehicle_customer(
+    cpf_p VARCHAR(50),
+	  name_p VARCHAR(50),
+    address_p VARCHAR(255),
+    phone_number_p VARCHAR(50),
+    email_p VARCHAR(50),
+    license_plate_p VARCHAR(50),
+    model_p VARCHAR(50),
+    brand_p VARCHAR(50), 
+    cnpj_auto_vehicle_workstops_p VARCHAR(50)
+  )
+
+BEGIN    
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN    
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
+
+        ROLLBACK;    
+    END;
+
+    START TRANSACTION;
+        SET track_no = '1/2';
+        UPDATE vehicles_customer 
+        SET 
+        license_plate = license_plate_p,
+        cpf_customer_fk = cpf_p,
+        model_vehicles_fk = model_p
+
+        WHERE vehicles_customer.license_plate = license_plate_p COLLATE utf8mb4_general_ci;
+
+        SET track_no = '2/2';
+        UPDATE customers 
+        SET         
+        name = name_p,
+        address = address_p,
+        phone_number = phone_number_p,
+        email = email_p,
+        cnpj_auto_vehicle_workstops_fk = cnpj_auto_vehicle_workstops_p
+
+        WHERE customers.cpf = cpf_p COLLATE utf8mb4_general_ci;
 
         SET track_no = '0/2';
         SELECT track_no, 'successfully executed.';

@@ -28,42 +28,45 @@
                         <th>Inicio</th>                        
                     </thead>
                     <tbody>
-                        <!-- <tr class="table-active"></tr> -->
-                        <?php foreach($maintenanceList as $maintenance): ?>
-                            <tr> 
-                                <td><?= $maintenance['id'] ?></td>                                
-                                <td><?= $maintenance['license_plate_vehicles_customer_fk'] ?></td>                                
-                                <td><?= $maintenance['reason'] ?></td>                                
-                                <td>
-                                    <?php 
-                                        switch($maintenance['status']):
-                                            case 0:
-                                                echo 'Não iniciada';
-                                            break;
+                        
+                        <?php foreach($maintenanceList as $maintenance): ?>                            
+                                 <tr> 
+                                    <td> <?= $maintenance['id'] ?></td>                                
+                                    <td><?= $maintenance['license_plate_vehicles_customer_fk'] ?></td>                                
+                                    <td>
+                                    <a  href="<?= site_url('index.php/maintenance/edit/'.$maintenance['id']) ?>">
+                                        <?= $maintenance['reason'] ?></a> 
+                                    </td>                                
+                                    <td>
+                                        <?php 
+                                            switch($maintenance['status']):
+                                                case 0:
+                                                    echo 'Não iniciada';
+                                                break;
 
-                                            case 1:
-                                                echo 'Concluida';
-                                            break;
+                                                case 1:
+                                                    echo 'Concluida';
+                                                break;
 
-                                            case 2:
-                                                echo 'Pausada';
-                                            break;
+                                                case 2:
+                                                    echo 'Pausada';
+                                                break;
 
-                                            case 3:
-                                                echo 'Cancelada';
-                                            break;
-                                        endswitch
-                                    ?>
-                                </td>  
-                                <td>
-                                    <?php 
-                                        if(is_null($maintenance['initialDate'])):
-                                           echo '-' ;
-                                        endif     
-                                    ?>
-                                </td>                               
-                                                              
-                            </tr>                        
+                                                case 3:
+                                                    echo 'Cancelada';
+                                                break;
+                                            endswitch
+                                        ?>
+                                    </td>  
+                                    <td>
+                                        <?php 
+                                            if(is_null($maintenance['initialDate'])):
+                                            echo '-' ;
+                                            endif     
+                                        ?>
+                                    </td>                               
+                                </tr>                        
+                                                        
                         <?php endforeach ?>
                     </tbody>
                     </table>

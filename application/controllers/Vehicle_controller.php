@@ -68,5 +68,57 @@ class Vehicle_controller extends CI_Controller {
 		redirect('index.php/vehicle');
 
 	}
+
+	public function edit($licensePlate) {
+		$resulset = $this->Vehicle_model->show(array('license_plate'=> $licensePlate));		
+
+		if(count($resulset) != 1){			
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
+			
+		}else{			
+			
+			$this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|max_length[50]');
+			$this->form_validation->set_rules('name', 'Nome', 'trim|required|min_length[5]|max_length[50]');
+			$this->form_validation->set_rules('address', 'Endereço', 'trim|min_length[5]|max_length[255]');
+			$this->form_validation->set_rules('phoneNumber', 'Telefone', 'trim|required|min_length[5]|max_length[50]');
+			$this->form_validation->set_rules('email', 'Email', 'trim|valid_email|min_length[5]|max_length[100]');
+
+			$this->form_validation->set_rules('licensePlate', 'Placa', 'trim|min_length[6]|max_length[50]|required');
+
+			$this->form_validation->set_rules('model', 'Modelo', 'trim|min_length[5]|max_length[50]');
+			$this->form_validation->set_rules('brand', 'Marca', 'trim|min_length[1]|max_length[50]');	
+
+			$data['vehicle'] = $resulset;
+
+			if($this->form_validation->run() == FALSE){								
+				$this->load->view('templates/header.php');
+				$this->load->view('vehicle_update_form.php',$data);
+				$this->load->view('templates/footer.php');
+
+			}else{		
+			
+			$cpf = $this->input->post('cpf');
+			$name = $this->input->post('name');
+			$address = $this->input->post('address');
+			$phoneNumber = $this->input->post('phoneNumber');
+			$email = $this->input->post('email');
+			$licensePlate = $this->input->post('licensePlate');
+			$model = $this->input->post('model');
+			$brand = $this->input->post('brand');
+
+				try{
+					$this->Vehicle_model->update($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand);				
+					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));
+					redirect('index.php/vehicle');
+					
+				}catch(Exception $e){	
+					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel Atualizar. Erro: '.$e->getMessage()));
+					redirect('index.php/vehicle/edit/'.$licensePlate);
+				}
+				
+			}
+		}
+		
+	}
 }
 
