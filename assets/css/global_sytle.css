@@ -36,6 +36,7 @@
 }
 
 main{
+    margin-top: calc(2 * var(--lg-margin2) );
     min-height: 100vh;
 }
 
@@ -44,7 +45,7 @@ main{
     position:absolute;        
         left:50%;
         transform:translate(-50%);
-        z-index: 1;
+        z-index: 10000;
         margin-top: var(--sm-margin3);
 }
 .toast > .toast-body{
