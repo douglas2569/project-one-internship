@@ -65,7 +65,7 @@ class Vehicle_controller extends CI_Controller {
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro'));				
 		}
 
-		redirect('/');
+		redirect('index.php/vehicle');
 
 	}
 }
