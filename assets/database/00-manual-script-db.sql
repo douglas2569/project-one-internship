@@ -141,8 +141,8 @@ CREATE TABLE IF NOT EXISTS `maintenance` (
   `reason` varchar(50) NOT NULL,
   `description` text,
   `status` tinyint default 0,  
-  `initialDate` datetime,
-  `finalDate` datetime,
+  `initial_date` datetime,
+  `final_date` datetime,
   `license_plate_vehicles_customer_fk` varchar(50) NOT NULL,
   
   PRIMARY KEY (`id`),   
@@ -352,7 +352,7 @@ values('M12345','Filtro de Ar','K&N','Os filtros de ar K&N possuem uma capacidad
 insert into automotive_parts (reference_number, name, brand, description, unit_value) 
 values('M87654','Pneu Traseiro','Michelin','O pneu traseiro Michelin possui uma construção radial com uma classificação de velocidade de até 180 km/h, oferecendo aderência excepcional em uma variedade de condições de pilotagem.', 50.00);
 
-insert into maintenance(id, reason, description, status, initialDate, finalDate, license_plate_vehicles_customer_fk) 
+insert into maintenance(id, reason, description, status, initial_date, final_date, license_plate_vehicles_customer_fk) 
 values(default, 'Carro não liga','Quando giro a chave ele faz tantaaaatan',0, null, null, 'MXQ9131');
 
 insert into maintenance(reason, description, status, license_plate_vehicles_customer_fk) 
@@ -510,7 +510,7 @@ CALL sp_vehicle_costumer('09048491555','Mariana Alta','Rua T, n° 33,Chico da Do
 DROP PROCEDURE IF EXISTS sp_inventory;
 DELIMITER $$
 
-CREATE PROCEDURE sp_inventory(
+CREATE PROCEDURE sp_register_inventory(
 	  image_address_P VARCHAR(255),
     reference_number_p VARCHAR(255),
     name_p VARCHAR(50),
@@ -731,3 +731,12 @@ BEGIN
 END; $$
 
 DELIMITER ;
+
+
+CREATE VIEW v_maintenance_inventory
+AS 
+SELECT maintenance.id as maintenance_id, maintenance.reason, maintenance.description, maintenance.status, maintenance.initial_date, maintenance.final_date, maintenance.license_plate_vehicles_customer_fk, maintenance_inventory.reference_number 
+FROM maintenance INNER JOIN maintenance_inventory ON maintenance.id = maintenance_inventory.id_maintenance  
+
+
+

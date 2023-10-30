@@ -60,7 +60,7 @@
                                     </td>  
                                     <td>
                                         <?php 
-                                            if(is_null($maintenance['initialDate'])):
+                                            if(is_null($maintenance['initial_date'])):
                                             echo '-' ;
                                             endif     
                                         ?>

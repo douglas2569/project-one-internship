@@ -26,7 +26,7 @@ class Inventory_model extends CI_Model {
         ); 
         
         try{        
-            $this->db->query("CALL sp_inventory('$data[address]', '$data[reference]', '$data[name]', '$data[brand]',
+            $this->db->query("CALL sp_register_inventory('$data[address]', '$data[reference]', '$data[name]', '$data[brand]',
             '$data[description]', '$data[unitValue]', '$data[quantity]')"); 
         }catch(Exception $e){	
             throw new Exception($e);
