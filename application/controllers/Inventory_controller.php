@@ -102,7 +102,9 @@ class Inventory_controller extends CI_Controller {
 			$this->form_validation->set_rules('brand', 'Marca', 'trim|required|min_length[2]|max_length[50]');
 			$this->form_validation->set_rules('description', 'Descrição', 'trim|min_length[5]');
 			$this->form_validation->set_rules('unitValue', 'Valor da unidade', 'trim|numeric|min_length[1]|max_length[50]');
-			$this->form_validation->set_rules('quantity', 'Quantidade', 'trim|integer|min_length[1]|max_length[50]');					
+			$this->form_validation->set_rules('quantity', 'Quantidade', 'trim|integer|min_length[1]|max_length[50]');	
+			$this->form_validation->set_rules('status', 'Estado', 'integer|min_length[1]|max_length[1]');
+			
 			
 			$data['part'] = $resulset;
 			
@@ -140,10 +142,11 @@ class Inventory_controller extends CI_Controller {
 			$unitValue = $this->input->post('unitValue');			
 			$quantity = $this->input->post('quantity');			
 			$referenceNew = $this->input->post('reference');
+			$status = $this->input->post('status');
 			$referenceOld = $reference;
 
 			try{
-				$this->Inventory_model->update($referenceOld, $address, $referenceNew, $name, $brand, $description, $unitValue, $quantity);
+				$this->Inventory_model->update($referenceOld, $address, $referenceNew, $name, $brand, $description, $unitValue, $quantity, $status);
 				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));			
 				redirect('index.php/inventory');								
 					

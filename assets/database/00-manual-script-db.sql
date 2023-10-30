@@ -421,8 +421,9 @@ AS SELECT users.cpf, users.username, users.password, employees.name, employees.p
 INNER JOIN employees on users.cpf = employees.cpf; 
 
 CREATE VIEW v_inventory 
-AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand, automotive_parts.unit_value, automotive_parts.description FROM automotive_parts 
-INNER JOIN inventory on automotive_parts.reference_number = inventory.reference_number; 
+AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand, automotive_parts.unit_value, automotive_parts.description, automotive_parts.status FROM automotive_parts 
+INNER JOIN inventory on automotive_parts.reference_number = inventory.reference_number
+WHERE automotive_parts.status = '1'; 
 
 DROP PROCEDURE IF EXISTS sp_vehicle_costumer;
 DELIMITER $$
@@ -627,7 +628,8 @@ CREATE PROCEDURE sp_update_inventory(
     brand_p VARCHAR(50),
     description_p TEXT,
     unit_value_p DECIMAL,
-    quantity_p INT
+    quantity_p INT, 
+    status_p tinyint 
   )
 
 BEGIN    
@@ -648,7 +650,7 @@ BEGIN
         WHERE inventory.reference_number = reference_number_old_p COLLATE utf8mb4_0900_ai_ci;
 
         SET track_no = '2/2';
-        UPDATE automotive_parts SET image_address = image_address_p, name = name_p, brand = brand_p, description = description_p, unit_value = unit_value_p 
+        UPDATE automotive_parts SET image_address = image_address_p, name = name_p, brand = brand_p, description = description_p, unit_value = unit_value_p, status = status_p 
         WHERE automotive_parts.reference_number = reference_number_old_p COLLATE utf8mb4_0900_ai_ci;
 
         SET track_no = '0/2';

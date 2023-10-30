@@ -46,6 +46,31 @@
                         <label class="form-label" for="quantity">Quantidade*</label>
                         <input class="form-control" inputmode="numeric" pattern="\d*"  type="number" name='quantity' id="quantity" min="1" value="<?= $part[0]['quantity'] ?>" /> 
                     </div>
+                    <div class="form-group">
+                        <label class="form-label" for="quantity">Estado</label>
+                        <div class="form-check">
+                            <?php if($part[0]['status'] == '1'): ?>
+                                <input class="form-check-input" type="radio" name="status" id="status" value="1" checked>
+                                <?php else: ?>
+                                    <input class="form-check-input" type="radio" name="status" id="status" value="1" >
+                            <?php endif ?>
+                            <label class="form-check-label" for="status2">
+                                Ativar
+                            </label>
+                        </div>                            
+                            
+                        </div>
+                        <div class="form-check">
+                            <?php if($part[0]['status'] == '0'): ?>
+                                <input class="form-check-input" type="radio" name="status" id="status" value="0" checked>
+                                <?php else: ?>
+                                    <input class="form-check-input" type="radio" name="status" id="status" value="0" >
+                            <?php endif ?>
+                            <label class="form-check-label" for="status2">
+                                Desativar
+                            </label>
+                        </div>
+                    </div>
 
                     <button class="btn  btn-primary" type='submit'>Atualizar</button>              
             </form> 
