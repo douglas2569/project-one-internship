@@ -29,7 +29,7 @@ class Vehicle_model extends CI_Model {
                     
         ); 
         try{        
-            $this->db->query("CALL sp_vehicle_costumer('$data[cpf]', '$data[name]', '$data[address]', '$data[phone_number]',
+            $this->db->query("CALL sp_register_vehicle_costumer('$data[cpf]', '$data[name]', '$data[address]', '$data[phone_number]',
             '$data[email]', '$data[cnpj_auto_vehicle_workstops_fk]', '$data[license_plate]', '$data[model]', '$data[brand]')"); 
         }catch(Exception $e){	
             throw new Exception($e);

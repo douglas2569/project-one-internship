@@ -5,7 +5,6 @@ $route['default_controller'] = 'Maintenance_controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
 $route['auth'] = 'Auth_controller';
 $route['auth/login'] = 'Auth_controller/login';
 $route['auth/logout'] = 'Auth_controller/logout';
@@ -24,6 +23,7 @@ $route['maintenance'] = 'Maintenance_controller';
 $route['home'] = 'Maintenance_controller';
 $route['maintenance/store'] = 'Maintenance_controller/store';
 $route['maintenance/edit/(:any)'] = 'Maintenance_controller/edit/$1';
+$route['maintenance/change/(:any)'] = 'Maintenance_controller/change/$1';
 $route['maintenance/delete/(:any)'] = 'Maintenance_controller/delete/$1';
 
 

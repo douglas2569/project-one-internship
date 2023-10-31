@@ -47,7 +47,8 @@ class Maintenance_controller extends CI_Controller {
 	}
 
 	public function delete($id) {
-		$resultset = $this->Maintenance_model->show(array('maintenance_id'=>$id));		
+		$resultset = $this->Maintenance_model->show(array('id'=>$id));	
+			
 		if(count($resultset) == 1){			
 			$this->Maintenance_model->delete($id);
 			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						
@@ -59,10 +60,10 @@ class Maintenance_controller extends CI_Controller {
 
 	}
 
-	public function edit($id) {
+	public function change($id) {
 		$maintenace = $this->Maintenance_model->show(array('id'=> $id));		
 		$maintenaceParts = $this->Maintenance_model->show(array('id_maintenance'=> $id), 'v_maintenance_inventory_parts');
-		$maintenanceService = $this->Maintenance_model->show(array('id_maintenance_fk '=> $id), 'v_services_provided_mechanics');	
+		$maintenanceService = $this->Maintenance_model->show(array('id_maintenance_fk '=> $id), 'v_services_provided_mechanics');
 				
 		
 		if(!is_array($maintenace)){						
@@ -87,7 +88,7 @@ class Maintenance_controller extends CI_Controller {
 				$data['maintenanceService'] = ($maintenanceService) ? $maintenanceService: false;
 				
 				$this->load->view('templates/header.php');
-				$this->load->view('maintenance_update_form.php',$data);
+				$this->load->view('maintenance_manipulation_form.php',$data);
 				$this->load->view('templates/footer.php');
 
 			}else{		

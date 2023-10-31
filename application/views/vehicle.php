@@ -19,6 +19,7 @@
                     </form>                   
                 </div>
                 <div class="vehiclesList-main">
+                <?php  if(count($vehiclesList) > 0): ?>
                     <ul class="vehicles-list">
                         <?php foreach($vehiclesList as $vehicle): ?>    
                         <li class="vehicles-item">
@@ -41,6 +42,9 @@
                         </li>
                         <?php endforeach ?>
                     </ul>
+                    <?php  else: ?>                         
+                        <p class="h6" >Nenhum veiculo cadastrado</p>
+                    <?php endif; ?> 
                 </div>
             </div>
         </div>

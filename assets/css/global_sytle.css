@@ -93,12 +93,10 @@ main .container > .toast{
     vertical-align: middle;
     margin-top: var(--sm-margin2);
 }
-.table th{
-    text-align: center;
-}
-
-.table tr::content('-'){
-    text-align: center;
+.table th{    
+  line-height: 50%;
+  text-align: center;
+  padding: var(--md-margin2) var(--md-margin1);
 }
 
 /* forms */
@@ -113,4 +111,16 @@ legend{
     width: auto;
     padding:var(--sm-padding3);
     
+}
+
+/* Maintenance */
+
+.maintenance-main a{
+    color:var(--white-color);
+    padding: 0;
+    margin: var(--sm-margin1);
+}
+
+p.h6{
+    text-align: center;
 }

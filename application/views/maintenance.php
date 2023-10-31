@@ -19,57 +19,65 @@
                     </form>                   
                 </div>
                 <div class="maintenance-main">
-                <table class="table table-dark">
-                    <thead>
-                        <th>N°</th>
-                        <th>Placa</th>
-                        <th>Problema</th>
-                        <th>Estado</th>                        
-                        <th>Inicio</th>                        
-                    </thead>
-                    <tbody>
-                        
-                        <?php foreach($maintenanceList as $maintenance): ?>                            
-                                 <tr> 
-                                    <td> <?= $maintenance['id'] ?></td>                                
-                                    <td><?= $maintenance['license_plate_vehicles_customer_fk'] ?></td>                                
-                                    <td>
-                                    <a  href="<?= site_url('index.php/maintenance/edit/'.$maintenance['id']) ?>">
-                                        <?= $maintenance['reason'] ?></a> 
-                                    </td>                                
-                                    <td>
-                                        <?php 
-                                            switch($maintenance['status']):
-                                                case 0:
-                                                    echo 'Não iniciada';
-                                                break;
+                    <?php  if(is_array($maintenanceList)): ?>
+                        <table class="table table-dark">
+                            <thead>
+                                <th>N°</th>
+                                <th>Placa</th>
+                                <th>Problema</th>
+                                <th>Estado</th>                        
+                                <th>*</th>                        
+                            </thead>
+                            <tbody>
+                                
+                                    <?php foreach($maintenanceList as $maintenance): ?>                            
+                                            <tr> 
+                                                <td> <?= $maintenance['id'] ?></td>                                
+                                                <td><?= $maintenance['license_plate_vehicles_customer_fk'] ?></td>                                
+                                                <td>
+                                                <a  href="<?= site_url('index.php/maintenance/change/'.$maintenance['id']) ?>">
+                                                    <?= $maintenance['reason'] ?></a> 
+                                                </td>                                
+                                                <td>
+                                                    <?php 
+                                                        switch($maintenance['status']):
+                                                            case 0:
+                                                                echo 'Não iniciada';
+                                                            break;
 
-                                                case 1:
-                                                    echo 'Concluida';
-                                                break;
+                                                            case 1:
+                                                                echo 'Concluida';
+                                                            break;
 
-                                                case 2:
-                                                    echo 'Pausada';
-                                                break;
+                                                            case 2:
+                                                                echo 'Pausada';
+                                                            break;
 
-                                                case 3:
-                                                    echo 'Cancelada';
-                                                break;
-                                            endswitch
-                                        ?>
-                                    </td>  
-                                    <td>
-                                        <?php 
-                                            if(is_null($maintenance['initial_date'])):
-                                            echo '-' ;
-                                            endif     
-                                        ?>
-                                    </td>                               
-                                </tr>                        
-                                                        
-                        <?php endforeach ?>
-                    </tbody>
-                    </table>
+                                                            case 3:
+                                                                echo 'Cancelada';
+                                                            break;
+                                                        endswitch
+                                                    ?>
+                                                </td> 
+                                                <td>
+                                                <a  href="<?= site_url('index.php/maintenance/edit/'.$maintenance['id'] ) ?>" class="btn edit-button">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                
+                                                </a>
+                                                <a  href="<?= site_url('index.php/maintenance/delete/'.$maintenance['id'] ) ?>" class="btn delete-button">
+                                                    <i class="bi bi-trash3"></i>
+                                                    
+                                                </a>
+                                                </td>
+                                                                            
+                                            </tr>                        
+                                                                    
+                                    <?php endforeach ?>                                                 
+                                </tbody>
+                            </table>
+                    <?php  else: ?>                         
+                        <p class="h6" >Nenhuma manutenção cadastrada</p>
+                    <?php endif; ?>  
                 </div>
             </div>
         </div>

@@ -1,4 +1,10 @@
-/*CREATE DATABASE 'workshopprime';*/
+/* Primeiro veja o colocation  */
+/* CREATE DATABASE 'workshopprime' */
+/* VER QUAL COLOCATION PARA VC COLOCAR  VARIAVEIS */
+COLLATE
+SHOW VARIABLES LIKE '%char%' 
+SHOW VARIABLES LIKE '%collation%'
+
 
 DROP TABLE IF EXISTS `auto_vehicle_workshops`;
 CREATE TABLE IF NOT EXISTS `auto_vehicle_workshops` (
@@ -458,10 +464,10 @@ INNER JOIN employees
 ON employees.cpf = services_provided.cpf_mechanics_fk 
 
 
-DROP PROCEDURE IF EXISTS sp_vehicle_costumer;
+DROP PROCEDURE IF EXISTS sp_register_vehicle_costumer;
 DELIMITER $$
 
-CREATE PROCEDURE sp_vehicle_costumer(
+CREATE PROCEDURE sp_register_vehicle_costumer(
 	 cpf_p VARCHAR(50),
     name_p VARCHAR(50),
     address_p VARCHAR(50),
@@ -516,18 +522,18 @@ END; $$
 DELIMITER ;
 
 
-CALL sp_vehicle_costumer('85743380099','Julio Mautinho','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473217',
-'julio@outlook.com','01187817000183','NAY5700', 'Ranger XLS 3.0 PSE 163cv 4x2 CD TB Dies', 'Ford');
+-- CALL sp_vehicle_costumer('85743380099','Julio Mautinho','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473217',
+-- 'julio@outlook.com','01187817000183','NAY5700', 'Ranger XLS 3.0 PSE 163cv 4x2 CD TB Dies', 'Ford');
 
-CALL sp_vehicle_costumer('09048491045','Mario Coiso','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473211',
-'mariocoiso@outlook.com','01187817000183','LRR3766', 'Chairman 3.2 V6 220cv Aut.', 'SSANGYONG');
+-- CALL sp_vehicle_costumer('09048491045','Mario Coiso','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473211',
+-- 'mariocoiso@outlook.com','01187817000183','LRR3766', 'Chairman 3.2 V6 220cv Aut.', 'SSANGYONG');
 
-CALL sp_vehicle_costumer('09048491555','Mariana Alta','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584773211',
-'mariana@outlook.com','01187817000183','JKB9916', 'Sorento 3.5 V6 24V 278cv 4x2 Aut.', 'Kia Motors');
+-- CALL sp_vehicle_costumer('09048491555','Mariana Alta','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584773211',
+-- 'mariana@outlook.com','01187817000183','JKB9916', 'Sorento 3.5 V6 24V 278cv 4x2 Aut.', 'Kia Motors');
 
 
 
-DROP PROCEDURE IF EXISTS sp_inventory;
+DROP PROCEDURE IF EXISTS sp_register_inventory;
 DELIMITER $$
 
 CREATE PROCEDURE sp_register_inventory(
@@ -570,8 +576,8 @@ END; $$
 
 DELIMITER ;
 
-CALL sp_inventory('caminho.jpg','23423423423','nome da peça','marca da peça',
-'descrição da pela........',11, 200);
+-- CALL sp_inventory('caminho.jpg','23423423423','nome da peça','marca da peça',
+-- 'descrição da pela........',11, 200);
 
 DROP PROCEDURE IF EXISTS sp_delete_part_inventory;
 DELIMITER $$
@@ -612,11 +618,11 @@ END; $$
 DELIMITER ;
 
 
-
-DROP PROCEDURE IF EXISTS sp_delete_maintance;
+--  collation_server
+DROP PROCEDURE IF EXISTS sp_delete_maintenance;
 DELIMITER $$
 
-CREATE PROCEDURE sp_delete_maintance(id_p INT)
+CREATE PROCEDURE sp_delete_maintenance(id_p INT)
 BEGIN   
     
     DECLARE track_no VARCHAR(10) DEFAULT '0/0';
@@ -632,13 +638,13 @@ BEGIN
 
     START TRANSACTION;
         SET track_no = '1/3'; 
-        DELETE FROM services_provided WHERE id_p COLLATE utf8mb4_general_ci  = services_provided.id_maintenance_fk;
+        DELETE FROM services_provided WHERE id_p COLLATE latin1_swedish_ci  = services_provided.id_maintenance_fk;
    
         SET track_no = '2/3';
-        DELETE FROM maintenance_inventory WHERE id_p COLLATE utf8mb4_general_ci  = maintenance_inventory.id_maintenance;
+        DELETE FROM maintenance_inventory WHERE id_p COLLATE latin1_swedish_ci  = maintenance_inventory.id_maintenance;
 
         SET track_no = '3/3';
-        DELETE FROM maintenance WHERE id_p COLLATE utf8mb4_general_ci  = maintenance.id;
+        DELETE FROM maintenance WHERE id_p COLLATE latin1_swedish_ci  = maintenance.id;
         
         SET track_no = '0/3';
         SELECT track_no, 'successfully executed.';
@@ -649,6 +655,7 @@ END; $$
 DELIMITER ;
 
 DELIMITER ;
+
 
 DROP PROCEDURE IF EXISTS sp_update_inventory;
 DELIMITER $$
@@ -751,8 +758,6 @@ BEGIN
 END; $$
 
 DELIMITER ;
-
-
 
 
 

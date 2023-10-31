@@ -3,19 +3,18 @@ class Maintenance_model extends CI_Model {
    
     public function show( $column = null, $queryEntity = 'maintenance' ) {
         $this->db->select("*");
-        if(!is_null($column)){  
-            $this->db->where( key($column),  $column[key($column)]);              
-            
+        if(!is_null($column)){ 
+
             if($this->db->get($queryEntity)->result_id->num_rows > 0){  
+                $this->db->where( key($column),  $column[key($column)]); 
                 
                 return $this->db->get($queryEntity)->result_array();
             }                
               
-        }else{
-             
+        }else{             
+            
             if($this->db->get($queryEntity)->result_id->num_rows > 0)
                     return $this->db->get($queryEntity)->result_array();
-            
             return false;  
 
         }   
@@ -40,9 +39,9 @@ class Maintenance_model extends CI_Model {
 
     }
     
-    public function delete($id){
+    public function delete($id){        
         try{    
-            $this->db->query("CALL sp_delete_maintance('$id')"); 
+            $this->db->query("CALL sp_delete_maintenance('$id')"); 
            
         }catch(Exception $e){	
             throw new Exception($e);       

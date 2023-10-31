@@ -19,6 +19,7 @@
                     </form>                   
                 </div>
                 <div class="inventory-main">
+                    <?php  if(count($partsList) > 0): ?>
                     <ul class="parts-list">
                         <?php foreach($partsList as $part): ?>    
                         <li class="parts-item">
@@ -46,6 +47,9 @@
                         </li>
                         <?php endforeach ?>
                     </ul>
+                    <?php  else: ?>                         
+                        <p class="h6" >Nenhuma peça cadastrada</p>
+                    <?php endif; ?> 
                 </div>
             </div>
         </div>
