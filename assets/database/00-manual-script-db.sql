@@ -437,6 +437,11 @@ AS
 select `workshopprime`.`customers`.`cpf` AS `cpf`,`workshopprime`.`customers`.`name` AS `name`,`workshopprime`.`customers`.`address` AS `address`,`workshopprime`.`customers`.`phone_number` AS `phone_number`,`workshopprime`.`customers`.`email` AS `email`,`workshopprime`.`vehicles_customer`.`model_vehicles_fk` AS `model_vehicles_fk`,`workshopprime`.`vehicles_customer`.`license_plate` AS `license_plate`,`workshopprime`.`vehicles`.`brand` AS `brand` from ((`workshopprime`.`vehicles_customer` join `workshopprime`.`vehicles` on(`workshopprime`.`vehicles_customer`.`model_vehicles_fk` = `workshopprime`.`vehicles`.`model`)) join `workshopprime`.`customers` on(`workshopprime`.`customers`.`cpf` = `workshopprime`.`vehicles_customer`.`cpf_customer_fk`));
 
 
+CREATE VIEW v_maintenance_inventory
+AS 
+SELECT maintenance.id as maintenance_id, maintenance.reason, maintenance.description, maintenance.status, maintenance.initial_date, maintenance.final_date, maintenance.license_plate_vehicles_customer_fk, maintenance_inventory.reference_number 
+FROM maintenance INNER JOIN maintenance_inventory ON maintenance.id = maintenance_inventory.id_maintenance  
+
 
 DROP PROCEDURE IF EXISTS sp_vehicle_costumer;
 DELIMITER $$
@@ -733,10 +738,6 @@ END; $$
 DELIMITER ;
 
 
-CREATE VIEW v_maintenance_inventory
-AS 
-SELECT maintenance.id as maintenance_id, maintenance.reason, maintenance.description, maintenance.status, maintenance.initial_date, maintenance.final_date, maintenance.license_plate_vehicles_customer_fk, maintenance_inventory.reference_number 
-FROM maintenance INNER JOIN maintenance_inventory ON maintenance.id = maintenance_inventory.id_maintenance  
 
 
 

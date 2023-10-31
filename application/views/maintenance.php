@@ -31,10 +31,10 @@
                         
                         <?php foreach($maintenanceList as $maintenance): ?>                            
                                  <tr> 
-                                    <td> <?= $maintenance['id'] ?></td>                                
+                                    <td> <?= $maintenance['maintenance_id'] ?></td>                                
                                     <td><?= $maintenance['license_plate_vehicles_customer_fk'] ?></td>                                
                                     <td>
-                                    <a  href="<?= site_url('index.php/maintenance/edit/'.$maintenance['id']) ?>">
+                                    <a  href="<?= site_url('index.php/maintenance/edit/'.$maintenance['maintenance_id']) ?>">
                                         <?= $maintenance['reason'] ?></a> 
                                     </td>                                
                                     <td>

@@ -47,7 +47,7 @@ class Maintenance_controller extends CI_Controller {
 	}
 
 	public function delete($id) {
-		$resultset = $this->Maintenance_model->show(array('id'=>$id));		
+		$resultset = $this->Maintenance_model->show(array('maintenance_id'=>$id));		
 		if(count($resultset) == 1){			
 			$this->Maintenance_model->delete($id);
 			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						
@@ -60,9 +60,11 @@ class Maintenance_controller extends CI_Controller {
 	}
 
 	public function edit($id) {
-		$resulset = $this->Maintenance_model->show(array('id'=> $id));		
+		$maintenaceParts = $this->Maintenance_model->show(array('maintenance_id'=> $id));		
+		$maintenanceService = $this->Maintenance_model->show(array('id_maintenance_fk '=> $id), 'services_provided');		
 
-		if(count($resulset) != 1){			
+		
+		if(count($maintenaceParts[0]) <= 0){			
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
 			
 		}else{			
@@ -77,10 +79,11 @@ class Maintenance_controller extends CI_Controller {
 
 			$this->form_validation->set_rules('model', 'Modelo', 'trim|min_length[5]|max_length[50]');
 			$this->form_validation->set_rules('brand', 'Marca', 'trim|min_length[1]|max_length[50]');	
-
-			$data['maintenance'] = $resulset;
-
-			if($this->form_validation->run() == FALSE){								
+			
+			if($this->form_validation->run() == FALSE){	
+				$data['maintenanceParts'] = $maintenaceParts[0];
+				$data['maintenanceService'] = $maintenanceService[0];
+				
 				$this->load->view('templates/header.php');
 				$this->load->view('maintenance_update_form.php',$data);
 				$this->load->view('templates/footer.php');
