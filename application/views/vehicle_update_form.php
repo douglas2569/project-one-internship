@@ -50,7 +50,7 @@
                     </div>  
                 </fieldset>
 
-                <button class="btn  btn-primary" type='submit'>Atualizar</button>              
+                <button class="btn  btn-primary" type='submit'>Salvar</button>              
             </form> 
             <a class="nav-link" href="<?= site_url() ?>">
                      <i class="bi bi-arrow-left  h2"></i>                     

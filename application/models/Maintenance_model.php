@@ -1,17 +1,26 @@
 <?php
 class Maintenance_model extends CI_Model {
    
-    public function show( $column = null, $queryEntity = 'v_maintenance_inventory' ) {         
-        
+    public function show( $column = null, $queryEntity = 'maintenance' ) {
         $this->db->select("*");
-
-        if(!is_null($column)){
-            $this->db->where( key($column),  $column[key($column)]);            
+        if(!is_null($column)){  
+            $this->db->where( key($column),  $column[key($column)]);              
             
-            return $this->db->get($queryEntity)->result_array();
-        }        
+            if($this->db->get($queryEntity)->result_id->num_rows > 0){  
+                
+                return $this->db->get($queryEntity)->result_array();
+            }                
+              
+        }else{
+             
+            if($this->db->get($queryEntity)->result_id->num_rows > 0)
+                    return $this->db->get($queryEntity)->result_array();
+            
+            return false;  
+
+        }   
         
-        return $this->db->get($queryEntity)->result_array();
+        
     }
     
     public function insert($license_plate, $reason, $description){        

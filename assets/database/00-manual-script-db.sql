@@ -427,10 +427,6 @@ AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  au
 INNER JOIN inventory on automotive_parts.reference_number = inventory.reference_number
 WHERE automotive_parts.status = '1'; 
 
-CREATE VIEW v_inventory   
-AS 
-SELECT `customers`.`cpf` AS `cpf`, `customers`.`name` AS `name`, `customers`.`address` AS `address`, `customers`.`phone_number` AS `phone_number`, `customers`.`email` AS `email`, `vehicles_customer`.`model_vehicles_fk` AS `model_vehicles_fk`, `vehicles_customer`.`license_plate` AS `license_plate`, `vehicles`.`brand` AS `brand` FROM ((`vehicles_customer` join `vehicles` on((`vehicles_customer`.`model_vehicles_fk` = `vehicles`.`model`))) join `customers` on((`customers`.`cpf` = `vehicles_customer`.`cpf_customer_fk`)));
-
 
 CREATE VIEW v_vehicles_customers
 AS  
@@ -441,6 +437,25 @@ CREATE VIEW v_maintenance_inventory
 AS 
 SELECT maintenance.id as maintenance_id, maintenance.reason, maintenance.description, maintenance.status, maintenance.initial_date, maintenance.final_date, maintenance.license_plate_vehicles_customer_fk, maintenance_inventory.reference_number 
 FROM maintenance INNER JOIN maintenance_inventory ON maintenance.id = maintenance_inventory.id_maintenance  
+
+CREATE VIEW v_maintenance_inventory_parts
+AS 
+SELECT maintenance_inventory.reference_number,  maintenance_inventory.id_maintenance,
+automotive_parts.image_address , automotive_parts.name , automotive_parts.description, automotive_parts.unit_value,  automotive_parts.brand,  automotive_parts.status 
+FROM maintenance_inventory 
+INNER JOIN automotive_parts 
+ON maintenance_inventory.reference_number = automotive_parts.reference_number 
+
+CREATE VIEW v_services_provided_mechanics
+AS 
+SELECT services_provided.id_services_fk,  services_provided.quantity_service, services_provided.id_maintenance_fk,
+services.name as service_name,
+employees.name as mechanic_name
+FROM services_provided 
+INNER JOIN services 
+ON services.id = services_provided.id_services_fk 
+INNER JOIN employees 
+ON employees.cpf = services_provided.cpf_mechanics_fk 
 
 
 DROP PROCEDURE IF EXISTS sp_vehicle_costumer;

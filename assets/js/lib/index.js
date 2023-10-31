@@ -5,4 +5,8 @@ function showSandwichMenu(){
     })    
 }
 
-export {showSandwichMenu}
+function showAccordionMaintenance(){
+    console.log('showAccordionMaintenance')      
+}
+
+export {showSandwichMenu, showAccordionMaintenance}

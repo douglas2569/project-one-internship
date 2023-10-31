@@ -11,7 +11,7 @@ class Maintenance_controller extends CI_Controller {
 	 }	
 
 	public function index(){
-		$data['maintenanceList'] = $this->Maintenance_model->show();		
+		$data['maintenanceList'] = $this->Maintenance_model->show();				
         
 		$this->load->view('templates/header', $data);
 		$this->load->view('maintenance', $data);
@@ -60,11 +60,12 @@ class Maintenance_controller extends CI_Controller {
 	}
 
 	public function edit($id) {
-		$maintenaceParts = $this->Maintenance_model->show(array('maintenance_id'=> $id));		
-		$maintenanceService = $this->Maintenance_model->show(array('id_maintenance_fk '=> $id), 'services_provided');		
-
+		$maintenace = $this->Maintenance_model->show(array('id'=> $id));		
+		$maintenaceParts = $this->Maintenance_model->show(array('id_maintenance'=> $id), 'v_maintenance_inventory_parts');
+		$maintenanceService = $this->Maintenance_model->show(array('id_maintenance_fk '=> $id), 'v_services_provided_mechanics');	
+				
 		
-		if(count($maintenaceParts[0]) <= 0){			
+		if(!is_array($maintenace)){						
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
 			
 		}else{			
@@ -80,9 +81,10 @@ class Maintenance_controller extends CI_Controller {
 			$this->form_validation->set_rules('model', 'Modelo', 'trim|min_length[5]|max_length[50]');
 			$this->form_validation->set_rules('brand', 'Marca', 'trim|min_length[1]|max_length[50]');	
 			
-			if($this->form_validation->run() == FALSE){	
-				$data['maintenanceParts'] = $maintenaceParts[0];
-				$data['maintenanceService'] = $maintenanceService[0];
+			if($this->form_validation->run() == FALSE){								
+				$data['maintenance'] = ($maintenace) ? $maintenace:false;
+				$data['maintenanceParts'] = ($maintenaceParts) ? $maintenaceParts: false;
+				$data['maintenanceService'] = ($maintenanceService) ? $maintenanceService: false;
 				
 				$this->load->view('templates/header.php');
 				$this->load->view('maintenance_update_form.php',$data);

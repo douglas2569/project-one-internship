@@ -1,3 +1,7 @@
+*{
+    list-style: none;
+}
+
 :root{
     --sm-margin1: 3px;
     --sm-margin2: 6px;
@@ -37,7 +41,7 @@
 
 main{
     margin-top: calc(2 * var(--lg-margin2) );
-    min-height: 100vh;
+    min-height: 100vh;    
 }
 
 /* messages */

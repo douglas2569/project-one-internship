@@ -1,3 +1,4 @@
-import {showSandwichMenu} from './lib/index.js'
+import {showSandwichMenu, showAccordionMaintenance} from './lib/index.js'
 
 showSandwichMenu()
+showAccordionMaintenance()
