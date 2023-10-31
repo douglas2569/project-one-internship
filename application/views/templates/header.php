@@ -50,8 +50,7 @@
                 <?php  if($this->session->position == 'gerente'):  ?>                                
                      <h4>Gerente</h4>
                 <?php endif ?>
-                
-                    <a href="<?=site_url('index.php/auth/logout') ?>">Sair</a>
+                    
             </div>
 
         </div>

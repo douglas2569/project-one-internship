@@ -39,6 +39,7 @@
     --white-color: rgb(231, 231, 231);
 }
 
+
 main{
     margin-top: calc(2 * var(--lg-margin2) );
     min-height: 100vh;    
@@ -130,3 +131,4 @@ p.h6{
         padding-left: 0;
     }
 }
+
