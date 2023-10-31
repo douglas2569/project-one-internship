@@ -33,21 +33,35 @@ class Maintenance_model extends CI_Model {
             $db_error = $this->db->error();        
             if (!empty($db_error)) {            
                 throw new Exception($db_error['message']);
-                return false; 
             }
         }
 
     }
     
-    public function delete($id){        
-        try{    
-            $this->db->query("CALL sp_delete_maintenance('$id')"); 
-           
-        }catch(Exception $e){	
-            throw new Exception($e);       
-        }        
+    public function delete($id){  
+        $resultset =  $this->db->query("CALL sp_delete_maintenance('$id')")->result_array();
+        return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
     }
 
+    public function update($id, $license_plate, $reason, $description){   
+        $data = array(            
+            'id' => $id,
+            'license_plate_vehicles_customer_fk' => $license_plate,
+            'reason' => $reason,
+            'description' => $description,
+         );
+                          
+            
+        $this->db->where('id', $id);
+        
+        if(!$this->db->update('maintenance', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);                
+            }
+        }
+
+    }
     
 
 }

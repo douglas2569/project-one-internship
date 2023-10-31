@@ -20,12 +20,12 @@
                 </div>
                 <div class="inventory-main">
                     <?php  if(count($partsList) > 0): ?>
-                    <ul class="parts-list">
+                    <ul class="parts-list container-fluid">
                         <?php foreach($partsList as $part): ?>    
                         <li class="parts-item">
                             <div class="item-main">
                                 <div>
-                                    <img src="<?= site_url('assets/images/'). $part['image_address'] ?>" alt="<?= $part['name'] ?>">
+                                    <img class="img-fluid" src="<?= site_url('assets/images/'). $part['image_address']  ?>" alt="<?= $part['name'] ?>">
                                 </div>
                                 <div>
                                     <span class="part-reference"> <?= $part['reference_number'] ?> </span>

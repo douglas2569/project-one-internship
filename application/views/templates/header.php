@@ -45,10 +45,6 @@
                         
                     </div>
             </nav>
-            
-            
-            <!-- <div class='header-left'>                                               
-                        <span>Olá, <strong> <?= $this->session->name ?>  </strong> </span> 
                                                
 
                 <?php  if($this->session->position == 'gerente'):  ?>                                
@@ -56,7 +52,7 @@
                 <?php endif ?>
                 
                     <a href="<?=site_url('index.php/auth/logout') ?>">Sair</a>
-            </div> -->
+            </div>
 
         </div>
     </header>

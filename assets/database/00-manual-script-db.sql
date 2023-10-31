@@ -514,7 +514,8 @@ BEGIN
         VALUES(license_plate_p, cpf_p, model_p);
         
         SET track_no = '0/3';
-        SELECT track_no, 'successfully executed.';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no,@full_error;
     COMMIT;
 
 END; $$
@@ -569,7 +570,8 @@ BEGIN
         VALUES(reference_number_p, quantity_p);
         
         SET track_no = '0/2';
-        SELECT track_no, 'successfully executed.';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no, @full_error;
     COMMIT;
 
 END; $$
@@ -610,7 +612,8 @@ BEGIN
         DELETE FROM automotive_parts WHERE reference_number_p COLLATE utf8mb4_general_ci  = automotive_parts.reference_number;
         
         SET track_no = '0/2';
-        SELECT track_no, 'successfully executed.';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no, @full_error;
     COMMIT;
 
 END; $$
@@ -647,7 +650,8 @@ BEGIN
         DELETE FROM maintenance WHERE id_p COLLATE latin1_swedish_ci  = maintenance.id;
         
         SET track_no = '0/3';
-        SELECT track_no, 'successfully executed.';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no, @full_error;
     COMMIT;
 
 END; $$
@@ -690,11 +694,12 @@ BEGIN
         WHERE inventory.reference_number = reference_number_old_p COLLATE utf8mb4_general_ci ;
 
         SET track_no = '2/2';
-        UPDATE automotive_parts SET image_address = image_address_p, name = name_p, brand = brand_p, description = description_p, unit_value = unit_value_p, status = status_p 
+        UPDATE automotive_parts SET image_address = image_address_p, name = name_p, brand = brand_p, description = description_p, unit_value = unit_value_p, status = status_p, reference_number  = reference_number_p
         WHERE automotive_parts.reference_number = reference_number_old_p COLLATE utf8mb4_general_ci ;
 
         SET track_no = '0/2';
-        SELECT track_no, 'successfully executed.';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no, @full_error;
     COMMIT;
 
 END; $$
@@ -712,7 +717,8 @@ CREATE PROCEDURE sp_update_vehicle_customer(
     address_p VARCHAR(255),
     phone_number_p VARCHAR(50),
     email_p VARCHAR(50),
-    license_plate_p VARCHAR(50),
+    license_plate_old_p VARCHAR(50),
+    license_plate_new_p VARCHAR(50),
     model_p VARCHAR(50),
     brand_p VARCHAR(50), 
     cnpj_auto_vehicle_workstops_p VARCHAR(50)
@@ -734,11 +740,11 @@ BEGIN
         SET track_no = '1/2';
         UPDATE vehicles_customer 
         SET 
-        license_plate = license_plate_p,
+        license_plate = license_plate_new_p,
         cpf_customer_fk = cpf_p,
         model_vehicles_fk = model_p
 
-        WHERE vehicles_customer.license_plate = license_plate_p COLLATE utf8mb4_general_ci;
+        WHERE vehicles_customer.license_plate = license_plate_old_p COLLATE utf8mb4_general_ci;
 
         SET track_no = '2/2';
         UPDATE customers 
@@ -752,7 +758,8 @@ BEGIN
         WHERE customers.cpf = cpf_p COLLATE utf8mb4_general_ci;
 
         SET track_no = '0/2';
-        SELECT track_no, 'successfully executed.';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no, @full_error;
     COMMIT;
 
 END; $$

@@ -40,8 +40,11 @@ class Vehicle_controller extends CI_Controller {
 			$model = $this->input->post('model');
 			$brand = $this->input->post('brand');					
 			
-			try{
-				$this->Vehicle_model->insert($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand);				
+			try{				
+				$return = $this->Vehicle_model->insert($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand);
+				if($return['status']){
+					throw new Exception($return['mensage']);
+				}				
 				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Cadastrado com sucesso'));
 				redirect('index.php/vehicle');						
 			}catch(Exception $e){	
@@ -71,7 +74,7 @@ class Vehicle_controller extends CI_Controller {
 
 	public function edit($licensePlate) {
 		$resulset = $this->Vehicle_model->show(array('license_plate'=> $licensePlate));		
-
+		
 		if(count($resulset) != 1){			
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
 			
@@ -102,12 +105,18 @@ class Vehicle_controller extends CI_Controller {
 			$address = $this->input->post('address');
 			$phoneNumber = $this->input->post('phoneNumber');
 			$email = $this->input->post('email');
-			$licensePlate = $this->input->post('licensePlate');
+			$licensePlateNew = $this->input->post('licensePlate');
+			$licensePlateOld = $licensePlate;
 			$model = $this->input->post('model');
 			$brand = $this->input->post('brand');
 
-				try{
-					$this->Vehicle_model->update($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand);				
+				try{					
+					$return = $this->Vehicle_model->update($cpf, $name, $address, $phoneNumber, $email, $licensePlateOld, $licensePlateNew, $model, $brand);	
+								
+					if($return['status']){// 0 =  success | n > 0 = error
+						throw new Exception($return['mensage']);
+					}
+
 					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));
 					redirect('index.php/vehicle');
 					

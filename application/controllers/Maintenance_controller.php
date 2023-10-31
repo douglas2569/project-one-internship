@@ -48,18 +48,25 @@ class Maintenance_controller extends CI_Controller {
 
 	public function delete($id) {
 		$resultset = $this->Maintenance_model->show(array('id'=>$id));	
-			
-		if(count($resultset) == 1){			
-			$this->Maintenance_model->delete($id);
-			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						
-		}else{
-			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro'));				
-		}
+		try{	
+			if(count($resultset) == 1){			
+				$return = $this->Maintenance_model->delete($id);			
+				if($return['status']){
+					throw new Exception($return['mensage']);
+				}
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						
+			}else{
+				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
+			}	
+		}catch(Exception $e){	
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel apagar deu registro. Erro: '.$e->getMessage()));			
+		}	
 
 		redirect('/');
 
-	}
 
+
+	}
 	public function change($id) {
 		$maintenace = $this->Maintenance_model->show(array('id'=> $id));		
 		$maintenaceParts = $this->Maintenance_model->show(array('id_maintenance'=> $id), 'v_maintenance_inventory_parts');
@@ -97,6 +104,45 @@ class Maintenance_controller extends CI_Controller {
 				
 			}
 		}
+		
+	}
+
+	public function edit($id) {
+		$resulset = $this->Maintenance_model->show(array('id'=>$id));		
+		$data['vehiclesList'] = $this->Vehicle_model->show();	
+		
+		if(count($resulset) != 1){			
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
+			
+		}else{
+
+			$this->form_validation->set_rules('reason', 'Problema', 'trim|required|min_length[5]|max_length[50]');
+			$this->form_validation->set_rules('description', 'Descrição', 'trim|min_length[10]');
+
+			$data['maintenance'] = $resulset;	
+
+			if($this->form_validation->run() == FALSE){		
+				$this->load->view('templates/header.php');
+				$this->load->view('maintenance_update_form.php',$data);
+				$this->load->view('templates/footer.php');
+
+			}else{
+				$license_plate = $this->input->post('license_plate');
+				$reason = $this->input->post('reason');
+				$description = $this->input->post('description');		
+				
+				try{
+					$this->Maintenance_model->update($id, $license_plate, $reason, $description);				
+					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Cadastrado com sucesso'));
+					redirect('/');						
+				}catch(Exception $e){	
+					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel cadastrar. Erro: '.$e->getMessage()));
+					redirect('index.php/maintenance/edit/'.$id);						
+				}
+			}
+
+		}	
+		
 		
 	}
 

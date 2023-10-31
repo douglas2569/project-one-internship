@@ -25,22 +25,19 @@ class Inventory_model extends CI_Model {
             'quantity' => $quantity 
         ); 
         
-        try{        
-            $this->db->query("CALL sp_register_inventory('$data[address]', '$data[reference]', '$data[name]', '$data[brand]',
-            '$data[description]', '$data[unitValue]', '$data[quantity]')"); 
-        }catch(Exception $e){	
-            throw new Exception($e);
-        }
+               
+        $resultset = $this->db->query("CALL sp_register_inventory('$data[address]', '$data[reference]', '$data[name]', '$data[brand]',
+        '$data[description]', '$data[unitValue]', '$data[quantity]')")->result_array();          
+        return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
+    
 
     }
     
     public function delete($reference){
-        try{    
-            $this->db->query("CALL sp_delete_part_inventory('$reference')"); 
-           
-        }catch(Exception $e){	
-            throw new Exception($e);       
-        }
+            
+        $resultset = $this->db->query("CALL sp_delete_part_inventory('$reference')")->result_array(); 
+        return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
+    
 
         
     }
@@ -57,12 +54,11 @@ class Inventory_model extends CI_Model {
             'status' => $status, 
         ); 
         
-        try{        
-            $this->db->query("CALL sp_update_inventory('$referenceOld','$data[address]', '$data[reference]', '$data[name]', '$data[brand]',
-            '$data[description]', '$data[unitValue]', '$data[quantity]', '$data[status]')"); 
-        }catch(Exception $e){	
-            throw new Exception($e);
-        }
+               
+        $resultset = $this->db->query("CALL sp_update_inventory('$referenceOld','$data[address]', '$data[reference]', '$data[name]', '$data[brand]',
+        '$data[description]', '$data[unitValue]', '$data[quantity]', '$data[status]')")->result_array();               
+        return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
+        
 
     }
 

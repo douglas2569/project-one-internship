@@ -57,12 +57,17 @@ class Inventory_controller extends CI_Controller {
 			$quantity = $this->input->post('quantity');
 			
 			try{
-				$this->Inventory_model->insert($address, $reference, $name, $brand, $description, $unitValue, $quantity);
+				$return = $this->Inventory_model->insert($address, $reference, $name, $brand, $description, $unitValue, $quantity);
+				
+				if($return['status']){
+					throw new Exception($return['mensage']);
+				}
 				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Cadastrado com sucesso'));											
 					
 			}catch(Exception $e){
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel cadastrar. Erro: '.$e->getMessage()));
-				unlink('assets/images/'.$address);
+				if(!empty($address)) 
+					unlink('assets/images/'.$address);
 			}
 			
 
@@ -79,7 +84,10 @@ class Inventory_controller extends CI_Controller {
 		$resultset = $this->Inventory_model->show(array('reference_number'=>$reference));
 				
 		if(count($resultset) == 1){
-			$this->Inventory_model->delete($reference);			
+			$return = $this->Inventory_model->delete($reference);
+			if($return['status']){
+				throw new Exception($return['mensage']);
+			}			
 			unlink('assets/images/'.$resultset[0]['image_address']);
 			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));									
 		}else{
@@ -146,15 +154,20 @@ class Inventory_controller extends CI_Controller {
 			$status = $this->input->post('status');
 			$referenceOld = $reference;
 
-			try{
-				$this->Inventory_model->update($referenceOld, $address, $referenceNew, $name, $brand, $description, $unitValue, $quantity, $status);
-				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));			
-				redirect('index.php/inventory');								
+			try{				
+				$return =  $this->Inventory_model->update($referenceOld, $address, $referenceNew, $name, $brand, $description, $unitValue, $quantity, $status);
+				if($return['status']){
+					throw new Exception($return['mensage']);
+				}
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));						
 					
 			}catch(Exception $e){
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel atualizar. Erro: '.$e->getMessage()));
-				unlink('assets/images/'.$address);
+				// if(!empty($address))
+				// 	unlink('assets/images/'.$address);
 			}
+
+			redirect('index.php/inventory');
 				
 			}
 		}
