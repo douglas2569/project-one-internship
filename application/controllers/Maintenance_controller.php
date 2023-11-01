@@ -8,6 +8,8 @@ class Maintenance_controller extends CI_Controller {
 		checkAuthentication();
 		$this->load->model('Maintenance_model');			
 		$this->load->model('Vehicle_model');			
+		$this->load->model('Inventory_model');			
+		$this->load->model('Maintenance_Inventory_model');			
 	 }	
 
 	public function index(){
@@ -142,6 +144,32 @@ class Maintenance_controller extends CI_Controller {
 			}
 
 		}	
+		
+		
+	}
+
+	public function initialDate($id) {		
+
+		try{
+			$this->Maintenance_model->updateDate($id, date("Y-m-d H:i:s"));				
+			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Manutenção Iniciada'));
+		}catch(Exception $e){	
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel iniciar a manutenção '.$e->getMessage()));					
+		}						
+		redirect('index.php/maintenance/change/'.$id);						
+		
+		
+	}
+
+	public function finalDate($id) {		
+
+		try{
+			$this->Maintenance_model->updateDate($id, '', date("Y-m-d H:i:s"));				
+			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Manutenção Iniciada'));
+		}catch(Exception $e){	
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel iniciar a manutenção '.$e->getMessage()));					
+		}						
+		redirect('index.php/maintenance/change/'.$id);						
 		
 		
 	}

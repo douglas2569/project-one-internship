@@ -13,9 +13,9 @@
                     </a> 
                     <form class="form-inline">
                         <input class="form-control mr-sm-2 d-none" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn my-sm-0" type="submit">
-                        <i class="bi bi-search"></i>
-                        </button>
+                        <a class="btn my-sm-0">
+                            <i class="bi bi-search"></i>
+                        </a>
                     </form>                   
                 </div>
                 <div class="vehiclesList-main">

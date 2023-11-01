@@ -14,7 +14,7 @@
         </div>
     </header>
     <main>
-        <div class="container">
+        <div class="login-screen">
              <?php if(validation_errors() !== ''):             
                         echo renderMessage(array('type'=> 'error', 'content'=> validation_errors() ));
                    endif

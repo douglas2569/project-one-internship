@@ -62,6 +62,35 @@ class Maintenance_model extends CI_Model {
         }
 
     }
+
+    public function updateDate($id, $initialDate, $finalDate=''){               
+        if(empty($finalDate)){
+            $data = array(            
+                'id' => $id,
+                'initial_date' => $initialDate,
+                'status' => 1
+             );
+        }else{
+            $data = array(            
+                'id' => $id,                
+                'final_date' => $finalDate,
+                'status' => 2
+             );
+        } 
+
+        
+         
+            
+        $this->db->where('id', $id);
+        
+        if(!$this->db->update('maintenance', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);                
+            }
+        }
+
+    }
     
 
 }

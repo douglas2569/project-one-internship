@@ -5,17 +5,19 @@
             </div>   
 
             <div class="maintenance">
-                <div class="maintenance-header toolbar">                                            
-                    <a href="<?= site_url('index.php/maintenance/store') ?>"  class="btn" role="button">
-                        <i class="bi bi-plus-circle"></i>
-                        Nova
-                    </a>                     
+                <div class="maintenance-header toolbar">  
+                    <?php if($this->session-> position == 'atendente'): ?>                                          
+                        <a href="<?= site_url('index.php/maintenance/store') ?>"  class="btn" role="button">
+                            <i class="bi bi-plus-circle"></i>
+                            Nova
+                        </a>  
+                    <?php endif ?>                                                                                 
 
                     <form class="form-inline">
                         <input class="form-control mr-sm-2 d-none" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn my-sm-0" type="submit">
+                        <a class="btn my-sm-0">
                         <i class="bi bi-search"></i>
-                        </button>
+</a>
                     </form>                   
                 </div>
                 <div class="maintenance-main">
@@ -44,30 +46,29 @@
                                                             case 0:
                                                                 echo 'Não iniciada';
                                                             break;
-
-                                                            case 1:
+            
+                                                            case 1:                                                    
+                                                                echo 'Iniciada';
+                                                            break;
+            
+                                                            case 2:
                                                                 echo 'Concluida';
                                                             break;
-
-                                                            case 2:
-                                                                echo 'Pausada';
-                                                            break;
-
-                                                            case 3:
-                                                                echo 'Cancelada';
-                                                            break;
-                                                        endswitch
+            
+                                                            endswitch;
                                                     ?>
                                                 </td> 
                                                 <td>
-                                                <a  href="<?= site_url('index.php/maintenance/edit/'.$maintenance['id'] ) ?>" class="btn edit-button">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                
-                                                </a>
-                                                <a  href="<?= site_url('index.php/maintenance/delete/'.$maintenance['id'] ) ?>" class="btn delete-button">
-                                                    <i class="bi bi-trash3"></i>
+                                                <?php if($this->session-> position == 'atendente'): ?> 
+                                                    <a  href="<?= site_url('index.php/maintenance/edit/'.$maintenance['id'] ) ?>" class="btn edit-button">
+                                                        <i class="bi bi-pencil-square"></i>
                                                     
-                                                </a>
+                                                    </a>
+                                                    <a  href="<?= site_url('index.php/maintenance/delete/'.$maintenance['id'] ) ?>" class="btn delete-button">
+                                                        <i class="bi bi-trash3"></i>
+                                                        
+                                                    </a>
+                                                <?php endif ?> 
                                                 </td>
                                                                             
                                             </tr>                        

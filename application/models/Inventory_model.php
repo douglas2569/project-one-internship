@@ -62,6 +62,22 @@ class Inventory_model extends CI_Model {
 
     }
 
+    public function updateOnlyInventory($reference_number, $quantity){   
+        $data = array(
+            'quantity' => $quantity
+         );                          
+            
+        $this->db->where('reference_number', $reference_number);
+        
+        if(!$this->db->update('inventory', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);                
+            }
+        }
+
+    }
+
     
 
 }
