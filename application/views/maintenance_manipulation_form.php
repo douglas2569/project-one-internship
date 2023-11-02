@@ -109,14 +109,14 @@
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">                    
-                        <div class="accordion-sub-button">
-                            <?php if($this->session-> position == 'mecânico'): ?> 
+                    <?php if($this->session-> position == 'mecânico'): ?> 
+                        <div class="accordion-sub-button">                            
                                 <a href="<?= site_url('index.php/maintenanceinventory/store/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
                                     <i class="bi bi-plus-circle"></i>
                                     Adicionar
-                                </a> 
-                            <?php endif; ?>    
+                                </a>                             
                         </div>                            
+                        <?php endif; ?>    
                         <?php  if(is_array($maintenanceParts)): ?>
                             <ul>
                                 <?php foreach($maintenanceParts as $part ): ?>
@@ -175,14 +175,14 @@
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <div class="accordion-sub-button">
-                        <?php if($this->session-> position == 'mecânico'): ?> 
+                    <?php if($this->session-> position == 'mecânico'): ?> 
+                        <div class="accordion-sub-button">                        
                             <a  href='<?= site_url('index.php/serviceprovided/store/'.$maintenance[0]['id']) ?>' class="btn" role="button">
                                 <i class="bi bi-plus-circle"></i>
                                     Adicionar
                             </a>
-                        <?php endif ?>     
-                    </div>
+                        </div>
+                    <?php endif ?>     
                     
                     <?php  if(is_array($maintenanceService)): ?>
                         <ul>
