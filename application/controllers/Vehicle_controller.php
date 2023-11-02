@@ -60,7 +60,7 @@ class Vehicle_controller extends CI_Controller {
 		
 	}
 
-	public function delete($licensePlate) {
+	public function destroy($licensePlate) {
 		$resultset = $this->Vehicle_model->show(array('license_plate'=>$licensePlate));		
 		if(count($resultset) == 1 && $this->Vehicle_model->delete($licensePlate)){			
 			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						

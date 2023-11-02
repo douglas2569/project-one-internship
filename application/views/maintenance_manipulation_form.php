@@ -137,7 +137,7 @@
                                                 </td>
                                                 <td rowspan="2" >
                                                     <?php if($this->session-> position == 'mecânico'): ?> 
-                                                        <a href="<?= site_url('index.php/maintenanceinventory/delete/'.$part['reference_number']) ?>"  class="btn" role="button">
+                                                        <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['reference_number']) ?>"  class="btn" role="button">
                                                             <i class="bi bi-trash3"></i>                               
                                                         </a>
                                                     <?php endif ?> 

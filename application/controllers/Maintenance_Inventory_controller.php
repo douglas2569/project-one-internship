@@ -56,7 +56,7 @@ class Maintenance_Inventory_controller extends CI_Controller {
 	}
 
 
-	public function delete($reference_number) {
+	public function destroy($reference_number) {
 		$resultset = $this->Maintenance_Inventory_model->show(array('reference_number'=>$reference_number));		
 		if(count($resultset) == 1 && $this->Maintenance_Inventory_model->delete($reference_number)){			
 			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						

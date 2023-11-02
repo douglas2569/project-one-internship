@@ -80,7 +80,7 @@ class Inventory_controller extends CI_Controller {
 		
 	}
 
-	public function delete($reference) {
+	public function destroy($reference) {
 		$resultset = $this->Inventory_model->show(array('reference_number'=>$reference));
 				
 		if(count($resultset) == 1){

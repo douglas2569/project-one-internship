@@ -1,5 +1,5 @@
     <main>
-        <div class="container">  
+        <div class="container" >  
             <div class="title-box">
                 <h1>Manutenções</h1> 
             </div>   
@@ -16,8 +16,8 @@
                     <form class="form-inline">
                         <input class="form-control mr-sm-2 d-none" type="search" placeholder="Search" aria-label="Search">
                         <a class="btn my-sm-0">
-                        <i class="bi bi-search"></i>
-</a>
+                            <i class="bi bi-search"></i>
+                        </a>
                     </form>                   
                 </div>
                 <div class="maintenance-main">
@@ -64,7 +64,7 @@
                                                         <i class="bi bi-pencil-square"></i>
                                                     
                                                     </a>
-                                                    <a  href="<?= site_url('index.php/maintenance/delete/'.$maintenance['id'] ) ?>" class="btn delete-button">
+                                                    <a  href="<?= site_url('index.php/maintenance/destroy/'.$maintenance['id'] ) ?>" class="btn destroy-button">
                                                         <i class="bi bi-trash3"></i>
                                                         
                                                     </a>

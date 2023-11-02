@@ -25,13 +25,17 @@
                         <li class="parts-item">
                             <div class="item-main">
                                 <div>
-                                    <img class="img-fluid" src="<?= site_url('assets/images/'). $part['image_address']  ?>" alt="<?= $part['name'] ?>">
+                                    <?php if(!empty($part['image_address'])): ?>
+                                        <img class="img-fluid" src="<?= site_url('assets/images/'). $part['image_address']  ?>" alt="<?= $part['name'] ?>">
+                                    <?php endif ?>
                                 </div>
                                 <div>
-                                    <span class="part-reference"> <?= $part['reference_number'] ?> </span>
-                                    <span class="part-name"> <?= $part['name'] ?> </span>
-                                    <span class="part-brand"> <?= $part['brand'] ?> </span>
-                                    <span class="part-quantity">  <?= $part['quantity'] ?> </span>
+                                    <div class="part-reference"> 
+                                            <strong>Ref: </strong> <?= $part['reference_number'] ?> 
+                                    </div>
+                                    <div class="part-name"> <strong>Name: </strong> <?= $part['name'] ?> </div>
+                                    <div class="part-brand"> <strong>Marca </strong> <?= $part['brand'] ?> </div>
+                                    <div class="part-quantity">  <strong>Quantidade </strong> <?= $part['quantity'] ?> </div>
                                 </div>
                             </div>
                             <div class="item-footer">
@@ -39,7 +43,7 @@
                                     <i class="bi bi-pencil-square"></i>
                                     Editar
                                 </a>
-                                <a  href="<?= site_url('index.php/inventory/delete/'.$part['reference_number']) ?>" class="btn delete-button">
+                                <a  href="<?= site_url('index.php/inventory/destroy/'.$part['reference_number']) ?>" class="btn destroy-button">
                                     <i class="bi bi-trash3"></i>
                                     Excluir
                                 </a>

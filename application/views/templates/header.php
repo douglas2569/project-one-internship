@@ -20,7 +20,7 @@
                  endif
             ?>
             
-            <nav class="navbar fixed-top navbar-expand-lg px-3 navbar-light bg-light">
+            <nav class="navbar fixed-top navbar-expand-md px-3 navbar-light bg-light"  id="navbar">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>

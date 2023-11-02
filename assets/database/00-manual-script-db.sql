@@ -104,15 +104,6 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `vehicles_automotive_parts`;
-CREATE TABLE IF NOT EXISTS `vehicles_automotive_parts` (
-  `reference_number_automotive_parts` varchar(50) NOT NULL,
-  `model_vehicles` varchar(50) NOT NULL,  
-  
-  PRIMARY KEY (`reference_number_automotive_parts`, `model_vehicles`),   
-  FOREIGN KEY (`reference_number_automotive_parts`) REFERENCES `automotive_parts`(`reference_number`),
-  FOREIGN KEY (`model_vehicles`) REFERENCES `vehicles`(`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `vehicles_customer`;
 CREATE TABLE IF NOT EXISTS `vehicles_customer` (
@@ -139,7 +130,15 @@ CREATE TABLE IF NOT EXISTS `automotive_parts` (
   PRIMARY KEY (`reference_number`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
-
+DROP TABLE IF EXISTS `vehicles_automotive_parts`;
+CREATE TABLE IF NOT EXISTS `vehicles_automotive_parts` (
+  `reference_number_automotive_parts` varchar(50) NOT NULL,
+  `model_vehicles` varchar(50) NOT NULL,  
+  
+  PRIMARY KEY (`reference_number_automotive_parts`, `model_vehicles`),   
+  FOREIGN KEY (`reference_number_automotive_parts`) REFERENCES `automotive_parts`(`reference_number`),
+  FOREIGN KEY (`model_vehicles`) REFERENCES `vehicles`(`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `maintenance`;
 CREATE TABLE IF NOT EXISTS `maintenance` (
@@ -409,41 +408,44 @@ values('23456',36);
 insert into maintenance_inventory(reference_number, id_maintenance) 
 values('98765',37);
 
-insert into services(name, description, estimatedTime, cost, cnpj_auto_vehicle_workstops_fk) 
-values('Troca de vela de ingnição de carro','Pego a vela, tiro a antiga, coloco a nova','10',50.00,'01187817000183');
 
 insert into services(name, description, estimatedTime, cost, cnpj_auto_vehicle_workstops_fk) 
-values('Troca filtro de ar','Pego a filtro, tiro a antigo, coloco a novo','30',100.00,'01187817000183');
+values('Troca de Pneu','Troca basica','20',20.00,'01187817000183');
 
-insert into services_provided(id_maintenance_fk, cpf_mechanics_fk, id_services_fk) 
-values(35,'41740738055',35);
+insert into services(name, description, estimatedTime, cost, cnpj_auto_vehicle_workstops_fk) 
+values('Troca de retrovisor','Troca basica','10',10,'01187817000183');
+
+insert into services(name, description, estimatedTime, cost, cnpj_auto_vehicle_workstops_fk) 
+values('Lampada do farol','Troca basica','15',20.5,'01187817000183');
+
 
 insert into services_provided(id_maintenance_fk, cpf_mechanics_fk, id_services_fk) 
 values(36,'46899032040',35);
 
-insert into services_provided(id_maintenance_fk, cpf_mechanics_fk, id_services_fk) 
-values(37,'31685403077',36);
-
+DROP VIEW IF EXISTS v_users;
 CREATE VIEW v_users 
 AS SELECT users.cpf, users.username, users.password, employees.name, employees.position FROM users 
 INNER JOIN employees on users.cpf = employees.cpf; 
 
+DROP VIEW IF EXISTS v_inventory;
 CREATE VIEW v_inventory 
 AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand, automotive_parts.unit_value, automotive_parts.description, automotive_parts.status FROM automotive_parts 
 INNER JOIN inventory on automotive_parts.reference_number = inventory.reference_number
 WHERE automotive_parts.status = '1'; 
 
-
+DROP VIEW IF EXISTS v_vehicles_customers;
 CREATE VIEW v_vehicles_customers
 AS  
 select `workshopprime`.`customers`.`cpf` AS `cpf`,`workshopprime`.`customers`.`name` AS `name`,`workshopprime`.`customers`.`address` AS `address`,`workshopprime`.`customers`.`phone_number` AS `phone_number`,`workshopprime`.`customers`.`email` AS `email`,`workshopprime`.`vehicles_customer`.`model_vehicles_fk` AS `model_vehicles_fk`,`workshopprime`.`vehicles_customer`.`license_plate` AS `license_plate`,`workshopprime`.`vehicles`.`brand` AS `brand` from ((`workshopprime`.`vehicles_customer` join `workshopprime`.`vehicles` on(`workshopprime`.`vehicles_customer`.`model_vehicles_fk` = `workshopprime`.`vehicles`.`model`)) join `workshopprime`.`customers` on(`workshopprime`.`customers`.`cpf` = `workshopprime`.`vehicles_customer`.`cpf_customer_fk`));
 
 
+DROP VIEW IF EXISTS v_maintenance_inventory;
 CREATE VIEW v_maintenance_inventory
 AS 
 SELECT maintenance.id as maintenance_id, maintenance.reason, maintenance.description, maintenance.status, maintenance.initial_date, maintenance.final_date, maintenance.license_plate_vehicles_customer_fk, maintenance_inventory.reference_number 
 FROM maintenance INNER JOIN maintenance_inventory ON maintenance.id = maintenance_inventory.id_maintenance  
 
+DROP VIEW IF EXISTS v_maintenance_inventory_parts;
 CREATE VIEW v_maintenance_inventory_parts
 AS 
 SELECT maintenance_inventory.reference_number,  maintenance_inventory.id_maintenance,
@@ -452,6 +454,7 @@ FROM maintenance_inventory
 INNER JOIN automotive_parts 
 ON maintenance_inventory.reference_number = automotive_parts.reference_number 
 
+DROP VIEW IF EXISTS v_services_provided_mechanics;
 CREATE VIEW v_services_provided_mechanics
 AS 
 SELECT services_provided.id_services_fk,  services_provided.quantity_service, services_provided.id_maintenance_fk,

@@ -41,9 +41,11 @@
 
 
 main{
-    margin-top: calc(2 * var(--lg-margin2) );
-    min-height: 100vh;    
+    margin-top: calc(4 * var(--lg-margin2) );
+    height: 100vw;  
+    
 }
+
 
 /* messages */
 .toast{
@@ -59,6 +61,11 @@ main{
     color: rgb(240, 240, 240);
     font-weight: 600;
     font-size: 1.2em;
+}
+
+/*nav bar*/
+#navbar{
+ left:7%;   
 }
 
 main .container > .toast{
@@ -182,6 +189,12 @@ footer p{
 footer p a{
     text-align: center;
     color: var(--black-color1);
+}
+
+/* invetory*/
+.parts-list .parts-item, .vehicles-list .vehicles-item{
+    margin-top: var(--md-margin1);
+    border-bottom: 1px solid #494949;
 }
 
 @media (max-width: 320px) {

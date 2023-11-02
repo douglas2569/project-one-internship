@@ -24,17 +24,17 @@
                         <?php foreach($vehiclesList as $vehicle): ?>    
                         <li class="vehicles-item">
                             <div class="item-main"> 
-                                <span class="vehicle-customer-name"> <?= $vehicle['name'] ?> </span>
-                                <span class="vehicle-licence-plate"> <?= $vehicle['license_plate'] ?> </span>
-                                <span class="vehicle-model">  <?= $vehicle['model_vehicles_fk'] ?> </span>
-                                <span class="vehicle-brand"> <?= $vehicle['brand'] ?> </span>
+                                <div class="vehicle-customer-name"> <strong>Nome: </strong> <?= $vehicle['name'] ?> </div>
+                                <div class="vehicle-licence-plate"> <strong>Placa: </strong> <?= $vehicle['license_plate'] ?> </div>
+                                <div class="vehicle-model">  <strong>Modelo: </strong> <?= $vehicle['model_vehicles_fk'] ?> </div>
+                                <div class="vehicle-brand"> <strong>Marca: </strong> <?= $vehicle['brand'] ?> </div>
                             </div>
                             <div class="item-footer">
                                 <a  href="<?= site_url('index.php/vehicle/edit/'.$vehicle['license_plate']) ?>" class="btn edit-button">
                                     <i class="bi bi-pencil-square"></i>
                                     Editar
                                 </a>
-                                <a  href="<?= site_url('index.php/vehicle/delete/'.$vehicle['license_plate']) ?>" class="btn delete-button">
+                                <a  href="<?= site_url('index.php/vehicle/destroy/'.$vehicle['license_plate']) ?>" class="btn destroy-button">
                                     <i class="bi bi-trash3"></i>
                                     Excluir
                                 </a>

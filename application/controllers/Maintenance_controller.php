@@ -48,7 +48,7 @@ class Maintenance_controller extends CI_Controller {
 		
 	}
 
-	public function delete($id) {
+	public function destroy($id) {
 		$resultset = $this->Maintenance_model->show(array('id'=>$id));	
 		try{	
 			if(count($resultset) == 1){			
