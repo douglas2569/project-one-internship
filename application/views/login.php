@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?= site_url('assets/css/global_sytle.css') ?>">   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+       
+    
+    <link rel="stylesheet" href="<?= site_url('assets/css/global_style.css') ?>">   
     <title><?= siteTitle() ?></title>
 </head>
 <body>
@@ -14,23 +17,38 @@
         </div>
     </header>
     <main>
-        <div class="login-screen">
-             <?php if(validation_errors() !== ''):             
-                        echo renderMessage(array('type'=> 'error', 'content'=> validation_errors() ));
-                   endif
-            ?>
-            <div class="title-box">
-                <h1>Login</h1>  
+        <div class="container">
+            <div class="login-screen">            
+                <?php if(validation_errors() !== ''):             
+                            echo renderMessage(array('type'=> 'error', 'content'=> validation_errors() ));
+                    endif
+                ?>
+                <div class="title-box">
+                    <h1>Login</h1>  
+                </div>
+                <?php echo form_open("index.php/auth", array('class'=>'form-login')); ?>    
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="bi bi-person-circle"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name='username' id='username' required>
+                    </div>            
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon2">
+                                <i class="bi bi-key-fill"></i>
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Senha" aria-label="Password" aria-describedby="basic-addon2" name='password' required>
+                    </div>
+                    <div class='login-footer'>
+                        <a href="#" class='link'>Criar conta</a>        
+                        <button class="btn  btn-primary" type='submit'>Entrar</button>        
+                    </div>
+
+                </form>
             </div>
-            <?php echo form_open("index.php/auth"); ?>                 
-                <label  for="username" class="form-label">Usuário*</label >
-                <input class="form-control" type="text" name='username' id='username' required/>
-
-                <label class="form-label" for="password">Senha*</label>
-                <input class="form-control" type="password" name='password'  required />  
-                  
-                <button class="btn  btn-primary" type='submit'>Entrar</button>        
-            </form>
-        </div>
-
+    </div>
     </main>

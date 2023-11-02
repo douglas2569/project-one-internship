@@ -1,0 +1,45 @@
+.maintenance-main a{
+    color:var(--white-color);
+    padding: 0;
+    margin: var(--sm-margin1);
+}
+
+main .container > .toast{
+    top: 0%;
+}
+
+p.h6{
+    text-align: center;
+}
+
+.accordion-body > .accordion-sub-button{
+    border-bottom: 1px solid #b9b9b9;
+    margin-bottom: var(--md-margin1);
+}
+
+fieldset {
+    padding:var(--md-padding3);
+}
+
+legend{
+    float: none;
+    width: auto;
+    padding:var(--sm-padding3);
+    
+}
+
+
+.table{
+    vertical-align: middle;
+    margin-top: var(--sm-margin2);
+}
+.table th{    
+  line-height: 50%;
+  text-align: center;
+  padding: var(--md-margin2) var(--md-margin1);
+}
+
+
+table  tr  td{
+    margin-bottom: 0;    
+}

@@ -1,0 +1,58 @@
+main .login-screen{
+    padding: var(--md-padding2);    
+    margin: auto;
+}
+
+main .login-screen button{
+    width: 200px;
+    margin-top:var(--lg-margin2);
+}
+
+.login-screen{
+    border: 1px solid var(--gray-color3);  
+    border-radius: 10px;
+
+}
+main .login-screen .title-box{        
+    margin-top: 0;
+    margin-bottom:  calc(1.5 * var(--lg-margin3)) ;
+}
+
+.login-screen .form-login input{
+    height: 50px;
+    border: 1px solid var(--gray-color3);  
+}
+.login-screen .input-group > .input-group-prepend > .input-group-text{
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+    border: 1px solid var(--gray-color3);  
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+.login-screen .form-login .input-group{
+    margin-bottom: var(--lg-margin3);
+}
+.login-screen .input-group-prepend{
+    border-radius: 100px;
+}
+
+.login-screen .login-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top:  calc(1 * var(--lg-margin1) ) ;
+}
+.login-screen .login-footer .btn{
+    width: 100px;
+    margin-top: 0;
+}
+
+@media (min-width: 576px) {    
+  
+}

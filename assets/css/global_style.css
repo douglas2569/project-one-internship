@@ -1,0 +1,82 @@
+@import url("./variables.css");
+@import url("./message_notification.css");
+@import url("./login.css");
+@import url("./maintenance.css");
+@import url("./inventory.css");
+
+*{
+    list-style: none;
+}
+
+main{
+    margin-top: calc(1.3 * var(--lg-margin2) );
+    height: 100vh;    
+}
+
+main > .container{
+    padding: var(--md-padding3);
+}
+
+/*nav bar*/
+#navbar{
+ left:7%;   
+}
+
+/* title */
+h1{
+    font-size: 1.6em;
+}
+
+.toolbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* forms*/
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+form > label, .form-group > label{
+    font-weight: 600;
+}
+form > button.btn, .form-group + button.btn{
+  margin: auto;
+  width: 300px;
+  margin-top: var(--md-margin1);
+  padding: var(--sm-margin3);
+}
+
+.title-box > h1{
+    margin: 0;
+    text-align: center;    
+}
+
+.title-box > a{
+    display: inline;
+    position: relative;   
+    left: 5%;
+}
+.title-box{    
+    margin-top: var(--md-margin2);
+    margin-bottom: var(--md-margin3);
+}
+
+footer{
+    margin-top: var(--md-margin1);
+}
+
+footer p{
+    text-align: center;    
+}
+footer p a{
+    text-align: center;
+    color: var(--black-color1);
+}
+
+@media (min-width: 540px) {
+    
+}
+
