@@ -167,6 +167,7 @@ DROP TABLE IF EXISTS `maintenance_inventory`;
 CREATE TABLE IF NOT EXISTS `maintenance_inventory` (
   `reference_number` varchar(50) NOT NULL,
   `id_maintenance` int NOT NULL,  
+  `quantity` int(11) DEFAULT 1,  
   
   PRIMARY KEY (`reference_number`,`id_maintenance`),   
   FOREIGN KEY (`reference_number`) REFERENCES `automotive_parts`(`reference_number`),  
@@ -448,7 +449,7 @@ FROM maintenance INNER JOIN maintenance_inventory ON maintenance.id = maintenanc
 DROP VIEW IF EXISTS v_maintenance_inventory_parts;
 CREATE VIEW v_maintenance_inventory_parts
 AS 
-SELECT maintenance_inventory.reference_number,  maintenance_inventory.id_maintenance,
+SELECT maintenance_inventory.reference_number,  maintenance_inventory.id_maintenance, maintenance_inventory.quantity,
 automotive_parts.image_address , automotive_parts.name , automotive_parts.description, automotive_parts.unit_value,  automotive_parts.brand,  automotive_parts.status 
 FROM maintenance_inventory 
 INNER JOIN automotive_parts 
@@ -768,6 +769,52 @@ BEGIN
 END; $$
 
 DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS sp_delete_maintenance_inventory;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_delete_maintenance_inventory(
+	 reference_number_p VARCHAR(50),
+    quantity_p VARCHAR(50)
+  )
+
+BEGIN    
+    DECLARE inventory_quantity INT DEFAULT 0;
+    DECLARE newQuantity INT DEFAULT 0;
+	  DECLARE count_model INT DEFAULT 0;
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN    
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
+
+        ROLLBACK;    
+    END;
+
+    START TRANSACTION;
+        SET track_no = '1/3'; 
+        SELECT quantity INTO inventory_quantity FROM inventory WHERE reference_number_p COLLATE utf8mb4_general_ci  = inventory.reference_number; 
+        
+        SET newQuantity = inventory_quantity + quantity_p; 
+        SET track_no = '2/3';
+        UPDATE inventory SET quantity = newQuantity WHERE inventory.reference_number = reference_number_p;
+
+        DELETE FROM maintenance_inventory WHERE maintenance_inventory.reference_number = reference_number_p;
+        
+        SET track_no = '0/3';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no,@full_error;
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
+
+
 
 
 

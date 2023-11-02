@@ -39,12 +39,17 @@ class Maintenance_Inventory_controller extends CI_Controller {
 			try{				
 
 				if(!count($this->Maintenance_Inventory_model->show(array('reference_number'=>$referenceNumberAndQuantity[0]))) > 0){					
-					$this->Maintenance_Inventory_model->insert($referenceNumberAndQuantity[0], $idMaintenance);
+					$this->Maintenance_Inventory_model->insert($referenceNumberAndQuantity[0], $idMaintenance, $quantity);
+					$newQuanityInventory = $referenceNumberAndQuantity[1] - $quantity;
+					$this->Inventory_model->updateOnlyInventory($referenceNumberAndQuantity[0], $newQuanityInventory);
+					
+					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Adicionada com sucesso'));
+				}else{
+					$this->session->set_flashdata('message', array('type'=>'warning','content'=>'Essa peça ja foi adicionada. Caso queira mudar a quantidade a remova e adcione uma nova peça com a quantidade desejada.'));
 				}
 
-				$newQuanityInventory = $referenceNumberAndQuantity[1] - $quantity;
-				$this->Inventory_model->updateOnlyInventory($referenceNumberAndQuantity[0], $newQuanityInventory);
-				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Adicionada com sucesso'));
+				
+
 			}catch(Exception $e){
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>$e->getMessage()));
 			}
@@ -56,18 +61,23 @@ class Maintenance_Inventory_controller extends CI_Controller {
 	}
 
 
-	public function destroy($reference_number) {
+	public function destroy($reference_number, $quantity) {
+		
 		$resultset = $this->Maintenance_Inventory_model->show(array('reference_number'=>$reference_number));		
-		if(count($resultset) == 1 && $this->Maintenance_Inventory_model->delete($reference_number)){			
-			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						
-		}else{
-			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro'));				
+		
+		if(count($resultset) == 1){
+			try{
+				$return = $this->Maintenance_Inventory_model->delete($reference_number,  $quantity);	
+				if($return['status']){
+					throw new Exception($return['mensage']);
+				}
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Removido com sucesso'));						
+			}catch(Exception $e){
+				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel remover seu registro. Erro:'.$e->getMessage()));				
+			}
+
+			redirect('index.php/maintenance/change/'.$resultset[0]['id_maintenance']);
 		}
-
-		redirect('index.php/maintenance/change/'.$resultset[0]['id_maintenance']);
-
-
-
 	}
 
 }

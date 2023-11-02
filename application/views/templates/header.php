@@ -50,9 +50,7 @@
                         
                     </div>
                 </div>
-            </nav>
-                  
-            </div>
+            </nav> 
 
         </div>
     </header>

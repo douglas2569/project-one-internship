@@ -25,11 +25,12 @@ class Maintenance_Inventory_model extends CI_Model {
         
     }
     
-    public function insert($reference_number, $id_maintenance
+    public function insert($reference_number, $id_maintenance, $quantity
     ){             
         $data = array(
             'reference_number' => $reference_number,
-            'id_maintenance' => $id_maintenance
+            'id_maintenance' => $id_maintenance,
+            'quantity' => $quantity
         );        
         
         if(!$this->db->insert('maintenance_inventory', $data)){
@@ -42,9 +43,16 @@ class Maintenance_Inventory_model extends CI_Model {
     }
     
         
-    public function delete($reference_number){
-        $this->db->where('reference_number', $reference_number);                     
-        return $this->db->delete('maintenance_inventory');
+    public function delete($reference_number,  $quantity){        
+
+        $data = array(
+            'reference_number' => $reference_number,
+            'quantity' => $quantity                    
+        );         
+          
+        $resultset = $this->db->query("CALL sp_delete_maintenance_inventory('$data[reference_number]', '$data[quantity]')")->result_array();
+        return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);  
+
     }
     
 

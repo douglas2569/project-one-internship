@@ -23,7 +23,7 @@ function renderMessage($message){
                     </div>
                 ";               
                
-            default:
+            case 'warning':
                 return"
                     <div class= 'toast bg-warning show' role='alert' aria-live='assertive' aria-atomic='true'>
                         <div class='toast-body'>
@@ -31,7 +31,8 @@ function renderMessage($message){
                             <button type='button' class='btn-close' data-bs-dismiss='toast' aria-label='Close'></button>
                         </div>
                     </div>
-                ";
+                ";           
+                
                 
     }    
 }

@@ -137,7 +137,7 @@
                                                 </td>
                                                 <td rowspan="2" >
                                                     <?php if($this->session-> position == 'mecânico'): ?> 
-                                                        <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['reference_number']) ?>"  class="btn" role="button">
+                                                        <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
                                                             <i class="bi bi-trash3"></i>                               
                                                         </a>
                                                     <?php endif ?> 
@@ -147,6 +147,13 @@
                                                 <td>
                                                     <strong>Nome:</strong>
                                                     <?= $part['name'] ?>
+                                                </td>                                                 
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <strong>Quantidade:</strong>
+                                                    <?= $part['quantity'] ?>
                                                 </td>                                                 
                                             </tr>
                                             
@@ -170,7 +177,7 @@
                 <div class="accordion-body">
                     <div class="accordion-sub-button">
                         <?php if($this->session-> position == 'mecânico'): ?> 
-                            <a class="btn" role="button">
+                            <a  href='<?= site_url('index.php/serviceprovided/store/'.$maintenance[0]['id']) ?>' class="btn" role="button">
                                 <i class="bi bi-plus-circle"></i>
                                     Adicionar
                             </a>
