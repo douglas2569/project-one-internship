@@ -18,9 +18,6 @@ main > .container{
 }
 
 /*nav bar*/
-#navbar{
- left:7%;   
-}
 
 /* title */
 h1{
@@ -31,7 +28,6 @@ h1{
     display: flex;
     justify-content: space-between;
 }
-
 
 /* forms*/
 form{
