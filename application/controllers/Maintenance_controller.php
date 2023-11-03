@@ -101,10 +101,6 @@ class Maintenance_controller extends CI_Controller {
 				$this->load->view('maintenance_manipulation_form.php',$data);
 				$this->load->view('templates/footer.php');
 
-			}else{		
-			
-				
-				
 			}
 		}
 		

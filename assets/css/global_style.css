@@ -60,6 +60,18 @@ form > button.btn, .form-group + button.btn{
     margin-bottom: var(--md-margin3);
 }
 
+main .container a.nav-link{
+    display: inline-block;
+}
+
+
+ul li div.item-footer{
+    display: flex;
+    justify-content: end;    
+    border-bottom: 1px solid var(--gray-color3);
+    margin-bottom: var(--sm-margin3);
+}
+
 footer{
     margin-top: var(--md-margin1);
 }

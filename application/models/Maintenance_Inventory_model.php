@@ -54,6 +54,19 @@ class Maintenance_Inventory_model extends CI_Model {
         return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);  
 
     }
+
+    public function updateQuantityMaintenanceInventory($referenceNumber, $newQuanityMaintenanceInventory, $newQuanityInventory){   
+        $data = array(
+            'reference_number' => $referenceNumber,
+            'quantity_maintenance_inventory' => $newQuanityMaintenanceInventory,
+            'quantity_inventory' => $newQuanityInventory            
+         );                          
+        
+        $resultset =  $this->db->query("CALL sp_update_maintenance_inventory_inventory('$data[reference_number]', '$data[quantity_maintenance_inventory]','$data[quantity_inventory]')")->result_array();             
+        
+        return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']); 
+
+    }
     
 
 }

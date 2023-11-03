@@ -134,14 +134,7 @@
                                                     <strong>Nº Ref:</strong>
                                                     
                                                     <?= $part['reference_number'] ?>
-                                                </td>
-                                                <td rowspan="2" >
-                                                    <?php if($this->session-> position == 'mecânico'): ?> 
-                                                        <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
-                                                            <i class="bi bi-trash3"></i>                               
-                                                        </a>
-                                                    <?php endif ?> 
-                                                </td>
+                                                </td>                                               
                                             </tr>
                                             <tr>
                                                 <td>
@@ -157,7 +150,15 @@
                                                 </td>                                                 
                                             </tr>
                                             
-                                            </table>                                        
+                                            </table>  
+
+                                            <div class="item-footer" >
+                                                <?php if($this->session-> position == 'mecânico'): ?> 
+                                                        <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
+                                                            <i class="bi bi-trash3"></i>                               
+                                                        </a>
+                                                 <?php endif ?>  
+                                            </div>                                      
                                     </li>
                                 <?php endforeach ?>
                             </ul>
@@ -194,13 +195,7 @@
                                                 <strong>Código:</strong>
                                                 <?= $service['id_services_fk'] ?>
                                             </td>
-                                            <td rowspan="4" >
-                                                <?php if($this->session-> position == 'mecânico'): ?> 
-                                                    <a href= "<?= site_url('index.php/serviceprovided/destroy/'.$maintenanceService[0]['id'].'/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
-                                                        <i class="bi bi-trash3"></i>                               
-                                                    </a>
-                                                <?php endif ?> 
-                                            </td>
+                                            
                                         </tr>
                                         <tr>
                                             <td>
@@ -220,8 +215,17 @@
                                                 <?= $service['mechanic_name'] ?>
                                             </td> 
                                         </tr>
-                                    </table>                                        
+                                    </table> 
+                                    
+                                    <div class="item-footer" >
+                                        <?php if($this->session-> position == 'mecânico'): ?> 
+                                            <a href= "<?= site_url('index.php/serviceprovided/destroy/'.$maintenanceService[0]['id'].'/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
+                                                <i class="bi bi-trash3"></i>                               
+                                            </a>
+                                        <?php endif ?> 
+                                    </div>                                       
                                 </li>
+                               
                             <?php endforeach ?>
                         </ul>
                     <?php  else: ?>

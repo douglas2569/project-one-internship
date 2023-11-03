@@ -37,17 +37,22 @@ class Maintenance_Inventory_controller extends CI_Controller {
 			}
 			
 			try{				
-
-				if(!count($this->Maintenance_Inventory_model->show(array('reference_number'=>$referenceNumberAndQuantity[0]))) > 0){					
-					$this->Maintenance_Inventory_model->insert($referenceNumberAndQuantity[0], $idMaintenance, $quantity);
-					$newQuanityInventory = $referenceNumberAndQuantity[1] - $quantity;
-					$this->Inventory_model->updateOnlyInventory($referenceNumberAndQuantity[0], $newQuanityInventory);
+				$resultset = $this->Maintenance_Inventory_model->show(array('reference_number'=>$referenceNumberAndQuantity[0]));
+				
+				if(count($resultset) > 0){	
+					$newQuantityInventory = $referenceNumberAndQuantity[1] - $quantity;
+					$newQuantityMaintenanceInventory = $quantity + $resultset[0]['quantity']; 				 
+			
+					$return = $this->Maintenance_Inventory_model->updateQuantityMaintenanceInventory($referenceNumberAndQuantity[0], $newQuantityMaintenanceInventory, $newQuantityInventory);	
+					if($return['status']){
+						throw new Exception($return['mensage']);
+					}									
 					
-					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Adicionada com sucesso'));
 				}else{
-					$this->session->set_flashdata('message', array('type'=>'warning','content'=>'Essa peça ja foi adicionada. Caso queira mudar a quantidade a remova e adcione uma nova peça com a quantidade desejada.'));
-				}
+					$this->Maintenance_Inventory_model->insert($referenceNumberAndQuantity[0], $idMaintenance, $quantity);
+				}				
 
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Adicionada com sucesso'));
 				
 
 			}catch(Exception $e){

@@ -27,13 +27,19 @@ class Service_Provided_controller extends CI_Controller {
 			$this->load->view('templates/footer.php');
 		}else{
 			$cpfMechanics = $this->input->post('cpfMechanics');
-			$serviceId =  $this->input->post('serviceId');		
+			$serviceId =  $this->input->post('serviceId');								
 			$quantity = $this->input->post('quantity');
 			
-			try{				
+			try{			
 
-				if(count($data['serviceList']) > 0){					
-					$this->Service_Provided_model->insert($idMaintenance, $cpfMechanics,$serviceId, $quantity);					
+				if(count($data['serviceList']) > 0){	
+					$resultset= $this->Service_Provided_model->show(array('id_services_fk'=>$serviceId));
+										
+					if( count($resultset) == 1 ){
+						$this->Service_Provided_model->updateOnlyQuantity($serviceId , ($quantity + $resultset[0]['quantity']));						
+					}else{
+						$this->Service_Provided_model->insert($idMaintenance, $cpfMechanics,$serviceId, $quantity);				
+					} 				
 					
 					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Adicionado com sucesso'));
 				}else{

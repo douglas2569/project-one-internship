@@ -49,6 +49,23 @@ class Service_Provided_model extends CI_Model {
         return $this->db->delete('services_provided');  
 
     }
-    
+
+    public function updateOnlyQuantity($serviceId , $quantity){
+        $data = array(                        
+            'quantity' => $quantity,
+         );
+                          
+            
+        $this->db->where('id_services_fk', $serviceId);
+        
+        if(!$this->db->update('services_provided', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);                
+            }
+        }
+    }
+
+       
 
 }

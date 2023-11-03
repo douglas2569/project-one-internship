@@ -816,5 +816,50 @@ DELIMITER ;
 
 
 
+DROP PROCEDURE IF EXISTS sp_update_maintenance_inventory_inventory;
+DELIMITER $$
+
+CREATE PROCEDURE sp_update_maintenance_inventory_inventory(
+    reference_number_p VARCHAR(50),
+	  quantity_maintenance_inventory_p INT,
+    quantity_inventory_p INT
+  )
+
+BEGIN    
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN    
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
+
+        ROLLBACK;    
+    END;
+
+    START TRANSACTION;
+        SET track_no = '1/2';
+        UPDATE inventory 
+        SET 
+        quantity 	= quantity_inventory_p
+        WHERE inventory.reference_number = reference_number_p COLLATE utf8mb4_general_ci;
+
+        SET track_no = '2/2';
+        UPDATE maintenance_inventory 
+        SET         
+        quantity = quantity_maintenance_inventory_p
+        WHERE maintenance_inventory.reference_number = reference_number_p COLLATE utf8mb4_general_ci;
+
+        SET track_no = '0/2';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no, @full_error;
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
+
+
+
 
 
