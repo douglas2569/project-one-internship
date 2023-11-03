@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `services_provided` (
   `id_maintenance_fk` int NOT NULL,  
   `cpf_mechanics_fk` varchar(50) NOT NULL,
   `id_services_fk` int NOT NULL, 
-  `quantity_service` int DEFAULT 1, 
+  `quantity` int DEFAULT 1, 
   
   PRIMARY KEY (`id`),   
   FOREIGN KEY (`id_maintenance_fk`) REFERENCES `maintenance`(`id`),
@@ -458,7 +458,7 @@ ON maintenance_inventory.reference_number = automotive_parts.reference_number
 DROP VIEW IF EXISTS v_services_provided_mechanics;
 CREATE VIEW v_services_provided_mechanics
 AS 
-SELECT services_provided.id_services_fk,  services_provided.quantity_service, services_provided.id_maintenance_fk,
+SELECT services_provided.id, services_provided.id_services_fk,  services_provided.quantity as quantity_service, services_provided.id_maintenance_fk,
 services.name as service_name,
 employees.name as mechanic_name
 FROM services_provided 

@@ -33,4 +33,5 @@ $route['maintenanceinventory/destroy/(:any)'] = 'Maintenance_Inventory_controlle
 $route['maintenanceinventory/destroy/(:any)/(:num)'] = 'Maintenance_Inventory_controller/destroy/$1/$2'; 
 
 $route['serviceprovided/store/(:num)'] = 'Service_Provided_controller/store/$1'; 
+$route['serviceprovided/destroy/(:num)/(:num)'] = 'Service_Provided_controller/destroy/$1/$2'; 
 

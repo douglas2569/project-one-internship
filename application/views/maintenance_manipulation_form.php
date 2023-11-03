@@ -196,7 +196,7 @@
                                             </td>
                                             <td rowspan="4" >
                                                 <?php if($this->session-> position == 'mecânico'): ?> 
-                                                    <a class="btn" role="button">
+                                                    <a href= "<?= site_url('index.php/serviceprovided/destroy/'.$maintenanceService[0]['id'].'/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
                                                         <i class="bi bi-trash3"></i>                               
                                                     </a>
                                                 <?php endif ?> 

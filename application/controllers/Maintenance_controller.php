@@ -10,6 +10,7 @@ class Maintenance_controller extends CI_Controller {
 		$this->load->model('Vehicle_model');			
 		$this->load->model('Inventory_model');			
 		$this->load->model('Maintenance_Inventory_model');			
+		$this->load->model('Service_Provided_model');			
 	 }	
 
 	public function index(){
@@ -72,7 +73,7 @@ class Maintenance_controller extends CI_Controller {
 	public function change($id) {
 		$maintenace = $this->Maintenance_model->show(array('id'=> $id));		
 		$maintenaceParts = $this->Maintenance_model->show(array('id_maintenance'=> $id), 'v_maintenance_inventory_parts');
-		$maintenanceService = $this->Maintenance_model->show(array('id_maintenance_fk '=> $id), 'v_services_provided_mechanics');
+		$maintenanceService = $this->Service_Provided_model->show(array('id_maintenance_fk '=> $id), 'v_services_provided_mechanics');
 				
 		
 		if(!is_array($maintenace)){						
