@@ -14,7 +14,7 @@
                     <?php endif ?>                                                                                 
 
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2 d-none" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
                         <a class="btn my-sm-0">
                             <i class="bi bi-search"></i>
                         </a>
@@ -33,7 +33,7 @@
                             <tbody>
                                 
                                     <?php foreach($maintenanceList as $maintenance): ?>                            
-                                            <tr> 
+                                            <tr class='itens-list' > 
                                                 <td> <?= $maintenance['id'] ?></td>                                
                                                 <td><?= $maintenance['license_plate_vehicles_customer_fk'] ?></td>                                
                                                 <td>
