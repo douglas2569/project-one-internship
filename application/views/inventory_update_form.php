@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label for="reference" class="form-label">Referência*</label>
                         <input class="form-control" type="text" name='reference' id="reference" value="<?= $part[0]['reference_number'] ?>" required/>
-                    <div>
+                    </div>
                     <div class="form-group">
                         <label class="form-label" for="name">Nome*</label>
                         <input class="form-control" type="text" name='name' id="name" value="<?= $part[0]['name'] ?>" required/> 
@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label class="form-label" for="unit-value" >Valor unitario*</label>
                         <input class="form-control" type="decimal" name='unitValue' id="unit-value" value="<?= $part[0]['unit_value'] ?>" required/>
-                    <div>
+                    </div>
                     <div class="form-group">
                         <label class="form-label" for="quantity">Quantidade*</label>
                         <input class="form-control" inputmode="numeric" pattern="\d*"  type="number" name='quantity' id="quantity" min="1" value="<?= $part[0]['quantity'] ?>" /> 
@@ -59,7 +59,7 @@
                             </label>
                         </div>                            
                             
-                        </div>
+                        
                         <div class="form-check">
                             <?php if($part[0]['status'] == '0'): ?>
                                 <input class="form-check-input" type="radio" name="status" id="status" value="0" checked>

@@ -428,12 +428,6 @@ CREATE VIEW v_users
 AS SELECT users.cpf, users.username, users.password, employees.name, employees.position FROM users 
 INNER JOIN employees on users.cpf = employees.cpf; 
 
-DROP VIEW IF EXISTS v_inventory;
-CREATE VIEW v_inventory 
-AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand, automotive_parts.unit_value, automotive_parts.description, automotive_parts.status FROM automotive_parts 
-INNER JOIN inventory on automotive_parts.reference_number = inventory.reference_number
---WHERE automotive_parts.status = '1'; 
-
 DROP VIEW IF EXISTS v_vehicles_customers;
 CREATE VIEW v_vehicles_customers
 AS  
@@ -467,6 +461,13 @@ ON services.id = services_provided.id_services_fk
 INNER JOIN employees 
 ON employees.cpf = services_provided.cpf_mechanics_fk 
 
+DROP VIEW IF EXISTS v_inventory_automotive_parts ;
+CREATE VIEW v_inventory_automotive_parts
+AS 
+SELECT automotive_parts.image_address , automotive_parts.reference_number,  automotive_parts.name , automotive_parts.description, automotive_parts.brand,  automotive_parts.unit_value, automotive_parts.status,  inventory.quantity   
+FROM automotive_parts 
+INNER JOIN inventory 
+ON automotive_parts.reference_number = inventory.reference_number 
 
 DROP PROCEDURE IF EXISTS sp_register_vehicle_costumer;
 DELIMITER $$

@@ -118,10 +118,10 @@
                         </div>                            
                         <?php endif; ?>    
                         <?php  if(is_array($maintenanceParts)): ?>
-                            <ul>
+                            
                                 <?php foreach($maintenanceParts as $part ): ?>
-                                    <li>
-                                        <table>
+                                    <div class="item">
+                                        <div class="item-body">
                                             <?php if(!empty($part['image_address'])): ?>
                                             <!-- <tr>
                                                 <td class="form-label">
@@ -129,39 +129,39 @@
                                                 </td>
                                             </tr> -->
                                             <?php endif ?>
-                                            <tr>
-                                                <td>
+                                            
+                                                <div >
                                                     <strong>Nº Ref:</strong>
                                                     
                                                     <?= $part['reference_number'] ?>
-                                                </td>                                               
-                                            </tr>
-                                            <tr>
-                                                <td>
+                                                </div>                                               
+                                            
+                                            
+                                                <div >
                                                     <strong>Nome:</strong>
                                                     <?= $part['name'] ?>
-                                                </td>                                                 
-                                            </tr>
+                                                </div>                                                 
+                                            
 
-                                            <tr>
-                                                <td>
+                                            
+                                                <div  class="form-label"> 
                                                     <strong>Quantidade:</strong>
                                                     <?= $part['quantity'] ?>
-                                                </td>                                                 
-                                            </tr>
+                                                </div>                                                 
                                             
-                                            </table>  
+                                            
+                                        </div>  
 
-                                            <div class="item-footer" >
-                                                <?php if($this->session-> position == 'mecânico'  && $maintenance[0]['status'] != '2'): ?> 
-                                                        <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['id_maintenance'].'/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
-                                                            <i class="bi bi-trash3"></i>                               
-                                                        </a>
-                                                 <?php endif ?>  
-                                            </div>                                      
-                                    </li>
+                                        <div class="item-footer" >
+                                            <?php if($this->session-> position == 'mecânico'  && $maintenance[0]['status'] != '2'): ?> 
+                                                    <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['id_maintenance'].'/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
+                                                        <i class="bi bi-trash3"></i>                               
+                                                    </a>
+                                                <?php endif ?>  
+                                        </div>                                      
+                                     </div>
                                 <?php endforeach ?>
-                            </ul>
+                            
                         <?php  else: ?>                         
                             <p class="h6" >Nenhuma peça adicionada</p>
                         <?php endif; ?>
@@ -186,36 +186,33 @@
                     <?php endif ?>     
                     
                     <?php  if(is_array($maintenanceService)): ?>
-                        <ul>
+                        
                             <?php foreach($maintenanceService as $service ): ?>
-                                <li>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <strong>Código:</strong>
-                                                <?= $service['id_services_fk'] ?>
-                                            </td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>Quantidade:</strong>
-                                                <?= $service['service_name'] ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="form-label">
-                                                <strong>Quantidade:</strong>
-                                                <?= $service['quantity_service'] ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="form-label">
-                                                <strong>Mecânico:</strong>
-                                                <?= $service['mechanic_name'] ?>
-                                            </td> 
-                                        </tr>
-                                    </table> 
+                                <div class="item">
+                                    <div class="item-body">
+                                        <div>
+                                            <strong>Código:</strong>
+                                            <?= $service['id_services_fk'] ?>
+                                        </div>
+                                        
+                                        <div>
+                                            <strong>Quantidade:</strong>
+                                            <?= $service['service_name'] ?>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-label">
+                                            <strong>Quantidade:</strong>
+                                            <?= $service['quantity_service'] ?>
+                                        </div>
+                                    
+                                        
+                                        <div class="form-label">
+                                            <strong>Mecânico:</strong>
+                                            <?= $service['mechanic_name'] ?>
+                                        </div> 
+                                        
+                                    </div> 
                                     
                                     <div class="item-footer" >
                                         <?php if($this->session-> position == 'mecânico'  && $maintenance[0]['status'] != '2'): ?> 

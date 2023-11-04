@@ -22,8 +22,8 @@
                     <?php  if(count($partsList) > 0): ?>
                     <ul class="parts-list container-fluid">
                         <?php foreach($partsList as $part): ?>    
-                        <li class="parts-item itens-list">
-                            <div class="item-main">
+                        <li class="parts-item item">
+                            <div class="item-body">
                                 <div>
                                     <?php if(!empty($part['image_address'])): ?>
                                         <img class="img-fluid" src="<?= site_url('assets/images/'). $part['image_address']  ?>" alt="<?= $part['name'] ?>">
@@ -33,9 +33,29 @@
                                     <div class="part-reference"> 
                                             <strong>Ref: </strong> <?= $part['reference_number'] ?> 
                                     </div>
-                                    <div class="part-name"> <strong>Name: </strong> <?= $part['name'] ?> </div>
-                                    <div class="part-brand"> <strong>Marca: </strong> <?= $part['brand'] ?> </div>
-                                    <div class="part-quantity">  <strong>Quantidade: </strong> <?= $part['quantity'] ?> </div>
+                                    <div>
+                                        <strong>Name: </strong> <?= $part['name'] ?> 
+                                    </div>
+                                    <div> 
+                                        <strong>Marca: </strong> <?= $part['brand'] ?>
+                                    </div>
+
+                                    <div>  
+                                        <strong>Quantidade: </strong> <?= $part['quantity'] ?> 
+                                    </div>
+                                    <div> 
+                                         <strong>Status: </strong> 
+                                         <?php 
+                                            switch($part['status']):
+                                                case '0':
+                                                        echo "Desativada";
+                                                    break;
+                                                case '1':
+                                                    echo "Ativada";
+                                                break;
+                                            endswitch;
+                                         ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="item-footer">

@@ -15,6 +15,11 @@ main{
 
 main > .container{
     padding: var(--md-padding3);
+    max-width: 720px;
+}
+
+nav > .container{
+    max-width: 720px;
 }
 
 /*nav bar*/
@@ -70,7 +75,11 @@ main .container a.nav-link{
 }
 
 
-ul li div.item-footer{
+.item .item-body{
+    padding-left: var(--lg-margin1);
+}
+
+.item .item-body + div.item-footer{
     display: flex;
     justify-content: end;    
     border-bottom: 1px solid var(--gray-color3);

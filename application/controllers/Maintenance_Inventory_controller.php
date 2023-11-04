@@ -17,7 +17,7 @@ class Maintenance_Inventory_controller extends CI_Controller {
 	}
 
 	public function store($idMaintenance) {
-		$data['partList'] = $this->Inventory_model->show();		
+		$data['partList'] = $this->Inventory_model->show(array('status'=>'1'));		
 		$data['maintenance_id'] = $idMaintenance;		
 		
 		$this->form_validation->set_rules('quantity', 'Quantidade', 'numeric|required|min_length[1]|max_length[50]');		

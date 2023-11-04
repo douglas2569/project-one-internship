@@ -8,10 +8,10 @@ class Inventory_model extends CI_Model {
         if(!is_null($column)){
             $this->db->where( key($column),  $column[key($column)]);            
             
-            return $this->db->get("v_inventory")->result_array();
+            return $this->db->get("v_inventory_automotive_parts")->result_array();
         }    
         
-        return $this->db->get("v_inventory")->result_array();
+        return $this->db->get("v_inventory_automotive_parts")->result_array();
     }  
     
     public function insert($address, $reference, $name, $brand, $description, $unitValue, $quantity){   
