@@ -432,7 +432,7 @@ DROP VIEW IF EXISTS v_inventory;
 CREATE VIEW v_inventory 
 AS SELECT automotive_parts.reference_number, automotive_parts.image_address,  automotive_parts.name, inventory.quantity, automotive_parts.brand, automotive_parts.unit_value, automotive_parts.description, automotive_parts.status FROM automotive_parts 
 INNER JOIN inventory on automotive_parts.reference_number = inventory.reference_number
-WHERE automotive_parts.status = '1'; 
+--WHERE automotive_parts.status = '1'; 
 
 DROP VIEW IF EXISTS v_vehicles_customers;
 CREATE VIEW v_vehicles_customers
