@@ -232,11 +232,7 @@
                 </div>
             </div>
             </div>
-
-
-            <a class="nav-link" href="<?= site_url() ?>">
-                     <i class="bi bi-arrow-left  h2"></i>                     
-            </a>             
+                      
         </div>
 
 
