@@ -46,12 +46,13 @@ main .login-screen .title-box{
 .login-screen .login-footer{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-top:  calc(1 * var(--lg-margin1) ) ;
+    justify-content: center;
+    margin-top: --md-margin3 ;
 }
 .login-screen .login-footer .btn{
-    width: 100px;
+    width: 100%;
     margin-top: 0;
+    height: 50px;
 }
 
 @media (min-width: 576px) {    

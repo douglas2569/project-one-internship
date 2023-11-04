@@ -44,7 +44,7 @@
                         <input type="password" class="form-control" placeholder="Senha" aria-label="Password" aria-describedby="basic-addon2" name='password' required>
                     </div>
                     <div class='login-footer'>
-                        <a href="#" class='link'>Criar conta</a>        
+                              
                         <button class="btn  btn-primary" type='submit'>Entrar</button>        
                     </div>
 
