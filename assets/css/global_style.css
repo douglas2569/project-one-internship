@@ -27,6 +27,11 @@ h1{
 .toolbar{
     display: flex;
     justify-content: space-between;
+    margin-bottom: var(--md-margin2); 
+}
+
+.form-inline{
+    flex-direction: row;   
 }
 
 /* forms*/
@@ -56,7 +61,7 @@ form > button.btn, .form-group + button.btn{
     left: 5%;
 }
 .title-box{    
-    margin-top: var(--md-margin2);
+    margin-top: var(--lg-margin1);
     margin-bottom: var(--md-margin3);
 }
 

@@ -12,8 +12,8 @@
                          Nova
                     </a> 
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2 d-none" type="search" placeholder="Search" aria-label="Search">
-                        <a class="btn my-sm-0" type="submit">
+                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
+                        <a class="btn my-sm-0">
                             <i class="bi bi-search"></i>
                         </a>
                     </form>                   
@@ -22,7 +22,7 @@
                     <?php  if(count($partsList) > 0): ?>
                     <ul class="parts-list container-fluid">
                         <?php foreach($partsList as $part): ?>    
-                        <li class="parts-item">
+                        <li class="parts-item itens-list">
                             <div class="item-main">
                                 <div>
                                     <?php if(!empty($part['image_address'])): ?>
@@ -34,8 +34,8 @@
                                             <strong>Ref: </strong> <?= $part['reference_number'] ?> 
                                     </div>
                                     <div class="part-name"> <strong>Name: </strong> <?= $part['name'] ?> </div>
-                                    <div class="part-brand"> <strong>Marca </strong> <?= $part['brand'] ?> </div>
-                                    <div class="part-quantity">  <strong>Quantidade </strong> <?= $part['quantity'] ?> </div>
+                                    <div class="part-brand"> <strong>Marca: </strong> <?= $part['brand'] ?> </div>
+                                    <div class="part-quantity">  <strong>Quantidade: </strong> <?= $part['quantity'] ?> </div>
                                 </div>
                             </div>
                             <div class="item-footer">

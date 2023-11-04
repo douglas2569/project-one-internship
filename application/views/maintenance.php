@@ -10,7 +10,10 @@
                         <a href="<?= site_url('index.php/maintenance/store') ?>"  class="btn" role="button">
                             <i class="bi bi-plus-circle"></i>
                             Nova
-                        </a>  
+                        </a> 
+
+                    <?php else: ?>                                                                                 
+                        <a class="btn" role="button"> </a> 
                     <?php endif ?>                                                                                 
 
                     <form class="form-inline">

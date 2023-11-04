@@ -12,17 +12,17 @@
                         Nova
                     </a> 
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2 d-none" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
                         <a class="btn my-sm-0">
                             <i class="bi bi-search"></i>
                         </a>
-                    </form>                   
+                    </form>                  
                 </div>
                 <div class="vehiclesList-main">
                 <?php  if(count($vehiclesList) > 0): ?>
                     <ul class="vehicles-list">
                         <?php foreach($vehiclesList as $vehicle): ?>    
-                        <li class="vehicles-item">
+                        <li class="vehicles-item itens-list" >
                             <div class="item-main"> 
                                 <div class="vehicle-customer-name"> <strong>Nome: </strong> <?= $vehicle['name'] ?> </div>
                                 <div class="vehicle-licence-plate"> <strong>Placa: </strong> <?= $vehicle['license_plate'] ?> </div>

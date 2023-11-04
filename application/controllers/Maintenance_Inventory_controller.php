@@ -37,19 +37,23 @@ class Maintenance_Inventory_controller extends CI_Controller {
 			}
 			
 			try{				
-				$resultset = $this->Maintenance_Inventory_model->show(array('reference_number'=>$referenceNumberAndQuantity[0]));
+				$resultset = $this->Maintenance_Inventory_model->show(array('id_maintenance'=>$idMaintenance,'reference_number'=>$referenceNumberAndQuantity[0]));
+				$newQuantityInventory = $referenceNumberAndQuantity[1] - $quantity;
 				
-				if(count($resultset) > 0){	
-					$newQuantityInventory = $referenceNumberAndQuantity[1] - $quantity;
-					$newQuantityMaintenanceInventory = $quantity + $resultset[0]['quantity']; 				 
-			
-					$return = $this->Maintenance_Inventory_model->updateQuantityMaintenanceInventory($referenceNumberAndQuantity[0], $newQuantityMaintenanceInventory, $newQuantityInventory);	
+				if(count($resultset) > 0){					
+					$newQuantityMaintenanceInventory = $quantity + $resultset[0]['quantity'];	 												
+					$return = $this->Maintenance_Inventory_model->updateQuantityMaintenanceInventory($idMaintenance, $referenceNumberAndQuantity[0], $newQuantityMaintenanceInventory, $newQuantityInventory);	
+					
 					if($return['status']){
 						throw new Exception($return['mensage']);
 					}									
 					
 				}else{
-					$this->Maintenance_Inventory_model->insert($referenceNumberAndQuantity[0], $idMaintenance, $quantity);
+					$return = $this->Maintenance_Inventory_model->insert($referenceNumberAndQuantity[0], $idMaintenance, $newQuantityInventory, $quantity);	
+					if($return['status']){
+						throw new Exception($return['mensage']);
+					}
+					
 				}				
 
 				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Adicionada com sucesso'));
@@ -66,9 +70,9 @@ class Maintenance_Inventory_controller extends CI_Controller {
 	}
 
 
-	public function destroy($reference_number, $quantity) {
+	public function destroy($idMaintenance, $reference_number, $quantity) {
 		
-		$resultset = $this->Maintenance_Inventory_model->show(array('reference_number'=>$reference_number));		
+		$resultset = $this->Maintenance_Inventory_model->show(array('id_maintenance'=>$idMaintenance,'reference_number'=>$reference_number));		
 		
 		if(count($resultset) == 1){
 			try{

@@ -109,7 +109,7 @@
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">                    
-                    <?php if($this->session-> position == 'mecânico'): ?> 
+                    <?php if($this->session-> position == 'mecânico' && $maintenance[0]['status'] != '2'): ?> 
                         <div class="accordion-sub-button">                            
                                 <a href="<?= site_url('index.php/maintenanceinventory/store/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
                                     <i class="bi bi-plus-circle"></i>
@@ -153,8 +153,8 @@
                                             </table>  
 
                                             <div class="item-footer" >
-                                                <?php if($this->session-> position == 'mecânico'): ?> 
-                                                        <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
+                                                <?php if($this->session-> position == 'mecânico'  && $maintenance[0]['status'] != '2'): ?> 
+                                                        <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['id_maintenance'].'/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
                                                             <i class="bi bi-trash3"></i>                               
                                                         </a>
                                                  <?php endif ?>  
@@ -176,7 +176,7 @@
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <?php if($this->session-> position == 'mecânico'): ?> 
+                    <?php if($this->session-> position == 'mecânico'  && $maintenance[0]['status'] != '2'): ?> 
                         <div class="accordion-sub-button">                        
                             <a  href='<?= site_url('index.php/serviceprovided/store/'.$maintenance[0]['id']) ?>' class="btn" role="button">
                                 <i class="bi bi-plus-circle"></i>
@@ -218,7 +218,7 @@
                                     </table> 
                                     
                                     <div class="item-footer" >
-                                        <?php if($this->session-> position == 'mecânico'): ?> 
+                                        <?php if($this->session-> position == 'mecânico'  && $maintenance[0]['status'] != '2'): ?> 
                                             <a href= "<?= site_url('index.php/serviceprovided/destroy/'.$maintenanceService[0]['id'].'/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
                                                 <i class="bi bi-trash3"></i>                               
                                             </a>

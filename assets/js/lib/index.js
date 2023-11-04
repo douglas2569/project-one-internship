@@ -28,7 +28,16 @@ function searchItem(){
                 x[i].style.display="none";
             }
             else {
-                x[i].style.display="table-row";                 
+                switch(x[0].localName){
+                    case 'li':
+                        x[i].style.display="block";                 
+                        break;
+                    case 'tr':
+                        x[i].style.display="table-row";                 
+                        break;
+
+                }
+
             }
         }
         
