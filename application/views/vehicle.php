@@ -18,12 +18,12 @@
                         </a>
                     </form>                  
                 </div>
-                <div class="vehiclesList-main">
+                <div class="vehicles-list-main">
                 <?php  if(count($vehiclesList) > 0): ?>
-                    <ul class="vehicles-list">
+                    <ul class="vehicles-list container-fluid">
                         <?php foreach($vehiclesList as $vehicle): ?>    
-                        <li class="vehicles-item itens-list" >
-                            <div class="item-main"> 
+                        <li class="vehicles-item item" >
+                            <div class="item-body"> 
                                 <div class="vehicle-customer-name"> <strong>Nome: </strong> <?= $vehicle['name'] ?> </div>
                                 <div class="vehicle-licence-plate"> <strong>Placa: </strong> <?= $vehicle['license_plate'] ?> </div>
                                 <div class="vehicle-model">  <strong>Modelo: </strong> <?= $vehicle['model_vehicles_fk'] ?> </div>
