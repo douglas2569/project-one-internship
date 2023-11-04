@@ -10,7 +10,7 @@
 
 main{
     margin-top: calc(1.3 * var(--lg-margin2) );
-    /* height: 100vh;     */
+    min-height: 100vh;    
 }
 
 main > .container{
@@ -90,9 +90,11 @@ footer{
     margin-top: var(--md-margin1);
 }
 
-footer p{
-    text-align: center;    
+footer > .container{
+    display: flex;
+    justify-content: center;
 }
+
 footer p a{
     text-align: center;
     color: var(--black-color1);
