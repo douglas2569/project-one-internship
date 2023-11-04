@@ -36,7 +36,7 @@
                             <tbody>
                                 
                                     <?php foreach($maintenanceList as $maintenance): ?>                            
-                                            <tr class='itens-list' > 
+                                            <tr class='itens-list item' > 
                                                 <td> <?= $maintenance['id'] ?></td>                                
                                                 <td><?= $maintenance['license_plate_vehicles_customer_fk'] ?></td>                                
                                                 <td>

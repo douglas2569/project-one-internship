@@ -21,7 +21,7 @@ function searchItem(){
         let input = document.querySelector('.search-item').value
         input=input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
         
-        let x = document.querySelectorAll('.itens-list');            
+        let x = document.querySelectorAll('.item');            
         
         for (let i = 0; i < x.length; i++) {             
              if (!x[i].outerText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(input)) {
