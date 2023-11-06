@@ -1,5 +1,6 @@
-import {showSandwichMenu, showAccordionMaintenance, searchItem} from './lib/index.js'
+import {showSandwichMenu, showAccordionMaintenance, searchItem, recordDeletionAlert} from './lib/index.js'
 
 showSandwichMenu()
 showAccordionMaintenance()
 searchItem()
+recordDeletionAlert()

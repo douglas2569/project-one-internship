@@ -64,7 +64,7 @@
                                     Editar
                                 </a>
                                 <a  href="<?= site_url('index.php/inventory/destroy/'.$part['reference_number']) ?>" class="btn destroy-button">
-                                    <i class="bi bi-trash3"></i>
+                                    <i class="bi bi-trash3"  ></i>
                                     Excluir
                                 </a>
                             </div>

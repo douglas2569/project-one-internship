@@ -44,4 +44,16 @@ function searchItem(){
     });
 }
 
-export {showSandwichMenu, showAccordionMaintenance, searchItem}
+function recordDeletionAlert(){
+    const destroyButton = document.querySelectorAll('.destroy-button')
+    destroyButton.forEach((btn)=>{
+        btn.addEventListener('click',(e)=>{        
+            if(!confirm("Realmente deseja excluir esse registo?")){
+               e.preventDefault()
+            }
+        });
+    })    
+    
+}
+
+export {showSandwichMenu, showAccordionMaintenance, searchItem, recordDeletionAlert}
