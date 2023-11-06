@@ -51,7 +51,7 @@ form > label, .form-group > label{
 form > button.btn, .form-group + button.btn{
   margin: auto;
   width: 300px;
-  margin-top: var(--md-margin1);
+  margin-top: var(--lg-margin3);
   padding: var(--sm-margin3);
 }
 

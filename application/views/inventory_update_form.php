@@ -49,31 +49,33 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="quantity">Estado</label>
-                        <div class="form-check">
-                            <?php if($part[0]['status'] == '1'): ?>
-                                <input class="form-check-input" type="radio" name="status" id="status" value="1" checked>
-                                <?php else: ?>
-                                    <input class="form-check-input" type="radio" name="status" id="status" value="1" >
-                            <?php endif ?>
-                            <label class="form-check-label" for="status2">
-                                Ativar
-                            </label>
-                        </div>                            
+                        <div class='status-radio'>
+                            <div class="form-check">
+                                <?php if($part[0]['status'] == '1'): ?>
+                                    <input class="form-check-input" type="radio" name="status" id="status" value="1" checked>
+                                    <?php else: ?>
+                                        <input class="form-check-input" type="radio" name="status" id="status" value="1" >
+                                <?php endif ?>
+                                <label class="form-check-label" for="status">
+                                    Ativar
+                                </label>
+                            </div>                            
+                                
                             
-                        
-                        <div class="form-check">
-                            <?php if($part[0]['status'] == '0'): ?>
-                                <input class="form-check-input" type="radio" name="status" id="status" value="0" checked>
-                                <?php else: ?>
-                                    <input class="form-check-input" type="radio" name="status" id="status" value="0" >
-                            <?php endif ?>
-                            <label class="form-check-label" for="status2">
-                                Desativar
-                            </label>
+                            <div class="form-check">
+                                <?php if($part[0]['status'] == '0'): ?>
+                                    <input class="form-check-input" type="radio" name="status" id="status" value="0" checked>
+                                    <?php else: ?>
+                                        <input class="form-check-input" type="radio" name="status" id="status2" value="0" >
+                                <?php endif ?>
+                                <label class="form-check-label" for="status2">
+                                    Desativar
+                                </label>
+                            </div>
                         </div>
                     </div>
 
-                    <button class="btn  btn-primary" type='submit'>Salvar</button>              
+                    <button class="btn btn-primary" type='submit'>Salvar</button>              
             </form> 
             <a class="nav-link" href="<?= site_url() ?>">
                      <i class="bi bi-arrow-left  h2"></i>                     

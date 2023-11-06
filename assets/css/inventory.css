@@ -2,3 +2,7 @@
     margin-top: var(--md-margin1);    
 }
 
+.status-radio{
+    display: flex;
+    gap: var(--md-margin2);
+}
