@@ -62,7 +62,9 @@ class Inventory_controller extends CI_Controller {
 				if($return['status']){
 					throw new Exception($return['mensage']);
 				}
-				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Cadastrado com sucesso'));											
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Cadastrado com sucesso'));	
+				redirect('index.php/inventory');	
+													
 					
 			}catch(Exception $e){
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel cadastrar. Erro: '.$e->getMessage()));

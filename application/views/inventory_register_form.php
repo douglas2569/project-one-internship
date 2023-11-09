@@ -19,6 +19,7 @@
                         <label for="reference" class="form-label">Referência*</label>
                         <input class="form-control" type="text" name='reference' id="reference" required/>
                     </div>
+                    <!-- pattern= '^[a-zA-Z]+\w*'  -->
                     <div class="form-group">
                         <label class="form-label" for="name">Nome*</label>
                         <input class="form-control" type="text" name='name' id="name" required/> 
@@ -34,10 +35,10 @@
                         </textarea>
                         
                     </div>
-                    
+                    <!-- data-mask="R$ 00,00" -->
                     <div class="form-group">
                         <label class="form-label" for="unit-value" >Valor unitario*</label>
-                        <input class="form-control" type="decimal" name='unitValue' id="unit-value" required/>
+                        <input class="form-control"  type="decimal" name='unitValue' id="unit-value" value='0' required/>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="quantity">Quantidade*</label>
