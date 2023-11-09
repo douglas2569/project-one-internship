@@ -54,7 +54,15 @@ form > button.btn, .form-group + button.btn{
   margin-top: var(--lg-margin3);
   padding: var(--sm-margin3);
 }
+.form-footer{
+    display: flex;
+    justify-content: space-around;
+    margin-top: var(--lg-margin1);
+}
 
+.form-footer .btn{
+    width: 150px;
+}
 .title-box > h1{
     margin: 0;
     text-align: center;    

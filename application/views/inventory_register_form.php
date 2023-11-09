@@ -43,12 +43,11 @@
                         <label class="form-label" for="quantity">Quantidade*</label>
                         <input class="form-control" inputmode="numeric" pattern="\d*"  type="number" name='quantity' id="quantity" value='1' min="1" /> 
                     </div>
-
-                    <button class="btn btn-primary" type='submit'>Cadastrar</button>              
+                    <div class="form-footer">
+                        <button class="btn btn-primary" type='submit'>Cadastrar</button>              
+                        <a class="btn btn-secondary" href="<?= site_url() ?>"> Voltar </a>             
+                    </div>
             </form> 
-            <a class="nav-link" href="<?= site_url() ?>">
-                     <i class="bi bi-arrow-left  h2"></i>                     
-            </a>             
         </div>
     </main>
 

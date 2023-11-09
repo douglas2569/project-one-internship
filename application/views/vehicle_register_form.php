@@ -50,11 +50,13 @@
                     </div>  
                 </fieldset>
 
-                <button class="btn  btn-primary" type='submit'>Cadastrar</button>              
+                
+                <div class="form-footer">
+                    <button class="btn btn-primary" type='submit'>Cadastrar</button>              
+                        <a class="btn btn-secondary" href="<?= site_url() ?>"> Voltar </a>             
+                </div>            
             </form> 
-            <a class="nav-link" href="<?= site_url() ?>">
-                     <i class="bi bi-arrow-left  h2"></i>                     
-            </a>             
+                        
         </div>
     </main>
 

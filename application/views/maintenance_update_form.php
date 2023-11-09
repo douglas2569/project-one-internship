@@ -26,10 +26,10 @@
                 <label class="form-label" for="description">Descrição</label>
                 <textarea class="form-control" name="description"  cols="30" rows="10"><?= $maintenance[0]['description'] ?></textarea>
 
-                <button class="btn  btn-primary" type='submit'>Salvar</button>              
-            </form> 
-            <a class="nav-link" href="<?= site_url() ?>">
-                     <i class="bi bi-arrow-left  h2"></i>                     
-            </a>             
+                <div class="form-footer">
+                    <button class="btn btn-primary" type='submit'>Salvar</button>              
+                   <a class="btn btn-secondary" href="<?= site_url() ?>"> Voltar </a>             
+                </div>             
+            </form>                        
         </div>
     </main>

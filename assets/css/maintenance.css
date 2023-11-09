@@ -35,8 +35,7 @@ legend{
     margin-top: var(--sm-margin2);
 }
 .table th{    
-  line-height: 50%;
-  text-align: center;
+  line-height: 50%;  
   padding: var(--md-margin2) var(--md-margin1);
 }
 
