@@ -30,15 +30,18 @@
                                <span><?=  ucfirst($this->session->position) ?></span>
                         </a>
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="<?= site_url() ?>">Manutenções</a>
-                            </li>
                             <?php if($this->session-> position == 'gerente'): ?> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/inventory') ?>">Estoque</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?= site_url('index.php/service') ?>">Serviço</a>
+                                    <a class="nav-link" href="<?= site_url('index.php/service') ?>">Serviços</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="<?= site_url() ?>">Manutenções</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="<?= site_url('index.php/user') ?>">Usuários</a>
                                 </li>
                             <?php endif ?> 
                             

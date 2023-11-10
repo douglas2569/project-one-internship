@@ -9,6 +9,11 @@ $route['auth'] = 'Auth_controller';
 $route['auth/login'] = 'Auth_controller/login';
 $route['auth/logout'] = 'Auth_controller/logout';
 
+$route['user'] = 'User_controller';
+$route['user/store'] = 'User_controller/store';
+$route['user/edit/(:num)'] = 'User_controller/edit/$1';
+$route['user/destroy/(:num)'] = 'User_controller/destroy/$1';
+
 $route['inventory'] = 'Inventory_controller';
 $route['inventory/store'] = 'Inventory_controller/store';
 $route['inventory/edit/(:any)'] = 'Inventory_controller/edit/$1';

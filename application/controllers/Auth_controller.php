@@ -22,7 +22,7 @@ class Auth_controller extends CI_Controller {
 				
 			}else{
 
-				$this->load->helper(array('passwordVerifyHash', 'encrypt'));
+				$this->load->helper('passwordVerifyHash');
 				
 				if(passwordVerifyHash($password, $resultset[0]['password'])){			
 					$array = array(					
