@@ -14,9 +14,9 @@ class User_model extends CI_Model {
         return $this->db->get("v_users")->result_array();
     }   
 
-    public function showPostionByUser($cpf) {
-        $resultset = $this->db->query("CALL sp_position_user('$cpf')")->result_array();
-        return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
-    }   
+    // public function showPostionByUser($cpf) {
+    //     $resultset = $this->db->query("CALL sp_position_user('$cpf')")->result_array();
+    //     return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
+    // }   
 
 }

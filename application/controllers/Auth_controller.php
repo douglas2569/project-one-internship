@@ -15,22 +15,33 @@ class Auth_controller extends CI_Controller {
 		if(!$this->form_validation->run() == FALSE){
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
-			$resultset = $this->User_model->show(array('username'=> $username));
+			$resultsetUser = $this->User_model->show(array('username'=> $username));			
+			$permissionsFeature = $this->Permissions_features_model->show('v_permissions_features', $resultsetUser[0]['position_id']);
+			
+			$permissionList  = [];
+			foreach($permissionsFeature as $permissionFeature){				
+				$permissionList  = array(
+					$permissionFeature[0]['features_name'] 
+					=> 
+					$this->Permissions_model->show($permissionFeature[0]['permissions_id']) 
+				);
+				
+			}			
 		
-			if (count($resultset) != 1) {	
+			if (count($resultsetUser) != 1) {	
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Usuário invalido.'));									
 				
 			}else{
 
 				$this->load->helper('passwordVerifyHash');
 				
-				if(passwordVerifyHash($password, $resultset[0]['password'])){			
+				if(passwordVerifyHash($password, $resultsetUser[0]['password'])){			
 					$array = array(					
-						'username' => $resultset[0]['username'],
-						'name' => $resultset[0]['name'],
-						'position' => $resultset[0]['position'],
-						'cpf' => $resultset[0]['cpf']
-										
+						'username' => $resultsetUser[0]['username'],
+						'employees_name' => $resultsetUser[0]['employees_name'],
+						'positions_name' => $resultsetUser[0],['positions_name'],										
+						'employees_id' => $resultsetUser[0]['employees_id'],										
+						'permissions' => $permissionList
 					);				
 					$this->session->set_userdata($array, 86400);								
 					redirect('/');				
