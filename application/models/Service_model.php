@@ -25,33 +25,49 @@ class Service_model extends CI_Model {
         
     }
     
-    public function insert($reference_number, $id_maintenance, $quantity
-    ){             
-        // $data = array(
-        //     'reference_number' => $reference_number,
-        //     'id_maintenance' => $id_maintenance,
-        //     'quantity' => $quantity
-        // );        
+    public function insert($name, $description, $estimatedTime, $cost, $cnpj_auto_vehicle_workstops_fk = '01187817000183'){             
+        $data = array(
+            'name' => $name,
+            'description' => $description,
+            'estimatedTime' => $estimatedTime,
+            'cost' => $cost,
+            'cnpj_auto_vehicle_workstops_fk' => $cnpj_auto_vehicle_workstops_fk,
+        );        
         
-        // if(!$this->db->insert('maintenance_inventory', $data)){
-        //     $db_error = $this->db->error();        
-        //     if (!empty($db_error)) {            
-        //         throw new Exception($db_error['message']);
-        //     }
-        // }
+        if(!$this->db->insert('services', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);
+            }
+        }
 
     }
     
         
-    public function delete($reference_number,  $quantity){        
+    public function delete($id){        
 
-        // $data = array(
-        //     'reference_number' => $reference_number,
-        //     'quantity' => $quantity                    
-        // );         
-          
-        // $resultset = $this->db->query("CALL sp_delete_maintenance_inventory('$data[reference_number]', '$data[quantity]')")->result_array();
-        // return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);  
+        $this->db->where('id', $id);                     
+        return $this->db->delete('services');
+
+    }
+
+    public function update($id, $name, $description, $estimatedTime, $cost, $status){   
+        $data = array(
+            'name' => $name,
+            'description' => $description,
+            'estimatedTime' => $estimatedTime,
+            'cost' => $cost,
+            'status' => $status
+        );             
+            
+        $this->db->where('id', $id);
+        
+        if(!$this->db->update('services', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);                
+            }
+        }
 
     }
     

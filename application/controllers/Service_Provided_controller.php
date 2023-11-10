@@ -16,7 +16,7 @@ class Service_Provided_controller extends CI_Controller {
 	}
 
 	public function store($idMaintenance) {
-		$data['serviceList'] = $this->Service_model->show();			
+		$data['serviceList'] = $this->Service_model->show(array('status'=>'1'));			
 		$data['maintenance_id'] = $idMaintenance;		
 		
 		$this->form_validation->set_rules('quantity', 'Quantidade', 'numeric|required|min_length[1]|max_length[50]');		

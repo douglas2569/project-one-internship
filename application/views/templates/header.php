@@ -37,7 +37,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/inventory') ?>">Estoque</a>
                                 </li>
-                                <?php endif ?> 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= site_url('index.php/service') ?>">Serviço</a>
+                                </li>
+                            <?php endif ?> 
+                            
                             <?php if($this->session-> position == 'atendente'): ?> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/vehicle') ?>">Veiculos</a>
