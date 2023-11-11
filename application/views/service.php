@@ -13,11 +13,16 @@
             </div> 
                                
             <div class="services">
-                <div class="services-header toolbar">                                            
+                <div class="services-header toolbar">
+                <?php if($this->session-> permissions['services']['create'] == 1): ?>                                            
                     <a href='<?= site_url('index.php/service/store') ?>' class="btn ">
                         <i class="bi bi-plus-circle"></i>
                         Nova
                     </a> 
+                    <?php else: ?>
+                        <a class="btn "></a> 
+                    <?php endif ?>
+
                     <form class="form-inline">
                         <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
                         <a class="btn my-sm-0">
@@ -56,14 +61,18 @@
                                     </div>
                             </div>
                             <div class="item-footer">
-                                <a  href="<?= site_url('index.php/service/edit/'.$service['id']) ?>" class="btn edit-button">
-                                    <i class="bi bi-pencil-square"></i>
-                                    Editar
-                                </a>
+                                <?php if($this->session-> permissions['services']['update'] == 1): ?>
+                                    <a  href="<?= site_url('index.php/service/edit/'.$service['id']) ?>" class="btn edit-button">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Editar
+                                    </a>
+                                <?php endif ?>
+                                <?php if($this->session-> permissions['services']['delete'] == 1): ?>
                                 <a  href="<?= site_url('index.php/service/destroy/'.$service['id']) ?>" class="btn destroy-button">
                                     <i class="bi bi-trash3"></i>
                                     Excluir
                                 </a>
+                                <?php endif ?>
                             </div>
                         </li>
                         <?php endforeach ?>

@@ -20,7 +20,7 @@
                             Nova
                         </a> 
                     <?php else: ?>
-                        <a href=''></a> 
+                        <a class="btn"></a> 
                     <?php endif ?>
 
                     <form class="form-inline">

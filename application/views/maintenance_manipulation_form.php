@@ -1,3 +1,11 @@
+<?php if($this->session-> permissions['maintenance']['read'] == 0): ?>
+      <?php 
+        redirect('/');
+        exit;      
+      ?>
+      
+<?php endif ?>  
+
 <main>
         <div class="container">
             

@@ -13,17 +13,21 @@
             </div> 
                                           
             <div class="inventory">
-                <div class="inventory-header toolbar">                                            
+                <div class="inventory-header toolbar">   
+                <?php if($this->session-> permissions['inventory']['create'] == 1): ?>                                        
                     <a href='<?= site_url('index.php/inventory/store') ?>' class="btn ">
                         <i class="bi bi-plus-circle"></i>
-                         Nova
+                        Nova
                     </a> 
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
-                        <a class="btn my-sm-0">
-                            <i class="bi bi-search"></i>
-                        </a>
-                    </form>                   
+                <?php else: ?>                                         
+                    <a class="btn "></a>
+                <?php endif ?>                                         
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
+                    <a class="btn my-sm-0">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </form>                   
                 </div>
                 <div class="inventory-main">
                     <?php  if(count($partsList) > 0): ?>
@@ -66,14 +70,18 @@
                                 </div>
                             </div>
                             <div class="item-footer">
-                                <a  href="<?= site_url('index.php/inventory/edit/'.$part['reference_number']) ?>" class="btn edit-button">
-                                    <i class="bi bi-pencil-square"></i>
-                                    Editar
-                                </a>
-                                <a  href="<?= site_url('index.php/inventory/destroy/'.$part['reference_number']).'/'.$part['automotive_parts_id'] ?>" class="btn destroy-button">
-                                    <i class="bi bi-trash3"  ></i>
-                                    Excluir
-                                </a>
+                                <?php if($this->session-> permissions['inventory']['update'] == 1): ?>
+                                    <a  href="<?= site_url('index.php/inventory/edit/'.$part['reference_number']) ?>" class="btn edit-button">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Editar
+                                    </a>
+                                <?php endif ?>
+                                <?php if($this->session-> permissions['inventory']['delete'] == 1): ?>
+                                    <a  href="<?= site_url('index.php/inventory/destroy/'.$part['reference_number']).'/'.$part['automotive_parts_id'] ?>" class="btn destroy-button">
+                                        <i class="bi bi-trash3"  ></i>
+                                        Excluir
+                                    </a>
+                                <?php endif ?>
                             </div>
                         </li>
                         <?php endforeach ?>
