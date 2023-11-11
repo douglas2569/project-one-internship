@@ -7,10 +7,9 @@ class Maintenance_controller extends CI_Controller {
 		parent::__construct();		
 		checkAuthentication();
 		$this->load->model('Maintenance_model');			
-		$this->load->model('Vehicle_model');			
-		$this->load->model('Inventory_model');			
-		$this->load->model('Maintenance_Inventory_model');			
-		$this->load->model('Service_Provided_model');			
+		$this->load->model('Vehicle_customer_model');			
+		$this->load->model('Inventory_model');							
+		$this->load->model('Service_provided_model');			
 	 }	
 
 	public function index(){
@@ -22,7 +21,7 @@ class Maintenance_controller extends CI_Controller {
 	}
 
 	public function store() {		
-		$data['vehiclesList'] = $this->Vehicle_model->show();				
+		$data['Vehicle_customersList'] = $this->Vehicle_customer_model->show();				
 		$this->form_validation->set_rules('reason', 'Problema', 'trim|required|min_length[5]|max_length[50]');
 		$this->form_validation->set_rules('description', 'Descrição', 'trim|min_length[10]');
 				
@@ -72,7 +71,7 @@ class Maintenance_controller extends CI_Controller {
 	public function change($id) {
 		$maintenace = $this->Maintenance_model->show(array('id'=> $id));
 		$maintenaceParts = $this->Maintenance_model->show(array('maintenance_id'=> $id), 'v_maintenance_inventory_parts');
-		$maintenanceService = $this->Service_Provided_model->show(array('maintenance_id '=> $id), 'v_services_provided_mechanics');		
+		$maintenanceService = $this->Service_provided_model->show(array('maintenance_id '=> $id), 'v_services_provided_mechanics');		
 		
 		
 		if(!is_array($maintenace)){						
@@ -107,7 +106,7 @@ class Maintenance_controller extends CI_Controller {
 
 	public function edit($id) {
 		$resulset = $this->Maintenance_model->show(array('id'=>$id));		
-		$data['vehiclesList'] = $this->Vehicle_model->show();	
+		$data['Vehicle_customersList'] = $this->Vehicle_customer_model->show();	
 		
 		if(count($resulset) != 1){			
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				

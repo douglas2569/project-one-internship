@@ -8,11 +8,11 @@ class Maintenance_Inventory_controller extends CI_Controller {
 		checkAuthentication();
 		$this->load->model('Maintenance_model');								
 		$this->load->model('Inventory_model');			
-		$this->load->model('Maintenance_Inventory_model');			
+		$this->load->model('Maintenance_inventory_model');			
 	 }	
 
 	public function index(){
-		$data['MaintenanceInventoryList'] = $this->Maintenance_Inventory_model->show();	
+		$data['MaintenanceInventoryList'] = $this->Maintenance_inventory_model->show();	
 		echo json_encode($data);
 	}
 
@@ -37,19 +37,19 @@ class Maintenance_Inventory_controller extends CI_Controller {
 			}
 			
 			try{				
-				$resultset = $this->Maintenance_Inventory_model->show(array('id_maintenance'=>$idMaintenance,'reference_number'=>$referenceNumberAndQuantity[0]));
+				$resultset = $this->Maintenance_inventory_model->show(array('id_maintenance'=>$idMaintenance,'reference_number'=>$referenceNumberAndQuantity[0]));
 				$newQuantityInventory = $referenceNumberAndQuantity[1] - $quantity;
 				
 				if(count($resultset) > 0){					
 					$newQuantityMaintenanceInventory = $quantity + $resultset[0]['quantity'];	 												
-					$return = $this->Maintenance_Inventory_model->updateQuantityMaintenanceInventory($idMaintenance, $referenceNumberAndQuantity[0], $newQuantityMaintenanceInventory, $newQuantityInventory);	
+					$return = $this->Maintenance_inventory_model->updateQuantityMaintenanceInventory($idMaintenance, $referenceNumberAndQuantity[0], $newQuantityMaintenanceInventory, $newQuantityInventory);	
 					
 					if($return['status']){
 						throw new Exception($return['mensage']);
 					}									
 					
 				}else{
-					$return = $this->Maintenance_Inventory_model->insert($referenceNumberAndQuantity[0], $idMaintenance, $newQuantityInventory, $quantity);	
+					$return = $this->Maintenance_inventory_model->insert($referenceNumberAndQuantity[0], $idMaintenance, $newQuantityInventory, $quantity);	
 					if($return['status']){
 						throw new Exception($return['mensage']);
 					}
@@ -72,11 +72,11 @@ class Maintenance_Inventory_controller extends CI_Controller {
 
 	public function destroy($idMaintenance, $reference_number, $quantity) {
 		
-		$resultset = $this->Maintenance_Inventory_model->show(array('id_maintenance'=>$idMaintenance,'reference_number'=>$reference_number));		
+		$resultset = $this->Maintenance_inventory_model->show(array('id_maintenance'=>$idMaintenance,'reference_number'=>$reference_number));		
 		
 		if(count($resultset) == 1){
 			try{
-				$return = $this->Maintenance_Inventory_model->delete($reference_number,  $quantity);	
+				$return = $this->Maintenance_inventory_model->delete($reference_number,  $quantity);	
 				if($return['status']){
 					throw new Exception($return['mensage']);
 				}

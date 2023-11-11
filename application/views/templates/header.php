@@ -26,8 +26,8 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <a class="navbar-brand" href="#">                                
-                               <span><?=  ucfirst($this->session->positions_name) ?></span>
+                        <a class="navbar-brand" href="#">                                                            
+                               <span><?=  ucfirst($this->session->position_name) ?></span>
                         </a>
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <?php if($this->session-> permissions['inventory']['read'] == '1'): ?> 
@@ -48,9 +48,15 @@
                                 </li>                                
                             <?php endif ?> 
                             
-                            <?php if($this->session-> permissions['vehicles']['read'] == '1'): ?> 
+                            <?php if($this->session-> permissions['vehicles_customer']['read'] == '1'): ?> 
                             <li class="nav-item">
-                                    <a class="nav-link" href="<?= site_url('index.php/vehicle') ?>">Veículos</a>
+                                    <a class="nav-link" href="<?= site_url('index.php/vehiclecustomer') ?>">Veículos</a>
+                                </li>
+                            <?php endif ?> 
+
+                            <?php if($this->session-> permissions['employees']['read'] == '1'): ?> 
+                            <li class="nav-item">
+                                    <a class="nav-link" href="<?= site_url('index.php/employee') ?>">Funcionários </a>
                                 </li>
                             <?php endif ?> 
                             

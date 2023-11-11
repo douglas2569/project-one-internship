@@ -14,15 +14,20 @@ $route['user/store'] = 'User_controller/store';
 $route['user/edit/(:num)'] = 'User_controller/edit/$1';
 $route['user/destroy/(:num)'] = 'User_controller/destroy/$1';
 
+$route['employee'] = 'Employee_controller';
+$route['employee/store'] = 'Employee_controller/store';
+$route['employee/edit/(:num)'] = 'Employee_controller/edit/$1';
+$route['employee/destroy/(:num)'] = 'Employee_controller/destroy/$1';
+
 $route['inventory'] = 'Inventory_controller';
 $route['inventory/store'] = 'Inventory_controller/store';
 $route['inventory/edit/(:any)'] = 'Inventory_controller/edit/$1';
 $route['inventory/destroy/(:any)/(:num)'] = 'Inventory_controller/destroy/$1/$2';
 
-$route['vehicle'] = 'Vehicle_controller';
-$route['vehicle/store'] = 'Vehicle_controller/store';
-$route['vehicle/edit/(:any)/(:any)'] = 'Vehicle_controller/edit/$1/$2';
-$route['vehicle/destroy/(:any)'] = 'Vehicle_controller/destroy/$1';
+$route['vehiclecustomer'] = 'Vehicle_customer_controller';
+$route['vehiclecustomer/store'] = 'Vehicle_customer_controller/store';
+$route['vehiclecustomer/edit/(:any)/(:any)'] = 'Vehicle_customer_controller/edit/$1/$2';
+$route['vehiclecustomer/destroy/(:any)'] = 'Vehicle_customer_controller/destroy/$1';
 
 $route['maintenance'] = 'Maintenance_controller';
 $route['home'] = 'Maintenance_controller';

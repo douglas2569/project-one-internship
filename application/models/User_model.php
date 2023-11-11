@@ -12,11 +12,24 @@ class User_model extends CI_Model {
         }        
         
         return $this->db->get("v_users")->result_array();
-    }   
+    } 
+    
+    public function insert($username, $password, $employees_id){             
+        $data = array(
+            'username' => $username,
+            'password' => $password,
+            'employees_id' => $employees_id
+        );        
+        
+        if(!$this->db->insert('users', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);
+            }
+        }
 
-    // public function showPostionByUser($cpf) {
-    //     $resultset = $this->db->query("CALL sp_position_user('$cpf')")->result_array();
-    //     return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
-    // }   
+    }
+
+      
 
 }

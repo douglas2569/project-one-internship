@@ -400,8 +400,9 @@ INSERT INTO `services_provided` (`id`, `initial_date`, `final_date`, `quantity`,
 INSERT INTO `services_provided` (`id`, `initial_date`, `final_date`, `quantity`, `maintenance_id`, `employees_id`, `services_id`) VALUES (NULL, NULL, NULL, '1', '36', '40', '37');
 
 DROP VIEW IF EXISTS v_users;
-CREATE VIEW v_users 
-AS SELECT users.id as user_id, users.username, users.password, users.status, users.employees_id,  employees.name as employees_name ,  employees.positions_id, positions.name as positions_name FROM users 
+CREATE VIEW v_users
+AS 
+SELECT users.id as user_id, users.username, users.password, users.status, users.employees_id,  employees.name as employee_name ,  employees.cpf, employees.positions_id, positions.name as position_name FROM users 
 INNER JOIN employees 
 on users.employees_id = employees.id
 INNER JOIN positions 
@@ -409,7 +410,7 @@ on employees.positions_id = positions.id;
 
 DROP VIEW IF EXISTS v_permissions_features;
 CREATE VIEW v_permissions_features 
-AS SELECT positions_id, positions.name as positions_name, features_id, features.name as features_name, permissions_id
+AS SELECT positions_id, positions.name as position_name, features_id, features.name as features_name, permissions_id
 FROM permissions_features 
 INNER JOIN positions 
 on permissions_features.positions_id = positions.id
@@ -427,10 +428,15 @@ ON customers.id  = vehicles_customer.customers_id
 INNER JOIN vehicles
 ON vehicles.id  = vehicles_customer.vehicles_id
 
-SELECT `workshopprime`.`customers`.`cpf` AS `cpf`,`workshopprime`.`customers`.`name` AS `name`,
+DROP VIEW IF EXISTS v_employees;
+CREATE VIEW v_employees
+AS  
+SELECT employees.id, employees.cpf, employees.name, employees.address, employees.phone_number, employees.email, employees.auto_vehicle_workshops_id, employees.positions_id,
+positions.name AS position_name
+FROM employees
+INNER JOIN positions
+ON  employees.positions_id  = positions.id
 
-`workshopprime`.`customers`.`address` AS `address`,`workshopprime`.`customers`.`phone_number` AS `phone_number`,`workshopprime`.`customers`.`email` AS `email`,`workshopprime`.`vehicles_customer`.`vehicles_id` AS `vehicles_id`,`workshopprime`.`vehicles_customer`.`license_plate` AS `license_plate`,`workshopprime`.`vehicles`.`brand` AS `brand` 
-from ((`workshopprime`.`vehicles_customer` join `workshopprime`.`vehicles` on(`workshopprime`.`vehicles_customer`.`vehicles_id` = `workshopprime`.`vehicles`.`model`)) join `workshopprime`.`customers` on(`workshopprime`.`customers`.`cpf` = `workshopprime`.`vehicles_customer`.`customers_id`));
 
 DROP VIEW IF EXISTS v_maintenance_inventory;
 CREATE VIEW v_maintenance_inventory

@@ -6,7 +6,7 @@ class Auth_controller extends CI_Controller {
 	 public function __construct() {
 		parent::__construct();
 		$this->load->model('User_model');		
-		$this->load->model('Permissions_Features_model');		
+		$this->load->model('Permissions_features_model');		
 		$this->load->model('Permissions_model');		
 	 }
 	
@@ -18,12 +18,12 @@ class Auth_controller extends CI_Controller {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 			$resultsetUser = $this->User_model->show(array('username'=> $username));			
-
+			
 			if (count($resultsetUser) != 1) {	
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Usuário invalido.'));									
 				
 			}else{
-				$permissionsFeature = $this->Permissions_Features_model->show(array('positions_id' =>$resultsetUser[0]['positions_id'] ));			
+				$permissionsFeature = $this->Permissions_features_model->show(array('positions_id' =>$resultsetUser[0]['positions_id'] ));			
 			
 				$permissionList  = [];
 				foreach($permissionsFeature as $permissionFeature){	
@@ -37,8 +37,8 @@ class Auth_controller extends CI_Controller {
 				if(passwordVerifyHash($password, $resultsetUser[0]['password'])){			
 					$array = array(					
 						'username' => $resultsetUser[0]['username'],
-						'employees_name' => $resultsetUser[0]['employees_name'],
-						'positions_name' => $resultsetUser[0]['positions_name'],		
+						'employee_name' => $resultsetUser[0]['employee_name'],
+						'position_name' => $resultsetUser[0]['position_name'],		
 						'employees_id' => $resultsetUser[0]['employees_id'],
 						'permissions' => $permissionList
 					);				

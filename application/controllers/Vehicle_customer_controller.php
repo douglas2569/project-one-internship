@@ -1,19 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Vehicle_controller extends CI_Controller {	
+class Vehicle_customer_controller extends CI_Controller {	
 
 	 public function __construct() {
 		parent::__construct();		
 		checkAuthentication();
-		$this->load->model('Vehicle_model');							
+		$this->load->model('Vehicle_customer_model');							
 	 }	
 
 	public function index(){
-		$data['vehiclesList'] = $this->Vehicle_model->show();		
+		$data['VehicleCustomerList'] = $this->Vehicle_customer_model->show();		
         
 		$this->load->view('templates/header', $data);
-		$this->load->view('vehicle', $data);
+		$this->load->view('Vehicle_customer', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -41,12 +41,12 @@ class Vehicle_controller extends CI_Controller {
 			$brand = $this->input->post('brand');					
 			
 			try{				
-				$return = $this->Vehicle_model->insert($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand);
+				$return = $this->Vehicle_customer_model->insert($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand);
 				if($return['status']){
 					throw new Exception($return['mensage']);
 				}				
 				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Cadastrado com sucesso'));
-				redirect('index.php/vehicle');						
+				redirect('index.php/Vehicle_customer');						
 			}catch(Exception $e){	
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel cadastrar. Erro: '.$e->getMessage()));
 			}
@@ -54,26 +54,26 @@ class Vehicle_controller extends CI_Controller {
 		}
 				
 		$this->load->view('templates/header.php');
-		$this->load->view('vehicle_register_form.php');
+		$this->load->view('Vehicle_customer_register_form.php');
 		$this->load->view('templates/footer.php');	
 
 		
 	}
 
 	public function destroy($licensePlate) {
-		$resultset = $this->Vehicle_model->show(array('license_plate'=>$licensePlate));		
-		if(count($resultset) == 1 && $this->Vehicle_model->delete($licensePlate)){			
+		$resultset = $this->Vehicle_customer_model->show(array('license_plate'=>$licensePlate));		
+		if(count($resultset) == 1 && $this->Vehicle_customer_model->delete($licensePlate)){			
 			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						
 		}else{
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro'));				
 		}
 
-		redirect('index.php/vehicle');
+		redirect('index.php/Vehicle_customer');
 
 	}
 
 	public function edit($licensePlate, $cpf) {
-		$resulset = $this->Vehicle_model->show(array('license_plate'=> $licensePlate));		
+		$resulset = $this->Vehicle_customer_model->show(array('license_plate'=> $licensePlate));		
 		
 		if(count($resulset) != 1){			
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
@@ -88,11 +88,11 @@ class Vehicle_controller extends CI_Controller {
 
 			$this->form_validation->set_rules('licensePlate', 'Placa', 'trim|min_length[6]|max_length[50]|required');
 
-			$data['vehicle'] = $resulset;
+			$data['Vehicle_customer'] = $resulset;
 
 			if($this->form_validation->run() == FALSE){								
 				$this->load->view('templates/header.php');
-				$this->load->view('vehicle_update_form.php',$data);
+				$this->load->view('Vehicle_customer_update_form.php',$data);
 				$this->load->view('templates/footer.php');
 
 			}else{		
@@ -108,18 +108,18 @@ class Vehicle_controller extends CI_Controller {
 
 
 				try{					
-					$return = $this->Vehicle_model->update($cpfOld, $cpfNew, $name, $address, $phoneNumber, $email, $licensePlateOld, $licensePlateNew);	
+					$return = $this->Vehicle_customer_model->update($cpfOld, $cpfNew, $name, $address, $phoneNumber, $email, $licensePlateOld, $licensePlateNew);	
 								
 					if($return['status']){// 0 =  success | n > 0 = error
 						throw new Exception($return['mensage']);
 					}
 
 					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));
-					redirect('index.php/vehicle');
+					redirect('index.php/Vehicle_customer');
 					
 				}catch(Exception $e){	
 					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel Atualizar. Erro: '.$e->getMessage()));
-					redirect('index.php/vehicle/edit/'.$licensePlate);
+					redirect('index.php/Vehicle_customer/edit/'.$licensePlate);
 				}
 				
 			}

@@ -37,9 +37,9 @@
                         <li class="users-item item" >
                             <div class="item-body"> 
                                 <div> <strong>CPF: </strong> <?= $user['cpf'] ?> </div>
-                                <div> <strong>Nome: </strong> <?= $user['name'] ?> </div>
+                                <div> <strong>Nome: </strong> <?= $user['employee_name'] ?> </div>
                                 <div> <strong>Username: </strong> <?= $user['username'] ?> </div>
-                                <div> <strong>Cargo: </strong> <?= $user['position'] ?> </div>                                 
+                                <div> <strong>Cargo: </strong> <?= $user['position_name'] ?> </div>                                 
                                 <div> 
                                          <strong>Status: </strong> 
                                          <?php 

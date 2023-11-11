@@ -1,0 +1,69 @@
+<?php
+class Employee_model extends CI_Model {
+   
+    public function show( $column = null ) {         
+
+        $this->db->select("*");
+
+        if(!is_null($column)){
+            $this->db->where( key($column),  $column[key($column)]);            
+            
+            return $this->db->get("v_employees")->result_array();
+        }        
+        
+        return $this->db->get("v_employees")->result_array();
+    } 
+    
+    public function insert($cpf, $name, $address, $phoneNumber, $email, $positionsId, $auto_vehicle_workstops_id ='35'){  
+        
+        $data = array(
+            'cpf' => $cpf,
+            'name' => $name,
+            'address' => $address,
+            'phone_number' => $phoneNumber,
+            'email' => $email,            
+            'positions_id' => $positionsId,            
+            'auto_vehicle_workstops_id' => $auto_vehicle_workstops_id
+                    
+        );         
+              
+        if(!$this->db->insert('employees', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);
+            }
+        }         
+        
+
+    }
+
+    public function delete($id){
+        $this->db->where('id', $id);                     
+        return $this->db->delete('employees');
+    }
+
+    public function update($id, $cpf, $name, $address, $phoneNumber, $email, $positionsId){   
+        $data = array(            
+            'cpf' => $cpf,
+            'name' => $name,
+            'address' => $address,
+            'phone_number' => $phoneNumber,
+            'email' => $email,                         
+            'positions_id' => $positionsId                         
+        ); 
+               
+        $this->db->where('id', $id);
+        
+        if(!$this->db->update('employees', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);                
+            }
+        }
+        
+
+    }
+
+    
+
+}

@@ -1,5 +1,5 @@
 <?php
-class Service_Provided_model extends CI_Model {
+class Service_provided_model extends CI_Model {
    
     public function show( $column = null, $queryEntity = 'services_provided' ) {
         $this->db->select("*");

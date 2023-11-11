@@ -1,5 +1,5 @@
 <?php
-class Vehicle_model extends CI_Model {
+class Vehicle_customer_model extends CI_Model {
    
     public function show( $column = null ) {         
 

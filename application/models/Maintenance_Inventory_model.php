@@ -1,5 +1,5 @@
 <?php
-class Maintenance_Inventory_model extends CI_Model {
+class Maintenance_inventory_model extends CI_Model {
    
     public function show( $columns = null, $queryEntity = 'maintenance_inventory' ) {
         $this->db->select("*");

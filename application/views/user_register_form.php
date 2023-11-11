@@ -14,7 +14,7 @@
                    endif
             ?> 
             <div class="title-box">
-                <h1>Alterar de Usuário</h1>
+                <h1>Cadastrar de Usuário</h1>
             </div>              
             <?php echo form_open('index.php/user/store'); ?> 
             
@@ -23,15 +23,15 @@
                     <select name="employeeCpf" class="form-select form-select-md mb-3" aria-label="select">                
                         <?php foreach($employeeList as $employee): ?>
                             <option value="<?= $employee['cpf']?>">
-                                <?= $employee['name'] ?> - Qt: <?= $employee['cpf'] ?>                                
+                                <?= $employee['employees_name'] ?> - Qt: <?= $employee['cpf'] ?>                                
                             </option>
                         <?php endforeach ?>    
                     </select>   
                 </div> 
                 
                 <div class="form-group">
-                    <label for="name" class="form-label">Username*</label>
-                    <input class="form-control" type="text" name='name' id="name" required/>
+                    <label for="username" class="form-label">Username*</label>
+                    <input class="form-control" type="text" name='username' id="username" required/>
                 <div>
                 <div class="form-group">
                     <label class="form-label" for="password">Senha</label>
