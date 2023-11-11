@@ -22,9 +22,11 @@
                     <label for="auto-part" class="form-label"><strong>Funcionários*</strong></label>
                     <select name="employeeId" class="form-select form-select-md mb-3" aria-label="select">                
                         <?php foreach($employeeList as $employee): ?>
-                            <option value="<?= $employee['id']?>">
-                                <?= $employee['name'] ?> - CPF: <?= $employee['cpf'] ?>                                
-                            </option>
+                            <?php if($employee['position_name'] != 'root'): ?>  
+                                <option value="<?= $employee['id']?>">
+                                    <?= $employee['name'] ?> - CPF: <?= $employee['cpf'] ?>                                
+                                </option>
+                            <?php endif ?>    
                         <?php endforeach ?>    
                     </select>   
                 </div> 

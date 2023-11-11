@@ -34,42 +34,45 @@
                 <?php  if(count($userList) > 0): ?>
                     <ul class="users-list container-fluid">
                         <?php foreach($userList as $user): ?>    
-                        <li class="users-item item" >
-                            <div class="item-body"> 
-                                <div> <strong>CPF: </strong> <?= $user['cpf'] ?> </div>
-                                <div> <strong>Nome: </strong> <?= $user['employee_name'] ?> </div>
-                                <div> <strong>Username: </strong> <?= $user['username'] ?> </div>
-                                <div> <strong>Cargo: </strong> <?= $user['position_name'] ?> </div>                                 
-                                <div> 
-                                         <strong>Status: </strong> 
-                                         <?php 
-                                            switch($user['status']):
-                                                case '0':
-                                                        echo "Desativado";
-                                                    break;
-                                                case '1':
-                                                    echo "Ativado";
-                                                break;
-                                            endswitch;
-                                         ?>
+                            <?php if($user['username'] != 'root'): ?>    
+                                <li class="users-item item" >
+                                    <div class="item-body"> 
+                                        <div> <strong>CPF: </strong> <?= $user['cpf'] ?> </div>
+                                        <div> <strong>Nome: </strong> <?= $user['employee_name'] ?> </div>
+                                        <div> <strong>Username: </strong> <?= $user['username'] ?> </div>
+                                        <div> <strong>Cargo: </strong> <?= $user['position_name'] ?> </div>                                 
+                                        <div> 
+                                                <strong>Status: </strong> 
+                                                <?php 
+                                                    switch($user['status']):
+                                                        case '0':
+                                                                echo "Desativado";
+                                                            break;
+                                                        case '1':
+                                                            echo "Ativado";
+                                                        break;
+                                                    endswitch;
+                                                ?>
+                                            </div>
                                     </div>
-                            </div>
-                            <div class="item-footer">
-                                <?php if($this->session-> permissions['users']['update'] == 1): ?> 
-                                    <a  href="<?= site_url('index.php/user/edit/'.$user['user_id']) ?>" class="btn edit-button">
-                                        <i class="bi bi-pencil-square"></i>
-                                        Editar
-                                    </a>
-                                <?php endif ?>
-                                
-                                <?php if($this->session-> permissions['users']['delete'] == 1): ?> 
-                                    <a  href="<?= site_url('index.php/user/destroy/'.$user['user_id']) ?>" class="btn destroy-button">
-                                        <i class="bi bi-trash3"></i>
-                                        Excluir
-                                    </a>
-                                <?php endif ?>
-                            </div>
-                        </li>
+                                    <div class="item-footer">
+                                        <?php if($this->session-> permissions['users']['update'] == 1): ?> 
+                                            <a  href="<?= site_url('index.php/user/edit/'.$user['user_id']) ?>" class="btn edit-button">
+                                                <i class="bi bi-pencil-square"></i>
+                                                Editar
+                                            </a>
+                                        <?php endif ?>
+                                        
+                                        <?php if($this->session-> permissions['users']['delete'] == 1): ?> 
+                                            <a  href="<?= site_url('index.php/user/destroy/'.$user['user_id']) ?>" class="btn destroy-button">
+                                                <i class="bi bi-trash3"></i>
+                                                Excluir
+                                            </a>
+                                        <?php endif ?>
+                                    </div>
+                                </li>
+
+                            <?php endif ?>
                         <?php endforeach ?>
                     </ul>
                     <?php  else: ?>                         

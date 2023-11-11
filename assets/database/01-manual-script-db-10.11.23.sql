@@ -249,6 +249,7 @@ INSERT INTO auto_vehicle_workshops (cnpj, name, business_name,address, phone_num
 INSERT INTO positions (name) values ('atendente');
 INSERT INTO positions (name) values ('mecânico');
 INSERT INTO positions (name) values ('gerente');
+INSERT INTO positions (name) VALUES ('root');
 
 INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
 values('62565411030', 'Cassio Malvarisco', 'Rua F, n° 1634, Parque das flores, Cidade dos Altos-CE, Brasil', 
@@ -292,7 +293,7 @@ values('pedro01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye'
 INSERT INTO users (username, password, employees_id) 
 values('antonio01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 40);
 
-INSERT INTO features (name) values('inventory'), ('maintenance'), ('services'), ('users'), ('vehicles'), ('services_provided');
+INSERT INTO features (name) values('inventory'), ('maintenance'), ('services'), ('users'), ('vehicles'), ('services_provided'),('permissions_features');
 
 INSERT INTO `permissions` (`id`, `create`, `read`, `update`, `delete`) VALUES (NULL, '0', '0', '0', '0'), (NULL, '1', '1', '1', '1'), (NULL, '0', '1', '0', '0'), (NULL, '1', '1', '0', '1'); 
 
@@ -301,6 +302,10 @@ INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_
 INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('37', '35', '36'), ('37', '36', '37'), ('37', '40', '37'), ('37', '37', '36'), ('37', '38', '36'), ('37', '39', '37');
 
 INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('36', '35', '35'), ('36', '36', '37'), ('36', '40', '38'), ('36', '37', '35'), ('36', '38', '35'), ('36', '39', '35');
+
+INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('35', '42', '35'), ('37', '42', '36'), ('36', '42', '35');
+
+INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('38', '41', '36'), ('38', '35', '36'), ('38', '36', '36'), ('38', '42', '36'), ('38', '37', '36'), ('38', '40', '36'), ('38', '38', '36'), ('38', '39', '36');
 
 INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brach_activity, auto_vehicle_workstops_id) 
 values('60655945000173','Bosch','Robert Bosch Ltda','Rua W, n° 98, Parque Tocas, Cidade Normal-CE, Brasil','8588873266',

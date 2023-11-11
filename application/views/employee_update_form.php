@@ -22,9 +22,11 @@
                     <label for="auto-part" class="form-label"><strong>Cargo*</strong></label>
                     <select name="positionId" class="form-select form-select-md mb-3" aria-label="select">                
                         <?php foreach($positionsList as $position): ?>
-                            <option value="<?= $position['id']?>" <?php ($position['id'] == $employee[0]['positions_id'])?'selected':''?>   >
-                                <?= $position['name'] ?>                                 
-                            </option>
+                            <?php if($position['name'] != 'root'): ?>  
+                                <option value="<?= $position['id']?>" <?php ($position['id'] == $employee[0]['positions_id'])?'selected':''?>   >
+                                    <?= $position['name'] ?>                                 
+                                </option>
+                            <?php endif ?>    
                         <?php endforeach ?>    
                     </select>   
                 </div> 

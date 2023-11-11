@@ -33,32 +33,34 @@
                 <div class="employees-list-main">
                 <?php  if(count($employeesList) > 0): ?>
                     <ul class="employees-list container-fluid">
-                        <?php foreach($employeesList as $employee): ?>    
-                        <li class="employees-item item" >
-                            <div class="item-body"> 
-                                <div class="employee-customer-name"> <strong>CPF: </strong> <?= $employee['cpf'] ?> </div>
-                                <div> <strong>Nome: </strong> <?= $employee['name'] ?> </div>
-                                <div>  <strong>Endereço: </strong> <?= $employee['address'] ?> </div>
-                                <div> <strong>Telefone: </strong> <?= $employee['phone_number'] ?> </div>
-                                <div> <strong>Email: </strong> <?= $employee['email'] ?> </div>
-                                <div> <strong>Cargo: </strong> <?= $employee['position_name'] ?> </div>
-                            </div>
-                            <div class="item-footer">
-                                <?php if($this->session-> permissions['employees']['update'] == 1): ?>
-                                    <a  href="<?= site_url('index.php/employee/edit/'.$employee['id']) ?>" class="btn edit-button">
-                                        <i class="bi bi-pencil-square"></i>
-                                        Editar
-                                    </a>
-                                <?php endif ?> 
+                            <?php foreach($employeesList as $employee): ?> 
+                                <?php if($employee['position_name'] != 'root'): ?>      
+                                    <li class="employees-item item" >
+                                        <div class="item-body"> 
+                                            <div class="employee-customer-name"> <strong>CPF: </strong> <?= $employee['cpf'] ?> </div>
+                                            <div> <strong>Nome: </strong> <?= $employee['name'] ?> </div>
+                                            <div>  <strong>Endereço: </strong> <?= $employee['address'] ?> </div>
+                                            <div> <strong>Telefone: </strong> <?= $employee['phone_number'] ?> </div>
+                                            <div> <strong>Email: </strong> <?= $employee['email'] ?> </div>
+                                            <div> <strong>Cargo: </strong> <?= $employee['position_name'] ?> </div>
+                                        </div>
+                                        <div class="item-footer">
+                                            <?php if($this->session-> permissions['employees']['update'] == 1): ?>
+                                                <a  href="<?= site_url('index.php/employee/edit/'.$employee['id']) ?>" class="btn edit-button">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                    Editar
+                                                </a>
+                                            <?php endif ?> 
 
-                                <?php if($this->session-> permissions['employees']['delete'] == 1): ?>  
-                                    <a  href="<?= site_url('index.php/employee/destroy/'.$employee['id']) ?>" class="btn destroy-button">
-                                        <i class="bi bi-trash3"></i>
-                                        Excluir
-                                    </a>
-                                <?php endif ?> 
-                            </div>
-                        </li>
+                                            <?php if($this->session-> permissions['employees']['delete'] == 1): ?>  
+                                                <a  href="<?= site_url('index.php/employee/destroy/'.$employee['id']) ?>" class="btn destroy-button">
+                                                    <i class="bi bi-trash3"></i>
+                                                    Excluir
+                                                </a>
+                                            <?php endif ?> 
+                                        </div>
+                                    </li>
+                            <?php endif ?>
                         <?php endforeach ?>
                     </ul>
                     <?php  else: ?>                         

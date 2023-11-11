@@ -11,7 +11,7 @@ class Auth_controller extends CI_Controller {
 	 }
 	
 	public function index() {
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[50]');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]|max_length[50]');
 		$this->form_validation->set_rules('password', 'Senha', 'trim|min_length[3]');
 				
 		if(!$this->form_validation->run() == FALSE){

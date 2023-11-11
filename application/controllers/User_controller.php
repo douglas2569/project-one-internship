@@ -19,7 +19,7 @@ class User_controller extends CI_Controller {
 	 }	
 
 	public function store() {
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[50]');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]|max_length[50]');
 		$this->form_validation->set_rules('password', 'Senha', 'trim|min_length[3]');
 		$data['employeeList'] =  $this->Employee_model->show();		
 		
@@ -65,7 +65,7 @@ class User_controller extends CI_Controller {
 	}
 
 	public function edit($id) {
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[50]');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]|max_length[50]');
 		$this->form_validation->set_rules('password', 'Senha', 'trim|min_length[3]');
 		$data['user'] =  $this->User_model->show(array('user_id'=>$id));						
 		
