@@ -6,6 +6,8 @@ class Auth_controller extends CI_Controller {
 	 public function __construct() {
 		parent::__construct();
 		$this->load->model('User_model');		
+		$this->load->model('Permissions_Features_model');		
+		$this->load->model('Permissions_model');		
 	 }
 	
 	public function index() {
@@ -16,22 +18,19 @@ class Auth_controller extends CI_Controller {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 			$resultsetUser = $this->User_model->show(array('username'=> $username));			
-			$permissionsFeature = $this->Permissions_features_model->show('v_permissions_features', $resultsetUser[0]['position_id']);
-			
-			$permissionList  = [];
-			foreach($permissionsFeature as $permissionFeature){				
-				$permissionList  = array(
-					$permissionFeature[0]['features_name'] 
-					=> 
-					$this->Permissions_model->show($permissionFeature[0]['permissions_id']) 
-				);
-				
-			}			
-		
+
 			if (count($resultsetUser) != 1) {	
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Usuário invalido.'));									
 				
 			}else{
+				$permissionsFeature = $this->Permissions_Features_model->show(array('positions_id' =>$resultsetUser[0]['positions_id'] ));			
+			
+				$permissionList  = [];
+				foreach($permissionsFeature as $permissionFeature){	
+					$permissionList[$permissionFeature['features_name']]  = 
+						$this->Permissions_model->show(array('id' => $permissionFeature['permissions_id']))[0];				 
+					
+				}
 
 				$this->load->helper('passwordVerifyHash');
 				
@@ -39,8 +38,8 @@ class Auth_controller extends CI_Controller {
 					$array = array(					
 						'username' => $resultsetUser[0]['username'],
 						'employees_name' => $resultsetUser[0]['employees_name'],
-						'positions_name' => $resultsetUser[0],['positions_name'],										
-						'employees_id' => $resultsetUser[0]['employees_id'],										
+						'positions_name' => $resultsetUser[0]['positions_name'],		
+						'employees_id' => $resultsetUser[0]['employees_id'],
 						'permissions' => $permissionList
 					);				
 					$this->session->set_userdata($array, 86400);								
@@ -66,11 +65,12 @@ class Auth_controller extends CI_Controller {
 	}	
 	
 	public function logout() {
-		
 		unset($_SESSION['username']);		
-		unset($_SESSION['name']);
-		unset($_SESSION['position']);				
-		unset($_SESSION['cpf']);				
+		unset($_SESSION['employees_name']);
+		unset($_SESSION['positions_name']);				
+		unset($_SESSION['employees_id']);				
+		unset($_SESSION['permissions']);	
+					
 		$this->session->set_flashdata('message', array('type'=>'success','content'=>'Deslogado com sucesso'));		
 		redirect("index.php/auth/login");
 		exit;

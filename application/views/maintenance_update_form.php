@@ -1,3 +1,11 @@
+<?php if($this->session-> permissions['manutencoes']['update'] != 1): ?>
+      <?php 
+        redirect('/');
+        exit;      
+      ?>
+      
+<?php endif ?>    
+
 <main>
         <div class="container">
             

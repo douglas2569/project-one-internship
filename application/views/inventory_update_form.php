@@ -1,3 +1,11 @@
+<?php if($this->session-> permissions['estoque']['update'] != 1): ?>
+      <?php 
+        redirect('/');
+        exit;      
+      ?>
+      
+<?php endif ?>  
+
 <main>
         <div class="container">
             

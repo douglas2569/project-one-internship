@@ -26,30 +26,40 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <a class="navbar-brand" href="#">
-                               <span><?=  ucfirst($this->session->position) ?></span>
+                        <a class="navbar-brand" href="#">                                
+                               <span><?=  ucfirst($this->session->positions_name) ?></span>
                         </a>
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <?php if($this->session-> position == 'gerente'): ?> 
+                            <?php if($this->session-> permissions['estoque']['read'] == '1'): ?> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/inventory') ?>">Estoque</a>
                                 </li>
+                            <?php endif ?>
+
+                            <?php if($this->session-> permissions['servicos']['read'] == '1'): ?> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/service') ?>">Serviços</a>
                                 </li>
+                            <?php endif ?>
+
+                            <?php if($this->session-> permissions['manutencoes']['read'] == '1'): ?> 
                                 <li class="nav-item active">
                                     <a class="nav-link" href="<?= site_url() ?>">Manutenções</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="<?= site_url('index.php/user') ?>">Usuários</a>
-                                </li>
+                                </li>                                
                             <?php endif ?> 
                             
-                            <?php if($this->session-> position == 'atendente'): ?> 
-                                <li class="nav-item">
+                            <?php if($this->session-> permissions['veiculos']['read'] == '1'): ?> 
+                            <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/vehicle') ?>">Veiculos</a>
                                 </li>
                             <?php endif ?> 
+                            
+                            <?php if($this->session-> permissions['usuarios']['read'] == '1'): ?> 
+                            <li class="nav-item">
+                                    <a class="nav-link" href="<?= site_url('index.php/user') ?>">Usuários</a>
+                                </li>
+                            <?php endif ?> 
+
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= site_url('index.php/auth/logout') ?>">Sair</a>
                             </li>

@@ -1,4 +1,11 @@
-  
+<?php if($this->session-> permissions['estoque']['read'] != 1): ?>
+      <?php 
+        redirect('/');
+        exit;      
+      ?>
+      
+<?php endif ?>  
+
     <main>
         <div class="container">
             <div class="title-box">

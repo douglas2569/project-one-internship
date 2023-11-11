@@ -260,55 +260,57 @@ CREATE TABLE IF NOT EXISTS `work_orders` (
 
 /* populating the database */
 
-insert INTO auto_vehicle_workshops (cnpj, name, business_name,address, phone_number, email) values('01187817000183', 'Workshop Prime', 'Workshop Prime', 'Rua 24, n° 1234, Automóvel Central, Cidade dos Motores-CE, Brasil', '8587965433', 'workshopprime@gmail.com');
+INSERT INTO auto_vehicle_workshops (cnpj, name, business_name,address, phone_number, email) values('01187817000183', 'Workshop Prime', 'Workshop Prime', 'Rua 24, n° 1234, Automóvel Central, Cidade dos Motores-CE, Brasil', '8587965433', 'workshopprime@gmail.com');
 
-insert INTO positions (name) values ('atendente');
-insert INTO positions (name) values ('mecânico');
-insert INTO positions (name) values ('gerente');
+INSERT INTO positions (name) values ('atendente');
+INSERT INTO positions (name) values ('mecânico');
+INSERT INTO positions (name) values ('gerente');
 
-insert INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
+INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
 values('62565411030', 'Cassio Malvarisco', 'Rua F, n° 1634, Parque das flores, Cidade dos Altos-CE, Brasil', 
 '8588965833', 'cassiomalvarisco@hotmail.com', 35, 35);
 
-insert INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
+INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
 values('82178774083', 'Angelo Tavares', 'Rua 22, n° 34, Bom Jardim, Cidade Baixa-CE, Brasil', 
 '8599465833', 'angelotavares@outlook.com', 35, 35);
 
-insert INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
+INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
 values('01069520055', 'Leticia Juliana', 'Rua 64, n° 03, Parque Jardim, Cidade Media-CE, Brasil', 
 '8590765833', 'leticiajuliana@gmail.com', 35, 35);
 
-insert INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
+INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
 values('41740738055', 'João Juliano', 'Rua 64, n° 03, Parque Jardim, Cidade Media-CE, Brasil', 
 '8590665833', 'joaojuliano@gmail.com', 36, 35);
 
-insert INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
+INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
 values('46899032040', 'Pedro Gustavo', 'Rua A, n° 11, Parque Jardim, Cidade Media-CE, Brasil', 
 '8597765833', 'pedrogustavo@gmail.com', 36, 35);
 
-insert INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
+INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
 values('31685403077', 'Antonio Ferreira', 'Rua Z, n° 98, Parque alvoras, Cidade Normal-CE, Brasil', 
 '8597788833', 'antonioferreia@yahoo.com', 36, 35);
 
-insert INTO users (username, password, employees_id) 
+INSERT INTO users (username, password, employees_id) 
 values('cassio00', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 35);
 
-insert INTO users (username, password, employees_id) 
-values('angelo24', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 36);
+INSERT INTO users (username, password, employees_id) 
+values('angelo02', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 36);
 
-insert INTO users (username, password, employees_id) 
-values('leticia66', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 37);
+INSERT INTO users (username, password, employees_id) 
+values('leticia02', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 37);
 
-insert INTO users (username, password, employees_id) 
+INSERT INTO users (username, password, employees_id) 
 values('joao01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 38);
 
-insert INTO users (username, password, employees_id) 
+INSERT INTO users (username, password, employees_id) 
 values('pedro01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 39);
 
-insert INTO users (username, password, employees_id) 
-values('antonioo01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 40);
+INSERT INTO users (username, password, employees_id) 
+values('antonio01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 40);
 
-insert INTO features (name) values(NULL,'estoque'), (NULL,'manutenção'), (NULL,'serviços'), (NULL,'usuarios'), (NULL,'veiculos'), (NULL,'serviço prestado');
+INSERT INTO features (name) values('estoque'), ('manutenção'), ('serviços'), ('usuarios'), ('veiculos'), ('serviço prestado');
+
+INSERT INTO `permissions` (`id`, `create`, `read`, `update`, `delete`) VALUES (NULL, '0', '0', '0', '0'), (NULL, '1', '1', '1', '1'), (NULL, '0', '1', '0', '0'), (NULL, '1', '1', '0', '1'); 
 
 INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('35', '35', '35'), ('35', '36', '36'), ('35', '40', '37'), ('35', '37', '35'), ('35', '38', '35'), ('35', '39', '35');
 
@@ -316,137 +318,136 @@ INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_
 
 INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('36', '35', '35'), ('36', '36', '37'), ('36', '40', '38'), ('36', '37', '35'), ('36', '38', '35'), ('36', '39', '35');
 
-
-insert INTO suppliers (cnpj, name, business_name, address, phone_number, email, brachActivity, auto_vehicle_workstops_id) 
+INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brachActivity, auto_vehicle_workstops_id) 
 values('60655945000173','Bosch','Robert Bosch Ltda','Rua W, n° 98, Parque Tocas, Cidade Normal-CE, Brasil','8588873266',
 'bosch@yahoo.com','Fabricante de equipamentos automotivos e peças',35);
 
-insert INTO suppliers (cnpj, name, business_name, address, phone_number, email, brachActivity, auto_vehicle_workstops_id) 
+INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brachActivity, auto_vehicle_workstops_id) 
 values('82804111000115','3M','3M do Brasil Ltda','Rua Y, n° 55, Sola Aí, Cidade Fortaleza-CE, Brasil','8588776544',
 '3M@yempresa.com','ornecedora de produtos automotivos, como lixas, adesivos e polidores',35);
 
-insert INTO suppliers (cnpj, name, business_name, address, phone_number, email, brachActivity, auto_vehicle_workstops_id) 
+INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brachActivity, auto_vehicle_workstops_id) 
 values('12557378000170','Pirelli','Pirelli Pneus Ltda','Rua P, n° 11, Maga, Cidade Pacajus-CE, Brasil','8588006544',
 'pirelli@yempresa.com','fabricante de pneus automotivos',35);
 
-insert INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
+INSERT INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
 values('03966183080','Juliano Pasquim','Rua T, n° 10,Chico da Doca, Cidade Paçoca-CE, Brasil','8588873217',
 'julianopasquim@outlook.com',35);
 
-insert INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
+INSERT INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
 values('29012056071','Paula Abreu','Rua B, n° 10,Chico Tico, Cidade Paçoca-CE, Brasil','8588879917',
 'paulaabreu@outlook.com',35);
 
-insert INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
+INSERT INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
 values('11924265095','Ivan Nildo','Rua C, n° 11, Tata Tico, Cidade Pamanha-CE, Brasil','8587779917',
 'ivannildo@outlook.com',35);
 
-insert INTO vehicles (model, brand) 
+INSERT INTO vehicles (model, brand) 
 values('Grand Cherokee Limited LX 5.9','Jeep');
 
-insert INTO vehicles (model, brand) 
+INSERT INTO vehicles (model, brand) 
 values('CT200h F-Sport 1.8 16V HIBRID Aut.','Lexus');
 
-insert INTO vehicles (model, brand) 
+INSERT INTO vehicles (model, brand) 
 values('Mystique GS 2.5 V6 Mec.','Mercury');
 
 INSERT INTO `vehicles_customer` (`id`, `license_plate`, `customers_id`, `vehicles_id`) VALUES (NULL, 'MXQ9131', '35', '36'), (NULL, 'LST5307', '37', '35'), (NULL, 'HPP2304', '36', '37');
 
 -- PAREI AQUI - -----
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('12345','Filtro de Óleo','Fram','Este filtro de óleo Fram possui uma classificação de eficiência de filtração de 98%, com uma capacidade de retenção de partículas de até 10 micra, protegendo o motor contra desgaste prematuro.', 15.00);
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('67890','Pastilhas de Freio','Brembo','Pastilhas de freio Brembo são componentes do sistema de freio que fornecem frenagem segura e eficaz.', 50.00);
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('54321','Bateria de Carro','AC Delco','A bateria AC Delco é uma bateria de chumbo-ácido de 12 volts, com uma capacidade nominal de 60 ampères-hora (Ah) e uma resistência INTerna baixa, fornecendo uma corrente de partida confiável', 150.00);
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('98765','Filtro de Ar','NGK', 'O filtro de ar K&N é um filtro de alto fluxo, projetado para aumentar a capacidade de fluxo de ar em até 50%, mantendo uma eficiência de filtração de 99%, com uma capacidade de retenção de partículas de até 2 micra.', 20.00);
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('23456','Vela de Ignição','K&N', 'As velas de ignição NGK são fabricadas com eletrodos de níquel-cromo e possuem uma faixa térmica de calor médio, garantindo ignição precisa e confiável em uma ampla gama de temperaturas e condições.', 90.00);
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('M78901','Corrente de Transmissão','DID','A corrente de transmissão DID é uma corrente de rolos selada com uma classificação de resistência à tração de 8.000 libras, projetada para transmitir potência eficientemente com uma vida útil prolongada.', 300.00);
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('M23456','Disco de Freio','EBC','Os discos de freio EBC são feitos de aço inoxidável endurecido e possuem ranhuras para dissipação de calor, proporcionando um desempenho de frenagem consistente e eficiente.', 200.00);
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('M65432','Vela de Ignição','Denso','As velas de ignição Denso são feitas de cerâmica isolante e possuem uma resistência de 0,8 ohms, garantindo ignição eficaz e redução do consumo de combustível.', 10.00);
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('M12345','Filtro de Ar','K&N','Os filtros de ar K&N possuem uma capacidade de fluxo de ar de 1.000 CFM (pés cúbicos por minuto) a uma restrição de 1 polegada de água, proporcionando um aumento significativo no fluxo de ar.', 80.00);
 
-insert INTO automotive_parts (reference_number, name, brand, description, unit_value) 
+INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('M87654','Pneu Traseiro','Michelin','O pneu traseiro Michelin possui uma construção radial com uma classificação de velocidade de até 180 km/h, oferecendo aderência excepcional em uma variedade de condições de pilotagem.', 50.00);
 
-insert INTO maintenance(id, reason, description, status, initial_date, final_date, license_plate_vehicles_customer_fk) 
+INSERT INTO maintenance(id, reason, description, status, initial_date, final_date, license_plate_vehicles_customer_fk) 
 values(default, 'Carro não liga','Quando giro a chave ele faz tantaaaatan',0, null, null, 'MXQ9131');
 
-insert INTO maintenance(reason, description, status, license_plate_vehicles_customer_fk) 
+INSERT INTO maintenance(reason, description, status, license_plate_vehicles_customer_fk) 
 values('Pneu vazio','Passei por cima de um prego',0,'LST5307');
 
-insert INTO maintenance(reason, description, status, license_plate_vehicles_customer_fk) 
+INSERT INTO maintenance(reason, description, status, license_plate_vehicles_customer_fk) 
 values('farol esquerdo piscando','uma bola bateu nele',0,'HPP2304');
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('12345',200);
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('67890',30);
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('54321',100);
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('98765',250);
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('23456',5);
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('M78901',1);
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('M23456',0);
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('M65432',35);
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('M12345',10);
 
-insert INTO inventory(reference_number, quantity) 
+INSERT INTO inventory(reference_number, quantity) 
 values('M87654',13);
 
-insert INTO maintenance_inventory(reference_number, maintenance_id) 
+INSERT INTO maintenance_inventory(reference_number, maintenance_id) 
 values('23456',35);
 
-insert INTO maintenance_inventory(reference_number, maintenance_id) 
+INSERT INTO maintenance_inventory(reference_number, maintenance_id) 
 values('23456',35);
 
-insert INTO maintenance_inventory(reference_number, maintenance_id) 
+INSERT INTO maintenance_inventory(reference_number, maintenance_id) 
 values('23456',36);
 
-insert INTO maintenance_inventory(reference_number, maintenance_id) 
+INSERT INTO maintenance_inventory(reference_number, maintenance_id) 
 values('98765',37);
 
 
-insert INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
+INSERT INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
 values('Troca de Pneu','Troca basica','20',20.00,'01187817000183');
 
-insert INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
+INSERT INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
 values('Troca de retrovisor','Troca basica','10',10,'01187817000183');
 
-insert INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
+INSERT INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
 values('Lampada do farol','Troca basica','15',20.5,'01187817000183');
 
 
-insert INTO services_provided(maintenance_id, employees_id, services_id) 
+INSERT INTO services_provided(maintenance_id, employees_id, services_id) 
 values(36,'46899032040',35);
 
 DROP VIEW IF EXISTS v_users;

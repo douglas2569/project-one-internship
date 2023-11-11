@@ -1,3 +1,11 @@
+<?php if($this->session-> permissions['manutencoes']['read'] != 1): ?>
+      <?php 
+        redirect('/');
+        exit;      
+      ?>
+      
+<?php endif ?>   
+
     <main>
         <div class="container" >  
             <div class="title-box">
@@ -6,7 +14,7 @@
 
             <div class="maintenance">
                 <div class="maintenance-header toolbar">  
-                    <?php if($this->session-> position == 'atendente'): ?>                                          
+                    <?php if($this->session-> permissions['manutencoes']['create'] == '1'): ?>                                          
                         <a href="<?= site_url('index.php/maintenance/store') ?>"  class="btn" role="button">
                             <i class="bi bi-plus-circle"></i>
                             Nova
