@@ -49,20 +49,26 @@
                             <?php endif ?> 
                             
                             <?php if($this->session-> permissions['vehicles_customer']['read'] == '1'): ?> 
-                            <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/vehiclecustomer') ?>">Veículos</a>
                                 </li>
                             <?php endif ?> 
 
                             <?php if($this->session-> permissions['employees']['read'] == '1'): ?> 
-                            <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/employee') ?>">Funcionários </a>
                                 </li>
                             <?php endif ?> 
                             
                             <?php if($this->session-> permissions['users']['read'] == '1'): ?> 
-                            <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/user') ?>">Usuários</a>
+                                </li>
+                            <?php endif ?> 
+
+                            <?php if($this->session-> permissions['permissions_features']['read'] == '1'): ?> 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= site_url('index.php/permissionsfeatures') ?>">Permissões</a>
                                 </li>
                             <?php endif ?> 
 
