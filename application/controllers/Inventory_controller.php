@@ -82,18 +82,23 @@ class Inventory_controller extends CI_Controller {
 		
 	}
 
-	public function destroy($reference) {
+	public function destroy($reference, $automotive_parts_id) {
 		$resultset = $this->Inventory_model->show(array('reference_number'=>$reference));
+		try{
+			if(count($resultset) == 1){
+				$return = $this->Inventory_model->delete($reference, $automotive_parts_id);
+				if($return['status']){
+					throw new Exception($return['mensage']);
+				}			
+				unlink('assets/images/'.$resultset[0]['image_address']);
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));									
+			}else{
+				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));						
 				
-		if(count($resultset) == 1){
-			$return = $this->Inventory_model->delete($reference);
-			if($return['status']){
-				throw new Exception($return['mensage']);
-			}			
-			unlink('assets/images/'.$resultset[0]['image_address']);
-			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));									
-		}else{
-			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro'));				
+			}
+			
+		}catch(Exception $e){
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel apagar seu registro. Erro: '.$e->getMessage()));						
 		}
 
 		redirect('index.php/inventory');

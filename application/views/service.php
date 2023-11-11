@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['servicos']['read'] != 1): ?>
+<?php if($this->session-> permissions['services']['read'] == 0): ?>
       <?php 
         redirect('/');
         exit;      

@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['estoque']['update'] != 1): ?>
+<?php if($this->session-> permissions['inventory']['update'] == 0): ?>
       <?php 
         redirect('/');
         exit;      

@@ -30,31 +30,31 @@
                                <span><?=  ucfirst($this->session->positions_name) ?></span>
                         </a>
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <?php if($this->session-> permissions['estoque']['read'] == '1'): ?> 
+                            <?php if($this->session-> permissions['inventory']['read'] == '1'): ?> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/inventory') ?>">Estoque</a>
                                 </li>
                             <?php endif ?>
 
-                            <?php if($this->session-> permissions['servicos']['read'] == '1'): ?> 
+                            <?php if($this->session-> permissions['services']['read'] == '1'): ?> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/service') ?>">Serviços</a>
                                 </li>
                             <?php endif ?>
 
-                            <?php if($this->session-> permissions['manutencoes']['read'] == '1'): ?> 
+                            <?php if($this->session-> permissions['maintenance']['read'] == '1'): ?> 
                                 <li class="nav-item active">
                                     <a class="nav-link" href="<?= site_url() ?>">Manutenções</a>
                                 </li>                                
                             <?php endif ?> 
                             
-                            <?php if($this->session-> permissions['veiculos']['read'] == '1'): ?> 
+                            <?php if($this->session-> permissions['vehicles']['read'] == '1'): ?> 
                             <li class="nav-item">
-                                    <a class="nav-link" href="<?= site_url('index.php/vehicle') ?>">Veiculos</a>
+                                    <a class="nav-link" href="<?= site_url('index.php/vehicle') ?>">Veículos</a>
                                 </li>
                             <?php endif ?> 
                             
-                            <?php if($this->session-> permissions['usuarios']['read'] == '1'): ?> 
+                            <?php if($this->session-> permissions['users']['read'] == '1'): ?> 
                             <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/user') ?>">Usuários</a>
                                 </li>

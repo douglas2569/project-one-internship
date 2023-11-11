@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['manutencoes']['read'] != 1): ?>
+<?php if($this->session-> permissions['maintenance']['read'] == 0): ?>
       <?php 
         redirect('/');
         exit;      
@@ -14,7 +14,7 @@
 
             <div class="maintenance">
                 <div class="maintenance-header toolbar">  
-                    <?php if($this->session-> permissions['manutencoes']['create'] == '1'): ?>                                          
+                    <?php if($this->session-> permissions['maintenance']['create'] == '1'): ?>                                          
                         <a href="<?= site_url('index.php/maintenance/store') ?>"  class="btn" role="button">
                             <i class="bi bi-plus-circle"></i>
                             Nova
@@ -46,7 +46,7 @@
                                     <?php foreach($maintenanceList as $maintenance): ?>                            
                                             <tr class='itens-list item' > 
                                                 <td> <?= $maintenance['id'] ?></td>                                
-                                                <td><?= $maintenance['license_plate_vehicles_customer_fk'] ?></td>                                
+                                                <td><?= $maintenance['vehicles_customer_license_plate'] ?></td>                                
                                                 <td>
                                                 <a  href="<?= site_url('index.php/maintenance/change/'.$maintenance['id']) ?>">
                                                     <?= $maintenance['reason'] ?></a> 
@@ -70,11 +70,14 @@
                                                     ?>
                                                 </td> 
                                                 <td>
-                                                <?php if($this->session-> position == 'atendente'): ?> 
+                                                <?php if($this->session-> permissions['maintenance']['update'] == '1'): ?>  
                                                     <a  href="<?= site_url('index.php/maintenance/edit/'.$maintenance['id'] ) ?>" class="btn edit-button">
                                                         <i class="bi bi-pencil-square"></i>
-                                                    
+                                                        
                                                     </a>
+                                                <?php endif ?> 
+                                                    
+                                                <?php if($this->session-> permissions['maintenance']['delete'] == '1'): ?>  
                                                     <a  href="<?= site_url('index.php/maintenance/destroy/'.$maintenance['id'] ) ?>" class="btn destroy-button">
                                                         <i class="bi bi-trash3"></i>
                                                         

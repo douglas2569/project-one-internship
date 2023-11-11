@@ -27,7 +27,7 @@
                                 <li>
                                     <label class="form-label">
                                         <strong>Placa:</strong>
-                                        <?= $maintenance[0]['license_plate_vehicles_customer_fk'] ?>
+                                        <?= $maintenance[0]['vehicles_customer_license_plate'] ?>
                                     </label>
                                 </li>
                                 <li>

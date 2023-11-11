@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['estoque']['read'] != 1): ?>
+<?php if($this->session-> permissions['inventory']['read'] == 0): ?>
       <?php 
         redirect('/');
         exit;      
@@ -70,7 +70,7 @@
                                     <i class="bi bi-pencil-square"></i>
                                     Editar
                                 </a>
-                                <a  href="<?= site_url('index.php/inventory/destroy/'.$part['reference_number']) ?>" class="btn destroy-button">
+                                <a  href="<?= site_url('index.php/inventory/destroy/'.$part['reference_number']).'/'.$part['automotive_parts_id'] ?>" class="btn destroy-button">
                                     <i class="bi bi-trash3"  ></i>
                                     Excluir
                                 </a>

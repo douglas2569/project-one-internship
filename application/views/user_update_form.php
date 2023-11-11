@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['usuarios']['update'] != 1): ?>
+<?php if($this->session-> permissions['users']['update'] == 0): ?>
       <?php 
         redirect('/');
         exit;      

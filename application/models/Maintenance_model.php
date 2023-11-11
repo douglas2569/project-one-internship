@@ -24,7 +24,7 @@ class Maintenance_model extends CI_Model {
     
     public function insert($license_plate, $reason, $description){        
         $data = array(
-            'license_plate_vehicles_customer_fk' => $license_plate,
+            'vehicles_customer_license_plate' => $license_plate,
             'reason' => $reason,
             'description' => $description
         );        
@@ -46,7 +46,7 @@ class Maintenance_model extends CI_Model {
     public function update($id, $license_plate, $reason, $description){   
         $data = array(            
             'id' => $id,
-            'license_plate_vehicles_customer_fk' => $license_plate,
+            'vehicles_customer_license_plate' => $license_plate,
             'reason' => $reason,
             'description' => $description,
          );

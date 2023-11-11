@@ -21,9 +21,8 @@ class Maintenance_controller extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function store() {
-		$data['vehiclesList'] = $this->Vehicle_model->show();		
-		
+	public function store() {		
+		$data['vehiclesList'] = $this->Vehicle_model->show();				
 		$this->form_validation->set_rules('reason', 'Problema', 'trim|required|min_length[5]|max_length[50]');
 		$this->form_validation->set_rules('description', 'Descrição', 'trim|min_length[10]');
 				
@@ -71,10 +70,10 @@ class Maintenance_controller extends CI_Controller {
 
 	}
 	public function change($id) {
-		$maintenace = $this->Maintenance_model->show(array('id'=> $id));		
-		$maintenaceParts = $this->Maintenance_model->show(array('id_maintenance'=> $id), 'v_maintenance_inventory_parts');
-		$maintenanceService = $this->Service_Provided_model->show(array('id_maintenance_fk '=> $id), 'v_services_provided_mechanics');
-				
+		$maintenace = $this->Maintenance_model->show(array('id'=> $id));
+		$maintenaceParts = $this->Maintenance_model->show(array('maintenance_id'=> $id), 'v_maintenance_inventory_parts');
+		$maintenanceService = $this->Service_Provided_model->show(array('maintenance_id '=> $id), 'v_services_provided_mechanics');		
+		
 		
 		if(!is_array($maintenace)){						
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				

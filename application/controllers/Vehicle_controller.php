@@ -30,7 +30,7 @@ class Vehicle_controller extends CI_Controller {
 		$this->form_validation->set_rules('model', 'Modelo', 'trim|min_length[5]|max_length[50]');
 		$this->form_validation->set_rules('brand', 'Marca', 'trim|min_length[1]|max_length[50]');
 				
-		if(!$this->form_validation->run() == FALSE){								
+		if(!$this->form_validation->run() == FALSE){											
 			$cpf = $this->input->post('cpf');
 			$name = $this->input->post('name');
 			$address = $this->input->post('address');
@@ -72,7 +72,7 @@ class Vehicle_controller extends CI_Controller {
 
 	}
 
-	public function edit($licensePlate) {
+	public function edit($licensePlate, $cpf) {
 		$resulset = $this->Vehicle_model->show(array('license_plate'=> $licensePlate));		
 		
 		if(count($resulset) != 1){			
@@ -88,9 +88,6 @@ class Vehicle_controller extends CI_Controller {
 
 			$this->form_validation->set_rules('licensePlate', 'Placa', 'trim|min_length[6]|max_length[50]|required');
 
-			$this->form_validation->set_rules('model', 'Modelo', 'trim|min_length[5]|max_length[50]');
-			$this->form_validation->set_rules('brand', 'Marca', 'trim|min_length[1]|max_length[50]');	
-
 			$data['vehicle'] = $resulset;
 
 			if($this->form_validation->run() == FALSE){								
@@ -100,18 +97,18 @@ class Vehicle_controller extends CI_Controller {
 
 			}else{		
 			
-			$cpf = $this->input->post('cpf');
+			$cpfNew = $this->input->post('cpf');
+			$cpfOld = $cpf;
 			$name = $this->input->post('name');
 			$address = $this->input->post('address');
 			$phoneNumber = $this->input->post('phoneNumber');
 			$email = $this->input->post('email');
 			$licensePlateNew = $this->input->post('licensePlate');
 			$licensePlateOld = $licensePlate;
-			$model = $this->input->post('model');
-			$brand = $this->input->post('brand');
+
 
 				try{					
-					$return = $this->Vehicle_model->update($cpf, $name, $address, $phoneNumber, $email, $licensePlateOld, $licensePlateNew, $model, $brand);	
+					$return = $this->Vehicle_model->update($cpfOld, $cpfNew, $name, $address, $phoneNumber, $email, $licensePlateOld, $licensePlateNew);	
 								
 					if($return['status']){// 0 =  success | n > 0 = error
 						throw new Exception($return['mensage']);

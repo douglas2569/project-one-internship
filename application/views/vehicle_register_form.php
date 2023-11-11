@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['veiculos']['create'] != 1): ?>
+<?php if($this->session-> permissions['vehicles']['create'] == 0): ?>
       <?php 
         redirect('/');
         exit;      

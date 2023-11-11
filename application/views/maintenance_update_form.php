@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['manutencoes']['update'] != 1): ?>
+<?php if($this->session-> permissions['maintenance']['update'] == 0): ?>
       <?php 
         redirect('/');
         exit;      
@@ -20,7 +20,7 @@
                 <label for="vehicle" class="form-label">Veiculo*</label>
                 <select name="license_plate" class="form-select form-select-md mb-3" aria-label="select">                
                     <?php foreach($vehiclesList as $vehicle): ?>
-                        <?php if($vehicle['license_plate'] == $maintenance[0]['license_plate_vehicles_customer_fk']): ?>
+                        <?php if($vehicle['license_plate'] == $maintenance[0]['vehicles_customer_license_plate']): ?>
                             <option selected value="<?= $vehicle['license_plate'] ?>"><?= $vehicle['license_plate'] ?></option>
                          <?php else: ?>   
                             <option value="<?= $vehicle['license_plate'] ?>"><?= $vehicle['license_plate'] ?></option>

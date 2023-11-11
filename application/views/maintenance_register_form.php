@@ -1,5 +1,5 @@
-<?php if($this->session-> permissions['manutencoes']['create'] != 1): ?>
-      <?php 
+<?php if($this->session-> permissions['maintenance']['create'] == 0): ?>
+      <?php       
         redirect('/');
         exit;      
       ?>

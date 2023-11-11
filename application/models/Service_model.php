@@ -25,13 +25,13 @@ class Service_model extends CI_Model {
         
     }
     
-    public function insert($name, $description, $estimatedTime, $cost, $cnpj_auto_vehicle_workstops_fk = '01187817000183'){             
+    public function insert($name, $description, $estimatedTime, $cost, $auto_vehicle_workstops_id = '35'){             
         $data = array(
             'name' => $name,
             'description' => $description,
             'estimatedTime' => $estimatedTime,
             'cost' => $cost,
-            'cnpj_auto_vehicle_workstops_fk' => $cnpj_auto_vehicle_workstops_fk,
+            'auto_vehicle_workstops_id' => $auto_vehicle_workstops_id,
         );        
         
         if(!$this->db->insert('services', $data)){

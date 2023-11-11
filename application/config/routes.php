@@ -17,11 +17,11 @@ $route['user/destroy/(:num)'] = 'User_controller/destroy/$1';
 $route['inventory'] = 'Inventory_controller';
 $route['inventory/store'] = 'Inventory_controller/store';
 $route['inventory/edit/(:any)'] = 'Inventory_controller/edit/$1';
-$route['inventory/destroy/(:any)'] = 'Inventory_controller/destroy/$1';
+$route['inventory/destroy/(:any)/(:num)'] = 'Inventory_controller/destroy/$1/$2';
 
 $route['vehicle'] = 'Vehicle_controller';
 $route['vehicle/store'] = 'Vehicle_controller/store';
-$route['vehicle/edit/(:any)'] = 'Vehicle_controller/edit/$1';
+$route['vehicle/edit/(:any)/(:any)'] = 'Vehicle_controller/edit/$1/$2';
 $route['vehicle/destroy/(:any)'] = 'Vehicle_controller/destroy/$1';
 
 $route['maintenance'] = 'Maintenance_controller';

@@ -240,22 +240,6 @@ CREATE TABLE IF NOT EXISTS `work_orders` (
   PRIMARY KEY (`id`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
-/*
-DROP TABLE IF EXISTS `work_orders`;
-CREATE TABLE IF NOT EXISTS `work_orders` (
-  `id` INT NOT NULL AUTO_INCREMENT,   
-  `warranty` VARCHAR(50) NOT NULL,
-  `date` DATETIME,
-  `total` decimal NOT NULL,
-  `maintenance_id` INT NOT NULL UNIQUE, //I think this is wrong  
-  `id_payment_fk` INT NOT NULL, 
-  
-  PRIMARY KEY (`id`),   
-  FOREIGN KEY (`maintenance_id`) REFERENCES `maintenance`(`id`),  //I think this is wrong 
-  FOREIGN KEY (`id_payment_fk`) REFERENCES `services`(`id`)  //I think this is wrong 
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
-
-*/
 
 
 /* populating the database */
@@ -308,7 +292,7 @@ values('pedro01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye'
 INSERT INTO users (username, password, employees_id) 
 values('antonio01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 40);
 
-INSERT INTO features (name) values('estoque'), ('manutenção'), ('serviços'), ('usuarios'), ('veiculos'), ('serviço prestado');
+INSERT INTO features (name) values('inventory'), ('maintenance'), ('services'), ('users'), ('vehicles'), ('services_provided');
 
 INSERT INTO `permissions` (`id`, `create`, `read`, `update`, `delete`) VALUES (NULL, '0', '0', '0', '0'), (NULL, '1', '1', '1', '1'), (NULL, '0', '1', '0', '0'), (NULL, '1', '1', '0', '1'); 
 
@@ -353,7 +337,6 @@ values('Mystique GS 2.5 V6 Mec.','Mercury');
 
 INSERT INTO `vehicles_customer` (`id`, `license_plate`, `customers_id`, `vehicles_id`) VALUES (NULL, 'MXQ9131', '35', '36'), (NULL, 'LST5307', '37', '35'), (NULL, 'HPP2304', '36', '37');
 
--- PAREI AQUI - -----
 
 INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('12345','Filtro de Óleo','Fram','Este filtro de óleo Fram possui uma classificação de eficiência de filtração de 98%, com uma capacidade de retenção de partículas de até 10 micra, protegendo o motor contra desgaste prematuro.', 15.00);
@@ -385,70 +368,36 @@ values('M12345','Filtro de Ar','K&N','Os filtros de ar K&N possuem uma capacidad
 INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('M87654','Pneu Traseiro','Michelin','O pneu traseiro Michelin possui uma construção radial com uma classificação de velocidade de até 180 km/h, oferecendo aderência excepcional em uma variedade de condições de pilotagem.', 50.00);
 
-INSERT INTO maintenance(id, reason, description, status, initial_date, final_date, license_plate_vehicles_customer_fk) 
-values(default, 'Carro não liga','Quando giro a chave ele faz tantaaaatan',0, null, null, 'MXQ9131');
 
-INSERT INTO maintenance(reason, description, status, license_plate_vehicles_customer_fk) 
+INSERT INTO maintenance(reason, description, status, initial_date, final_date, vehicles_customer_license_plate ) 
+values('Carro não liga','Quando giro a chave ele faz tantaaaatan',0, null, null, 'MXQ9131');
+
+INSERT INTO maintenance(reason, description, status, vehicles_customer_license_plate ) 
 values('Pneu vazio','Passei por cima de um prego',0,'LST5307');
 
-INSERT INTO maintenance(reason, description, status, license_plate_vehicles_customer_fk) 
+INSERT INTO maintenance(reason, description, status, vehicles_customer_license_plate ) 
 values('farol esquerdo piscando','uma bola bateu nele',0,'HPP2304');
 
-INSERT INTO inventory(reference_number, quantity) 
-values('12345',200);
 
 INSERT INTO inventory(reference_number, quantity) 
-values('67890',30);
+values('12345',200),('67890',30),('54321',100),('98765',250),('23456',5),('M78901',1),('M23456',0),('M65432',35),('M12345',10),('M87654',13);
 
-INSERT INTO inventory(reference_number, quantity) 
-values('54321',100);
-
-INSERT INTO inventory(reference_number, quantity) 
-values('98765',250);
-
-INSERT INTO inventory(reference_number, quantity) 
-values('23456',5);
-
-INSERT INTO inventory(reference_number, quantity) 
-values('M78901',1);
-
-INSERT INTO inventory(reference_number, quantity) 
-values('M23456',0);
-
-INSERT INTO inventory(reference_number, quantity) 
-values('M65432',35);
-
-INSERT INTO inventory(reference_number, quantity) 
-values('M12345',10);
-
-INSERT INTO inventory(reference_number, quantity) 
-values('M87654',13);
-
-INSERT INTO maintenance_inventory(reference_number, maintenance_id) 
-values('23456',35);
-
-INSERT INTO maintenance_inventory(reference_number, maintenance_id) 
-values('23456',35);
-
-INSERT INTO maintenance_inventory(reference_number, maintenance_id) 
-values('23456',36);
-
-INSERT INTO maintenance_inventory(reference_number, maintenance_id) 
-values('98765',37);
-
+INSERT INTO `maintenance_inventory` (`automotive_parts_id`, `maintenance_id`, `quantity`) VALUES ('35', '35', '1'), ('36', '37', '1'), ('37', '36', '1');
 
 INSERT INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
-values('Troca de Pneu','Troca basica','20',20.00,'01187817000183');
+values('Troca de Pneu','Troca basica','20',20.00,35);
 
 INSERT INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
-values('Troca de retrovisor','Troca basica','10',10,'01187817000183');
+values('Troca de retrovisor','Troca basica','10',10,35);
 
 INSERT INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
-values('Lampada do farol','Troca basica','15',20.5,'01187817000183');
+values('Lampada do farol','Troca basica','15',20.5,35);
 
+INSERT INTO `services_provided` (`id`, `initial_date`, `final_date`, `quantity`, `maintenance_id`, `employees_id`, `services_id`) VALUES (NULL, NULL, NULL, '1', '35', '38', '35'); 
 
-INSERT INTO services_provided(maintenance_id, employees_id, services_id) 
-values(36,'46899032040',35);
+INSERT INTO `services_provided` (`id`, `initial_date`, `final_date`, `quantity`, `maintenance_id`, `employees_id`, `services_id`) VALUES (NULL, NULL, NULL, '1', '37', '39', '36');
+
+INSERT INTO `services_provided` (`id`, `initial_date`, `final_date`, `quantity`, `maintenance_id`, `employees_id`, `services_id`) VALUES (NULL, NULL, NULL, '1', '36', '40', '37');
 
 DROP VIEW IF EXISTS v_users;
 CREATE VIEW v_users 
@@ -470,23 +419,33 @@ on permissions_features.features_id = features.id;
 DROP VIEW IF EXISTS v_vehicles_customers;
 CREATE VIEW v_vehicles_customers
 AS  
-select `workshopprime`.`customers`.`cpf` AS `cpf`,`workshopprime`.`customers`.`name` AS `name`,`workshopprime`.`customers`.`address` AS `address`,`workshopprime`.`customers`.`phone_number` AS `phone_number`,`workshopprime`.`customers`.`email` AS `email`,`workshopprime`.`vehicles_customer`.`vehicles_id` AS `vehicles_id`,`workshopprime`.`vehicles_customer`.`license_plate` AS `license_plate`,`workshopprime`.`vehicles`.`brand` AS `brand` from ((`workshopprime`.`vehicles_customer` join `workshopprime`.`vehicles` on(`workshopprime`.`vehicles_customer`.`vehicles_id` = `workshopprime`.`vehicles`.`model`)) join `workshopprime`.`customers` on(`workshopprime`.`customers`.`cpf` = `workshopprime`.`vehicles_customer`.`customers_id`));
+SELECT customers.id AS customers_id, customers.cpf, customers.name, customers.address, customers.phone_number, customers.email, vehicles.brand, vehicles.model, vehicles_customer.license_plate, 
+vehicles_customer.vehicles_id  
+FROM customers
+INNER JOIN vehicles_customer
+ON customers.id  = vehicles_customer.customers_id
+INNER JOIN vehicles
+ON vehicles.id  = vehicles_customer.vehicles_id
 
+SELECT `workshopprime`.`customers`.`cpf` AS `cpf`,`workshopprime`.`customers`.`name` AS `name`,
+
+`workshopprime`.`customers`.`address` AS `address`,`workshopprime`.`customers`.`phone_number` AS `phone_number`,`workshopprime`.`customers`.`email` AS `email`,`workshopprime`.`vehicles_customer`.`vehicles_id` AS `vehicles_id`,`workshopprime`.`vehicles_customer`.`license_plate` AS `license_plate`,`workshopprime`.`vehicles`.`brand` AS `brand` 
+from ((`workshopprime`.`vehicles_customer` join `workshopprime`.`vehicles` on(`workshopprime`.`vehicles_customer`.`vehicles_id` = `workshopprime`.`vehicles`.`model`)) join `workshopprime`.`customers` on(`workshopprime`.`customers`.`cpf` = `workshopprime`.`vehicles_customer`.`customers_id`));
 
 DROP VIEW IF EXISTS v_maintenance_inventory;
 CREATE VIEW v_maintenance_inventory
 AS 
-SELECT maintenance.id as maintenance_id, maintenance.reason, maintenance.description, maintenance.status, maintenance.initial_date, maintenance.final_date, maintenance.license_plate_vehicles_customer_fk, maintenance_inventory.reference_number 
+SELECT maintenance.id as maintenance_id, maintenance.reason, maintenance.description, maintenance.status, maintenance.initial_date, maintenance.final_date, maintenance.vehicles_customer_license_plate , maintenance_inventory.reference_number 
 FROM maintenance INNER JOIN maintenance_inventory ON maintenance.id = maintenance_inventory.maintenance_id  
 
 DROP VIEW IF EXISTS v_maintenance_inventory_parts;
 CREATE VIEW v_maintenance_inventory_parts
 AS 
-SELECT maintenance_inventory.reference_number,  maintenance_inventory.maintenance_id, maintenance_inventory.quantity,
-automotive_parts.image_address , automotive_parts.name , automotive_parts.description, automotive_parts.unit_value,  automotive_parts.brand,  automotive_parts.status 
+SELECT maintenance_inventory.automotive_parts_id as automotive_parts_id,  maintenance_inventory.maintenance_id, maintenance_inventory.quantity,
+automotive_parts.reference_number, automotive_parts.image_address , automotive_parts.name , automotive_parts.description, automotive_parts.unit_value,  automotive_parts.brand,  automotive_parts.status 
 FROM maintenance_inventory 
 INNER JOIN automotive_parts 
-ON maintenance_inventory.reference_number = automotive_parts.reference_number 
+ON maintenance_inventory.automotive_parts_id = automotive_parts.id 
 
 DROP VIEW IF EXISTS v_services_provided_mechanics;
 CREATE VIEW v_services_provided_mechanics
@@ -503,7 +462,7 @@ ON employees.cpf = services_provided.employees_id
 DROP VIEW IF EXISTS v_inventory_automotive_parts ;
 CREATE VIEW v_inventory_automotive_parts
 AS 
-SELECT automotive_parts.image_address , automotive_parts.reference_number,  automotive_parts.name , automotive_parts.description, automotive_parts.brand,  automotive_parts.unit_value, automotive_parts.status,  inventory.quantity   
+SELECT automotive_parts.image_address , automotive_parts.reference_number,  automotive_parts.name , automotive_parts.description, automotive_parts.brand,  automotive_parts.unit_value, automotive_parts.status,  automotive_parts.id AS automotive_parts_id, inventory.quantity   
 FROM automotive_parts 
 INNER JOIN inventory 
 ON automotive_parts.reference_number = inventory.reference_number 
@@ -511,13 +470,13 @@ ON automotive_parts.reference_number = inventory.reference_number
 DROP PROCEDURE IF EXISTS sp_register_vehicle_costumer;
 DELIMITER $$
 
-CREATE PROCEDURE sp_register_vehicle_costumer(
+CREATE PROCEDURE sp_register_vehicle_costumer(	 
 	 cpf_p VARCHAR(50),
     name_p VARCHAR(50),
     address_p VARCHAR(50),
     phoneNumber_p VARCHAR(50),
     email_p VARCHAR(50),
-    cnpjAutoVehicleWorkstops_p VARCHAR(255),
+    autoVehicleWorkstops_id_p INT,
     license_plate_p VARCHAR(50),
     model_p VARCHAR(50),
     brand_p VARCHAR(50)
@@ -526,6 +485,8 @@ CREATE PROCEDURE sp_register_vehicle_costumer(
 BEGIN    
     DECLARE count_cpf INT DEFAULT 0;
 	  DECLARE count_model INT DEFAULT 0;
+    DECLARE customers_id INT DEFAULT 0;
+    DECLARE vehicles_id INT DEFAULT 0;
     DECLARE track_no VARCHAR(10) DEFAULT '0/0';
     DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
     
@@ -542,20 +503,25 @@ BEGIN
         SELECT COUNT(cpf) INTO count_cpf FROM customers WHERE cpf_p COLLATE utf8mb4_general_ci  = customers.cpf; 
         IF (count_cpf <= 0) THEN      
           INSERT INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
-          VALUES(cpf_p, name_p, address_p, phoneNumber_p, email_p, cnpjAutoVehicleWorkstops_p);
+          VALUES(cpf_p, name_p, address_p, phoneNumber_p, email_p, autoVehicleWorkstops_id_p);
+          SELECT customers.id INTO customers_id FROM customers  ORDER BY id DESC LIMIT 1;
+        ELSE
+           SELECT customers.id INTO customers_id FROM customers WHERE cpf_p COLLATE utf8mb4_general_ci  = customers.cpf;
         END IF;
-              
-        /* model_p COLLATE utf8mb4_general_ci  --> aqui estou fazendo com que o valor da minha variavel tenha o msm  COLLATE da minha tabela, por consequencia dos meu campos, se eu nao forçar iss nao da certo */
+        
         SET track_no = '2/3';  
         SELECT COUNT(model) INTO count_model FROM vehicles WHERE model_p COLLATE utf8mb4_general_ci  = vehicles.model; 
         IF (count_model <= 0) THEN
-        	INSERT INTO vehicles(model, brand ) 
-        	VALUES(model_p, brand_p);
+        	INSERT INTO vehicles(model, brand ) VALUES(model_p, brand_p);
+          SELECT MAX(vehicles.id) INTO vehicles_id FROM vehicles;
+        ELSE
+           SELECT vehicles.id INTO vehicles_id FROM vehicles WHERE model_p COLLATE utf8mb4_general_ci  = vehicles.model;
     	  END IF;
         
         SET track_no = '3/3';
+
         INSERT INTO vehicles_customer (license_plate, customers_id, vehicles_id ) 
-        VALUES(license_plate_p, cpf_p, model_p);
+        VALUES(license_plate_p, customers_id, vehicles_id);
         
         SET track_no = '0/3';
         SET @full_error = 'successfully executed.';
@@ -567,15 +533,59 @@ END; $$
 DELIMITER ;
 
 
--- CALL sp_vehicle_costumer('85743380099','Julio Mautinho','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473217',
--- 'julio@outlook.com','01187817000183','NAY5700', 'Ranger XLS 3.0 PSE 163cv 4x2 CD TB Dies', 'Ford');
+DROP PROCEDURE IF EXISTS sp_update_vehicles_customer;
+DELIMITER $$
 
--- CALL sp_vehicle_costumer('09048491045','Mario Coiso','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584473211',
--- 'mariocoiso@outlook.com','01187817000183','LRR3766', 'Chairman 3.2 V6 220cv Aut.', 'SSANGYONG');
+CREATE PROCEDURE sp_update_vehicles_customer(
+    cpf_new_p VARCHAR(50),
+    cpf_old_p VARCHAR(50),
+	  name_p VARCHAR(50),
+    address_p VARCHAR(255),
+    phone_number_p VARCHAR(50),
+    email_p VARCHAR(50),
+    license_plate_old_p VARCHAR(50),
+    license_plate_new_p VARCHAR(50)
+  )
 
--- CALL sp_vehicle_costumer('09048491555','Mariana Alta','Rua T, n° 33,Chico da Doca, Cidade Paçoca-CE, Brasil','8584773211',
--- 'mariana@outlook.com','01187817000183','JKB9916', 'Sorento 3.5 V6 24V 278cv 4x2 Aut.', 'Kia Motors');
+BEGIN    
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN    
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
 
+        ROLLBACK;    
+    END;
+
+    START TRANSACTION;  
+        SET track_no = '1/2';
+        UPDATE customers 
+        SET         
+        name = name_p,
+        address = address_p,
+        cpf = cpf_new_p,
+        phone_number = phone_number_p,
+        email = email_p
+
+        WHERE customers.cpf = cpf_old_p COLLATE utf8mb4_general_ci;
+
+        SET track_no = '2/2';
+        UPDATE vehicles_customer 
+        SET 
+        license_plate = license_plate_new_p
+
+        WHERE vehicles_customer.license_plate = license_plate_old_p COLLATE utf8mb4_general_ci;
+
+        SET track_no = '0/2';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no, @full_error;
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
 
 
 DROP PROCEDURE IF EXISTS sp_register_inventory;
@@ -628,7 +638,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS sp_delete_part_inventory;
 DELIMITER $$
 
-CREATE PROCEDURE sp_delete_part_inventory(reference_number_p VARCHAR(255))
+CREATE PROCEDURE sp_delete_part_inventory(reference_number_p VARCHAR(255), automotive_parts_id_p INT)
 BEGIN   
     
     DECLARE track_no VARCHAR(10) DEFAULT '0/0';
@@ -644,18 +654,18 @@ BEGIN
 
     START TRANSACTION;
         SET track_no = '1/4'; 
-        DELETE FROM vehicles_automotive_parts WHERE reference_number_p COLLATE utf8mb4_general_ci  = vehicles_automotive_parts.reference_number_automotive_parts;
+        DELETE FROM vehicles_automotive_parts WHERE automotive_parts_id =  automotive_parts_id_p COLLATE utf8mb4_general_ci;
 
         SET track_no = '2/4'; 
-        DELETE FROM maintenance_inventory WHERE reference_number_p COLLATE utf8mb4_general_ci  = maintenance_inventory .reference_number;
+        DELETE FROM maintenance_inventory WHERE automotive_parts_id = automotive_parts_id_p COLLATE utf8mb4_general_ci;
 
         SET track_no = '3/4'; 
-        DELETE FROM inventory WHERE reference_number_p COLLATE utf8mb4_general_ci  = inventory.reference_number;
+        DELETE FROM inventory WHERE reference_number = reference_number_p COLLATE utf8mb4_general_ci ;
    
         SET track_no = '4/4';
-        DELETE FROM automotive_parts WHERE reference_number_p COLLATE utf8mb4_general_ci  = automotive_parts.reference_number;
+        DELETE FROM automotive_parts WHERE reference_number = reference_number_p COLLATE utf8mb4_general_ci ;
         
-        SET track_no = '0/2';
+        SET track_no = '0/4';
         SET @full_error = 'successfully executed.';
         SELECT track_no, @full_error;
     COMMIT;
@@ -702,8 +712,8 @@ END; $$
 
 DELIMITER ;
 
-DELIMITER ;
 
+DELIMITER ;
 
 DROP PROCEDURE IF EXISTS sp_update_inventory;
 DELIMITER $$
@@ -740,66 +750,6 @@ BEGIN
         SET track_no = '2/2';
         UPDATE automotive_parts SET image_address = image_address_p, name = name_p, brand = brand_p, description = description_p, unit_value = unit_value_p, status = status_p, reference_number  = reference_number_p
         WHERE automotive_parts.reference_number = reference_number_old_p COLLATE utf8mb4_general_ci ;
-
-        SET track_no = '0/2';
-        SET @full_error = 'successfully executed.';
-        SELECT track_no, @full_error;
-    COMMIT;
-
-END; $$
-
-DELIMITER ;
-
-
-
-DROP PROCEDURE IF EXISTS sp_update_vehicle_customer;
-DELIMITER $$
-
-CREATE PROCEDURE sp_update_vehicle_customer(
-    cpf_p VARCHAR(50),
-	  name_p VARCHAR(50),
-    address_p VARCHAR(255),
-    phone_number_p VARCHAR(50),
-    email_p VARCHAR(50),
-    license_plate_old_p VARCHAR(50),
-    license_plate_new_p VARCHAR(50),
-    model_p VARCHAR(50),
-    brand_p VARCHAR(50), 
-    cnpj_auto_vehicle_workstops_p VARCHAR(50)
-  )
-
-BEGIN    
-    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
-    
-    BEGIN    
-        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
-        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
-        SELECT track_no, @full_error;
-
-        ROLLBACK;    
-    END;
-
-    START TRANSACTION;
-        SET track_no = '1/2';
-        UPDATE vehicles_customer 
-        SET 
-        license_plate = license_plate_new_p,
-        customers_id = cpf_p,
-        vehicles_id = model_p
-
-        WHERE vehicles_customer.license_plate = license_plate_old_p COLLATE utf8mb4_general_ci;
-
-        SET track_no = '2/2';
-        UPDATE customers 
-        SET         
-        name = name_p,
-        address = address_p,
-        phone_number = phone_number_p,
-        email = email_p,
-        auto_vehicle_workstops_id = cnpj_auto_vehicle_workstops_p
-
-        WHERE customers.cpf = cpf_p COLLATE utf8mb4_general_ci;
 
         SET track_no = '0/2';
         SET @full_error = 'successfully executed.';

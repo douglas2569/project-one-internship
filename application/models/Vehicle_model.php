@@ -14,7 +14,7 @@ class Vehicle_model extends CI_Model {
         return $this->db->get("v_vehicles_customers")->result_array();
     } 
     
-    public function insert($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand, $cnpj_auto_vehicle_workstops_fk ='01187817000183'){   
+    public function insert($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand, $auto_vehicle_workstops_id ='35'){   
         
         $data = array(
             'cpf' => $cpf,
@@ -25,13 +25,13 @@ class Vehicle_model extends CI_Model {
             'license_plate' => $licensePlate,
             'model' => $model,
             'brand' => $brand,
-            'cnpj_auto_vehicle_workstops_fk' => $cnpj_auto_vehicle_workstops_fk
+            'auto_vehicle_workstops_id' => $auto_vehicle_workstops_id
                     
         ); 
         
               
         $resultset = $this->db->query("CALL sp_register_vehicle_costumer('$data[cpf]', '$data[name]', '$data[address]', '$data[phone_number]',
-        '$data[email]', '$data[cnpj_auto_vehicle_workstops_fk]', '$data[license_plate]', '$data[model]', '$data[brand]')")->result_array();
+        '$data[email]', '$data[auto_vehicle_workstops_id]', '$data[license_plate]', '$data[model]', '$data[brand]')")->result_array();
         return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);  
          
         
@@ -43,23 +43,20 @@ class Vehicle_model extends CI_Model {
         return $this->db->delete('vehicles_customer');
     }
 
-    public function update($cpf, $name, $address='', $phoneNumber, $email, $licensePlateOld, $licensePlateNew, $model, $brand, $cnpj_auto_vehicle_workstops_fk ='01187817000183'){   
+    public function update($cpfOld, $cpfNew, $name, $address, $phoneNumber, $email, $licensePlateOld, $licensePlateNew){   
         $data = array(
-            'cpf' => $cpf,
+            'cpf_old' => $cpfOld,
+            'cpf_new' => $cpfNew,
             'name' => $name,
             'address' => $address,
             'phone_number' => $phoneNumber,
             'email' => $email,
             'license_plate_old' => $licensePlateOld,
-            'license_plate_new' => $licensePlateNew,
-            'model' => $model,
-            'brand' => $brand,
-            'cnpj_auto_vehicle_workstops_fk' => $cnpj_auto_vehicle_workstops_fk                    
+            'license_plate_new' => $licensePlateNew,                          
         ); 
-        
                
-        $resultset =  $this->db->query("CALL sp_update_vehicle_customer('$data[cpf]', '$data[name]', '$data[address]', '$data[phone_number]',
-        '$data[email]', '$data[license_plate_old]', '$data[license_plate_new]', '$data[model]', '$data[brand]','$data[cnpj_auto_vehicle_workstops_fk]')")->result_array();             
+        $resultset =  $this->db->query("CALL sp_update_vehicles_customer('$data[cpf_new]', '$data[cpf_old]', '$data[name]', '$data[address]', '$data[phone_number]',
+        '$data[email]', '$data[license_plate_old]', '$data[license_plate_new]')")->result_array();             
         
         return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']); 
         

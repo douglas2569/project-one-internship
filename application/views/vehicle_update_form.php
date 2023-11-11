@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['veiculos']['update'] != 1): ?>
+<?php if($this->session-> permissions['vehicles']['update'] == 0): ?>
       <?php 
         redirect('/');
         exit;      
@@ -16,7 +16,8 @@
             <div class="title-box">
                 <h1>Alterar Veiculo</h1>
             </div>              
-            <?php echo form_open('index.php/vehicle/edit/'.$vehicle[0]['license_plate']); ?>   
+            <?php                 
+                echo form_open('index.php/vehicle/edit/'.$vehicle[0]['license_plate'].'/'.$vehicle[0]['cpf']); ?>   
                 <fieldset class="form-group border">
                     <legend>Veiculo</legend>
                     <div class="form-group">
@@ -25,11 +26,11 @@
                     <div>
                     <div class="form-group">
                         <label class="form-label" for="model">Modelo*</label>
-                        <input class="form-control" type="text" name='model' id="model" required value="<?= $vehicle[0]['model_vehicles_fk']?>"/> 
+                        <input class="form-control" disabled type="text" name='model' id="model" required value="<?= $vehicle[0]['model']?>"/> 
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="brand">Marca*</label>
-                        <input class="form-control" type="text" name="brand"  required  value="<?= $vehicle[0]['brand'] ?>"/>
+                        <input class="form-control"  disabled type="text" name="brand"  required  value="<?= $vehicle[0]['brand'] ?>"/>
                     </div>    
                 </fieldset>  
                 

@@ -33,9 +33,9 @@ class Inventory_model extends CI_Model {
 
     }
     
-    public function delete($reference){
+    public function delete($reference, $automotive_parts_id){
             
-        $resultset = $this->db->query("CALL sp_delete_part_inventory('$reference')")->result_array(); 
+        $resultset = $this->db->query("CALL sp_delete_part_inventory('$reference','$automotive_parts_id')")->result_array(); 
         return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
     
 
