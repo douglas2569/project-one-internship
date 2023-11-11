@@ -56,14 +56,14 @@
                             </div>
                             <div class="item-footer">
                                 <?php if($this->session-> permissions['users']['update'] == 1): ?> 
-                                    <a  href="<?= site_url('index.php/user/edit/'.$user['cpf']) ?>" class="btn edit-button">
+                                    <a  href="<?= site_url('index.php/user/edit/'.$user['user_id']) ?>" class="btn edit-button">
                                         <i class="bi bi-pencil-square"></i>
                                         Editar
                                     </a>
                                 <?php endif ?>
                                 
                                 <?php if($this->session-> permissions['users']['delete'] == 1): ?> 
-                                    <a  href="<?= site_url('index.php/user/destroy/'.$user['cpf']) ?>" class="btn destroy-button">
+                                    <a  href="<?= site_url('index.php/user/destroy/'.$user['user_id']) ?>" class="btn destroy-button">
                                         <i class="bi bi-trash3"></i>
                                         Excluir
                                     </a>

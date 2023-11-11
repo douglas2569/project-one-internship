@@ -19,11 +19,11 @@
             <?php echo form_open('index.php/user/store'); ?> 
             
                 <div class="form-group"> 
-                    <label for="auto-part" class="form-label"><strong>Funcionário*</strong></label>
-                    <select name="employeeCpf" class="form-select form-select-md mb-3" aria-label="select">                
+                    <label for="auto-part" class="form-label"><strong>Funcionários*</strong></label>
+                    <select name="employeeId" class="form-select form-select-md mb-3" aria-label="select">                
                         <?php foreach($employeeList as $employee): ?>
-                            <option value="<?= $employee['cpf']?>">
-                                <?= $employee['employees_name'] ?> - Qt: <?= $employee['cpf'] ?>                                
+                            <option value="<?= $employee['id']?>">
+                                <?= $employee['name'] ?> - CPF: <?= $employee['cpf'] ?>                                
                             </option>
                         <?php endforeach ?>    
                     </select>   

@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` VARCHAR(50) NOT NULL UNIQUE,   
   `password` VARCHAR(255) NOT NULL, 
   `status` tinyint(1) default 1, 
-  `employees_id` INT NOT NULL,
+  `employees_id` INT NOT NULL UNIQUE,
 	
   PRIMARY KEY (`id`),
   FOREIGN KEY (`employees_id`) REFERENCES `employees`(`id`)
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `suppliers` (
   `address` VARCHAR(255),  
   `phone_number` VARCHAR(50) NOT NULL UNIQUE,
   `email` VARCHAR(255) NOT NULL UNIQUE,  
-  `brachActivity` VARCHAR(255) UNIQUE, 
+  `brach_activity` VARCHAR(255) UNIQUE, 
   `auto_vehicle_workstops_id`INT NOT NULL,
   
   PRIMARY KEY (`id`),
@@ -302,15 +302,15 @@ INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_
 
 INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('36', '35', '35'), ('36', '36', '37'), ('36', '40', '38'), ('36', '37', '35'), ('36', '38', '35'), ('36', '39', '35');
 
-INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brachActivity, auto_vehicle_workstops_id) 
+INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brach_activity, auto_vehicle_workstops_id) 
 values('60655945000173','Bosch','Robert Bosch Ltda','Rua W, n° 98, Parque Tocas, Cidade Normal-CE, Brasil','8588873266',
 'bosch@yahoo.com','Fabricante de equipamentos automotivos e peças',35);
 
-INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brachActivity, auto_vehicle_workstops_id) 
+INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brach_activity, auto_vehicle_workstops_id) 
 values('82804111000115','3M','3M do Brasil Ltda','Rua Y, n° 55, Sola Aí, Cidade Fortaleza-CE, Brasil','8588776544',
 '3M@yempresa.com','ornecedora de produtos automotivos, como lixas, adesivos e polidores',35);
 
-INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brachActivity, auto_vehicle_workstops_id) 
+INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brach_activity, auto_vehicle_workstops_id) 
 values('12557378000170','Pirelli','Pirelli Pneus Ltda','Rua P, n° 11, Maga, Cidade Pacajus-CE, Brasil','8588006544',
 'pirelli@yempresa.com','fabricante de pneus automotivos',35);
 

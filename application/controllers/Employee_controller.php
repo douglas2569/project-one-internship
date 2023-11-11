@@ -7,6 +7,7 @@ class Employee_controller extends CI_Controller {
 		parent::__construct();		
 		checkAuthentication();
 		$this->load->model('Employee_model');							
+		$this->load->model('Position_model');							
 	 }	
 
 	public function index(){
@@ -16,7 +17,7 @@ class Employee_controller extends CI_Controller {
 		$this->load->view('employee.php', $data);
 		$this->load->view('templates/footer.php');
 	}
-
+	
 	public function store() {			
 		
 		$this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|max_length[50]');
@@ -24,17 +25,19 @@ class Employee_controller extends CI_Controller {
 		$this->form_validation->set_rules('address', 'Endereço', 'trim|min_length[5]|max_length[255]');
 		$this->form_validation->set_rules('phoneNumber', 'Telefone', 'trim|required|min_length[5]|max_length[50]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|valid_email|min_length[5]|max_length[100]');		
-				
+		
+		$data['positionsList'] = $this->Position_model->show();	
+		
 		if(!$this->form_validation->run() == FALSE){											
 			$cpf = $this->input->post('cpf');
 			$name = $this->input->post('name');
 			$address = $this->input->post('address');
 			$phoneNumber = $this->input->post('phoneNumber');
 			$email = $this->input->post('email');
-			$positionsId= $this->input->post('positions_id');							
+			$positionId= $this->input->post('positionId');							
 			
 			try{				
-				$this->Employee_model->insert($cpf, $name, $address, $phoneNumber, $email, $positionsId);								
+				$this->Employee_model->insert($cpf, $name, $address, $phoneNumber, $email, $positionId);								
 				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Cadastrado com sucesso'));
 				redirect('index.php/employee');						
 			}catch(Exception $e){	
@@ -44,7 +47,7 @@ class Employee_controller extends CI_Controller {
 		}
 				
 		$this->load->view('templates/header.php');
-		$this->load->view('employee_register_form.php');
+		$this->load->view('employee_register_form.php', $data);
 		$this->load->view('templates/footer.php');	
 
 		
@@ -63,8 +66,9 @@ class Employee_controller extends CI_Controller {
 	}
 
 	public function edit($id) {
-		$resulset = $this->Employee_model->show(array('id'=> $id));		
-		
+		$resulset = $this->Employee_model->show(array('id'=> $id));	
+		$data['positionsList'] = $this->Position_model->show();	
+
 		if(count($resulset) != 1){			
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
 			
@@ -75,8 +79,8 @@ class Employee_controller extends CI_Controller {
 			$this->form_validation->set_rules('address', 'Endereço', 'trim|min_length[5]|max_length[255]');
 			$this->form_validation->set_rules('phoneNumber', 'Telefone', 'trim|required|min_length[5]|max_length[50]');
 			$this->form_validation->set_rules('email', 'Email', 'trim|valid_email|min_length[5]|max_length[100]');			
-
-			$data['employee'] = $resulset;
+			
+			$data['employee'] = $resulset;			
 
 			if($this->form_validation->run() == FALSE){								
 				$this->load->view('templates/header.php');
@@ -90,7 +94,7 @@ class Employee_controller extends CI_Controller {
 			$address = $this->input->post('address');
 			$phoneNumber = $this->input->post('phoneNumber');
 			$email = $this->input->post('email');
-			$positionsId = $this->input->post('positionsId');
+			$positionsId = $this->input->post('positionId');			
 
 			try{					
 				$return = $this->Employee_model->update($id, $cpf, $name, $address, $phoneNumber, $email, $positionsId);	

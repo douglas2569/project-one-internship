@@ -14,7 +14,7 @@ class Employee_model extends CI_Model {
         return $this->db->get("v_employees")->result_array();
     } 
     
-    public function insert($cpf, $name, $address, $phoneNumber, $email, $positionsId, $auto_vehicle_workstops_id ='35'){  
+    public function insert($cpf, $name, $address, $phoneNumber, $email, $positionId, $auto_vehicle_workstops_id ='35'){  
         
         $data = array(
             'cpf' => $cpf,
@@ -22,8 +22,8 @@ class Employee_model extends CI_Model {
             'address' => $address,
             'phone_number' => $phoneNumber,
             'email' => $email,            
-            'positions_id' => $positionsId,            
-            'auto_vehicle_workstops_id' => $auto_vehicle_workstops_id
+            'positions_id' => $positionId,            
+            'auto_vehicle_workshops_id' => $auto_vehicle_workstops_id
                     
         );         
               
@@ -41,8 +41,9 @@ class Employee_model extends CI_Model {
         $this->db->where('id', $id);                     
         return $this->db->delete('employees');
     }
-
-    public function update($id, $cpf, $name, $address, $phoneNumber, $email, $positionsId){   
+    
+    public function update($id, $cpf, $name, $address, $phoneNumber, $email, $positionsId){ 
+        
         $data = array(            
             'cpf' => $cpf,
             'name' => $name,
