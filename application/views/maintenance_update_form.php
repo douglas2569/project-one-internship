@@ -34,6 +34,34 @@
                 <label class="form-label" for="description">Descrição</label>
                 <textarea class="form-control" name="description"  cols="30" rows="10"><?= $maintenance[0]['description'] ?></textarea>
 
+                <?php if(!empty($maintenance[0]['initial_date'])):  ?>
+                    <div>
+                        <label class="form-label">
+                            <strong>Data Inicial:</strong>
+                            <?php if(empty($maintenance[0]['initial_date'])):  ?>                                
+                                    Não iniciada 
+                            <?php elseif(!empty($maintenance[0]['final_date'])): 
+                                echo $maintenance[0]['initial_date']  ?>                                   
+                            <?php else: 
+                                echo $maintenance[0]['initial_date']  ?>   
+                                <a href="<?= site_url('index.php/maintenance/eraseinitialdate/'.$maintenance[0]['id']) ?>" class='btn'><i class="bi bi-trash3"></i></a>  
+                            <?php endif;  ?>
+                        </label>
+                    </div>  
+                <?php endif;  ?> 
+
+                <?php if(!empty($maintenance[0]['final_date'])):  ?>
+                    <div>
+                        <label class="form-label">
+                            <strong>Data Final:</strong>      
+                            <?php echo $maintenance[0]['final_date']  ?>   
+                                <a href="<?= site_url('index.php/maintenance/erasefinaldate/'.$maintenance[0]['id']) ?>" class='btn'>
+                                    <i class="bi bi-trash3"></i>
+                                </a> 
+                        </label>
+                    </div>  
+                <?php endif;  ?>  
+
                 <div class="form-footer">
                     <button class="btn btn-primary" type='submit'>Salvar</button>              
                    <a class="btn btn-secondary" href="<?= site_url() ?>"> Voltar </a>             

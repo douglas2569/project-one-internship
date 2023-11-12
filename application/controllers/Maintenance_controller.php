@@ -106,7 +106,7 @@ class Maintenance_controller extends CI_Controller {
 
 	public function edit($id) {
 		$resulset = $this->Maintenance_model->show(array('id'=>$id));		
-		$data['Vehicle_customersList'] = $this->Vehicle_customer_model->show();	
+		$data['vehiclesList'] = $this->Vehicle_customer_model->show();	
 		
 		if(count($resulset) != 1){			
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
@@ -146,7 +146,7 @@ class Maintenance_controller extends CI_Controller {
 	public function initialDate($id) {		
 
 		try{
-			$this->Maintenance_model->updateDate($id, date("Y-m-d H:i:s"));				
+			$this->Maintenance_model->updateDateInitial($id, date("Y-m-d H:i:s"), 1);				
 			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Manutenção Iniciada'));
 		}catch(Exception $e){	
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel iniciar a manutenção '.$e->getMessage()));					
@@ -156,15 +156,50 @@ class Maintenance_controller extends CI_Controller {
 		
 	}
 
-	public function finalDate($id) {		
+	public function eraseInitialDate($id) {		
 
 		try{
-			$this->Maintenance_model->updateDate($id, '', date("Y-m-d H:i:s"));				
-			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Manutenção Iniciada'));
+			$this->Maintenance_model->updateDateInitial($id, null, 0);				
+			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Data inicial apagada com sucesso'));
 		}catch(Exception $e){	
-			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel iniciar a manutenção '.$e->getMessage()));					
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel apagar a data inicial'.$e->getMessage()));					
 		}						
+		redirect('index.php/maintenance');					
+		
+		
+	}
+
+	public function finalDate($id) {
+		$resulset = $this->Maintenance_model->show(array('id'=> $id, 'status' =>'1'));	
+
+		if(count($resulset) > 0){
+
+			try{
+				$this->Maintenance_model->updateDateFinal($id, date("Y-m-d H:i:s"), 2);				
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Manutenção Iniciada'));
+			}catch(Exception $e){	
+				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel iniciar a manutenção '.$e->getMessage()));					
+			}						
+		}
 		redirect('index.php/maintenance/workon/'.$id);						
+		
+		
+	}
+
+	public function eraseFinalDate($id) {	
+		$resulset = $this->Maintenance_model->show(array('id'=> $id, 'status' =>'2'));	
+
+		if(count($resulset) > 0){
+
+			try{
+				$this->Maintenance_model->updateDateFinal($id, null, 1);				
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Data final apagada com sucesso'));
+			}catch(Exception $e){	
+				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel apagar a data final '.$e->getMessage()));					
+			}						
+		}
+
+		redirect('index.php/maintenance');						
 		
 		
 	}

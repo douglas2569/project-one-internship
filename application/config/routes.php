@@ -37,6 +37,8 @@ $route['maintenance/workon/(:any)'] = 'Maintenance_controller/workOn/$1';
 $route['maintenance/destroy/(:any)'] = 'Maintenance_controller/destroy/$1';
 $route['maintenance/initialdate/(:any)'] = 'Maintenance_controller/initialDate/$1';
 $route['maintenance/finaldate/(:any)'] = 'Maintenance_controller/finalDate/$1';
+$route['maintenance/eraseinitialdate/(:any)'] = 'Maintenance_controller/eraseInitialDate/$1';
+$route['maintenance/erasefinaldate/(:any)'] = 'Maintenance_controller/eraseFinalDate/$1';
 
 $route['maintenanceinventory/store/(:num)'] = 'Maintenance_Inventory_controller/store/$1'; 
 $route['maintenanceinventory/destroy/(:any)'] = 'Maintenance_Inventory_controller/destroy/$1'; 
