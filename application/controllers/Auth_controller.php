@@ -19,7 +19,7 @@ class Auth_controller extends CI_Controller {
 			$password = $this->input->post('password');
 			$resultsetUser = $this->User_model->show(array('username'=> $username));			
 			
-			if (count($resultsetUser) != 1) {	
+			if (count($resultsetUser) <= 0 || $resultsetUser[0]['status'] <= 0) {	
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Usuário invalido.'));									
 				
 			}else{

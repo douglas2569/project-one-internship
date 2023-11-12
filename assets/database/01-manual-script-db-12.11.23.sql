@@ -823,6 +823,40 @@ END; $$
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS sp_delete_employee;
+DELIMITER $$
+
+CREATE PROCEDURE sp_delete_employee(id_p INT)
+BEGIN   
+    
+    DECLARE track_no VARCHAR(10) DEFAULT '0/0';
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION, NOT FOUND, SQLWARNING
+    
+    BEGIN    
+        GET DIAGNOSTICS CONDITION 1 @`errno` = MYSQL_ERRNO, @`sqlstate` = RETURNED_SQLSTATE, @`text` = MESSAGE_TEXT;
+        SET @full_error = CONCAT('ERROR ', @`errno`, ' (', @`sqlstate`, '): ', @`text`);
+        SELECT track_no, @full_error;
+
+        ROLLBACK;    
+    END;
+
+    START TRANSACTION;
+        SET track_no = '1/2'; 
+        DELETE FROM users WHERE employees_id = id_p COLLATE latin1_swedish_ci;
+   
+        SET track_no = '2/2';
+        DELETE FROM employees  WHERE id = id_p COLLATE latin1_swedish_ci;
+        
+        SET track_no = '0/2';
+        SET @full_error = 'successfully executed.';
+        SELECT track_no, @full_error;
+    COMMIT;
+
+END; $$
+
+DELIMITER ;
+
+
 DROP PROCEDURE IF EXISTS sp_update_maintenance_inventory_inventory;
 DELIMITER $$
 

@@ -65,10 +65,15 @@ class User_controller extends CI_Controller {
 	}
 
 	public function edit($id) {
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]|max_length[50]');
+		$this->form_validation->set_rules('username', 'Username', 'trim|min_length[4]|max_length[50]');
 		$this->form_validation->set_rules('password', 'Senha', 'trim|min_length[3]');
-		$data['user'] =  $this->User_model->show(array('user_id'=>$id));						
-		
+
+		$data['user'] =  $this->User_model->show(array('user_id'=>$id));								
+		if(count($data['user']) <= 0){
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido.'));
+			redirect('index.php/user');
+		}
+
 		if(!$this->form_validation->run() == FALSE){											
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
@@ -76,19 +81,32 @@ class User_controller extends CI_Controller {
 			$status = $this->input->post('status');	
 			
 			$resultsetUser = $this->User_model->show(array('username'=> $username));
-			
-			if (count($resultsetUser) == 1) {
-				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Esse usuário ja existe.'));
-				
-			}else{
+
+			if (!$username && !$password) {
+
 				try{				
-					$this->User_model->update($id, $username, encryptHash($password), $employeeId, $status);									
+					$this->User_model->updateStatusOnly($id, $status);									
 					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));
 					redirect('index.php/user');						
 				}catch(Exception $e){	
 					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel atualizar. Erro: '.$e->getMessage()));
-				}									
+				}
 
+			}else{
+
+				if (count($resultsetUser) == 1) {
+					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Esse usuário ja existe.'));
+					
+				}else{
+					try{				
+						$this->User_model->update($id, $username, encryptHash($password), $employeeId, $status);									
+						$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));
+						redirect('index.php/user');						
+					}catch(Exception $e){	
+						$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel atualizar. Erro: '.$e->getMessage()));
+					}									
+	
+				}
 			}
 			
 

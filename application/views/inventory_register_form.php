@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-footer">
                         <button class="btn btn-primary" type='submit'>Cadastrar</button>              
-                        <a class="btn btn-secondary" href="<?= site_url() ?>"> Voltar </a>             
+                        <a class="btn btn-secondary" href="<?= site_url('index.php/inventory') ?>"> Voltar </a>             
                     </div>
             </form> 
         </div>

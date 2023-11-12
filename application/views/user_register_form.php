@@ -19,7 +19,7 @@
             <?php echo form_open('index.php/user/store'); ?> 
             
                 <div class="form-group"> 
-                    <label for="auto-part" class="form-label"><strong>Funcionários*</strong></label>
+                    <label for="auto-part" class="form-label"><strong>Funcionário*</strong></label>
                     <select name="employeeId" class="form-select form-select-md mb-3" aria-label="select">                
                         <?php foreach($employeeList as $employee): ?>
                             <?php if($employee['position_name'] != 'root'): ?>  
@@ -42,7 +42,7 @@
                                 
                 <div class="form-footer">
                     <button class="btn btn-primary" type='submit'>Cadastrar</button>              
-                        <a class="btn btn-secondary" href="<?= site_url() ?>"> Voltar </a>             
+                        <a class="btn btn-secondary" href="<?= site_url('index.php/user') ?>"> Voltar </a>             
                 </div>            
             </form> 
                         

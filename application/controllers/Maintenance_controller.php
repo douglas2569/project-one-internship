@@ -21,7 +21,7 @@ class Maintenance_controller extends CI_Controller {
 	}
 
 	public function store() {		
-		$data['Vehicle_customersList'] = $this->Vehicle_customer_model->show();				
+		$data['vehiclesList'] = $this->Vehicle_customer_model->show();				
 		$this->form_validation->set_rules('reason', 'Problema', 'trim|required|min_length[5]|max_length[50]');
 		$this->form_validation->set_rules('description', 'Descrição', 'trim|min_length[10]');
 				

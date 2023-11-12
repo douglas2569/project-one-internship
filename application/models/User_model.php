@@ -49,6 +49,22 @@ class User_model extends CI_Model {
 
     }
 
+    public function updateStatusOnly($id, $status){   
+        $data = array(
+            'status' => $status
+        );             
+            
+        $this->db->where('id', $id);
+        
+        if(!$this->db->update('users', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);                
+            }
+        }
+
+    }
+
     public function delete($id){        
 
         $this->db->where('id', $id);                     

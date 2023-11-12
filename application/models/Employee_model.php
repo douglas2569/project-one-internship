@@ -37,9 +37,9 @@ class Employee_model extends CI_Model {
 
     }
 
-    public function delete($id){
-        $this->db->where('id', $id);                     
-        return $this->db->delete('employees');
+    public function delete($id){        
+        $resultset =  $this->db->query("CALL sp_delete_employee('$id')")->result_array();
+        return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
     }
     
     public function update($id, $cpf, $name, $address, $phoneNumber, $email, $positionsId){ 

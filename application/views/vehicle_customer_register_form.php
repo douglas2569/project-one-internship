@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['vehicles']['create'] == 0): ?>
+<?php if($this->session-> permissions['vehicles_customer']['create'] == 0): ?>
       <?php 
         redirect('/');
         exit;      
@@ -16,7 +16,7 @@
             <div class="title-box">
                 <h1>Cadastrar de Veiculo</h1>
             </div>              
-            <?php echo form_open('index.php/vehicle/store'); ?>   
+            <?php echo form_open('index.php/vehiclecustomer/store'); ?>   
                 <fieldset class="form-group border">
                     <legend>Veiculo</legend>
                     <div class="form-group">
@@ -61,7 +61,7 @@
                 
                 <div class="form-footer">
                     <button class="btn btn-primary" type='submit'>Cadastrar</button>              
-                        <a class="btn btn-secondary" href="<?= site_url() ?>"> Voltar </a>             
+                        <a class="btn btn-secondary" href="<?= site_url('index.php/vehiclecustomer') ?>"> Voltar </a>             
                 </div>            
             </form> 
                         

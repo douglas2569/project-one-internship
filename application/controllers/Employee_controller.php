@@ -54,9 +54,19 @@ class Employee_controller extends CI_Controller {
 	}
 
 	public function destroy($id) {
-		$resultset = $this->Employee_model->show(array('id'=>$id));		
-		if(count($resultset) == 1 && $this->Employee_model->delete($id)){			
-			$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso'));						
+		$resultset = $this->Employee_model->show(array('id'=>$id));
+
+		if(count($resultset) == 1){		
+			try{
+				$return = $this->Employee_model->delete($id);	
+				if($return['status']){
+					throw new Exception($return['mensage']);
+				}	
+				$this->session->set_flashdata('message', array('type'=>'success','content'=>'Registro deletado com sucesso.'));
+
+			}catch(Exception $e){
+				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro. Erro:'.$e->getMessage()));
+			}
 		}else{
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro'));				
 		}

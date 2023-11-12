@@ -19,13 +19,13 @@
             
                 <div class="form-group"> 
                     <label for="auto-part" class="form-label"><strong>Funcionário*</strong></label>
-                    <input class="form-control" disabled type="text" name='name' value="<?= $user[0]['employee_name'] ?>" required/>
+                    <input class="form-control" disabled type="text" name='name' value="<?= $user[0]['employee_name'] ?>"/>
                     <input type="hidden" name='employeeId' value="<?= $user[0]['employees_id'] ?>"/>   
                 </div> 
                 
                 <div class="form-group">
                     <label for="name" class="form-label">Username*</label>
-                    <input class="form-control" type="text" name='username' id="username" required/>
+                    <input class="form-control" type="text" name='username' id="username"/>
                 <div>
                 <div class="form-group">
                     <label class="form-label" for="password">Senha</label>
@@ -62,7 +62,7 @@
                                 
                 <div class="form-footer">
                     <button class="btn btn-primary" type='submit'>Salvar</button>              
-                        <a class="btn btn-secondary" href="<?= site_url() ?>"> Voltar </a>             
+                        <a class="btn btn-secondary" href="<?= site_url('index.php/user') ?>"> Voltar </a>             
                 </div>            
             </form> 
                         
