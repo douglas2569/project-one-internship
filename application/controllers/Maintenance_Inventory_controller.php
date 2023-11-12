@@ -16,9 +16,9 @@ class Maintenance_Inventory_controller extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function store($idMaintenance) {
+	public function store($maintenanceId) {
 		$data['partList'] = $this->Inventory_model->show(array('status'=>'1'));		
-		$data['maintenance_id'] = $idMaintenance;		
+		$data['maintenance_id'] = $maintenanceId;		
 		
 		$this->form_validation->set_rules('quantity', 'Quantidade', 'numeric|required|min_length[1]|max_length[50]');		
 				
@@ -28,28 +28,30 @@ class Maintenance_Inventory_controller extends CI_Controller {
 			$this->load->view('templates/footer.php');
 		}else{
 			$quantity = $this->input->post('quantity');
-			$referenceNumberAndQuantity = $this->input->post('reference_number_quantity');
-			$referenceNumberAndQuantity = explode('|',$referenceNumberAndQuantity);			
+			$automotivePartsIdAndReferenceNumberAndQuantity = $this->input->post('automotivePartsIdAndReferenceNumberAndQuantity');
+			$automotivePartsIdAndReferenceNumberAndQuantity = explode('|',$automotivePartsIdAndReferenceNumberAndQuantity);	
 			
-			if($quantity > $referenceNumberAndQuantity[1] || $referenceNumberAndQuantity[1] == 0){
+			if($quantity > $automotivePartsIdAndReferenceNumberAndQuantity[1] || $automotivePartsIdAndReferenceNumberAndQuantity[2] == 0){
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não a peça suficiente'));
-				redirect('index.php/maintenanceinventory/store/'.$idMaintenance);
+				redirect('index.php/maintenanceinventory/store/'.$maintenanceId);
 			}
 			
 			try{				
-				$resultset = $this->Maintenance_inventory_model->show(array('id_maintenance'=>$idMaintenance,'reference_number'=>$referenceNumberAndQuantity[0]));
-				$newQuantityInventory = $referenceNumberAndQuantity[1] - $quantity;
+				$resultset = $this->Maintenance_inventory_model->show(array('maintenance_id'=>$maintenanceId,'automotive_parts_id'=>$automotivePartsIdAndReferenceNumberAndQuantity[0]));
+				$newQuantityInventory = $automotivePartsIdAndReferenceNumberAndQuantity[2] - $quantity;
 				
 				if(count($resultset) > 0){					
 					$newQuantityMaintenanceInventory = $quantity + $resultset[0]['quantity'];	 												
-					$return = $this->Maintenance_inventory_model->updateQuantityMaintenanceInventory($idMaintenance, $referenceNumberAndQuantity[0], $newQuantityMaintenanceInventory, $newQuantityInventory);	
+					$return = $this->Maintenance_inventory_model->updateQuantityMaintenanceInventory($maintenanceId, $automotivePartsIdAndReferenceNumberAndQuantity[0], $automotivePartsIdAndReferenceNumberAndQuantity[1], $newQuantityMaintenanceInventory, $newQuantityInventory);	
 					
 					if($return['status']){
 						throw new Exception($return['mensage']);
 					}									
 					
 				}else{
-					$return = $this->Maintenance_inventory_model->insert($referenceNumberAndQuantity[0], $idMaintenance, $newQuantityInventory, $quantity);	
+					$return = $this->Maintenance_inventory_model->insert($automotivePartsIdAndReferenceNumberAndQuantity[0], $automotivePartsIdAndReferenceNumberAndQuantity[1],
+					$maintenanceId, $newQuantityInventory,
+					$quantity);	
 					if($return['status']){
 						throw new Exception($return['mensage']);
 					}
@@ -63,20 +65,21 @@ class Maintenance_Inventory_controller extends CI_Controller {
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>$e->getMessage()));
 			}
 			
-			redirect('index.php/maintenance/change/'. $idMaintenance);
+			redirect('index.php/maintenance/workon/'. $maintenanceId);
 
 		}
 		
 	}
 
 
-	public function destroy($idMaintenance, $reference_number, $quantity) {
+	public function destroy($maintenanceId, $automotivePartsId, $reference_number, $quantity) {
 		
-		$resultset = $this->Maintenance_inventory_model->show(array('id_maintenance'=>$idMaintenance,'reference_number'=>$reference_number));		
+		$resultset = $this->Maintenance_inventory_model->show(array('maintenance_id'=>$maintenanceId,'automotive_parts_id'=>$automotivePartsId));
 		
+				
 		if(count($resultset) == 1){
 			try{
-				$return = $this->Maintenance_inventory_model->delete($reference_number,  $quantity);	
+				$return = $this->Maintenance_inventory_model->delete($automotivePartsId, $reference_number,  $quantity);	
 				if($return['status']){
 					throw new Exception($return['mensage']);
 				}
@@ -85,7 +88,7 @@ class Maintenance_Inventory_controller extends CI_Controller {
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel remover seu registro. Erro:'.$e->getMessage()));				
 			}
 
-			redirect('index.php/maintenance/change/'.$resultset[0]['id_maintenance']);
+			redirect('index.php/maintenance/workon/'.$resultset[0]['maintenance_id']);
 		}
 	}
 

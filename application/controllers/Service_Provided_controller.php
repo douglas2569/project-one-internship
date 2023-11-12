@@ -15,9 +15,9 @@ class Service_Provided_controller extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	public function store($idMaintenance) {
+	public function store($maintenanceId) {
 		$data['serviceList'] = $this->Service_model->show(array('status'=>'1'));			
-		$data['maintenance_id'] = $idMaintenance;		
+		$data['maintenance_id'] = $maintenanceId;		
 		
 		$this->form_validation->set_rules('quantity', 'Quantidade', 'numeric|required|min_length[1]|max_length[50]');		
 				
@@ -26,19 +26,20 @@ class Service_Provided_controller extends CI_Controller {
 			$this->load->view('maintenance_add_service_provided_form.php',$data);
 			$this->load->view('templates/footer.php');
 		}else{
-			$cpfMechanics = $this->input->post('cpfMechanics');
+			$employeesId = $this->input->post('employeesId');
 			$serviceId =  $this->input->post('serviceId');								
 			$quantity = $this->input->post('quantity');
 			
 			try{			
 
 				if(count($data['serviceList']) > 0){	
-					$resultset= $this->Service_provided_model->show(array('id_services_fk'=>$serviceId));
+					$resultset= $this->Service_provided_model->show(array('services_id'=>$serviceId, 'employees_id'=>$employeesId));
 										
 					if( count($resultset) == 1 ){
-						$this->Service_provided_model->updateOnlyQuantity($serviceId , ($quantity + $resultset[0]['quantity']));						
+						$this->Service_provided_model->updateOnlyQuantity($serviceId , $employeesId, ($quantity + $resultset[0]['quantity']));						
 					}else{
-						$this->Service_provided_model->insert($idMaintenance, $cpfMechanics,$serviceId, $quantity);				
+  
+						$this->Service_provided_model->insert($maintenanceId, $employeesId, $serviceId, $quantity);				
 					} 				
 					
 					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Adicionado com sucesso'));
@@ -51,14 +52,14 @@ class Service_Provided_controller extends CI_Controller {
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>$e->getMessage()));
 			}
 			
-			redirect('index.php/maintenance/change/'. $idMaintenance);
+			redirect('index.php/maintenance/workon/'. $maintenanceId);
 
 		}
 		
 	}
 
 
-	public function destroy($id, $idMaintenance) {
+	public function destroy($id, $maintenanceId) {
 		$resultset = $this->Service_provided_model->show(array('id'=>$id));		
 
 		if(count($resultset) == 1 && $this->Service_provided_model->delete($id)){			
@@ -67,7 +68,7 @@ class Service_Provided_controller extends CI_Controller {
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel deletar seu registro'));				
 		}
 
-		redirect('index.php/maintenance/change/'. $idMaintenance);
+		redirect('index.php/maintenance/workon/'. $maintenanceId);
 	}
 
 }

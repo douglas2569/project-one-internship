@@ -1,12 +1,14 @@
 <?php
 class Service_provided_model extends CI_Model {
    
-    public function show( $column = null, $queryEntity = 'services_provided' ) {
+    public function show( $columns = null, $queryEntity = 'services_provided' ) {
         $this->db->select("*");
-        if(!is_null($column)){ 
-            
+        if(!is_null($columns)){             
             if($this->db->get($queryEntity)->result_id->num_rows > 0){  
-                $this->db->where( key($column),  $column[key($column)]); 
+               
+                foreach($columns as $key => $column){                     
+                    $this->db->where( $key,  $column);
+                }
                 
                 return $this->db->get($queryEntity)->result_array();
             }else{
@@ -25,12 +27,12 @@ class Service_provided_model extends CI_Model {
         
     }
     
-    public function insert($idMaintenance, $cpfMechanics, $serviceId, $quantity
+    public function insert($maintenanceId, $employeesId, $serviceId, $quantity
     ){             
         $data = array(
-            'id_maintenance_fk' => $idMaintenance,
-            'cpf_mechanics_fk' => $cpfMechanics,
-            'id_services_fk' => $serviceId,
+            'maintenance_id' => $maintenanceId,
+            'employees_id' => $employeesId,
+            'services_id' => $serviceId,
             'quantity' => $quantity
         );        
         
@@ -50,13 +52,14 @@ class Service_provided_model extends CI_Model {
 
     }
 
-    public function updateOnlyQuantity($serviceId , $quantity){
+    public function updateOnlyQuantity($serviceId , $employeesId, $quantity){
         $data = array(                        
             'quantity' => $quantity,
          );
                           
             
-        $this->db->where('id_services_fk', $serviceId);
+        $this->db->where('services_id', $serviceId);
+        $this->db->where('employees_id', $employeesId);
         
         if(!$this->db->update('services_provided', $data)){
             $db_error = $this->db->error();        

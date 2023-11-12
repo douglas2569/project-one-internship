@@ -463,14 +463,18 @@ ON maintenance_inventory.automotive_parts_id = automotive_parts.id
 DROP VIEW IF EXISTS v_services_provided_mechanics;
 CREATE VIEW v_services_provided_mechanics
 AS 
-SELECT services_provided.id, services_provided.services_id,  services_provided.quantity as quantity_service, services_provided.maintenance_id,
-services.name as service_name,
-employees.name as mechanic_name
+SELECT services_provided.id AS services_provided_id, 
+services_provided.services_id,  
+services_provided.quantity AS quantity_service, 
+services_provided.maintenance_id,
+services.name AS service_name,
+employees.name AS mechanic_name,
+employees.cpf
 FROM services_provided 
 INNER JOIN services 
 ON services.id = services_provided.services_id 
 INNER JOIN employees 
-ON employees.cpf = services_provided.employees_id 
+ON employees.id = services_provided.employees_id 
 
 DROP VIEW IF EXISTS v_inventory_automotive_parts ;
 CREATE VIEW v_inventory_automotive_parts
@@ -779,6 +783,7 @@ DROP PROCEDURE IF EXISTS sp_delete_maintenance_inventory;
 DELIMITER $$
 
 CREATE PROCEDURE sp_delete_maintenance_inventory(
+	 automotive_parts_id_p INT,
 	 reference_number_p VARCHAR(50),
     quantity_p VARCHAR(50)
   )
@@ -799,16 +804,16 @@ BEGIN
     END;
 
     START TRANSACTION;
-        SET track_no = '1/3'; 
+        SET track_no = '1/2'; 
         SELECT quantity INTO inventory_quantity FROM inventory WHERE reference_number_p COLLATE utf8mb4_general_ci  = inventory.reference_number; 
         
         SET newQuantity = inventory_quantity + quantity_p; 
-        SET track_no = '2/3';
-        UPDATE inventory SET quantity = newQuantity WHERE inventory.reference_number = reference_number_p;
+        SET track_no = '2/2';
+        UPDATE inventory SET quantity = newQuantity WHERE inventory.reference_number = reference_number_p COLLATE utf8mb4_general_ci;
 
-        DELETE FROM maintenance_inventory WHERE maintenance_inventory.reference_number = reference_number_p;
+        DELETE FROM maintenance_inventory WHERE maintenance_inventory.automotive_parts_id = automotive_parts_id_p COLLATE utf8mb4_general_ci;
         
-        SET track_no = '0/3';
+        SET track_no = '0/2';
         SET @full_error = 'successfully executed.';
         SELECT track_no,@full_error;
     COMMIT;
@@ -823,6 +828,7 @@ DELIMITER $$
 
 CREATE PROCEDURE sp_update_maintenance_inventory_inventory(
     maintenance_id_p INT,
+    automotive_parts_id_p INT,
     reference_number_p VARCHAR(50),
 	  quantity_maintenance_inventory_p INT,
     quantity_inventory_p INT
@@ -851,7 +857,7 @@ BEGIN
         UPDATE maintenance_inventory 
         SET         
         quantity = quantity_maintenance_inventory_p
-        WHERE maintenance_inventory.reference_number = reference_number_p COLLATE utf8mb4_general_ci 
+        WHERE maintenance_inventory.automotive_parts_id = automotive_parts_id_p COLLATE utf8mb4_general_ci 
         AND
         maintenance_inventory.maintenance_id = maintenance_id_p COLLATE utf8mb4_general_ci;
 
@@ -869,6 +875,7 @@ DROP PROCEDURE IF EXISTS sp_register_maintenance_inventory;
 DELIMITER $$
 
 CREATE PROCEDURE sp_register_maintenance_inventory(	  
+    automotive_parts_Id_p INT,
     reference_number_p VARCHAR(100),
     maintenance_id_p INT,
     inventory_quantity_p INT,
@@ -895,8 +902,8 @@ BEGIN
         WHERE inventory.reference_number = reference_number_p COLLATE utf8mb4_general_ci;
 
         SET track_no = '2/2'; 
-        INSERT INTO maintenance_inventory (reference_number, maintenance_id, quantity) 
-        VALUES(reference_number_p, maintenance_id_p, maintenance_inventory_quantity_p);        
+        INSERT INTO maintenance_inventory (automotive_parts_Id, maintenance_id, quantity) 
+        VALUES(automotive_parts_Id_p, maintenance_id_p, maintenance_inventory_quantity_p);        
         
         
         SET track_no = '0/2';

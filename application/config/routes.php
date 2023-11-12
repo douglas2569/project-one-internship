@@ -40,7 +40,7 @@ $route['maintenance/finaldate/(:any)'] = 'Maintenance_controller/finalDate/$1';
 
 $route['maintenanceinventory/store/(:num)'] = 'Maintenance_Inventory_controller/store/$1'; 
 $route['maintenanceinventory/destroy/(:any)'] = 'Maintenance_Inventory_controller/destroy/$1'; 
-$route['maintenanceinventory/destroy/(:num)/(:any)/(:num)'] = 'Maintenance_Inventory_controller/destroy/$1/$2/$3'; 
+$route['maintenanceinventory/destroy/(:num)/(:num)/(:any)/(:num)'] = 'Maintenance_Inventory_controller/destroy/$1/$2/$3/$4'; 
 
 $route['service'] = 'Service_controller';
 $route['service/store'] = 'Service_controller/store';

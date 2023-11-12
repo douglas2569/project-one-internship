@@ -17,9 +17,9 @@
 
                     <div class="form-group"> 
                         <label for="auto-part" class="form-label"><strong>Peça*</strong></label>
-                            <select name="reference_number_quantity" class="form-select form-select-md mb-3" aria-label="select">                
+                            <select name="automotivePartsIdAndReferenceNumberAndQuantity" class="form-select form-select-md mb-3" aria-label="select">                
                                 <?php foreach($partList as $part): ?>
-                                    <option value="<?= $part['reference_number']."|".$part['quantity'] ?>">
+                                    <option value="<?= $part['automotive_parts_id']."|".$part['reference_number']."|".$part['quantity'] ?>">
                                         <?= $part['name'] ?> - Qt: <?= $part['quantity'] ?>
                                         
                                     </option>
@@ -31,11 +31,12 @@
                         <input class="form-control" inputmode="numeric" pattern="\d*"  type="number" name='quantity' id="quantity" value='1' min="1" /> 
                     </div>
 
-                    <button class="btn  btn-primary" type='submit'>Adicionar</button>              
+                    <div class="form-footer">
+                        <button class="btn  btn-primary" type='submit'>Adicionar</button>                
+                        <a class="btn btn-secondary" href="<?= site_url("index.php/maintenance/workon/".$maintenance_id) ?>"> Voltar </a>             
+                    </div>  
             </form> 
-            <a class="nav-link" href="<?= site_url() ?>">
-                     <i class="bi bi-arrow-left  h2"></i>                     
-            </a>             
+                       
         </div>
     </main>
 

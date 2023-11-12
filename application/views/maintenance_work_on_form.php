@@ -162,7 +162,7 @@
 
                                         <div class="item-footer" >                                        
                                             <?php if($this->session-> permissions['work_on_maintaining']['delete'] == 1  && $maintenance[0]['status'] != '2'): ?> 
-                                                    <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['maintenance_id'].'/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
+                                                    <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['maintenance_id'].'/'.$part['automotive_parts_id'].'/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
                                                         <i class="bi bi-trash3"></i>                               
                                                     </a>
                                                 <?php endif ?>  
@@ -201,7 +201,7 @@
                                     <div class="item-body">
                                         <div>
                                             <strong>Código:</strong>
-                                            <?= $service['id_services_fk'] ?>
+                                            <?= $service['services_id'] ?>
                                         </div>
                                         
                                         <div>
@@ -226,7 +226,7 @@
                                     <div class="item-footer" >
                                     
                                         <?php if($this->session-> permissions['work_on_maintaining']['delete'] == 1  && $maintenance[0]['status'] != '2'): ?> 
-                                            <a href= "<?= site_url('index.php/serviceprovided/destroy/'.$maintenanceService[0]['id'].'/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
+                                            <a href= "<?= site_url('index.php/serviceprovided/destroy/'.$maintenanceService[0]['services_provided_id'].'/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
                                                 <i class="bi bi-trash3"></i>                               
                                             </a>
                                         <?php endif ?> 

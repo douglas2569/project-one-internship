@@ -27,17 +27,18 @@ class Maintenance_inventory_model extends CI_Model {
         
     }
     
-    public function insert($reference_number, $id_maintenance, $inventoryQuantity, $maintenanceInventoryQuantity
+    public function insert($automotivePartsId, $referenceNumber, $maintenanceId, $inventoryQuantity, $maintenanceInventoryQuantity
     ){             
         $data = array(
-            'reference_number' => $reference_number,
-            'id_maintenance' => $id_maintenance,
+            'automotive_parts_Id' => $automotivePartsId,
+            'reference_number' => $referenceNumber,
+            'maintenance_id' => $maintenanceId,
             'inventory_quantity' => $inventoryQuantity,
             'maintenance_inventory_quantity' => $maintenanceInventoryQuantity
         ); 
 
                 
-        $resultset = $this->db->query("CALL sp_register_maintenance_inventory('$data[reference_number]','$data[id_maintenance]', '$data[inventory_quantity]', '$data[maintenance_inventory_quantity]')")->result_array();
+        $resultset = $this->db->query("CALL sp_register_maintenance_inventory('$data[automotive_parts_Id]','$data[reference_number]','$data[maintenance_id]', '$data[inventory_quantity]', '$data[maintenance_inventory_quantity]')")->result_array();
         return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']); 
         
         
@@ -45,27 +46,29 @@ class Maintenance_inventory_model extends CI_Model {
     }
     
         
-    public function delete($reference_number,  $quantity){        
+    public function delete($automotivePartsId, $reference_number,  $quantity){        
 
         $data = array(
+            'automotive_parts_id' => $automotivePartsId,
             'reference_number' => $reference_number,
             'quantity' => $quantity                    
         );         
           
-        $resultset = $this->db->query("CALL sp_delete_maintenance_inventory('$data[reference_number]', '$data[quantity]')")->result_array();
+        $resultset = $this->db->query("CALL sp_delete_maintenance_inventory('$data[automotive_parts_id]','$data[reference_number]', '$data[quantity]')")->result_array();
         return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);  
 
     }
 
-    public function updateQuantityMaintenanceInventory($idMaintenance, $referenceNumber, $newQuanityMaintenanceInventory, $newQuanityInventory){   
+    public function updateQuantityMaintenanceInventory($maintenanceId, $automotivePartsId, $referenceNumber, $newQuanityMaintenanceInventory, $newQuanityInventory){   
         $data = array(
-            'id_maintenance' => $idMaintenance,
+            'maintenance_id' => $maintenanceId,
+            'automotive_parts_id' => $automotivePartsId,
             'reference_number' => $referenceNumber,
             'quantity_maintenance_inventory' => $newQuanityMaintenanceInventory,
             'quantity_inventory' => $newQuanityInventory            
          );                          
         
-        $resultset =  $this->db->query("CALL sp_update_maintenance_inventory_inventory('$data[id_maintenance]', '$data[reference_number]', '$data[quantity_maintenance_inventory]','$data[quantity_inventory]')")->result_array();             
+        $resultset =  $this->db->query("CALL sp_update_maintenance_inventory_inventory('$data[maintenance_id]', '$data[automotive_parts_id]', '$data[reference_number]', '$data[quantity_maintenance_inventory]','$data[quantity_inventory]')")->result_array();             
         
         return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']); 
 

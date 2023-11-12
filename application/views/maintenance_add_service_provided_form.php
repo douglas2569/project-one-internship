@@ -9,7 +9,7 @@
                 <h1>Adicionar Serviço </h1>
             </div>              
             <?php echo form_open_multipart('index.php/serviceprovided/store/'.$maintenance_id ); ?>
-                <input type="hidden" name='cpfMechanics' value='<?= $this->session->cpf ?>'> 
+                <input type="hidden" name='employeesId' value='<?= $this->session->employees_id ?>'> 
 
                     <div class="form-group">
                         <label for="auto-part" class="form-label">
@@ -31,14 +31,13 @@
                     <div class="form-group">                        
                         <label class="form-label" for="quantity"><strong>Quantidade*</strong></label>
                         <input class="form-control" inputmode="numeric" pattern="\d*"  type="number" name='quantity' id="quantity" value='1' min="1" /> 
-                    </div>
-                    
+                    </div>                    
                    
-                    <button class="btn  btn-primary" type='submit'>Adicionar</button>              
-            </form> 
-            <a class="nav-link" href="<?= site_url() ?>">
-                     <i class="bi bi-arrow-left  h2"></i>                     
-            </a>             
+                    <div class="form-footer">
+                        <button class="btn  btn-primary" type='submit'>Adicionar</button>                
+                        <a class="btn btn-secondary" href="<?= site_url("index.php/maintenance/workon/".$maintenance_id) ?>"> Voltar </a>             
+                    </div>            
+            </form>                        
         </div>
     </main>
 
