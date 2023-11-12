@@ -151,7 +151,7 @@ class Maintenance_controller extends CI_Controller {
 		}catch(Exception $e){	
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel iniciar a manutenção '.$e->getMessage()));					
 		}						
-		redirect('index.php/maintenance/change/'.$id);						
+		redirect('index.php/maintenance/workon/'.$id);						
 		
 		
 	}
@@ -164,7 +164,7 @@ class Maintenance_controller extends CI_Controller {
 		}catch(Exception $e){	
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel iniciar a manutenção '.$e->getMessage()));					
 		}						
-		redirect('index.php/maintenance/change/'.$id);						
+		redirect('index.php/maintenance/workon/'.$id);						
 		
 		
 	}
