@@ -65,6 +65,40 @@ class User_model extends CI_Model {
 
     }
 
+    public function updateUsernameOnly($id, $username, $status){   
+        $data = array(
+            'username' => $username,
+            'status' => $status
+        );             
+            
+        $this->db->where('id', $id);
+        
+        if(!$this->db->update('users', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);                
+            }
+        }
+
+    }
+
+    public function updatePasswordOnly($id, $password, $status){   
+        $data = array(
+            'password' => $password,
+            'status' => $status
+        );             
+            
+        $this->db->where('id', $id);
+        
+        if(!$this->db->update('users', $data)){
+            $db_error = $this->db->error();        
+            if (!empty($db_error)) {            
+                throw new Exception($db_error['message']);                
+            }
+        }
+
+    }
+
     public function delete($id){        
 
         $this->db->where('id', $id);                     

@@ -92,6 +92,26 @@ class User_controller extends CI_Controller {
 					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel atualizar. Erro: '.$e->getMessage()));
 				}
 
+			}elseif($username && empty($password)){
+
+				try{				
+					$this->User_model->updateUsernameOnly($id, $username, $status);									
+					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));
+					redirect('index.php/user');						
+				}catch(Exception $e){	
+					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel atualizar. Erro: '.$e->getMessage()));
+				}
+
+			}elseif(empty($username) && $password){
+
+				try{				
+					$this->User_model->updatePasswordOnly($id, encryptHash($password), $status);									
+					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Atualizado com sucesso'));
+					redirect('index.php/user');						
+				}catch(Exception $e){	
+					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel atualizar. Erro: '.$e->getMessage()));
+				}
+
 			}else{
 
 				if (count($resultsetUser) == 1) {
