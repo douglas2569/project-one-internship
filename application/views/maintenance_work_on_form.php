@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['maintenance']['read'] == 0): ?>
+<?php if($this->session-> permissions['work_on_maintaining']['read'] == 0): ?>
       <?php 
         redirect('/');
         exit;      
@@ -74,8 +74,8 @@
                                 <li>
                                      <label class="form-label">
                                         <strong>Data inicial:</strong>
-                                        <?php if(empty($maintenance[0]['initial_date'])):  ?>
-                                            <?php if($this->session-> position == 'mecânico'): ?> 
+                                        <?php if(empty($maintenance[0]['initial_date'])):  ?>                                         
+                                            <?php if($this->session-> permissions['work_on_maintaining']['update'] == 1): ?>
                                                 <a href="<?= site_url('index.php/maintenance/initialdate/'.$maintenance[0]['id']) ?>" class='btn btn-primary' >Iniciar</a>  
                                              <?php else: ?>
                                                     Não iniciada.    
@@ -92,7 +92,7 @@
                                         <label class="form-label">
                                             <strong>Data final:</strong>
                                             <?php if(empty($maintenance[0]['final_date'])):  ?>
-                                                <?php if($this->session-> position == 'mecânico'): ?> 
+                                                <?php if($this->session-> permissions['work_on_maintaining']['update'] == 1): ?>
                                                 <a href="<?= site_url('index.php/maintenance/finaldate/'.$maintenance[0]['id']) ?>" class='btn btn-primary'>Finalizar</a>  
                                                 <?php else: ?>
                                                     Não finalizada 
@@ -116,8 +116,8 @@
                     </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">                    
-                    <?php if($this->session-> position == 'mecânico' && $maintenance[0]['status'] != '2'): ?> 
+                    <div class="accordion-body">
+                        <?php if($this->session-> permissions['work_on_maintaining']['create'] == 1 && $maintenance[0]['status'] != '2'): ?> 
                         <div class="accordion-sub-button">                            
                                 <a href="<?= site_url('index.php/maintenanceinventory/store/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
                                     <i class="bi bi-plus-circle"></i>
@@ -160,9 +160,9 @@
                                             
                                         </div>  
 
-                                        <div class="item-footer" >
-                                            <?php if($this->session-> position == 'mecânico'  && $maintenance[0]['status'] != '2'): ?> 
-                                                    <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['id_maintenance'].'/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
+                                        <div class="item-footer" >                                        
+                                            <?php if($this->session-> permissions['work_on_maintaining']['delete'] == 1  && $maintenance[0]['status'] != '2'): ?> 
+                                                    <a href="<?= site_url('index.php/maintenanceinventory/destroy/'.$part['maintenance_id'].'/'.$part['reference_number'].'/'.$part['quantity']) ?>"  class="btn" role="button">
                                                         <i class="bi bi-trash3"></i>                               
                                                     </a>
                                                 <?php endif ?>  
@@ -184,7 +184,8 @@
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <?php if($this->session-> position == 'mecânico'  && $maintenance[0]['status'] != '2'): ?> 
+                
+                    <?php if($this->session-> permissions['work_on_maintaining']['create'] == 1  && $maintenance[0]['status'] != '2'): ?> 
                         <div class="accordion-sub-button">                        
                             <a  href='<?= site_url('index.php/serviceprovided/store/'.$maintenance[0]['id']) ?>' class="btn" role="button">
                                 <i class="bi bi-plus-circle"></i>
@@ -223,7 +224,8 @@
                                     </div> 
                                     
                                     <div class="item-footer" >
-                                        <?php if($this->session-> position == 'mecânico'  && $maintenance[0]['status'] != '2'): ?> 
+                                    
+                                        <?php if($this->session-> permissions['work_on_maintaining']['delete'] == 1  && $maintenance[0]['status'] != '2'): ?> 
                                             <a href= "<?= site_url('index.php/serviceprovided/destroy/'.$maintenanceService[0]['id'].'/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
                                                 <i class="bi bi-trash3"></i>                               
                                             </a>

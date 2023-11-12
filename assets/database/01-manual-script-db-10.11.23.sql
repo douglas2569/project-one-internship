@@ -293,7 +293,7 @@ values('pedro01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye'
 INSERT INTO users (username, password, employees_id) 
 values('antonio01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 40);
 
-INSERT INTO features (name) values('inventory'), ('maintenance'), ('services'), ('users'), ('vehicles'), ('services_provided'),('permissions_features');
+INSERT INTO features (name) values('inventory'), ('maintenance'), ('services'), ('users'), ('vehicles'), ('services_provided'),('permissions_features'), ('work_on_maintaining');
 
 INSERT INTO `permissions` (`id`, `create`, `read`, `update`, `delete`) VALUES (NULL, '0', '0', '0', '0'), (NULL, '1', '1', '1', '1'), (NULL, '0', '1', '0', '0'), (NULL, '1', '1', '0', '1'); 
 
@@ -306,6 +306,8 @@ INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_
 INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('35', '42', '35'), ('37', '42', '36'), ('36', '42', '35');
 
 INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('38', '41', '36'), ('38', '35', '36'), ('38', '36', '36'), ('38', '42', '36'), ('38', '37', '36'), ('38', '40', '36'), ('38', '38', '36'), ('38', '39', '36');
+
+INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('35', '43', '37'), ('37', '43', '37'), ('36', '43', '38'), ('38', '43', '36');
 
 INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brach_activity, auto_vehicle_workstops_id) 
 values('60655945000173','Bosch','Robert Bosch Ltda','Rua W, n° 98, Parque Tocas, Cidade Normal-CE, Brasil','8588873266',

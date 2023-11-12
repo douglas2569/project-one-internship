@@ -68,10 +68,10 @@ class Maintenance_controller extends CI_Controller {
 
 
 	}
-	public function change($id) {
+	public function workOn($id) {
 		$maintenace = $this->Maintenance_model->show(array('id'=> $id));
 		$maintenaceParts = $this->Maintenance_model->show(array('maintenance_id'=> $id), 'v_maintenance_inventory_parts');
-		$maintenanceService = $this->Service_provided_model->show(array('maintenance_id '=> $id), 'v_services_provided_mechanics');		
+		$maintenanceService = $this->Service_provided_model->show(array('maintenance_id'=> $id), 'v_services_provided_mechanics');				
 		
 		
 		if(!is_array($maintenace)){						
@@ -96,7 +96,7 @@ class Maintenance_controller extends CI_Controller {
 				$data['maintenanceService'] = ($maintenanceService) ? $maintenanceService: false;
 				
 				$this->load->view('templates/header.php');
-				$this->load->view('maintenance_manipulation_form.php',$data);
+				$this->load->view('maintenance_work_on_form.php',$data);
 				$this->load->view('templates/footer.php');
 
 			}

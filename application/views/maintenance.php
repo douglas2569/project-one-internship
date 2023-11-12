@@ -48,7 +48,7 @@
                                                 <td> <?= $maintenance['id'] ?></td>                                
                                                 <td><?= $maintenance['vehicles_customer_license_plate'] ?></td>                                
                                                 <td>
-                                                <a  href="<?= site_url('index.php/maintenance/change/'.$maintenance['id']) ?>">
+                                                <a  href="<?= site_url('index.php/maintenance/workon/'.$maintenance['id']) ?>">
                                                     <?= $maintenance['reason'] ?></a> 
                                                 </td>                                
                                                 <td>
