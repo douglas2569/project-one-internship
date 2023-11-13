@@ -14,7 +14,7 @@ class Vehicle_customer_model extends CI_Model {
         return $this->db->get("v_vehicles_customers")->result_array();
     } 
     
-    public function insert($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand, $auto_vehicle_workstops_id ='35'){   
+    public function insert($cpf, $name, $address, $phoneNumber, $email, $licensePlate, $model, $brand, $auto_vehicle_workstops_id ='1'){   
         
         $data = array(
             'cpf' => $cpf,

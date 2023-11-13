@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `auto_vehicle_workshops` (
   `phone_number` VARCHAR(50) NOT NULL UNIQUE,
   `email` VARCHAR(255) NOT NULL UNIQUE,  
   PRIMARY KEY (`id`)  
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `positions`;
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `positions` (
   `name` VARCHAR(50) NOT NULL UNIQUE,  
 
   PRIMARY KEY (`id`)  
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `employees`;
 CREATE TABLE IF NOT EXISTS `employees` (
@@ -41,14 +41,14 @@ CREATE TABLE IF NOT EXISTS `employees` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`positions_id`) REFERENCES `positions`(`id`),
   FOREIGN KEY (`auto_vehicle_workshops_id`) REFERENCES `auto_vehicle_workshops`(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `features`;
 CREATE TABLE IF NOT EXISTS `features` (
   `id` INT NOT NULL AUTO_INCREMENT,  
   `name` VARCHAR(50) NOT NULL UNIQUE, 
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE IF NOT EXISTS `permissions` (
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `delete` tinyint DEFAULT 0,
   
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `permissions_features`;
 CREATE TABLE IF NOT EXISTS `permissions_features` (
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `permissions_features` (
   FOREIGN KEY (`features_id`) REFERENCES `features`(`id`),
   FOREIGN KEY (`permissions_id`) REFERENCES `permissions`(`id`)
   
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 	
   PRIMARY KEY (`id`),
   FOREIGN KEY (`employees_id`) REFERENCES `employees`(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `suppliers`;
 CREATE TABLE IF NOT EXISTS `suppliers` (
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `suppliers` (
   
   PRIMARY KEY (`id`),
   FOREIGN KEY (`auto_vehicle_workstops_id`) REFERENCES `auto_vehicle_workshops`(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE IF NOT EXISTS `customers` (
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   
   PRIMARY KEY (`id`),
   FOREIGN KEY (`auto_vehicle_workstops_id`) REFERENCES `auto_vehicle_workshops`(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `vehicles`;
 CREATE TABLE IF NOT EXISTS `vehicles` (
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
   `brand` VARCHAR(50) NOT NULL,  
   
   PRIMARY KEY (`id`) 
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `vehicles_customer`;
 CREATE TABLE IF NOT EXISTS `vehicles_customer` (
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `vehicles_customer` (
   FOREIGN KEY (`customers_id`) REFERENCES `customers`(`id`) ,
   FOREIGN KEY (`vehicles_id`) REFERENCES `vehicles`(`id`) 
 
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `automotive_parts`;
 CREATE TABLE IF NOT EXISTS `automotive_parts` (
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `automotive_parts` (
   `status` tinyint default 1, 
   
   PRIMARY KEY (`id`) 
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `vehicles_automotive_parts`;
 CREATE TABLE IF NOT EXISTS `vehicles_automotive_parts` (
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `vehicles_automotive_parts` (
   PRIMARY KEY (`automotive_parts_id`, `vehicles_id`),   
   FOREIGN KEY (`automotive_parts_id`) REFERENCES `automotive_parts`(`id`),
   FOREIGN KEY (`vehicles_id`) REFERENCES `vehicles`(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `maintenance`;
 CREATE TABLE IF NOT EXISTS `maintenance` (
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `maintenance` (
   
   PRIMARY KEY (`id`),   
   FOREIGN KEY (`vehicles_customer_license_plate`) REFERENCES `vehicles_customer`(`license_plate`)  
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE IF NOT EXISTS `inventory` (
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   
   PRIMARY KEY (`reference_number`),   
   FOREIGN KEY (`reference_number`) REFERENCES `automotive_parts`(`reference_number`)  
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `maintenance_inventory`;
 CREATE TABLE IF NOT EXISTS `maintenance_inventory` (
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `maintenance_inventory` (
   PRIMARY KEY (`automotive_parts_id`,`maintenance_id`),   
   FOREIGN KEY (`automotive_parts_id`) REFERENCES `automotive_parts`(`id`),  
   FOREIGN KEY (`maintenance_id`) REFERENCES `maintenance`(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `services`;
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `services` (
   
   PRIMARY KEY (`id`),   
   FOREIGN KEY (`auto_vehicle_workstops_id`) REFERENCES `auto_vehicle_workshops`(`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `services_provided`;
 CREATE TABLE IF NOT EXISTS `services_provided` (
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `services_provided` (
   FOREIGN KEY (`employees_id`) REFERENCES `employees`(`id`),
   FOREIGN KEY (`services_id`) REFERENCES `services`(`id`)  
   
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `work_orders`;
 CREATE TABLE IF NOT EXISTS `work_orders` (
@@ -238,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `work_orders` (
   `status` tinyint default 0, 
   
   PRIMARY KEY (`id`) 
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 
 
@@ -251,87 +251,70 @@ INSERT INTO positions (name) values ('mecânico');
 INSERT INTO positions (name) values ('gerente');
 INSERT INTO positions (name) VALUES ('root');
 
-INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
-values('62565411030', 'Cassio Malvarisco', 'Rua F, n° 1634, Parque das flores, Cidade dos Altos-CE, Brasil', 
-'8588965833', 'cassiomalvarisco@hotmail.com', 35, 35);
+INSERT INTO `employees` (`cpf`, `name`, `address`, `phone_number`, `email`, `auto_vehicle_workshops_id`, `positions_id`) VALUES ('62565411030', 'Cassio Malvarisco', 'Rua F, n° 1634, Parque das flores, Cidade dos Altos-CE, Brasil', '8588965833', 'cassiomalvarisco@hotmail.com', 1, 3),
+('82178774083', 'Angelo Tavares', 'Rua 22, n° 34, Bom Jardim, Cidade Baixa-CE, Brasil', 
+'8599465833', 'angelotavares@outlook.com', 1, 1),
+('01069520055', 'Leticia Juliana', 'Rua 64, n° 03, Parque Jardim, Cidade Media-CE, Brasil', 
+'8590765833', 'leticiajuliana@gmail.com', 1, 1),
+('41740738055', 'João Juliano', 'Rua 64, n° 03, Parque Jardim, Cidade Media-CE, Brasil', 
+'8590665833', 'joaojuliano@gmail.com', 1, 2),
+('46899032040', 'Pedro Gustavo', 'Rua A, n° 11, Parque Jardim, Cidade Media-CE, Brasil', 
+'8597765833', 'pedrogustavo@gmail.com', 1, 2),
+('31685403077', 'Antonio Ferreira', 'Rua Z, n° 98, Parque alvoras, Cidade Normal-CE, Brasil', 
+'8597788833', 'antonioferreia@yahoo.com', 1, 2),
+('00000000000', 'Root', NULL, '00000000000', '', 1, 4);
 
-INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
-values('82178774083', 'Angelo Tavares', 'Rua 22, n° 34, Bom Jardim, Cidade Baixa-CE, Brasil', 
-'8599465833', 'angelotavares@outlook.com', 35, 35);
+INSERT INTO users (username, password, employees_id) values
+('cassio00', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 1),
+('angelo02', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 2),
+('leticia02', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 3),
+('joao01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 4),
+('pedro01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 5),
+('antonio01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 6),
+('Root', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 7);
 
-INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
-values('01069520055', 'Leticia Juliana', 'Rua 64, n° 03, Parque Jardim, Cidade Media-CE, Brasil', 
-'8590765833', 'leticiajuliana@gmail.com', 35, 35);
+INSERT INTO features (name) values('inventory'), ('maintenance'), ('services'), ('users'), ('vehicles_customer'), ('services_provided'),('permissions_features'), ('work_on_maintaining'), ('employees');
 
-INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
-values('41740738055', 'João Juliano', 'Rua 64, n° 03, Parque Jardim, Cidade Media-CE, Brasil', 
-'8590665833', 'joaojuliano@gmail.com', 36, 35);
+INSERT INTO `permissions` (`create`, `read`, `update`, `delete`) VALUES(0, 0, 0, 0), (1, 1, 1, 1), (0, 1, 0, 0), (1, 1, 0, 1);
 
-INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
-values('46899032040', 'Pedro Gustavo', 'Rua A, n° 11, Parque Jardim, Cidade Media-CE, Brasil', 
-'8597765833', 'pedrogustavo@gmail.com', 36, 35);
+#atendente
+INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('1', '9', '1'), ('1', '1', '3'), ('1', '2', '2'), ('1', '7', '1'), ('1', '3', '3'), ('1', '6', '1'), ('1', '4', '1'), ('1', '5', '2'), ('1', '8', '3');
 
-INSERT INTO employees (cpf, name, address, phone_number, email, positions_id, auto_vehicle_workshops_id) 
-values('31685403077', 'Antonio Ferreira', 'Rua Z, n° 98, Parque alvoras, Cidade Normal-CE, Brasil', 
-'8597788833', 'antonioferreia@yahoo.com', 36, 35);
+#gerente
+INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('3', '9', '2'), ('3', '1', '2'), ('3', '2', '3'), ('3', '7', '2'), ('3', '3', '2'), ('3', '6', '3'), ('3', '4', '2'), ('3', '5', '3'), ('3', '8', '3');
 
-INSERT INTO users (username, password, employees_id) 
-values('cassio00', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 35);
+#mecanico
+INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('2', '9', '1'), ('2', '1', '3'), ('2', '2', '3'), ('2', '7', '1'), ('2', '3', '3'), ('2', '6', '2'), ('2', '4', '1'), ('2', '5', '1'), ('2', '8', '2');
 
-INSERT INTO users (username, password, employees_id) 
-values('angelo02', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 36);
-
-INSERT INTO users (username, password, employees_id) 
-values('leticia02', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 37);
-
-INSERT INTO users (username, password, employees_id) 
-values('joao01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 38);
-
-INSERT INTO users (username, password, employees_id) 
-values('pedro01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 39);
-
-INSERT INTO users (username, password, employees_id) 
-values('antonio01', '$2y$10$.0URBGQDyTW77ezc/iy.FOD9zVODmuQIE0HuRSeW9cocuEso3Uzye', 40);
-
-INSERT INTO features (name) values('inventory'), ('maintenance'), ('services'), ('users'), ('vehicles'), ('services_provided'),('permissions_features'), ('work_on_maintaining');
-
-INSERT INTO `permissions` (`id`, `create`, `read`, `update`, `delete`) VALUES (NULL, '0', '0', '0', '0'), (NULL, '1', '1', '1', '1'), (NULL, '0', '1', '0', '0'), (NULL, '1', '1', '0', '1'); 
-
-INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('35', '35', '35'), ('35', '36', '36'), ('35', '40', '37'), ('35', '37', '35'), ('35', '38', '35'), ('35', '39', '35');
-
-INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('37', '35', '36'), ('37', '36', '37'), ('37', '40', '37'), ('37', '37', '36'), ('37', '38', '36'), ('37', '39', '37');
-
-INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('36', '35', '35'), ('36', '36', '37'), ('36', '40', '38'), ('36', '37', '35'), ('36', '38', '35'), ('36', '39', '35');
-
-INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('35', '42', '35'), ('37', '42', '36'), ('36', '42', '35');
-
-INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('38', '41', '36'), ('38', '35', '36'), ('38', '36', '36'), ('38', '42', '36'), ('38', '37', '36'), ('38', '40', '36'), ('38', '38', '36'), ('38', '39', '36');
-
-INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('35', '43', '37'), ('37', '43', '37'), ('36', '43', '38'), ('38', '43', '36');
+#root
+INSERT INTO `permissions_features` (`positions_id`, `features_id`, `permissions_id`) VALUES ('4', '9', '2'), ('4', '1', '2'), ('4', '2', '2'), ('4', '7', '2'), ('4', '3', '2'), ('4', '6', '2'), ('4', '4', '2'), ('4', '5', '2'), ('4', '8', '2');
 
 INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brach_activity, auto_vehicle_workstops_id) 
 values('60655945000173','Bosch','Robert Bosch Ltda','Rua W, n° 98, Parque Tocas, Cidade Normal-CE, Brasil','8588873266',
-'bosch@yahoo.com','Fabricante de equipamentos automotivos e peças',35);
+'bosch@yahoo.com','Fabricante de equipamentos automotivos e peças',1);
 
 INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brach_activity, auto_vehicle_workstops_id) 
 values('82804111000115','3M','3M do Brasil Ltda','Rua Y, n° 55, Sola Aí, Cidade Fortaleza-CE, Brasil','8588776544',
-'3M@yempresa.com','ornecedora de produtos automotivos, como lixas, adesivos e polidores',35);
+'3M@yempresa.com','ornecedora de produtos automotivos, como lixas, adesivos e polidores',1);
 
 INSERT INTO suppliers (cnpj, name, business_name, address, phone_number, email, brach_activity, auto_vehicle_workstops_id) 
 values('12557378000170','Pirelli','Pirelli Pneus Ltda','Rua P, n° 11, Maga, Cidade Pacajus-CE, Brasil','8588006544',
-'pirelli@yempresa.com','fabricante de pneus automotivos',35);
+'pirelli@yempresa.com','fabricante de pneus automotivos',1);
 
 INSERT INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
 values('03966183080','Juliano Pasquim','Rua T, n° 10,Chico da Doca, Cidade Paçoca-CE, Brasil','8588873217',
-'julianopasquim@outlook.com',35);
+'julianopasquim@outlook.com',1);
 
 INSERT INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
 values('29012056071','Paula Abreu','Rua B, n° 10,Chico Tico, Cidade Paçoca-CE, Brasil','8588879917',
-'paulaabreu@outlook.com',35);
+'paulaabreu@outlook.com',1);
 
 INSERT INTO customers (cpf, name, address, phone_number, email, auto_vehicle_workstops_id) 
 values('11924265095','Ivan Nildo','Rua C, n° 11, Tata Tico, Cidade Pamanha-CE, Brasil','8587779917',
-'ivannildo@outlook.com',35);
+'ivannildo@outlook.com',1);
+
+INSERT INTO vehicles (model, brand) 
+values('Mystique GS 2.5 V6 Mec.','Mercury');
 
 INSERT INTO vehicles (model, brand) 
 values('Grand Cherokee Limited LX 5.9','Jeep');
@@ -339,11 +322,7 @@ values('Grand Cherokee Limited LX 5.9','Jeep');
 INSERT INTO vehicles (model, brand) 
 values('CT200h F-Sport 1.8 16V HIBRID Aut.','Lexus');
 
-INSERT INTO vehicles (model, brand) 
-values('Mystique GS 2.5 V6 Mec.','Mercury');
-
-INSERT INTO `vehicles_customer` (`id`, `license_plate`, `customers_id`, `vehicles_id`) VALUES (NULL, 'MXQ9131', '35', '36'), (NULL, 'LST5307', '37', '35'), (NULL, 'HPP2304', '36', '37');
-
+INSERT INTO `vehicles_customer` (`license_plate`, `customers_id`, `vehicles_id`) VALUES ('IAK7872', '1', '3'), ('KDM0428', '3', '2'), ('LWP1328', '2', '3');
 
 INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('12345','Filtro de Óleo','Fram','Este filtro de óleo Fram possui uma classificação de eficiência de filtração de 98%, com uma capacidade de retenção de partículas de até 10 micra, protegendo o motor contra desgaste prematuro.', 15.00);
@@ -375,36 +354,17 @@ values('M12345','Filtro de Ar','K&N','Os filtros de ar K&N possuem uma capacidad
 INSERT INTO automotive_parts (reference_number, name, brand, description, unit_value) 
 values('M87654','Pneu Traseiro','Michelin','O pneu traseiro Michelin possui uma construção radial com uma classificação de velocidade de até 180 km/h, oferecendo aderência excepcional em uma variedade de condições de pilotagem.', 50.00);
 
+INSERT INTO `maintenance` (`reason`, `description`, `status`, `initial_date`, `final_date`, `vehicles_customer_license_plate`) VALUES ('Carro não liga', 'Quando giro a chave ele faz tantaaaatan', '0', NULL, NULL, 'IAK7872');
 
-INSERT INTO maintenance(reason, description, status, initial_date, final_date, vehicles_customer_license_plate ) 
-values('Carro não liga','Quando giro a chave ele faz tantaaaatan',0, null, null, 'MXQ9131');
-
-INSERT INTO maintenance(reason, description, status, vehicles_customer_license_plate ) 
-values('Pneu vazio','Passei por cima de um prego',0,'LST5307');
-
-INSERT INTO maintenance(reason, description, status, vehicles_customer_license_plate ) 
-values('farol esquerdo piscando','uma bola bateu nele',0,'HPP2304');
-
-
-INSERT INTO inventory(reference_number, quantity) 
-values('12345',200),('67890',30),('54321',100),('98765',250),('23456',5),('M78901',1),('M23456',0),('M65432',35),('M12345',10),('M87654',13);
-
-INSERT INTO `maintenance_inventory` (`automotive_parts_id`, `maintenance_id`, `quantity`) VALUES ('35', '35', '1'), ('36', '37', '1'), ('37', '36', '1');
 
 INSERT INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
-values('Troca de Pneu','Troca basica','20',20.00,35);
+values('Troca de Pneu','Troca basica','20',20.00,1);
 
 INSERT INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
-values('Troca de retrovisor','Troca basica','10',10,35);
+values('Troca de retrovisor','Troca basica','10',10,1);
 
 INSERT INTO services(name, description, estimatedTime, cost, auto_vehicle_workstops_id) 
-values('Lampada do farol','Troca basica','15',20.5,35);
-
-INSERT INTO `services_provided` (`id`, `initial_date`, `final_date`, `quantity`, `maintenance_id`, `employees_id`, `services_id`) VALUES (NULL, NULL, NULL, '1', '35', '38', '35'); 
-
-INSERT INTO `services_provided` (`id`, `initial_date`, `final_date`, `quantity`, `maintenance_id`, `employees_id`, `services_id`) VALUES (NULL, NULL, NULL, '1', '37', '39', '36');
-
-INSERT INTO `services_provided` (`id`, `initial_date`, `final_date`, `quantity`, `maintenance_id`, `employees_id`, `services_id`) VALUES (NULL, NULL, NULL, '1', '36', '40', '37');
+values('Lampada do farol','Troca basica','15',20.5,1);
 
 DROP VIEW IF EXISTS v_users;
 CREATE VIEW v_users
@@ -433,7 +393,7 @@ FROM customers
 INNER JOIN vehicles_customer
 ON customers.id  = vehicles_customer.customers_id
 INNER JOIN vehicles
-ON vehicles.id  = vehicles_customer.vehicles_id
+ON vehicles.id  = vehicles_customer.vehicles_id;
 
 DROP VIEW IF EXISTS v_employees;
 CREATE VIEW v_employees
@@ -442,14 +402,14 @@ SELECT employees.id, employees.cpf, employees.name, employees.address, employees
 positions.name AS position_name
 FROM employees
 INNER JOIN positions
-ON  employees.positions_id  = positions.id
+ON  employees.positions_id  = positions.id;
 
 
 DROP VIEW IF EXISTS v_maintenance_inventory;
 CREATE VIEW v_maintenance_inventory
 AS 
-SELECT maintenance.id as maintenance_id, maintenance.reason, maintenance.description, maintenance.status, maintenance.initial_date, maintenance.final_date, maintenance.vehicles_customer_license_plate , maintenance_inventory.reference_number 
-FROM maintenance INNER JOIN maintenance_inventory ON maintenance.id = maintenance_inventory.maintenance_id  
+SELECT maintenance.id as maintenance_id, maintenance.reason, maintenance.description, maintenance.status, maintenance.initial_date, maintenance.final_date, maintenance.vehicles_customer_license_plate
+FROM maintenance INNER JOIN maintenance_inventory ON maintenance.id = maintenance_inventory.maintenance_id;  
 
 DROP VIEW IF EXISTS v_maintenance_inventory_parts;
 CREATE VIEW v_maintenance_inventory_parts
@@ -458,7 +418,7 @@ SELECT maintenance_inventory.automotive_parts_id as automotive_parts_id,  mainte
 automotive_parts.reference_number, automotive_parts.image_address , automotive_parts.name , automotive_parts.description, automotive_parts.unit_value,  automotive_parts.brand,  automotive_parts.status 
 FROM maintenance_inventory 
 INNER JOIN automotive_parts 
-ON maintenance_inventory.automotive_parts_id = automotive_parts.id 
+ON maintenance_inventory.automotive_parts_id = automotive_parts.id ;
 
 DROP VIEW IF EXISTS v_services_provided_mechanics;
 CREATE VIEW v_services_provided_mechanics
@@ -474,7 +434,7 @@ FROM services_provided
 INNER JOIN services 
 ON services.id = services_provided.services_id 
 INNER JOIN employees 
-ON employees.id = services_provided.employees_id 
+ON employees.id = services_provided.employees_id; 
 
 DROP VIEW IF EXISTS v_inventory_automotive_parts ;
 CREATE VIEW v_inventory_automotive_parts
@@ -482,7 +442,7 @@ AS
 SELECT automotive_parts.image_address , automotive_parts.reference_number,  automotive_parts.name , automotive_parts.description, automotive_parts.brand,  automotive_parts.unit_value, automotive_parts.status,  automotive_parts.id AS automotive_parts_id, inventory.quantity   
 FROM automotive_parts 
 INNER JOIN inventory 
-ON automotive_parts.reference_number = inventory.reference_number 
+ON automotive_parts.reference_number = inventory.reference_number; 
 
 DROP PROCEDURE IF EXISTS sp_register_vehicle_costumer;
 DELIMITER $$
@@ -649,8 +609,8 @@ END; $$
 
 DELIMITER ;
 
--- CALL sp_inventory('caminho.jpg','23423423423','nome da peça','marca da peça',
--- 'descrição da pela........',11, 200);
+# CALL sp_inventory('caminho.jpg','23423423423','nome da peça','marca da peça',
+# 'descrição da pela........',11, 200);
 
 DROP PROCEDURE IF EXISTS sp_delete_part_inventory;
 DELIMITER $$
@@ -692,7 +652,7 @@ END; $$
 DELIMITER ;
 
 
---  collation_server
+#  collation_server
 DROP PROCEDURE IF EXISTS sp_delete_maintenance;
 DELIMITER $$
 
@@ -904,7 +864,7 @@ END; $$
 
 DELIMITER ;
 
-
+# collation_connection 
 DROP PROCEDURE IF EXISTS sp_register_maintenance_inventory;
 DELIMITER $$
 
@@ -933,7 +893,7 @@ BEGIN
     START TRANSACTION;
         SET track_no = '1/2';
         UPDATE  inventory SET quantity = inventory_quantity_p 
-        WHERE inventory.reference_number = reference_number_p COLLATE utf8mb4_general_ci;
+        WHERE inventory.reference_number = reference_number_p COLLATE utf8mb4_unicode_ci;
 
         SET track_no = '2/2'; 
         INSERT INTO maintenance_inventory (automotive_parts_Id, maintenance_id, quantity) 

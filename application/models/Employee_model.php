@@ -14,7 +14,7 @@ class Employee_model extends CI_Model {
         return $this->db->get("v_employees")->result_array();
     } 
     
-    public function insert($cpf, $name, $address, $phoneNumber, $email, $positionId, $auto_vehicle_workstops_id ='35'){  
+    public function insert($cpf, $name, $address, $phoneNumber, $email, $positionId, $auto_vehicle_workstops_id ='1'){  
         
         $data = array(
             'cpf' => $cpf,

@@ -25,7 +25,7 @@ class Service_model extends CI_Model {
         
     }
     
-    public function insert($name, $description, $estimatedTime, $cost, $auto_vehicle_workstops_id = '35'){             
+    public function insert($name, $description, $estimatedTime, $cost, $auto_vehicle_workstops_id = '1'){             
         $data = array(
             'name' => $name,
             'description' => $description,
