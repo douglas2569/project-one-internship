@@ -52,3 +52,7 @@ $route['service/destroy/(:num)'] = 'Service_controller/destroy/$1';
 $route['serviceprovided/store/(:num)'] = 'Service_Provided_controller/store/$1'; 
 $route['serviceprovided/destroy/(:num)/(:num)'] = 'Service_Provided_controller/destroy/$1/$2'; 
 
+$route['permissionfeature'] = 'Permission_Feature_controller'; 
+$route['permissionfeature/store/(:num)'] = 'Permission_Feature_controller/store/$1'; 
+$route['permissionfeature/update/(:num)/(:num)'] = 'Permission_Feature_controller/update/$1/$2'; 
+
