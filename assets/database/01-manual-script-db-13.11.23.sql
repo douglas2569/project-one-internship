@@ -1,10 +1,15 @@
 /* Primeiro veja o colocation  */
 /* CREATE DATABASE 'workshopprime' */
 /* VER QUAL COLOCATION PARA VC COLOCAR  VARIAVEIS */
-COLLATE
-SHOW VARIABLES LIKE '%char%' 
-SHOW VARIABLES LIKE '%collation%'
+#COLLATE
+#SHOW VARIABLES LIKE '%char%' 
+#SHOW VARIABLES LIKE '%collation%'
 
+# Configuração para funcionar esse codigo
+# collation_connection:  utf8mb4_unicode_ci 
+# collation_database:  utf8mb4_0900_ai_ci 
+# collation_server:  utf8mb4_0900_ai_ci 
+# default_collation_for_utf8mb4:  utf8mb4_0900_ai_ci 
 
 DROP TABLE IF EXISTS `auto_vehicle_workshops`;
 CREATE TABLE IF NOT EXISTS `auto_vehicle_workshops` (
@@ -672,13 +677,13 @@ BEGIN
 
     START TRANSACTION;
         SET track_no = '1/3'; 
-        DELETE FROM services_provided WHERE id_p COLLATE latin1_swedish_ci  = services_provided.maintenance_id;
+        DELETE FROM services_provided WHERE id_p COLLATE utf8mb4_0900_ai_ci  = services_provided.maintenance_id;
    
         SET track_no = '2/3';
-        DELETE FROM maintenance_inventory WHERE id_p COLLATE latin1_swedish_ci  = maintenance_inventory.maintenance_id;
+        DELETE FROM maintenance_inventory WHERE id_p COLLATE utf8mb4_0900_ai_ci  = maintenance_inventory.maintenance_id;
 
         SET track_no = '3/3';
-        DELETE FROM maintenance WHERE id_p COLLATE latin1_swedish_ci  = maintenance.id;
+        DELETE FROM maintenance WHERE id_p COLLATE utf8mb4_0900_ai_ci  = maintenance.id;
         
         SET track_no = '0/3';
         SET @full_error = 'successfully executed.';
@@ -802,10 +807,10 @@ BEGIN
 
     START TRANSACTION;
         SET track_no = '1/2'; 
-        DELETE FROM users WHERE employees_id = id_p COLLATE latin1_swedish_ci;
+        DELETE FROM users WHERE employees_id = id_p COLLATE utf8mb4_0900_ai_ci;
    
         SET track_no = '2/2';
-        DELETE FROM employees  WHERE id = id_p COLLATE latin1_swedish_ci;
+        DELETE FROM employees  WHERE id = id_p COLLATE utf8mb4_0900_ai_ci;
         
         SET track_no = '0/2';
         SET @full_error = 'successfully executed.';
