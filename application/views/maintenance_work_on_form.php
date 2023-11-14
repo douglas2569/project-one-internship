@@ -130,13 +130,6 @@
                                 <?php foreach($maintenanceParts as $part ): ?>
                                     <div class="item">
                                         <div class="item-body">
-                                            <?php if(!empty($part['image_address'])): ?>
-                                            <!-- <tr>
-                                                <td class="form-label">
-                                                    <img src="<?= site_url('assets/images/'.$part['image_address']) ?>" alt="">                                            
-                                                </td>
-                                            </tr> -->
-                                            <?php endif ?>
                                             
                                                 <div >
                                                     <strong>Nº Ref:</strong>

@@ -35,12 +35,12 @@
                         <?php foreach($partsList as $part): ?>    
                         <li class="parts-item item">
                             <div class="item-body">
-                                <div>
+                                <div class="left-content">
                                     <?php if(!empty($part['image_address'])): ?>
                                         <img class="img-fluid" src="<?= site_url('assets/images/'). $part['image_address']  ?>" alt="<?= $part['name'] ?>">
                                     <?php endif ?>
                                 </div>
-                                <div>
+                                <div class="right-content">
                                     <div class="part-reference"> 
                                             <strong>Ref: </strong> <?= $part['reference_number'] ?> 
                                     </div>

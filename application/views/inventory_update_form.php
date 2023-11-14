@@ -18,15 +18,15 @@
                 <h1>Modificar Peça</h1>
             </div>              
             <?php echo form_open_multipart('index.php/inventory/edit/'.$part[0]['reference_number']); ?>
-                    <!-- <div class="input-group mb-3">
+                    <div class="input-group mb-3">
                         <img src="<?= site_url('assets/images/'.$part[0]['image_address']) ?>" class="img-fluid" alt="">
                         <input type="hidden" name="imageInventoryPartOld" value="<?= $part[0]['image_address'] ?>">
-                    </div>  -->
+                    </div> 
 
-                    <!-- <div class="input-group mb-3">
+                    <div class="input-group mb-3">
                         <label class="input-group-text" for="image-inventory-part">Upload Imagem</label>
                         <input type="file" class="form-control" id="image-inventory-part" name="imageInventoryPart">
-                    </div> -->
+                    </div>
                 
                     <div class="form-group">
                         <label for="reference" class="form-label">Referência*</label>

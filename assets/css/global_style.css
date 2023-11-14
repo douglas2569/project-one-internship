@@ -18,6 +18,14 @@ main > .container{
     max-width: 720px;
 }
 
+nav{
+    background-color: var(--primary-color);
+}
+nav a span, li.nav-item a.nav-link{
+    color: var(--white-color);
+    font-weight: 600;
+}
+
 nav > .container{
     max-width: 720px;
 }
@@ -29,10 +37,19 @@ h1{
     font-size: 1.6em;
 }
 
+
 .toolbar{
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--md-margin2); 
+    margin-bottom: var(--lg-margin3); 
+    padding: var(--sm-margin2) 0 ;
+
+    background-color:var(--primary-color);
+}
+
+.toolbar a, .item-footer a{
+    color: var(--white-color);
+    font-weight: 600;
 }
 
 .form-inline{
@@ -88,27 +105,50 @@ main .container a.nav-link{
 }
 
 .item .item-body + div.item-footer{
-    display: flex;
-    justify-content: end;    
+    display: flex;    
+    justify-content: space-around;    
     border-bottom: 1px solid var(--gray-color3);
     margin-bottom: var(--sm-margin3);
 }
 
+
+.item-footer{
+    margin-top: var(--sm-margin3);
+    background-color: var(--unsaturated-secondary-color);
+}
+
 footer{
     margin-top: var(--md-margin1);
+    background-color: var(--primary-color);
 }
 
 footer > .container{
     display: flex;
     justify-content: center;
+    padding: var(--md-padding1) 0;
+    align-items: center;
 }
 
 footer p a{
-    text-align: center;
-    color: var(--black-color1);
+    text-align: center;    
+    color: var(--white-color);
 }
 
-@media (min-width: 540px) {
-    
+footer p{
+    font-weight: 600;
+    color: var(--white-color);
+}
+
+
+@media (min-width: 768px) {
+   
+    .item .item-body + div.item-footer{
+        justify-content: end;          
+        
+    }
+
+    .item-footer{
+        margin-top: 0;
+    }
 }
 

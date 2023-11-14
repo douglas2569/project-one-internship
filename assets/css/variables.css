@@ -34,4 +34,10 @@
     --black-color3: rgb(53, 53, 53);
     --gray-color3: rgb(143, 143, 143);
     --white-color: rgb(231, 231, 231);
+    
+    --primary-color: #3F119E;
+    --unsaturated-primary-color: #63469e;
+    --secondary-color: #119E28;
+    --unsaturated-secondary-color: #499b57;
+    
 }

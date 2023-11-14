@@ -45,6 +45,9 @@ class Inventory_controller extends CI_Controller {
 				if($this->upload->do_upload('imageInventoryPart')){
 					$imageType = $this->upload->data('file_ext');					
 					$address = $imageName.$imageType;
+				}else{														
+					$this->session->set_flashdata('message', array('type'=>'error','content'=>$this->upload->display_errors()));
+					redirect('index.php/inventory/store');
 				}
 				
 			}	
@@ -146,6 +149,9 @@ class Inventory_controller extends CI_Controller {
 				if($this->upload->do_upload('imageInventoryPart')){
 					$imageType = $this->upload->data('file_ext');					
 					$address = $imageName.$imageType;
+				}else{														
+					$this->session->set_flashdata('message', array('type'=>'error','content'=>$this->upload->display_errors()));
+					redirect('index.php/inventory/edit/'.$reference);
 				}
 				
 			}else{
@@ -170,8 +176,8 @@ class Inventory_controller extends CI_Controller {
 					
 			}catch(Exception $e){
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel atualizar. Erro: '.$e->getMessage()));
-				// if(!empty($address))
-				// 	unlink('assets/images/'.$address);
+				if(!empty($address))
+					unlink('assets/images/'.$address);
 			}
 
 			redirect('index.php/inventory');

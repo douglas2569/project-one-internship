@@ -43,3 +43,17 @@ legend{
 table  tr  td{
     margin-bottom: 0;    
 }
+
+.accordion-body .item .item-body + div.item-footer{
+    display: flex;    
+    justify-content: flex-end;    
+    border-bottom: 1px solid var(--gray-color3);
+    margin-bottom: var(--sm-margin3);
+}
+
+@media (min-width: 768px){
+    .accordion-body .item .item-body {
+        display: block;
+       
+    }
+}
