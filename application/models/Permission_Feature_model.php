@@ -1,5 +1,5 @@
 <?php
-class Permissions_features_model extends CI_Model {
+class Permission_Feature_model extends CI_Model {
    
     public function show( $column = null, $queryEntity = 'v_permissions_features' ) {
         $this->db->select("*");

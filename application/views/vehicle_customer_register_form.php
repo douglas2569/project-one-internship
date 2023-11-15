@@ -14,7 +14,7 @@
                    endif
             ?> 
             <div class="title-box">
-                <h1>Cadastrar de Veiculo</h1>
+                <h1>Cadastrar Cliente</h1>
             </div>              
             <?php echo form_open('index.php/vehiclecustomer/store'); ?>   
                 <fieldset class="form-group border">

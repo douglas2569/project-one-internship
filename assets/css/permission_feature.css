@@ -1,0 +1,16 @@
+.permissions-panel{
+    display: none;
+}
+.permissions-panel > div{
+    display: flex;
+    gap: var(--lg-margin1);
+}
+
+.permissions-panel > div label{
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.permissions-panel > div input[type='checkbox']{
+    cursor: pointer;    
+}

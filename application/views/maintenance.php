@@ -25,7 +25,7 @@
                     <?php endif ?>                                                                                 
 
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Pesquisar" aria-label="Search">
                         <a class="btn my-sm-0">
                             <i class="bi bi-search"></i>
                         </a>

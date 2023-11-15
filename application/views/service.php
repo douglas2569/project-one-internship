@@ -6,7 +6,7 @@
       
 <?php endif ?>  
 
-    <main>
+    <main>    
         <div class="container"> 
             <div class="title-box">
                 <h1>Serviços</h1>
@@ -24,7 +24,7 @@
                     <?php endif ?>
 
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Pesquisar" aria-label="Search">
                         <a class="btn my-sm-0">
                             <i class="bi bi-search"></i>
                         </a>
@@ -46,9 +46,10 @@
 
                                  </div>
                                 <div> <strong>Valor: </strong> <?= $service['cost'] ?> </div>
-                                <div> 
-                                         <strong>Status: </strong> 
-                                         <?php 
+                                <?php if($this->session-> permissions['services']['update'] == 1): ?>
+                                    <div> 
+                                        <strong>Status: </strong> 
+                                        <?php 
                                             switch($service['status']):
                                                 case '0':
                                                         echo "Desativado";
@@ -57,8 +58,9 @@
                                                     echo "Ativado";
                                                 break;
                                             endswitch;
-                                         ?>
+                                        ?>
                                     </div>
+                                <?php endif ?>
                             </div>
                             <div class="item-footer">
                                 <?php if($this->session-> permissions['services']['update'] == 1): ?>

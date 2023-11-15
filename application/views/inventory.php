@@ -23,11 +23,12 @@
                     <a class="btn "></a>
                 <?php endif ?>                                         
                 <form class="form-inline">
-                    <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2 search-item" type="search" placeholder="Pesquisar" aria-label="Search">
                     <a class="btn my-sm-0">
                         <i class="bi bi-search"></i>
                     </a>
-                </form>                   
+                </form>               
+                
                 </div>
                 <div class="inventory-main">
                     <?php  if(count($partsList) > 0): ?>
@@ -54,19 +55,21 @@
                                     <div>  
                                         <strong>Quantidade: </strong> <?= $part['quantity'] ?> 
                                     </div>
-                                    <div> 
-                                         <strong>Status: </strong> 
-                                         <?php 
-                                            switch($part['status']):
-                                                case '0':
-                                                        echo "Desativada";
+                                    <?php if($this->session-> permissions['inventory']['update'] == 1): ?>
+                                        <div> 
+                                            <strong>Status: </strong> 
+                                            <?php 
+                                                switch($part['status']):
+                                                    case '0':
+                                                            echo "Desativada";
+                                                        break;
+                                                    case '1':
+                                                        echo "Ativada";
                                                     break;
-                                                case '1':
-                                                    echo "Ativada";
-                                                break;
-                                            endswitch;
-                                         ?>
-                                    </div>
+                                                endswitch;
+                                            ?>
+                                        </div>
+                                    <?php endif ?>
                                 </div>
                             </div>
                             <div class="item-footer">

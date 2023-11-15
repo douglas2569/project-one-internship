@@ -6,8 +6,8 @@ class Auth_controller extends CI_Controller {
 	 public function __construct() {
 		parent::__construct();
 		$this->load->model('User_model');		
-		$this->load->model('Permissions_features_model');		
-		$this->load->model('Permissions_model');		
+		$this->load->model('Permission_Feature_model');		
+		$this->load->model('Permission_model');		
 	 }
 	
 	public function index() {
@@ -23,12 +23,12 @@ class Auth_controller extends CI_Controller {
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Usuário invalido.'));									
 				
 			}else{
-				$permissionsFeature = $this->Permissions_features_model->show(array('positions_id' =>$resultsetUser[0]['positions_id'] ));			
+				$permissionsFeature = $this->Permission_Feature_model->show(array('positions_id' =>$resultsetUser[0]['positions_id'] ));			
 			
 				$permissionList  = [];
 				foreach($permissionsFeature as $permissionFeature){	
 					$permissionList[$permissionFeature['features_name']]  = 
-						$this->Permissions_model->show(array('id' => $permissionFeature['permissions_id']))[0];				 
+						$this->Permission_model->show(array('id' => $permissionFeature['permissions_id']))[0];				 
 					
 				}
 

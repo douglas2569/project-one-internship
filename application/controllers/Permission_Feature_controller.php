@@ -5,9 +5,7 @@ class Permission_Feature_controller extends CI_Controller {
 
 	 public function __construct() {
 		parent::__construct();
-		$this->load->model('Permission_Feature_model');		
-		$this->load->model('Permission_model');		
-		$this->load->model('Feature_model');						
+		$this->load->model('Permission_Feature_model');									
 		$this->load->model('Position_model');						
 	 }
 	

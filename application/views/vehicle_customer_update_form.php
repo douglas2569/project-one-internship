@@ -14,7 +14,7 @@
                    endif
             ?> 
             <div class="title-box">
-                <h1>Alterar Veiculo</h1>
+                <h1>Alterar Cliente</h1>
             </div>              
             <?php                 
                 echo form_open('index.php/vehiclecustomer/edit/'.$vehicleCustomer[0]['license_plate'].'/'.$vehicleCustomer[0]['cpf']); ?>   

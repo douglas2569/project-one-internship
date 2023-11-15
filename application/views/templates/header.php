@@ -13,13 +13,14 @@
     <title><?= siteTitle() ?></title>
 </head>
 <body>
+<?php 
+        if(isset($this->session->message)):
+                    echo renderMessage($this->session->message);
+        endif 
+    ?>
     <header>
         <div class="container">
-            <?php if(isset($this->session->message)):
-                    echo renderMessage($this->session->message);
-                 endif
-            ?>
-            
+                      
             <!-- <nav class="navbar fixed-top navbar-expand-md px-3 navbar-light bg-light"  id="navbar"> -->
             <nav class="navbar fixed-top navbar-expand-md px-3 navbar-light"  id="navbar">
                 <div class="container">
@@ -51,7 +52,7 @@
                             
                             <?php if($this->session-> permissions['vehicles_customer']['read'] == '1'): ?> 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?= site_url('index.php/vehiclecustomer') ?>">Veículos</a>
+                                    <a class="nav-link" href="<?= site_url('index.php/vehiclecustomer') ?>">Clientes</a>
                                 </li>
                             <?php endif ?> 
 
@@ -67,7 +68,7 @@
                                 </li>
                             <?php endif ?> 
 
-                            <?php if($this->session-> permissions['permissions_features']['read'] == '2'): ?> 
+                            <?php if($this->session-> permissions['permissions_features']['read'] == '1'): ?> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/permissionfeature') ?>">Permissões</a>
                                 </li>
@@ -83,4 +84,6 @@
             </nav> 
 
         </div>
+       
     </header>
+    

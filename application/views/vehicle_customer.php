@@ -9,7 +9,7 @@
     <main>
         <div class="container"> 
             <div class="title-box">
-                <h1>Veiculos</h1>
+                <h1>Clientes</h1>
             </div> 
                                
             <div class="vehicles">

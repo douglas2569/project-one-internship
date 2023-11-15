@@ -9,20 +9,20 @@
 
 @media (min-width: 768px) {
     
-    .item .item-body{        
+    .inventory-main .item .item-body{        
         display: flex;
         gap: var(--md-margin3);
         align-items: center;
     }
-    .item .item-body img{
+    .inventory-main .item .item-body img{
         width: 250px;
     }
 
-    .item-body .right-content{
+    .inventory-main .item-body .right-content{
         align-self: flex-start;
     }
 
-    .item-body .right-content .part-reference{
+    .inventory-main .item-body .right-content .part-reference{
         margin-bottom: var(--sm-margin3);
     }
 

@@ -3,6 +3,7 @@
 @import url("./login.css");
 @import url("./maintenance.css");
 @import url("./inventory.css");
+@import url("./permission_feature.css");
 
 *{
     list-style: none;
@@ -44,7 +45,7 @@ h1{
     margin-bottom: var(--lg-margin3); 
     padding: var(--sm-margin2) 0 ;
 
-    background-color:var(--primary-color);
+    background-color:var(--unsaturated-secondary-color);
 }
 
 .toolbar a, .item-footer a{
@@ -143,7 +144,7 @@ footer p{
 @media (min-width: 768px) {
    
     .item .item-body + div.item-footer{
-        justify-content: end;          
+        justify-content: end;         
         
     }
 

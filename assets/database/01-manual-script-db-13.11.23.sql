@@ -449,6 +449,21 @@ FROM automotive_parts
 INNER JOIN inventory 
 ON automotive_parts.reference_number = inventory.reference_number; 
 
+DROP VIEW IF EXISTS v_permissions_features  ;
+CREATE VIEW v_permissions_features
+AS 
+SELECT  permissions_features.positions_id, permissions_features.features_id, 
+ positions.name AS  positions_name,
+ features.name AS features_name,
+ permissions_features.permissions_id
+FROM permissions_features 
+INNER JOIN positions 
+ON permissions_features.positions_id = positions.id
+INNER JOIN features
+ON permissions_features.features_id = features.id
+
+
+
 DROP PROCEDURE IF EXISTS sp_register_vehicle_costumer;
 DELIMITER $$
 

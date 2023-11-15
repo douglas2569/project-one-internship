@@ -1,4 +1,4 @@
-<?php if($this->session-> permissions['permissions']['read'] == 0): ?>
+<?php if($this->session-> permissions['permissions_features']['read'] == 0): ?>
       <?php 
         redirect('/');
         exit;      
@@ -14,73 +14,48 @@
                                
             <div>
                 <div class="permissions-header toolbar">
-                    <?php if($this->session-> permissions['permissions']['create'] == 1): ?> 
-                        <a href='<?= site_url('index.php/permissionsfeatures/store') ?>' class="btn ">
-                            <i class="bi bi-plus-circle"></i>
-                            Novo
-                        </a> 
-                    <?php else: ?>
-                        <a class="btn "></a> 
-                    <?php endif ?>
+                    <label for="vehicle" class="form-label">Cargos*</label>
+                    <select name="position_id" class="form-select form-select-md mb-3" aria-label="select">                
+                        <option min='1'  value="0" selected>Escolha um opção</option>
+                        <?php foreach($positionList as $position): ?>
+                            <option value="<?= $position['id'] ?>"><?= $position['name'] ?></option>
+                            <?php endforeach ?>    
+                    </select>                 
+                        
+                </div>   
+                    
+                <div class="permissions-panel"> 
+                    <label class="form-label h5">Permissão</label>
+                    <div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="create-check">Cadastrar</label>
+                            <input class="form-check-input" type="checkbox" id="create-check" name="create">
+                        </div>
 
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Search" aria-label="Search">
-                        <a class="btn my-sm-0">
-                            <i class="bi bi-search"></i>
-                        </a>
-                    </form>                  
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="read-check">Visualizar</label>
+                            <input class="form-check-input" type="checkbox" id="read-check" name="read">
+                        </div>
+
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="update-check">Atualizar</label>
+                            <input class="form-check-input" type="checkbox" id="update-check" name="update">
+                        </div>
+
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="update-check">Excluir</label>
+                            <input class="form-check-input" type="checkbox" id="delete-check" name="delete">
+                        </div>
+                    </div>
+
+
                 </div>
-
-                <div class="permissions-list-main">
-                <?php  if(count($permissionsfeaturesList) > 0): ?>
-                    <ul class="permissions-list container-fluid">
-                        <?php foreach($permissionsfeaturesList as $permissionsfeatures): ?>    
-                            <?php if($permissionsfeatures['permissionsfeaturesname'] != 'root'): ?>    
-                                <li class="permissions-item item" >
-                                    <div class="item-body"> 
-                                        <div> <strong>CPF: </strong> <?= $permissionsfeatures['cpf'] ?> </div>
-                                        <div> <strong>Nome: </strong> <?= $permissionsfeatures['employee_name'] ?> </div>
-                                        <div> <strong>permissionsfeaturesname: </strong> <?= $permissionsfeatures['permissionsfeaturesname'] ?> </div>
-                                        <div> <strong>Cargo: </strong> <?= $permissionsfeatures['position_name'] ?> </div>                                 
-                                        <div> 
-                                                <strong>Status: </strong> 
-                                                <?php 
-                                                    switch($permissionsfeatures['status']):
-                                                        case '0':
-                                                                echo "Desativado";
-                                                            break;
-                                                        case '1':
-                                                            echo "Ativado";
-                                                        break;
-                                                    endswitch;
-                                                ?>
-                                            </div>
-                                    </div>
-                                    <div class="item-footer">
-                                        <?php if($this->session-> permissions['permissions']['update'] == 1): ?> 
-                                            <a  href="<?= site_url('index.php/permissionsfeatures/edit/'.$permissionsfeatures['permissionsfeatures_id']) ?>" class="btn edit-button">
-                                                <i class="bi bi-pencil-square"></i>
-                                                Editar
-                                            </a>
-                                        <?php endif ?>
-                                        
-                                        <?php if($this->session-> permissions['permissions']['delete'] == 1): ?> 
-                                            <a  href="<?= site_url('index.php/permissionsfeatures/destroy/'.$permissionsfeatures['permissionsfeatures_id']) ?>" class="btn destroy-button">
-                                                <i class="bi bi-trash3"></i>
-                                                Excluir
-                                            </a>
-                                        <?php endif ?>
-                                    </div>
-                                </li>
-
-                            <?php endif ?>
-                        <?php endforeach ?>
-                    </ul>
-                    <?php  else: ?>                         
-                        <p class="h6" >Nenhum serviço cadastrado</p>
-                    <?php endif; ?> 
-                </div>
+                
             </div>
+            
+
+
+
         </div>
     </main>
  
