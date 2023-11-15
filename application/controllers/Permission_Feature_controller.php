@@ -16,6 +16,12 @@ class Permission_Feature_controller extends CI_Controller {
 		$this->load->view('permission_feature', $data);
 		$this->load->view('templates/footer');
 	 }
+
+	 public function show($id){			
+		$permissions = $this->Permission_Feature_model->show(array('positions_id'=>$id));			
+		
+		echo json_encode($permissions);
+	}
 	
 	
 }

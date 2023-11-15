@@ -68,7 +68,7 @@
                                 </li>
                             <?php endif ?> 
 
-                            <?php if($this->session-> permissions['permissions_features']['read'] == '1'): ?> 
+                            <?php if($this->session-> permissions['permissions_features']['read'] == '2'): ?> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= site_url('index.php/permissionfeature') ?>">Permissões</a>
                                 </li>

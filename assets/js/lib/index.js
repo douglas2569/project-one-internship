@@ -1,3 +1,5 @@
+import { getAll } from "./requests/index"
+
 function showSandwichMenu(){
     const sandwichMenuButton = document.querySelector('.navbar-toggler')
     sandwichMenuButton &&
@@ -49,11 +51,51 @@ function recordDeletionAlert(){
     destroyButton.forEach((btn)=>{
         btn.addEventListener('click',(e)=>{        
             if(!confirm("Realmente deseja excluir esse registo?")){
-               e.preventDefault()
+                e.preventDefault()
             }
         });
     })    
     
 }
 
-export {showSandwichMenu, showAccordionMaintenance, searchItem, recordDeletionAlert}
+
+ function getPermissionsByPosition(){
+    const positionList = document.querySelector('.select-position-list')
+    if(!positionList) return    
+    positionList.addEventListener('change', async (event)=>{
+        const permissionsPanel = document.querySelector('.permissions-panel')
+        
+        let url = (window.location.href).split('index.php')[0]
+        
+        let endpoint = `${url}index.php/permissionfeature/show/${event.target.value}`        
+        let resultset = await getAll(endpoint)
+        console.log(endpoint)
+        if(resultset.error){
+            console.log(resultset.error)
+        }else{
+            permissionsPanel.style.display = 'block'
+            const permissions = resultset.data[0]         
+            
+            // const inputs = document.querySelectorAll(".permissions-panel > div .form-check input")
+
+            //     inputs.forEach((input)=>{
+            //         for (const [key, value] of Object.entries(permissions)) {
+            //             if(input.name == key ){
+            //                 input.value = value
+            //                 break
+            //             }
+            //         }
+            //     })
+              
+            
+        }
+
+    })
+
+
+}
+
+
+
+
+export {showSandwichMenu, showAccordionMaintenance, searchItem, recordDeletionAlert, getPermissionsByPosition}
