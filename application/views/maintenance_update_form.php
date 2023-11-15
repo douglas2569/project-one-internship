@@ -62,6 +62,36 @@
                     </div>  
                 <?php endif;  ?>  
 
+                <div class="form-group">
+                        <label class="form-label">Estado</label>
+                        <div class='status-radio'>
+                            <div class="form-check">
+                                <?php if($maintenance[0]['live_status'] == '1'): ?>
+                                    <input class="form-check-input" type="radio" name="liveStatus" id="status" value="1" checked>
+                                    <?php else: ?>
+                                        <input class="form-check-input" type="radio" name="liveStatus" id="status" value="1" >
+                                <?php endif ?>
+                                <label class="form-check-label" for="status">
+                                    Ativar
+                                </label>
+                            </div>                            
+                                
+                            
+                            <div class="form-check">
+                                <?php if($maintenance[0]['live_status'] == '0'): ?>
+                                    <input class="form-check-input" type="radio" name="liveStatus" id="status" value="0" checked>
+                                    <?php else: ?>
+                                        <input class="form-check-input" type="radio" name="liveStatus" id="status2" value="0" >
+                                <?php endif ?>
+                                <label class="form-check-label" for="status2">
+                                    Desativar
+                                </label>
+                            </div>
+                        </div>
+                  </div>
+
+
+
                 <div class="form-footer">
                     <button class="btn btn-primary" type='submit'>Salvar</button>              
                    <a class="btn btn-secondary" href="<?= site_url() ?>"> Voltar </a>             

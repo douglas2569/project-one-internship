@@ -43,7 +43,8 @@
                             </thead>
                             <tbody>
                                 
-                                    <?php foreach($maintenanceList as $maintenance): ?>                            
+                                    <?php foreach($maintenanceList as $maintenance): ?> 
+                                        <?php  if($maintenance['live_status'] == 1 || $this->session-> permissions['maintenance']['create'] == 1): ?>                           
                                             <tr class='itens-list item' > 
                                                 <td> <?= $maintenance['id'] ?></td>                                
                                                 <td><?= $maintenance['vehicles_customer_license_plate'] ?></td>                                
@@ -53,20 +54,25 @@
                                                 </td>                                
                                                 <td>
                                                     <?php 
-                                                        switch($maintenance['status']):
-                                                            case 0:
-                                                                echo 'Não iniciada';
-                                                            break;
-            
-                                                            case 1:                                                    
-                                                                echo 'Iniciada';
-                                                            break;
-            
-                                                            case 2:
-                                                                echo 'Concluida';
-                                                            break;
-            
-                                                            endswitch;
+                                                       if($maintenance['live_status']): 
+
+                                                            switch($maintenance['status']):
+                                                                case 0:
+                                                                    echo 'Não iniciada';
+                                                                break;
+                
+                                                                case 1:                                                    
+                                                                    echo 'Iniciada';
+                                                                break;
+                
+                                                                case 2:
+                                                                    echo 'Concluida';
+                                                                break;
+                
+                                                                endswitch;
+                                                        else:
+                                                            echo 'Desativada';
+                                                        endif;
                                                     ?>
                                                 </td> 
                                                 <td>
@@ -77,7 +83,7 @@
                                                     </a>
                                                 <?php endif ?> 
                                                     
-                                                <?php if($this->session-> permissions['maintenance']['delete'] == '1'): ?>  
+                                                <?php if($this->session-> permissions['maintenance']['delete'] == '2'): ?>  
                                                     <a  href="<?= site_url('index.php/maintenance/destroy/'.$maintenance['id'] ) ?>" class="btn destroy-button">
                                                         <i class="bi bi-trash3"></i>
                                                         
@@ -85,7 +91,8 @@
                                                 <?php endif ?> 
                                                 </td>
                                                                             
-                                            </tr>                        
+                                            </tr> 
+                                            <?php  endif ?>                       
                                                                     
                                     <?php endforeach ?>                                                 
                                 </tbody>

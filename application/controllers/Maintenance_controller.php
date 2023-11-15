@@ -127,10 +127,11 @@ class Maintenance_controller extends CI_Controller {
 				$license_plate = $this->input->post('license_plate');
 				$reason = $this->input->post('reason');
 				$description = $this->input->post('description');		
+				$liveStatus = $this->input->post('liveStatus');		
 				
 				try{
-					$this->Maintenance_model->update($id, $license_plate, $reason, $description);				
-					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Cadastrado com sucesso'));
+					$this->Maintenance_model->update($id, $license_plate, $reason, $description, $liveStatus);				
+					$this->session->set_flashdata('message', array('type'=>'success','content'=>'Alterado com sucesso'));
 					redirect('/');						
 				}catch(Exception $e){	
 					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel cadastrar. Erro: '.$e->getMessage()));

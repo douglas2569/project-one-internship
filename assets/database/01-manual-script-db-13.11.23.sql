@@ -173,6 +173,7 @@ CREATE TABLE IF NOT EXISTS `maintenance` (
   `reason` VARCHAR(50) NOT NULL,
   `description` text,
   `status` tinyint default 0,  
+  `live_status` tinyint default 1,  
   `initial_date` DATETIME,
   `final_date` DATETIME,
   `vehicles_customer_license_plate` VARCHAR(50) NOT NULL,

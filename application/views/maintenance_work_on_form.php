@@ -102,7 +102,21 @@
                                             <?php endif;  ?>
                                         </label>
                                     </li>  
-                                <?php endif;  ?>                              
+                                <?php endif;  ?>   
+                                
+                                <?php if(!empty($maintenance[0]['final_date']) && $this->session-> permissions['maintenance']['create'] == 1):  ?>
+                                    <li>
+                                        <label class="form-label">
+                                            <strong>Ordem de Serviço:</strong>
+                                                                                       
+                                                <a href="<?= site_url('index.php/workorder/generate/'.$maintenance[0]['id']) ?>" class='btn btn-primary'>Gerar</a>
+                                            
+                                                
+                                        </label>
+                                    </li>  
+                                <?php endif;  ?> 
+                                
+                                
                             </ul>
                         <?php endif; ?>
 

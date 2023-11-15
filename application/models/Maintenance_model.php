@@ -31,7 +31,7 @@ class Maintenance_model extends CI_Model {
         $data = array(
             'vehicles_customer_license_plate' => $license_plate,
             'reason' => $reason,
-            'description' => $description
+            'description' => $description            
         );        
         
         if(!$this->db->insert('maintenance', $data)){
@@ -48,12 +48,13 @@ class Maintenance_model extends CI_Model {
         return array('status'=> intval(explode('/',$resultset[0]['track_no'])[0]), 'mensage'=> $resultset[0]['@full_error']);
     }
 
-    public function update($id, $license_plate, $reason, $description){   
+    public function update($id, $license_plate, $reason, $description, $liveStatus){   
         $data = array(            
             'id' => $id,
             'vehicles_customer_license_plate' => $license_plate,
             'reason' => $reason,
             'description' => $description,
+            'live_status' => $liveStatus
          );
                           
             
