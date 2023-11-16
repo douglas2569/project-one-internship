@@ -50,5 +50,34 @@
 
                 </form>
             </div>
+
+            <ul class="form-group mt-5 login-screen">
+                <li>  <label class="form-label h5">Gerente</label>
+                    <ul>
+                        <li> <label class="form-label"><strong>Usersname:</strong> cassio00</label></li>
+                    </ul>
+                </li>
+
+                <li>  <label class="form-label h5">Atendentes</label>
+                    <ul>
+                        <li> <label class="form-label"><strong>Usersname:</strong> angelo02, leticia02</label></li>
+                    </ul>
+                </li>
+
+                <li>  <label class="form-label h5">Mecânicos</label>
+                    <ul>
+                        <li> <label class="form-label"><strong>Usersname:</strong> pedro01, antonio01, joao01</label></li>
+                    </ul>
+                </li>
+
+                <li>  <label class="form-label h5">Root</label>
+                    <ul>
+                        <li> <label class="form-label"><strong>Usersname:</strong> root</label></li>
+                    </ul>
+                </li>
+
+                <li><label class="form-label"><strong>Senhas:</strong> 123</label></li>
+            </ul>    
+
     </div>
     </main>

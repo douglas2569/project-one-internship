@@ -29,15 +29,15 @@ legend{
     
 }
 
-
 .table{
     vertical-align: middle;
-    margin-top: var(--sm-margin2);
+    margin-top: var(--sm-margin2);    
 }
 .table th{    
   line-height: 50%;  
   padding: var(--md-margin2) var(--md-margin1);
 }
+
 
 
 table  tr  td{

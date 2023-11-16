@@ -16,26 +16,31 @@
             <div class="title-box">
                 <h1>Alterar Manuteção</h1>
             </div>              
-            <?php echo form_open('index.php/maintenance/edit/'.$maintenance[0]['id']); ?>                
+            <?php echo form_open('index.php/maintenance/edit/'.$maintenance[0]['id']); ?>  
+            <div class="form-group">               
                 <label for="vehicle" class="form-label">Veiculo*</label>
                 <select name="license_plate" class="form-select form-select-md mb-3" aria-label="select">                
-                    <?php foreach($vehiclesList as $vehicle): ?>
-                        <?php if($vehicle['license_plate'] == $maintenance[0]['vehicles_customer_license_plate']): ?>
-                            <option selected value="<?= $vehicle['license_plate'] ?>"><?= $vehicle['license_plate'] ?></option>
-                         <?php else: ?>   
-                            <option value="<?= $vehicle['license_plate'] ?>"><?= $vehicle['license_plate'] ?></option>
-                        <?php endif ?>  
-                    <?php endforeach ?>    
-                </select> 
-
-                <label class="form-label" for="reason">Problema*</label>
-                <input class="form-control" type="text" name='reason' required value="<?= $maintenance[0]['reason'] ?>"/> 
-
-                <label class="form-label" for="description">Descrição</label>
-                <textarea class="form-control" name="description"  cols="30" rows="10"><?= $maintenance[0]['description'] ?></textarea>
-
+                        <?php foreach($vehiclesList as $vehicle): ?>
+                            <?php if($vehicle['license_plate'] == $maintenance[0]['vehicles_customer_license_plate']): ?>
+                                <option selected value="<?= $vehicle['license_plate'] ?>"><?= $vehicle['license_plate'] ?></option>
+                            <?php else: ?>   
+                                <option value="<?= $vehicle['license_plate'] ?>"><?= $vehicle['license_plate'] ?></option>
+                            <?php endif ?>  
+                        <?php endforeach ?>    
+                    </select> 
+                </div> 
+                 
+                <div class="form-group"> 
+                    <label class="form-label" for="reason">Problema*</label>
+                    <input class="form-control" type="text" name='reason' required value="<?= $maintenance[0]['reason'] ?>"/> 
+                </div"> 
+                 
+                <div class="form-group"> 
+                    <label class="form-label" for="description">Descrição</label>
+                    <textarea class="form-control" name="description"  cols="30" rows="10"><?= $maintenance[0]['description'] ?></textarea>
+                </div>                
                 <?php if(!empty($maintenance[0]['initial_date'])):  ?>
-                    <div>
+                    <div class="form-group">
                         <label class="form-label">
                             <strong>Data Inicial:</strong>
                             <?php if(empty($maintenance[0]['initial_date'])):  ?>                                
@@ -51,7 +56,7 @@
                 <?php endif;  ?> 
 
                 <?php if(!empty($maintenance[0]['final_date'])):  ?>
-                    <div>
+                    <div class="form-group">
                         <label class="form-label">
                             <strong>Data Final:</strong>      
                             <?php echo $maintenance[0]['final_date']  ?>   

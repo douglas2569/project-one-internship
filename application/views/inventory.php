@@ -15,18 +15,17 @@
             <div class="inventory">
                 <div class="inventory-header toolbar">   
                 <?php if($this->session-> permissions['inventory']['create'] == 1): ?>                                        
-                    <a href='<?= site_url('index.php/inventory/store') ?>' class="btn ">
+                    <a href='<?= site_url('index.php/inventory/store') ?>' class="btn" role="button">
                         <i class="bi bi-plus-circle"></i>
                         Nova
                     </a> 
+
                 <?php else: ?>                                         
-                    <a class="btn "></a>
+                    <a></a>
                 <?php endif ?>                                         
                 <form class="form-inline">
                     <input class="form-control mr-sm-2 search-item" type="search" placeholder="Pesquisar" aria-label="Search">
-                    <a class="btn my-sm-0">
-                        <i class="bi bi-search"></i>
-                    </a>
+                    
                 </form>               
                 
                 </div>

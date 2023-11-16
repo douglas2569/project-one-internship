@@ -48,7 +48,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label" for="unit-value" >Valor unitario*</label>
+                        <label class="form-label" for="unit-value" >Valor unitario (R$)*</label>
                         <input class="form-control" type="decimal" name='unitValue' id="unit-value" value="<?= $part[0]['unit_value'] ?>" required/>
                     </div>
                     <div class="form-group">

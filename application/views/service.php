@@ -20,14 +20,12 @@
                         Nova
                     </a> 
                     <?php else: ?>
-                        <a class="btn "></a> 
+                        <a></a> 
                     <?php endif ?>
 
                     <form class="form-inline">
                         <input class="form-control mr-sm-2 search-item" type="search" placeholder="Pesquisar" aria-label="Search">
-                        <a class="btn my-sm-0">
-                            <i class="bi bi-search"></i>
-                        </a>
+                        
                     </form>                  
                 </div>
                 <div class="services-list-main">
@@ -45,7 +43,7 @@
                                     <?php  echo empty($service['estimatedTime'])? 'Não estimado' : $service['estimatedTime'].' min'?>
 
                                  </div>
-                                <div> <strong>Valor: </strong> <?= $service['cost'] ?> </div>
+                                <div> <strong>Valor: </strong> R$ <?= $service['cost'] ?> </div>
                                 <?php if($this->session-> permissions['services']['update'] == 1): ?>
                                     <div> 
                                         <strong>Status: </strong> 

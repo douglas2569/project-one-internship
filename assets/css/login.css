@@ -1,6 +1,9 @@
 main .login-screen{
-    padding: var(--md-padding2);    
+    padding: var(--lg-padding3) var(--lg-padding3) calc(var(--lg-padding3) * 3) var(--lg-padding3);    
     margin: auto;
+    border: 1px solid var(--gray-color4);  
+    border-radius: 10px;
+    max-width: 350px;
 }
 
 main .login-screen button{
@@ -8,12 +11,6 @@ main .login-screen button{
     margin-top:var(--lg-margin2);
 }
 
-.login-screen{
-    border: 1px solid var(--gray-color3);  
-    border-radius: 10px;
-    max-width: 350px;
-
-}
 main .login-screen .title-box{        
     margin-top: 0;
     margin-bottom:  calc(1.5 * var(--lg-margin3)) ;
@@ -29,10 +26,14 @@ main .login-screen .title-box{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.3em;
+    font-size: 1.4em;
     border: 1px solid var(--gray-color3);  
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    color: var(--primary-color);    
+}
+#basic-addon1, #basic-addon2{
+    background-color:var(--gray-color3);
 }
 
 

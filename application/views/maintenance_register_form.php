@@ -16,21 +16,25 @@
             <div class="title-box">
                 <h1>Cadastrar de Manuteção</h1>
             </div>              
-            <?php echo form_open('index.php/maintenance/store'); ?>                
-                <label for="vehicle" class="form-label">Veiculo*</label>
-                <select name="license_plate" class="form-select form-select-md mb-3" aria-label="select">                
-                    <?php foreach($vehiclesList as $vehicle): ?>
-                        <option value="<?= $vehicle['license_plate'] ?>"><?= $vehicle['license_plate'] ?></option>
-                    <?php endforeach ?>    
-                </select> 
-
-                <label class="form-label" for="reason">Problema*</label>
-                <input class="form-control" type="text" name='reason' required/> 
-
-                <label class="form-label" for="description">Descrição</label>
-                <textarea class="form-control" name="description"  cols="30" rows="10">
-
-                </textarea>
+            <?php echo form_open('index.php/maintenance/store'); ?> 
+                <div class="form-group">
+                    <label for="vehicle" class="form-label">Veiculo*</label>
+                    <select name="license_plate" class="form-select form-select-md mb-3" aria-label="select">                
+                        <?php foreach($vehiclesList as $vehicle): ?>
+                            <option value="<?= $vehicle['license_plate'] ?>"><?= $vehicle['license_plate'] ?></option>
+                        <?php endforeach ?>    
+                    </select> 
+                </div>               
+                <div class="form-group">           
+                    <label class="form-label" for="reason">Problema*</label>
+                    <input class="form-control" type="text" name='reason' required/> 
+                </div>
+                <div class="form-group"> 
+                    <label class="form-label" for="description">Descrição</label>
+                    <textarea class="form-control" name="description"  cols="30" rows="10">
+                        
+                        </textarea>
+                </div>            
 
                 <div class="form-footer">
                     <button class="btn btn-primary" type='submit'>Cadastrar</button>              

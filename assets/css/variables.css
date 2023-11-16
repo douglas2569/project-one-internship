@@ -30,14 +30,15 @@
     --border-color:  #cacaca;
     --sm-border-radius2:  6px;
 
-    --black-color1: rgb(15, 15, 15);
-    --black-color3: rgb(53, 53, 53);
-    --gray-color3: rgb(143, 143, 143);
-    --white-color: rgb(231, 231, 231);
+    --black-color1: rgb(6, 19, 35);    
+    --gray-color3: rgb(40, 47, 57);
+    --gray-color4: rgb(40, 47, 57, .2);
+    --white-color: rgb(245, 246, 250);
     
-    --primary-color: #3F119E;
-    --unsaturated-primary-color: #63469e;
-    --secondary-color: #119E28;
-    --unsaturated-secondary-color: #499b57;
+    --primary-color: rgb(254, 120, 59);    
+    --primary-color2: rgb(254, 120, 59,.9);    
+    --secondary-color: rgb(253, 240, 4); 
+   
+    
     
 }

@@ -21,19 +21,19 @@
                 <div class="form-group">
                     <label for="name" class="form-label">Nome*</label>
                     <input class="form-control" type="text" name='name' id="name" required/>
-                <div>
+                </div>
                 <div class="form-group">
                     <label class="form-label" for="description">Descrição</label>
                     <textarea class="form-control" name="description" id="description" cols="30" rows="10">
                     </textarea>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="estimatedTime ">Tempo estimado</label>
+                    <label class="form-label" for="estimatedTime ">Tempo estimado (min)</label>
                     <input class="form-control" type="decimal" name="estimatedTime" />
                 </div> 
 
                 <div class="form-group">
-                    <label class="form-label" for="brand">Valor*</label>
+                    <label class="form-label" for="brand">Valor (R$)*</label>
                     <input class="form-control" type="decimal" name="cost"  required />
                 </div>                    
                                 
@@ -44,6 +44,6 @@
             </form> 
                         
         </div>
-    </main>
+</main>
 
 
