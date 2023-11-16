@@ -7,6 +7,7 @@
 
 *{
     list-style: none;
+    font-size:14px;
 }
 
 main{
@@ -205,14 +206,21 @@ footer p{
 
 
 @media (min-width: 412px) {
+    *{        
+        font-size:15px;
+    }
+
     main > .container{   
         padding-left: var(--md-margin1);
         padding-right: var(--md-margin1);
     }
 }
 
-@media (min-width: 768px) {
-   
+@media (min-width: 768px) {   
+    *{        
+        font-size:1em;
+    } 
+    
     .item .item-body + div.item-footer{
         justify-content: end;         
         
