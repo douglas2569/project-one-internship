@@ -16,6 +16,8 @@ main{
 
 main > .container{    
     max-width: 720px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 nav{
@@ -201,6 +203,13 @@ footer p{
 
 }
 
+
+@media (min-width: 412px) {
+    main > .container{   
+        padding-left: var(--md-margin1);
+        padding-right: var(--md-margin1);
+    }
+}
 
 @media (min-width: 768px) {
    

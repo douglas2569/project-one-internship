@@ -55,6 +55,21 @@ table  tr  td{
     margin-bottom: var(--sm-margin3);
 }
 
+@media (max-width: 320px){
+    main .container {
+       
+       
+    }
+
+    table thead tr th:nth-child(1){
+        display: none; 
+    }
+    table tbody tr td:nth-child(1){
+        display: none; 
+        
+    }
+}
+
 @media (min-width: 768px){
     .accordion-body .item .item-body {
         display: block;
