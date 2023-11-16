@@ -15,7 +15,7 @@
             <div class="users">
                 <div class="users-header toolbar">   
                     <?php if($this->session-> permissions['users']['create'] == 1): ?> 
-                        <a href='<?= site_url('index.php/user/store') ?>' class="btn ">
+                        <a href='<?= site_url('index.php/user/store') ?>' class="btn  new-btn">
                             <i class="bi bi-plus-circle"></i>
                             Novo
                         </a> 
@@ -24,7 +24,7 @@
                     <?php endif ?>
 
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Pesquisar" aria-label="Search">
+                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Digite para pesquisar" aria-label="Search">
                         
                     </form>                  
                 </div>
@@ -32,7 +32,7 @@
                 <?php  if(count($userList) > 0): ?>
                     <ul class="users-list container-fluid">
                         <?php foreach($userList as $user): ?>    
-                            <?php if($user['username'] != 'root'): ?>    
+                            <?php if($user['position_name'] != 'root'): ?>    
                                 <li class="users-item item" >
                                     <div class="item-body"> 
                                         <div> <strong>CPF: </strong> <?= $user['cpf'] ?> </div>

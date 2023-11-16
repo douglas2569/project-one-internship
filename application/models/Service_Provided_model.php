@@ -52,14 +52,15 @@ class Service_provided_model extends CI_Model {
 
     }
 
-    public function updateOnlyQuantity($serviceId , $employeesId, $quantity){
+    public function updateOnlyQuantity($serviceId , $employeesId, $quantity, $maintenanceId){
         $data = array(                        
-            'quantity' => $quantity,
+            'quantity' => $quantity,            
          );
                           
             
         $this->db->where('services_id', $serviceId);
         $this->db->where('employees_id', $employeesId);
+        $this->db->where('maintenance_id', $maintenanceId);
         
         if(!$this->db->update('services_provided', $data)){
             $db_error = $this->db->error();        

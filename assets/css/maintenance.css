@@ -43,11 +43,15 @@ legend{
 table  tr  td{
     margin-bottom: 0;    
 }
-
+.accordion-button{
+   
+    color: var(--black-color1);
+    font-weight: 600;
+}
 .accordion-body .item .item-body + div.item-footer{
     display: flex;    
     justify-content: flex-end;    
-    border-bottom: 1px solid var(--gray-color3);
+    border-bottom: 1px solid var(--gray-color4);
     margin-bottom: var(--sm-margin3);
 }
 

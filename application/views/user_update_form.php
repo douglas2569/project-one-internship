@@ -15,7 +15,7 @@
             <div class="title-box">
                 <h1>Alterar de Usuário</h1>
             </div>              
-            <?php echo form_open('index.php/user/edit/'.$user[0]['user_id']); ?> 
+            <?php echo form_open('index.php/user/edit/'.$user[0]['user_id'] , array('class'=>'form-register-upload')); ?> 
             
                 <div class="form-group"> 
                     <label for="auto-part" class="form-label"><strong>Funcionário*</strong></label>

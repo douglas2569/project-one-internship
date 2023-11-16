@@ -132,8 +132,8 @@
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <?php if($this->session-> permissions['work_on_maintaining']['create'] == 1 && $maintenance[0]['status'] != '2'): ?> 
-                        <div class="accordion-sub-button">                            
-                                <a href="<?= site_url('index.php/maintenanceinventory/store/'.$maintenance[0]['id']) ?>"  class="btn" role="button">
+                        <div class="accordion-sub-button toolbar">                            
+                                <a href="<?= site_url('index.php/maintenanceinventory/store/'.$maintenance[0]['id']) ?>"  class="btn new-btn" role="button">
                                     <i class="bi bi-plus-circle"></i>
                                     Adicionar
                                 </a>                             
@@ -193,8 +193,8 @@
                 <div class="accordion-body">
                 
                     <?php if($this->session-> permissions['work_on_maintaining']['create'] == 1  && $maintenance[0]['status'] != '2'): ?> 
-                        <div class="accordion-sub-button">                        
-                            <a  href='<?= site_url('index.php/serviceprovided/store/'.$maintenance[0]['id']) ?>' class="btn" role="button">
+                        <div class="accordion-sub-button toolbar">                        
+                            <a  href='<?= site_url('index.php/serviceprovided/store/'.$maintenance[0]['id']) ?>' class="btn new-btn" role="button">
                                 <i class="bi bi-plus-circle"></i>
                                     Adicionar
                             </a>

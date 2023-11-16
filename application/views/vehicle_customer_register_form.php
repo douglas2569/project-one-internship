@@ -16,7 +16,7 @@
             <div class="title-box">
                 <h1>Cadastrar Cliente</h1>
             </div>              
-            <?php echo form_open('index.php/vehiclecustomer/store'); ?>   
+            <?php echo form_open('index.php/vehiclecustomer/store' , array('class'=>'form-register-upload')); ?>   
                 <fieldset class="form-group border">
                     <legend>Veiculo</legend>
                     <div class="form-group">

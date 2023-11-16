@@ -17,7 +17,7 @@
                 <h1>Alterar Cliente</h1>
             </div>              
             <?php                 
-                echo form_open('index.php/vehiclecustomer/edit/'.$vehicleCustomer[0]['license_plate'].'/'.$vehicleCustomer[0]['cpf']); ?>   
+                echo form_open('index.php/vehiclecustomer/edit/'.$vehicleCustomer[0]['license_plate'].'/'.$vehicleCustomer[0]['cpf'], array('class'=>'form-register-upload')); ?>   
                 <fieldset class="form-group border">
                     <legend>Veiculo</legend>
                     <div class="form-group">

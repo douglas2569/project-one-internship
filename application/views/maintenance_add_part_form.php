@@ -8,7 +8,7 @@
             <div class="title-box">
                 <h1>Adicionar Peça </h1>
             </div>              
-            <?php echo form_open_multipart('index.php/maintenanceinventory/store/'.$maintenance_id ); ?>
+            <?php echo form_open_multipart('index.php/maintenanceinventory/store/'.$maintenance_id , array('class'=>'form-register-upload')); ?>
                     <div class="form-group">
                         <label for="auto-part" class="form-label">
                             <strong>N° Manutenção:</strong> <?= $maintenance_id ?>

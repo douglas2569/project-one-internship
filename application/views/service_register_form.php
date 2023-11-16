@@ -16,7 +16,7 @@
             <div class="title-box">
                 <h1>Cadastrar de Serviço</h1>
             </div>              
-            <?php echo form_open('index.php/service/store'); ?>                   
+            <?php echo form_open('index.php/service/store' , array('class'=>'form-register-upload')); ?>                   
                 
                 <div class="form-group">
                     <label for="name" class="form-label">Nome*</label>

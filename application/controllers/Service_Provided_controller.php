@@ -17,7 +17,8 @@ class Service_Provided_controller extends CI_Controller {
 
 	public function store($maintenanceId) {
 		$data['serviceList'] = $this->Service_model->show(array('status'=>'1'));			
-		$data['maintenance_id'] = $maintenanceId;		
+		$data['maintenance_id'] = $maintenanceId;
+			
 		
 		$this->form_validation->set_rules('quantity', 'Quantidade', 'numeric|required|min_length[1]|max_length[50]');		
 				
@@ -33,10 +34,10 @@ class Service_Provided_controller extends CI_Controller {
 			try{			
 
 				if(count($data['serviceList']) > 0){	
-					$resultset= $this->Service_provided_model->show(array('services_id'=>$serviceId, 'employees_id'=>$employeesId));
+					$resultset= $this->Service_provided_model->show(array('services_id'=>$serviceId, 'employees_id'=>$employeesId, 'maintenance_id'=> $maintenanceId));
 										
 					if( count($resultset) == 1 ){
-						$this->Service_provided_model->updateOnlyQuantity($serviceId , $employeesId, ($quantity + $resultset[0]['quantity']));						
+						$this->Service_provided_model->updateOnlyQuantity($serviceId , $employeesId, ($quantity + $resultset[0]['quantity']),  $maintenanceId);						
 					}else{
   
 						$this->Service_provided_model->insert($maintenanceId, $employeesId, $serviceId, $quantity);				

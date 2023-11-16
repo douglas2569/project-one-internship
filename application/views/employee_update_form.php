@@ -16,7 +16,7 @@
             <div class="title-box">
                 <h1>Alterar de Funcionário</h1>
             </div>              
-            <?php echo form_open('index.php/employee/edit/'.$employee[0]['id']); ?>  
+            <?php echo form_open('index.php/employee/edit/'.$employee[0]['id'], array('class'=>'form-register-upload')); ?>  
 
                 <div class="form-group"> 
                     <label for="auto-part" class="form-label"><strong>Cargo*</strong></label>
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label class="form-label" for="name" >Nome*</label>
                     <input class="form-control" type="text" name='name' value="<?= $employee[0]['name'] ?>"  id="name" required/>
-                <div>
+                            </div>
                 <div class="form-group">
                     <label class="form-label" for="cpf">CPF*</label>
                     <input class="form-control" type="tel" name='cpf' id="cpf" value="<?= $employee[0]['cpf'] ?>"  required/> 

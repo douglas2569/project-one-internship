@@ -16,7 +16,7 @@
             <div class="title-box">
                 <h1>Cadastrar de Usuário</h1>
             </div>              
-            <?php echo form_open('index.php/user/store'); ?> 
+            <?php echo form_open('index.php/user/store' , array('class'=>'form-register-upload')); ?> 
             
                 <div class="form-group"> 
                     <label for="auto-part" class="form-label"><strong>Funcionário*</strong></label>

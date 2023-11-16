@@ -16,7 +16,7 @@
             <div class="title-box">
                 <h1>Cadastrar de Manuteção</h1>
             </div>              
-            <?php echo form_open('index.php/maintenance/store'); ?> 
+            <?php echo form_open('index.php/maintenance/store', array('class'=>'form-register-upload')); ?> 
                 <div class="form-group">
                     <label for="vehicle" class="form-label">Veiculo*</label>
                     <select name="license_plate" class="form-select form-select-md mb-3" aria-label="select">                

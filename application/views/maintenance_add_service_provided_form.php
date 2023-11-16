@@ -8,7 +8,7 @@
             <div class="title-box">
                 <h1>Adicionar Serviço </h1>
             </div>              
-            <?php echo form_open_multipart('index.php/serviceprovided/store/'.$maintenance_id ); ?>
+            <?php echo form_open_multipart('index.php/serviceprovided/store/'.$maintenance_id , array('class'=>'form-register-upload')); ?>
                 <input type="hidden" name='employeesId' value='<?= $this->session->employees_id ?>'> 
 
                     <div class="form-group">

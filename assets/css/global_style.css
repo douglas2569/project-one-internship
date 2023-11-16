@@ -90,6 +90,12 @@ form{
     flex-direction: column;
 }
 
+.form-register-upload{    
+    border: 1px solid var(--gray-color4);
+    border-radius: 10px;
+    padding: var(--lg-padding3);    
+}
+
 form > label, .form-group > label{
     font-weight: 600;
 }

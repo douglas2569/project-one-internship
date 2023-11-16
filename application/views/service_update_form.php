@@ -16,7 +16,7 @@
             <div class="title-box">
                 <h1>Alterar Serviço</h1>
             </div>              
-            <?php echo form_open('index.php/service/edit/'.$service[0]['id']); ?>                   
+            <?php echo form_open('index.php/service/edit/'.$service[0]['id'] , array('class'=>'form-register-upload')); ?>                   
                 
                 <div class="form-group">
                     <label for="name" class="form-label">Nome*</label>

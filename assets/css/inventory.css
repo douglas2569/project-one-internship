@@ -7,6 +7,13 @@
     gap: var(--md-margin2);
 }
 
+.form-group .image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: var(--md-margin1);
+}
+
 @media (min-width: 768px) {
     
     .inventory-main .item .item-body{        
