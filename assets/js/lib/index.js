@@ -1,4 +1,4 @@
-import { getAll } from "./requests/index"
+import { getAll } from "./requests/index.js"
 
 function showSandwichMenu(){
     const sandwichMenuButton = document.querySelector('.navbar-toggler')

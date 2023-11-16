@@ -13,7 +13,7 @@ class Vehicle_customer_controller extends CI_Controller {
 		$data['vehicleCustomerList'] = $this->Vehicle_customer_model->show();		
         
 		$this->load->view('templates/header', $data);
-		$this->load->view('Vehicle_customer', $data);
+		$this->load->view('vehicle_customer', $data);
 		$this->load->view('templates/footer');
 	}
 

@@ -11,6 +11,8 @@
 # collation_server:  utf8mb4_0900_ai_ci 
 # default_collation_for_utf8mb4:  utf8mb4_0900_ai_ci 
 
+CREATE DATABASE IF NOT EXISTS `workshopprime` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+
 DROP TABLE IF EXISTS `auto_vehicle_workshops`;
 CREATE TABLE IF NOT EXISTS `auto_vehicle_workshops` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -461,7 +463,7 @@ FROM permissions_features
 INNER JOIN positions 
 ON permissions_features.positions_id = positions.id
 INNER JOIN features
-ON permissions_features.features_id = features.id
+ON permissions_features.features_id = features.id;
 
 
 
