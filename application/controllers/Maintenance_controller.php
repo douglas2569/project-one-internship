@@ -171,7 +171,7 @@ class Maintenance_controller extends CI_Controller {
 	}
 
 	public function finalDate($id) {
-		$resulset = $this->Maintenance_model->show(array('id'=> $id, 'status' =>'1'));	
+		$resulset = $this->Maintenance_model->show(array('maintenance_id'=> $id, 'status' =>'1'), ' v_services_provided_mechanics');	
 
 		if(count($resulset) > 0){
 
@@ -181,6 +181,8 @@ class Maintenance_controller extends CI_Controller {
 			}catch(Exception $e){	
 				$this->session->set_flashdata('message', array('type'=>'error','content'=>'Não foi possivel iniciar a manutenção '.$e->getMessage()));					
 			}						
+		}else{
+			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Adcione pelo menos um serviço para poder finalizar a manutenção'));
 		}
 		redirect('index.php/maintenance/workon/'.$id);						
 		

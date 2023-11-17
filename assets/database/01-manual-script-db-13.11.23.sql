@@ -436,13 +436,16 @@ services_provided.services_id,
 services_provided.quantity AS quantity_service, 
 services_provided.maintenance_id,
 services.name AS service_name,
+maintenance.status,
 employees.name AS mechanic_name,
 employees.cpf
 FROM services_provided 
 INNER JOIN services 
 ON services.id = services_provided.services_id 
 INNER JOIN employees 
-ON employees.id = services_provided.employees_id; 
+ON employees.id = services_provided.employees_id 
+INNER JOIN maintenance
+ON services_provided.maintenance_id = maintenance.id; 
 
 DROP VIEW IF EXISTS v_inventory_automotive_parts ;
 CREATE VIEW v_inventory_automotive_parts
