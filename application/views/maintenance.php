@@ -25,7 +25,8 @@
                     <?php endif ?>                                                                                 
 
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Digite para pesquisar" aria-label="Search">                       
+                        <input class="form-control mr-sm-2 search-item" type="search" placeholder="Digite para pesquisar" aria-label="Search">  
+                                            
                     </form>                   
                 </div>
                 <div class="maintenance-main">

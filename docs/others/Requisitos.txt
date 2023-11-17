@@ -1,21 +1,20 @@
 08:55 26/10/2023
+	REQUISITOS
 
-Cada um de vocês vai desenvolver um pequeno sistema
-	1 - Oficina (Douglas)
-		-   Cadastro da oficina
+	Carlitos Oficina
+
 		-   Cadastro de Funcionarios
 		-   Cadastro de Usuario		
-		-   Cadastro de Clientes		
-		-   Cadastro de fornecedor
-		-   Cadastro de Veiculos		
-		-   Cadastro de Pecas
-	    -   Cadastro de Servicos		
-		-   Formas de pagamento		
+		-   Cadastro de Veiculos / Clientes 								
+		-   Cadastro de Peças
+	    -   Cadastro de Servicos					
+		-   Cadastro de Manutenção
 		-   Gerenciamento de serviços prestados				
-		-   Autenticacao de entrada no sistema
+		-   Gerenciamento de estoque				
+		-   Autenticacão de entrada no sistema
+	
 		
-		-   Gerenciamento de estoque
-
+Cada um de vocês vai desenvolver um pequeno sistema
 		- * Deve possuir o cadastro de veiculo(placa, modelo)
 		- * Deve possuir peças
 		- * Deve registrar manutenções
