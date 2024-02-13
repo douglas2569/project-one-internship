@@ -18,8 +18,7 @@ class Employee_controller extends CI_Controller {
 		$this->load->view('templates/footer.php');
 	}
 	
-	public function store() {			
-		
+	public function store() {
 		$this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|max_length[50]');
 		$this->form_validation->set_rules('name', 'Nome', 'trim|required|min_length[5]|max_length[50]');
 		$this->form_validation->set_rules('address', 'Endereço', 'trim|min_length[5]|max_length[255]');
@@ -48,8 +47,7 @@ class Employee_controller extends CI_Controller {
 				
 		$this->load->view('templates/header.php');
 		$this->load->view('employee_register_form.php', $data);
-		$this->load->view('templates/footer.php');	
-
+		$this->load->view('templates/footer.php');
 		
 	}
 
@@ -72,7 +70,6 @@ class Employee_controller extends CI_Controller {
 		}
 
 		redirect('index.php/employee');
-
 	}
 
 	public function edit($id) {
@@ -82,8 +79,7 @@ class Employee_controller extends CI_Controller {
 		if(count($resulset) != 1){			
 			$this->session->set_flashdata('message', array('type'=>'error','content'=>'Id invalido'));				
 			
-		}else{			
-			
+		}else{
 			$this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|max_length[50]');
 			$this->form_validation->set_rules('name', 'Nome', 'trim|required|min_length[5]|max_length[50]');
 			$this->form_validation->set_rules('address', 'Endereço', 'trim|min_length[5]|max_length[255]');
@@ -97,14 +93,13 @@ class Employee_controller extends CI_Controller {
 				$this->load->view('employee_update_form.php',$data);
 				$this->load->view('templates/footer.php');
 
-			}else{		
-			
-			$cpf = $this->input->post('cpf');			
-			$name = $this->input->post('name');
-			$address = $this->input->post('address');
-			$phoneNumber = $this->input->post('phoneNumber');
-			$email = $this->input->post('email');
-			$positionsId = $this->input->post('positionId');			
+			}else{				
+				$cpf = $this->input->post('cpf');			
+				$name = $this->input->post('name');
+				$address = $this->input->post('address');
+				$phoneNumber = $this->input->post('phoneNumber');
+				$email = $this->input->post('email');
+				$positionsId = $this->input->post('positionId');			
 
 			try{					
 				$return = $this->Employee_model->update($id, $cpf, $name, $address, $phoneNumber, $email, $positionsId);	
