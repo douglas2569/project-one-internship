@@ -46,16 +46,14 @@ class Auth_controller extends CI_Controller {
 					redirect('/');				
 				}else{								
 					$this->session->set_flashdata('message', array('type'=>'error','content'=>'Senha invalida.'));								
-				}
-				
+				}				
 				
 			}
 
 		}	
 
 		$this->load->view('login');
-		$this->load->view('templates/footer');
-		
+		$this->load->view('templates/footer');		
 
 	}
 	public function login() {
